@@ -6,29 +6,29 @@
 **/*.iml
 
 **/*.ps1
-mii-process-eyematics-v1-test-data-generator/
-mii-process-eyematics-v1-test-setup/
+eyematics-dsf-process-plugin-test-data-generator/
+eyematics-dsf-process-plugin-test-setup/
 
-# mii-process-eyematics-v1-test-data-generator/cert/**/*.pem
-# mii-process-eyematics-v1-test-data-generator/cert/**/*.csr
-# mii-process-eyematics-v1-test-data-generator/cert/**/*.p12
-# mii-process-eyematics-v1-test-data-generator/cert/thumbprints.txt
+# eyematics-dsf-process-plugin-test-data-generator/cert/**/*.pem
+# eyematics-dsf-process-plugin-test-data-generator/cert/**/*.csr
+# eyematics-dsf-process-plugin-test-data-generator/cert/**/*.p12
+# eyematics-dsf-process-plugin-test-data-generator/cert/thumbprints.txt
 
-# mii-process-eyematics-v1-test-data-generator/bundle/*.xml
+# eyematics-dsf-process-plugin-test-data-generator/bundle/*.xml
 
-# mii-process-eyematics-v1-test-setup/**/bpe/log/*.log
-# mii-process-eyematics-v1-test-setup/**/bpe/log/*.log.gz
-# mii-process-data-exchange-test-setup/**/bpe/last_event/time.file
-# mii-process-eyematics-v1-test-setup/**/bpe/plugin/*.jar
-# mii-process-eyematics-v1-test-setup/**/bpe/process/*.jar
+# eyematics-dsf-process-plugin-test-setup/**/bpe/log/*.log
+# eyematics-dsf-process-plugin-test-setup/**/bpe/log/*.log.gz
+# eyematics-dsf-process-plugin-test-setup/**/bpe/last_event/time.file
+# eyematics-dsf-process-plugin-test-setup/**/bpe/plugin/*.jar
+# eyematics-dsf-process-plugin-test-setup/**/bpe/process/*.jar
 
-# mii-process-data-exchange-test-setup/keycloak/data
-# mii-process-data-exchange-test-setup/secrets/keycloak_trust_store.jks
+# eyematics-dsf-process-plugin-test-setup/keycloak/data
+# eyematics-dsf-process-plugin-test-setup/secrets/keycloak_trust_store.jks
 
-# mii-process-data-exchange-test-setup/**/fhir/conf/bundle.xml
-# mii-process-eyematics-v1-test-setup/**/fhir/log/*.log
-# mii-process-eyematics-v1-test-setup/**/fhir/log/*.log.gz
+# eyematics-dsf-process-plugin-test-setup/**/fhir/conf/bundle.xml
+# eyematics-dsf-process-plugin-test-setup/**/fhir/log/*.log
+# eyematics-dsf-process-plugin-test-setup/**/fhir/log/*.log.gz
 
-# mii-process-eyematics-v1-test-setup/secrets/*.pem
-# mii-process-data-exchange-test-setup/.env
-# mii-process-data-exchange-test-setup/docker-compose.override.yml
+# eyematics-dsf-process-plugin-test-setup/secrets/*.pem
+# eyematics-dsf-process-plugin-test-setup/.env
+# eyematics-dsf-process-plugin-test-setup/docker-compose.override.yml
