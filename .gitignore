@@ -6,8 +6,8 @@
 **/*.iml
 
 **/*.ps1
-eyematics-dsf-process-plugin-test-data-generator/
-eyematics-dsf-process-plugin-test-setup/
+**/eyematics-dsf-process-plugin-test-data-generator/
+**/eyematics-dsf-process-plugin-test-setup/
 
 # eyematics-dsf-process-plugin-test-data-generator/cert/**/*.pem
 # eyematics-dsf-process-plugin-test-data-generator/cert/**/*.csr
