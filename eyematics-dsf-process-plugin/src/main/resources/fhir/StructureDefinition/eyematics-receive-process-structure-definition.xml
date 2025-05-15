@@ -23,7 +23,7 @@
     <differential>
         <element id="Task.instantiatesCanonical">
             <path value="Task.instantiatesCanonical" />
-            <fixedCanonical value="http://dsf.dev/bpe/Process/eyematicsInitiateProcess|#{version}" />
+            <fixedCanonical value="http://dsf.dev/bpe/Process/eyematicsReceiveProcess|#{version}" />
         </element>
         <!-- requester / recipient -->
         <element id="Task.input">

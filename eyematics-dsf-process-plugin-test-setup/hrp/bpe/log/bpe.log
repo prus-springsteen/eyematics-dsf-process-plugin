@@ -1,265 +1,205 @@
-2025-05-15 11:20:56,387 [main] INFO  dev.dsf.tools.db.DbMigrator - Executing DB migration ...
-2025-05-15 11:20:57,449 [main] DEBUG dev.dsf.tools.db.DbMigrator - UPDATE SUMMARY
-2025-05-15 11:20:57,450 [main] DEBUG dev.dsf.tools.db.DbMigrator - Run:                          0
-2025-05-15 11:20:57,450 [main] DEBUG dev.dsf.tools.db.DbMigrator - Previously run:               9
-2025-05-15 11:20:57,451 [main] DEBUG dev.dsf.tools.db.DbMigrator - Filtered out:                 0
-2025-05-15 11:20:57,451 [main] DEBUG dev.dsf.tools.db.DbMigrator - -------------------------------
-2025-05-15 11:20:57,451 [main] DEBUG dev.dsf.tools.db.DbMigrator - Total change sets:            9
-2025-05-15 11:20:57,453 [main] INFO  dev.dsf.tools.db.DbMigrator - Executing DB migration [Done]
-2025-05-15 11:20:57,862 [main] DEBUG dev.dsf.common.jetty.JettyServer - Java classpath: [lib/camunda-dmn-model-7.22.0.jar, lib/hapi-fhir-validation-resources-r4-5.1.0.jar, lib/camunda-xml-model-7.22.0.jar, lib/jakarta.activation-api-2.1.3.jar, lib/feel-engine-1.17.5-scala-shaded.jar, lib/org.hl7.fhir.r5-5.1.0.jar, lib/spring-jdbc-6.2.5.jar, lib/jersey-entity-filtering-3.1.10.jar, lib/slf4j-api-2.0.17.jar, lib/dsf-common-status-1.7.1.jar, lib/micrometer-observation-1.14.5.jar, lib/asm-commons-9.7.1.jar, lib/jetty-http-11.0.25.jar, lib/dsf-fhir-validation-1.7.1.jar, lib/jaxb-core-4.0.5.jar, lib/jetty-annotations-11.0.25.jar, lib/jakarta.activation-1.2.1.jar, lib/spring-aop-6.2.5.jar, lib/hapi-fhir-validation-5.1.0.jar, lib/jakarta.websocket-client-api-2.1.1.jar, lib/tyrus-core-2.2.0.jar, lib/hapi-fhir-converter-5.1.0.jar, lib/java-jwt-4.5.0.jar, lib/hk2-api-3.0.6.jar, lib/log4j-core-2.24.3.jar, lib/jetty-alpn-client-11.0.25.jar, lib/commons-dbcp2-2.13.0.jar, lib/jackson-core-2.18.3.jar, lib/jetty-util-ajax-11.0.25.jar, lib/tyrus-container-grizzly-client-2.2.0.jar, lib/jcl-over-slf4j-2.0.17.jar, lib/org.hl7.fhir.dstu2-5.1.0.jar, lib/jakarta.validation-api-3.0.2.jar, lib/error_prone_annotations-2.3.3.jar, lib/camunda-engine-dmn-7.22.0.jar, lib/dsf-common-ui-1.7.1.jar, lib/jersey-container-servlet-3.1.10.jar, lib/dsf-common-jetty-1.7.1.jar, lib/org.hl7.fhir.dstu3-5.1.0.jar, lib/jetty-util-11.0.25.jar, lib/txw2-4.0.5.jar, lib/jaxb-runtime-4.0.5.jar, lib/failureaccess-1.0.1.jar, lib/xpp3-1.1.4c.jar, lib/jersey-media-jaxb-3.1.10.jar, lib/jetty-openid-11.0.25.jar, lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar, lib/grizzly-http-server-4.0.2.jar, lib/hapi-fhir-structures-r4-5.1.0.jar, lib/joda-time-2.12.5.jar, lib/jersey-apache-connector-3.1.10.jar, lib/dsf-fhir-webservice-client-1.7.1.jar, lib/dsf-common-auth-1.7.1.jar, lib/camunda-cmmn-model-7.22.0.jar, lib/jetty-client-11.0.25.jar, lib/jackson-module-jakarta-xmlbind-annotations-2.18.3.jar, lib/grizzly-http-4.0.2.jar, lib/grizzly-framework-4.0.2.jar, lib/httpcore-4.4.16.jar, lib/attoparser-2.0.7.RELEASE.jar, lib/hapi-fhir-validation-resources-r5-5.1.0.jar, lib/log4j-slf4j2-impl-2.24.3.jar, lib/jakarta.xml.bind-api-4.0.2.jar, lib/jetty-plus-11.0.25.jar, lib/istack-commons-runtime-4.1.2.jar, lib/commons-collections4-4.4.jar, lib/jetty-webapp-11.0.25.jar, lib/dsf-fhir-rest-adapter-1.7.1.jar, lib/jetty-io-11.0.25.jar, lib/camunda-engine-feel-api-7.22.0.jar, lib/postgresql-42.7.5.jar, lib/bcmail-jdk18on-1.80.jar, lib/bcprov-jdk18on-1.80.jar, lib/spring-context-6.2.5.jar, lib/dsf-bpe-server-1.7.1.jar, lib/jackson-annotations-2.18.3.jar, lib/ognl-3.3.4.jar, lib/Saxon-HE-9.5.1-5.jar, lib/j2objc-annotations-2.8.jar, lib/spring-expression-6.2.5.jar, lib/httpclient-4.5.14.jar, lib/hapi-fhir-structures-r5-5.1.0.jar, lib/jersey-common-3.1.10.jar, lib/jakarta.servlet-api-6.0.0.jar, lib/hapi-fhir-base-5.1.0.jar, lib/dsf-common-config-1.7.1.jar, lib/crypto-utils-3.8.0.jar, lib/dsf-common-documentation-1.7.1.jar, lib/spring-tx-6.2.5.jar, lib/caffeine-2.7.0.jar, lib/org.hl7.fhir.validation-5.1.0.jar, lib/asm-tree-9.7.1.jar, lib/tyrus-client-2.2.0.jar, lib/org.hl7.fhir.r4-5.1.0.jar, lib/jetty-xml-11.0.25.jar, lib/jakarta.transaction-api-1.3.3.jar, lib/jersey-client-3.1.10.jar, lib/dsf-tools-build-info-reader-1.7.1.jar, lib/micrometer-commons-1.14.5.jar, lib/jetty-server-11.0.25.jar, lib/hk2-locator-3.0.6.jar, lib/spring-beans-6.2.5.jar, lib/camunda-engine-7.22.0.jar, lib/jersey-server-3.1.10.jar, lib/bcpkix-jdk18on-1.80.jar, lib/camunda-bpmn-model-7.22.0.jar, lib/hk2-utils-3.0.6.jar, lib/jetty-jakarta-servlet-api-5.0.2.jar, lib/thymeleaf-3.1.3.RELEASE.jar, lib/org.hl7.fhir.utilities-5.1.0.jar, lib/checker-qual-3.48.3.jar, lib/commons-io-2.18.0.jar, lib/xpp3_xpath-1.1.4c.jar, lib/dsf-bpe-process-api-v1-1.7.1.jar, lib/jakarta.websocket-api-2.1.1.jar, lib/camunda-commons-logging-7.22.0.jar, lib/jetty-security-11.0.25.jar, lib/jersey-container-servlet-core-3.1.10.jar, lib/spring-web-6.2.5.jar, lib/jakarta.ws.rs-api-3.1.0.jar, lib/dsf-tools-docker-secrets-reader-1.7.1.jar, lib/jakarta.annotation-api-2.1.1.jar, lib/jakarta.inject-api-2.0.1.jar, lib/commons-text-1.13.0.jar, lib/commons-pool2-2.12.0.jar, lib/aopalliance-repackaged-3.0.6.jar, lib/guava-32.1.3-jre.jar, lib/unbescape-1.1.6.RELEASE.jar, lib/asm-9.7.1.jar, lib/commons-lang3-3.17.0.jar, lib/org.hl7.fhir.dstu2016may-5.1.0.jar, lib/dsf-fhir-websocket-client-1.7.1.jar, lib/spring-core-6.2.5.jar, lib/commons-compress-1.27.1.jar, lib/jersey-hk2-3.1.10.jar, lib/opencsv-5.9.jar, lib/javassist-3.30.2-GA.jar, lib/org.hl7.fhir.convertors-5.1.0.jar, lib/java-uuid-generator-4.3.0.jar, lib/jakarta.mail-1.6.7.jar, lib/camunda-engine-feel-juel-7.22.0.jar, lib/liquibase-core-4.31.1.jar, lib/jetty-jndi-11.0.25.jar, lib/spring-jcl-6.2.5.jar, lib/camunda-engine-spring-7.22.0.jar, lib/dsf-tools-db-migration-1.7.1.jar, lib/jersey-media-json-jackson-3.1.10.jar, lib/snakeyaml-2.4.jar, lib/camunda-commons-utils-7.22.0.jar, lib/dsf-fhir-auth-1.7.1.jar, lib/gson-2.12.1.jar, lib/camunda-engine-feel-scala-7.22.0.jar, lib/jul-to-slf4j-2.0.17.jar, lib/jsr305-3.0.2.jar, lib/camunda-juel-7.22.0.jar, lib/commons-codec-1.18.0.jar, lib/dsf-common-db-1.7.1.jar, lib/bcutil-jdk18on-1.80.jar, lib/jackson-databind-2.18.3.jar, lib/jetty-servlet-11.0.25.jar, lib/camunda-commons-typed-values-7.22.0.jar, lib/osgi-resource-locator-1.0.3.jar, lib/log4j-api-2.24.3.jar, lib/jaxb-api-2.3.1.jar, lib/tyrus-spi-2.2.0.jar, lib/mybatis-3.5.15.jar, lib/ucum-1.0.2.jar, lib_external/*, dsf_bpe.jar]
-2025-05-15 11:20:57,862 [main] DEBUG dev.dsf.common.jetty.JettyServer - Resources for jetty: [file:///opt/bpe/lib/dsf-bpe-server-1.7.1.jar]
-2025-05-15 11:20:57,863 [main] DEBUG dev.dsf.common.jetty.JettyServer - Init parameters: {}
-2025-05-15 11:20:58,269 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC authorization code flow enabled
-2025-05-15 11:20:58,271 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC bearer token enabled
-2025-05-15 11:20:58,273 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC back-channel logout enabled
-2025-05-15 11:20:58,535 [main] INFO  dev.dsf.common.auth.ClientCertificateAuthenticator - Using [CN=Test, C=DE] to validate client certificates
-2025-05-15 11:20:58,539 [main] INFO  dev.dsf.common.jetty.JettyServer - Starting jetty server ...
-2025-05-15 11:20:58,542 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.25; built: 2025-03-13T00:15:57.301Z; git: a2e9fae3ad8320f2a713d4fa29bba356a99d1295; jvm 17.0.14+7-LTS
-2025-05-15 11:20:58,650 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler.bpe - 1 Spring WebApplicationInitializers detected on classpath
-2025-05-15 11:20:58,664 [main] INFO  org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
-2025-05-15 11:20:58,763 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler.bpe - Initializing Spring root WebApplicationContext
-2025-05-15 11:20:58,992 [main] INFO  dev.dsf.bpe.spring.config.PropertiesConfig - Concurrency config: {process-threads: 20, engine-core-pool: 4, engine-queue: 40, engine-max-pool: 10}
-2025-05-15 11:20:59,001 [main] INFO  dev.dsf.common.config.ProxyConfigImpl - Forward proxy config: {url: null, username: null, password: null, no-proxy: []}
-2025-05-15 11:20:59,002 [main] INFO  dev.dsf.bpe.spring.config.FhirClientConfig - Local webservice client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, url: https://hrp/fhir, proxy: disabled}
-2025-05-15 11:20:59,003 [main] INFO  dev.dsf.bpe.spring.config.FhirClientConfig - Local websocket client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, url: wss://hrp/fhir/ws, proxy: disabled}
-2025-05-15 11:20:59,004 [main] INFO  dev.dsf.bpe.spring.config.FhirClientConfig - Remote webservice client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, proxy: disabled}
-2025-05-15 11:20:59,007 [main] INFO  dev.dsf.bpe.spring.config.MailConfig - Mail client config: SMTP client not configured, sending mails to debug log, configure at least SMTP server host and port
-2025-05-15 11:21:01,581 [main] INFO  dev.dsf.bpe.spring.config.AuthenticationConfig - Role config: {[name=webbrowser_test_user, thumbprints=[7b426682eceeb1f9e688890f82f67c9c3df7f98097e82fcf45edd537d5d8705f5159824568e54346dd350ef9c4c142fbfa3425248c113b34e6a3a6ae2226dba4], emails=[], tokenRoles=[admin], tokenGroups=[], dsfRoles=[ADMIN], practitionerRoles=[]]}
-2025-05-15 11:21:01,598 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Excluded processes: []
-2025-05-15 11:21:01,599 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Retired processes: []
-2025-05-15 11:21:01,667 [main] INFO  dev.dsf.tools.build.BuildInfoReaderImpl - System default timezone: Europe/Berlin
-2025-05-15 11:21:01,670 [main] INFO  dev.dsf.tools.build.BuildInfoReaderImpl - Artifact: dsf-bpe-server-jetty, version: 1.7.1, build: 2025-03-24T19:38:48+01:00, branch: main, commit: bffc318dc9150994236c1a40d0e6b736d4ec81f4
-2025-05-15 11:21:01,671 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Deploying process plugins ...
-2025-05-15 11:21:01,674 [main] DEBUG dev.dsf.fhir.client.AbstractFhirWebserviceClientJerseyWithRetry - First try ...
-2025-05-15 11:21:01,996 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:02,202 [main] WARN  dev.dsf.bpe.plugin.ProcessPluginLoaderImpl - Ignoring /opt/bpe/process/README.md: Not a .jar file
-2025-05-15 11:21:02,209 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ActivityDefinition/eyematics-initiate-process-activity-definition.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,253 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/StructureDefinition/eyematics-initiate-process-structure-definition.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,268 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/Task/eyematics-initiate-process-task.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,450 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,455 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/CodeSystem/eyematics-receive-process-code-system.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,465 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ValueSet/eyematics-receive-process-value-set.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,467 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,470 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,471 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/Task/eyematics-provide-process-task.xml from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,474 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading BPMN model bpe/eyematics-initiate-process.bpmn from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,653 [main] INFO  dev.dsf.bpe.plugin.AbstractProcessPlugin - Setting process history time to live for process dsfdev_eyematicsInitiateProcess from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar to P30D
-2025-05-15 11:21:02,659 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading BPMN model bpe/eyematics-provide-process.bpmn from process plugin eyematics-dsf-process-plugin-1.3.0.1 and replacing all occurrences of #{version} with 1.3, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
-2025-05-15 11:21:02,680 [main] INFO  dev.dsf.bpe.plugin.AbstractProcessPlugin - Setting process history time to live for process dsfdev_eyematicsProvideProcess from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar to P30D
-2025-05-15 11:21:02,801 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Deploying process models ...
-2025-05-15 11:21:02,879 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsInitiateProcess|1.3 from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar://bpe/eyematics-initiate-process.bpmn deployed with id 4996ef1d-316d-11f0-897f-0242ac120009
-2025-05-15 11:21:02,928 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsProvideProcess|1.3 from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar://bpe/eyematics-provide-process.bpmn deployed with id 49c2e122-316d-11f0-897f-0242ac120009
-2025-05-15 11:21:03,002 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsInitiateProcess|1.3 state change: DRAFT -> DRAFT
-2025-05-15 11:21:03,003 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsProvideProcess|1.3 state change: DRAFT -> DRAFT
-2025-05-15 11:21:03,004 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsInitiateProcess|1.1 state change: EXCLUDED -> EXCLUDED
-2025-05-15 11:21:03,004 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsProvideProcess|1.1 state change: EXCLUDED -> EXCLUDED
-2025-05-15 11:21:03,004 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsInitiateProcess|1.2 state change: EXCLUDED -> EXCLUDED
-2025-05-15 11:21:03,004 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsProvideProcess|1.2 state change: EXCLUDED -> EXCLUDED
-2025-05-15 11:21:03,022 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Suspended process dsfdev_eyematicsInitiateProcess/1.1 (internal version 1) from bpe/eyematics-initiate-process.bpmn deployed 2025-05-15T08:20:00.904+0200
-2025-05-15 11:21:03,023 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Suspended process dsfdev_eyematicsInitiateProcess/1.2 (internal version 2) from bpe/eyematics-initiate-process.bpmn deployed 2025-05-15T10:45:24.269+0200
-2025-05-15 11:21:03,023 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Active process dsfdev_eyematicsInitiateProcess/1.3 (internal version 3) from bpe/eyematics-initiate-process.bpmn deployed 2025-05-15T11:16:30.400+0200
-2025-05-15 11:21:03,024 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Suspended process dsfdev_eyematicsProvideProcess/1.1 (internal version 1) from bpe/eyematics-provide-process.bpmn deployed 2025-05-15T08:20:01.086+0200
-2025-05-15 11:21:03,024 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Suspended process dsfdev_eyematicsProvideProcess/1.2 (internal version 2) from bpe/eyematics-provide-process.bpmn deployed 2025-05-15T10:45:24.469+0200
-2025-05-15 11:21:03,024 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Active process dsfdev_eyematicsProvideProcess/1.3 (internal version 3) from bpe/eyematics-provide-process.bpmn deployed 2025-05-15T11:16:30.717+0200
-2025-05-15 11:21:03,031 [main] DEBUG dev.dsf.bpe.plugin.FhirResourceHandlerImpl - No resources found in BPE DB for process dsfdev_eyematicsProvideProcess|1.2
-2025-05-15 11:21:03,032 [main] DEBUG dev.dsf.bpe.plugin.FhirResourceHandlerImpl - No resources found in BPE DB for process dsfdev_eyematicsProvideProcess|1.1
-2025-05-15 11:21:03,032 [main] DEBUG dev.dsf.bpe.plugin.FhirResourceHandlerImpl - No resources found in BPE DB for process dsfdev_eyematicsInitiateProcess|1.1
-2025-05-15 11:21:03,032 [main] DEBUG dev.dsf.bpe.plugin.FhirResourceHandlerImpl - No resources found in BPE DB for process dsfdev_eyematicsInitiateProcess|1.2
-2025-05-15 11:21:03,035 [main] DEBUG dev.dsf.bpe.plugin.FhirResourceHandlerImpl - Executing process plugin resources bundle
-2025-05-15 11:21:03,064 [main] DEBUG dev.dsf.fhir.client.AbstractFhirWebserviceClientJerseyWithRetry - First try ...
-2025-05-15 11:21:08,912 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:08,913 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: null
-2025-05-15 11:21:08,913 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: null
-2025-05-15 11:21:08,914 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: null
-2025-05-15 11:21:09,005 [main] INFO  org.eyematics.process.EyeMaticsProcessPluginDeploymentStateListener - Providing Public Key, If Not Exists.
-2025-05-15 11:21:09,006 [main] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - Reading PublicKey Bundle on DSF FHIR server with baseUrl 'https://hrp/fhir' ...
-2025-05-15 11:21:09,035 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:09,046 [main] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - PublicKey Bundle already exists on DSF FHIR server with base Url 'https://hrp/fhir'
-2025-05-15 11:21:09,047 [main] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - PublicKey Bundle has id 'Bundle/d9753588-1abc-48f8-9e66-29e1b32cb67b/_history/1'
-2025-05-15 11:21:09,048 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Deploying process plugins [Done]
-2025-05-15 11:21:09,048 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Starting process engine ...
-2025-05-15 11:21:09,050 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Starting process engine [Done]
-2025-05-15 11:21:09,051 [main] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
-2025-05-15 11:21:09,052 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Task websocket subscription ...
-2025-05-15 11:21:09,053 [main] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
-2025-05-15 11:21:09,053 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving QuestionnaireResponse websocket subscription ...
-2025-05-15 11:21:09,087 [pool-7-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:09,095 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Subscription with id 7e05acb0-b75d-4590-b126-ef3887dfb579 found
-2025-05-15 11:21:09,096 [pool-7-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new QuestionnaireResponse resources ...
-2025-05-15 11:21:09,108 [pool-6-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:09,113 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Executing search QuestionnaireResponse?_page=1&_count=20&_sort=_lastUpdated&status=completed
-2025-05-15 11:21:09,113 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Subscription with id 0c7fc77f-bb1c-46a1-b66b-bd672558523d found
-2025-05-15 11:21:09,113 [pool-6-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new Task resources ...
-2025-05-15 11:21:09,117 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Executing search Task?_page=1&_count=20&_lastUpdated=gt2025-05-15T10%3A46%3A30.546&_sort=_lastUpdated&status=requested
-2025-05-15 11:21:09,132 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'logoutService' as singleton resource with path '/bpe/logout'
-2025-05-15 11:21:09,134 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'processService' as singleton resource with path '/bpe/Process'
-2025-05-15 11:21:09,134 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'rootService' as singleton resource with path '/bpe/'
-2025-05-15 11:21:09,135 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'staticResourcesService' as singleton resource with path '/bpe/static'
-2025-05-15 11:21:09,135 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'statusService' as singleton resource with path '/bpe/status'
-2025-05-15 11:21:09,135 [pool-7-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:09,137 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Result bundle.total <= 0
-2025-05-15 11:21:09,138 [pool-7-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new QuestionnaireResponse resources [Done]
-2025-05-15 11:21:09,146 [pool-6-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:21:09,148 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Result bundle.total <= 0
-2025-05-15 11:21:09,148 [pool-6-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new Task resources [Done]
-2025-05-15 11:21:09,150 [pool-6-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Connecting Task websocket to local DSF FHIR server, subscription: 0c7fc77f-bb1c-46a1-b66b-bd672558523d ...
-2025-05-15 11:21:09,151 [pool-7-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Connecting QuestionnaireResponse websocket to local DSF FHIR server, subscription: 7e05acb0-b75d-4590-b126-ef3887dfb579 ...
-2025-05-15 11:21:09,160 [pool-6-thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Connecting to websocket wss://hrp/fhir/ws and waiting for connection
-2025-05-15 11:21:09,160 [pool-7-thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Connecting to websocket wss://hrp/fhir/ws and waiting for connection
-2025-05-15 11:21:09,310 [Grizzly(1)] INFO  dev.dsf.fhir.client.ClientEndpoint - Websocket open, session f94370b4-954c-4703-991d-a9fa924a437a
-2025-05-15 11:21:09,310 [Grizzly(1)] INFO  dev.dsf.fhir.client.ClientEndpoint - Websocket open, session 8c320938-de98-48bd-93a8-a252eae7e109
-2025-05-15 11:21:09,326 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Websocket message received, session 8c320938-de98-48bd-93a8-a252eae7e109: bound 0c7fc77f-bb1c-46a1-b66b-bd672558523d
-2025-05-15 11:21:09,326 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Websocket message received, session f94370b4-954c-4703-991d-a9fa924a437a: bound 7e05acb0-b75d-4590-b126-ef3887dfb579
-2025-05-15 11:21:09,326 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Bound received
-2025-05-15 11:21:09,326 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Bound received
-2025-05-15 11:21:09,348 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@5a6dd1e7{/bpe,null,AVAILABLE}
-2025-05-15 11:21:09,350 [main] INFO  org.eclipse.jetty.webapp.WebAppContext - WebApp@1939100990 at http://ServerConnector@5e13f156{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}/bpe
-2025-05-15 11:21:09,350 [main] INFO  org.eclipse.jetty.webapp.WebAppContext - WebApp@1939100990 at http://ServerConnector@f2a1813{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}/bpe
-2025-05-15 11:21:09,354 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@5e13f156{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
-2025-05-15 11:21:09,358 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@f2a1813{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}
-2025-05-15 11:21:09,360 [main] INFO  org.eclipse.jetty.server.Server - Started Server@51efb731{STARTING}[11.0.25,sto=0] @14222ms
-2025-05-15 11:22:29,308 [Grizzly(1)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Websocket message received, session 8c320938-de98-48bd-93a8-a252eae7e109: {"resourceType":"Task","id":"4fa3dc34-837a-41b6-aec3-fd936dfe9a89","meta":{"versionId":"1","lastUpdated":"2025-05-15T11:22:29.291+02:00","profile":["http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition|1.3"]},"instantiatesCanonical":"http://dsf.dev/bpe/Process/eyematicsProvideProcess|1.3","status":"requested","intent":"order","authoredOn":"2025-05-15T11:22:29+02:00","requester":{"type":"Organization","identifier":{"system":"http://dsf.dev/sid/organization-identifier","value":"dic.dsf.test"}},"restriction":{"recipient":[{"type":"Organization","identifier":{"system":"http://dsf.dev/sid/organization-identifier","value":"hrp.dsf.test"}}]},"input":[{"type":{"coding":[{"system":"http://dsf.dev/fhir/CodeSystem/bpmn-message","code":"message-name"}]},"valueString":"provideProcessStartEventMessage"},{"type":{"coding":[{"system":"http://dsf.dev/fhir/CodeSystem/bpmn-message","code":"business-key"}]},"valueString":"5b2e1e2e-788e-4b6f-9afc-ca2b0562770b"},{"type":{"coding":[{"system":"http://dsf.dev/fhir/CodeSystem/bpmn-message","code":"correlation-key"}]},"valueString":"d9d9fbf5-3f9b-4b24-80e6-125bc372a53b"}]}
-2025-05-15 11:22:29,311 [pool-2-thread-1] DEBUG dev.dsf.bpe.subscription.ConcurrentSubscriptionHandlerFactory - executing onResource for Task with id: Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/1
-2025-05-15 11:22:29,474 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
-2025-05-15 11:22:29,474 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: https://hrp/fhir/Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/2
-2025-05-15 11:22:29,474 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: W/"2"
-2025-05-15 11:22:29,475 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: Thu, 15 May 2025 09:22:29 GMT
-2025-05-15 11:22:29,545 [pool-2-thread-1] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.EncryptProvideDataTask in BPMN element with id 'encryptProvideDataTask'
-2025-05-15 11:22:29,546 [pool-2-thread-1] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.SelectReceiveTargetTask in BPMN element with id 'selectReceiveTargetTask'
-2025-05-15 11:22:29,546 [pool-2-thread-1] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.CreateProvideBundleDataTask in BPMN element with id 'createProvideBundleDataTask'
-2025-05-15 11:22:29,546 [pool-2-thread-1] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.StoreProvideDataTask in BPMN element with id 'storeProvideDataTask'
-2025-05-15 11:22:29,547 [pool-2-thread-1] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.message.provide.SendProvideDataMessageTask in BPMN element with id 'sendProvideDataMessageTask'
-2025-05-15 11:22:29,547 [pool-2-thread-1] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.ReadDataProvideTask in BPMN element with id 'readDataProvideTask'
-2025-05-15 11:22:29,621 [pool-2-thread-1] INFO  dev.dsf.bpe.listener.StartListener - Starting process http://dsf.dev/bpe/Process/eyematicsProvideProcess|1.3 at 2025-05-15T11:22:29+02:00 [task: https://hrp/fhir/Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89, requester: dic.dsf.test, business-key: 5b2e1e2e-788e-4b6f-9afc-ca2b0562770b, correlation-key: d9d9fbf5-3f9b-4b24-80e6-125bc372a53b, message: provideProcessStartEventMessage]
-2025-05-15 11:22:29,628 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.ReadDataProvideTask - Reading Data from FHIR-Repository...
-2025-05-15 11:22:30,638 [pool-2-thread-1] ERROR org.camunda.bpm.engine.context - ENGINE-16004 Exception while closing command context: ca/uhn/fhir/rest/client/impl/RestfulClientFactory
-java.lang.NoClassDefFoundError: ca/uhn/fhir/rest/client/impl/RestfulClientFactory
-	at java.base/java.lang.ClassLoader.defineClass1(Native Method) ~[?:?]
-	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1017) ~[?:?]
-	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150) ~[?:?]
-	at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:524) ~[?:?]
-	at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:427) ~[?:?]
-	at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:421) ~[?:?]
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712) ~[?:?]
-	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:420) ~[?:?]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592) ~[?:?]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
-	at eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar/org.eyematics.process.utils.fhir.client.FhirClientImpl.createClientFactory(FhirClientImpl.java:109) ~[?:?]
-	at eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar/org.eyematics.process.utils.fhir.client.FhirClientImpl.<init>(FhirClientImpl.java:62) ~[?:?]
-	at eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar/org.eyematics.process.utils.fhir.client.FhirClientFactory.createFhirClientImpl(FhirClientFactory.java:142) ~[?:?]
-	at eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar/org.eyematics.process.utils.fhir.client.FhirClientFactory.getFhirClient(FhirClientFactory.java:113) ~[?:?]
-	at eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar/org.eyematics.process.service.provide.ReadDataProvideTask.doExecute(ReadDataProvideTask.java:51) ~[?:?]
-	at dev.dsf.bpe.v1.activity.AbstractServiceDelegate.execute(AbstractServiceDelegate.java:68) ~[dsf-bpe-process-api-v1-1.7.1.jar:1.7.1]
-	at org.camunda.bpm.engine.impl.bpmn.delegate.JavaDelegateInvocation.invoke(JavaDelegateInvocation.java:40) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.delegate.DelegateInvocation.proceed(DelegateInvocation.java:58) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.delegate.DefaultDelegateInterceptor.handleInvocationInContext(DefaultDelegateInterceptor.java:92) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.delegate.DefaultDelegateInterceptor.handleInvocation(DefaultDelegateInterceptor.java:63) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.ServiceTaskJavaDelegateActivityBehavior.execute(ServiceTaskJavaDelegateActivityBehavior.java:55) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.ServiceTaskJavaDelegateActivityBehavior.performExecution(ServiceTaskJavaDelegateActivityBehavior.java:44) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.TaskActivityBehavior.execute(TaskActivityBehavior.java:69) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.ClassDelegateActivityBehavior$1.call(ClassDelegateActivityBehavior.java:68) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.ClassDelegateActivityBehavior$1.call(ClassDelegateActivityBehavior.java:65) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.AbstractBpmnActivityBehavior.executeWithErrorPropagation(AbstractBpmnActivityBehavior.java:90) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.bpmn.behavior.ClassDelegateActivityBehavior.execute(ClassDelegateActivityBehavior.java:65) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationActivityExecute$2.callback(PvmAtomicOperationActivityExecute.java:61) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationActivityExecute$2.callback(PvmAtomicOperationActivityExecute.java:50) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl.continueIfExecutionDoesNotAffectNextOperation(PvmExecutionImpl.java:2109) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationActivityExecute.execute(PvmAtomicOperationActivityExecute.java:42) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationActivityExecute.execute(PvmAtomicOperationActivityExecute.java:31) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.AtomicOperationInvocation.execute(AtomicOperationInvocation.java:99) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.invokeNext(CommandInvocationContext.java:141) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performNext(CommandInvocationContext.java:121) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:96) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperation(ExecutionEntity.java:627) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperation(ExecutionEntity.java:601) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl$6.callback(PvmExecutionImpl.java:2048) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl$6.callback(PvmExecutionImpl.java:2045) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl.continueExecutionIfNotCanceled(PvmExecutionImpl.java:2115) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl.dispatchDelayedEventsAndPerformOperation(PvmExecutionImpl.java:2064) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl.dispatchDelayedEventsAndPerformOperation(PvmExecutionImpl.java:2045) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationTransitionNotifyListenerStart.eventNotificationsCompleted(PvmAtomicOperationTransitionNotifyListenerStart.java:61) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationTransitionNotifyListenerStart.eventNotificationsCompleted(PvmAtomicOperationTransitionNotifyListenerStart.java:30) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.core.operation.AbstractEventAtomicOperation.execute(AbstractEventAtomicOperation.java:70) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.AtomicOperationInvocation.execute(AtomicOperationInvocation.java:99) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.invokeNext(CommandInvocationContext.java:141) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performNext(CommandInvocationContext.java:121) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:96) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:86) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperationSync(ExecutionEntity.java:636) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperationSync(ExecutionEntity.java:611) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.core.operation.AbstractEventAtomicOperation.execute(AbstractEventAtomicOperation.java:66) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.AtomicOperationInvocation.execute(AtomicOperationInvocation.java:99) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.invokeNext(CommandInvocationContext.java:141) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performNext(CommandInvocationContext.java:121) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:96) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:86) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperationSync(ExecutionEntity.java:636) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperationSync(ExecutionEntity.java:611) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.core.operation.AbstractEventAtomicOperation.execute(AbstractEventAtomicOperation.java:66) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.AtomicOperationInvocation.execute(AtomicOperationInvocation.java:99) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.invokeNext(CommandInvocationContext.java:141) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performNext(CommandInvocationContext.java:121) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:96) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperation(ExecutionEntity.java:627) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperation(ExecutionEntity.java:601) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationTransitionCreateScope.scopeCreated(PvmAtomicOperationTransitionCreateScope.java:38) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationCreateScope.execute(PvmAtomicOperationCreateScope.java:53) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.operation.PvmAtomicOperationCreateScope.execute(PvmAtomicOperationCreateScope.java:27) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.AtomicOperationInvocation.execute(AtomicOperationInvocation.java:99) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.invokeNext(CommandInvocationContext.java:141) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performNext(CommandInvocationContext.java:128) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandInvocationContext.performOperation(CommandInvocationContext.java:96) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperation(ExecutionEntity.java:627) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.performOperation(ExecutionEntity.java:601) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl.start(PvmExecutionImpl.java:294) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity.start(ExecutionEntity.java:454) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.pvm.runtime.PvmExecutionImpl.start(PvmExecutionImpl.java:271) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.cmd.AbstractCorrelateMessageCmd.instantiateProcess(AbstractCorrelateMessageCmd.java:93) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.cmd.AbstractCorrelateMessageCmd.createMessageCorrelationResult(AbstractCorrelateMessageCmd.java:127) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.cmd.CorrelateMessageCmd.execute(CorrelateMessageCmd.java:94) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.cmd.CorrelateMessageCmd.execute(CorrelateMessageCmd.java:41) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandExecutorImpl.execute(CommandExecutorImpl.java:28) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:111) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.lambda$execute$0(SpringTransactionInterceptor.java:62) ~[camunda-engine-spring-7.22.0.jar:7.22.0]
-	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140) ~[spring-tx-6.2.5.jar:6.2.5]
-	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:62) ~[camunda-engine-spring-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:34) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.interceptor.ExceptionCodeInterceptor.execute(ExceptionCodeInterceptor.java:55) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.MessageCorrelationBuilderImpl.execute(MessageCorrelationBuilderImpl.java:346) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.MessageCorrelationBuilderImpl.correlateWithResult(MessageCorrelationBuilderImpl.java:257) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at org.camunda.bpm.engine.impl.MessageCorrelationBuilderImpl.correlateStartMessage(MessageCorrelationBuilderImpl.java:316) ~[camunda-engine-7.22.0.jar:7.22.0]
-	at dev.dsf.bpe.subscription.TaskHandler.onMessage(TaskHandler.java:298) ~[dsf-bpe-server-1.7.1.jar:1.7.1]
-	at dev.dsf.bpe.subscription.TaskHandler.onResource(TaskHandler.java:169) ~[dsf-bpe-server-1.7.1.jar:1.7.1]
-	at dev.dsf.bpe.subscription.TaskHandler.onResource(TaskHandler.java:41) ~[dsf-bpe-server-1.7.1.jar:1.7.1]
-	at dev.dsf.bpe.subscription.EventResourceHandlerImpl.onResource(EventResourceHandlerImpl.java:38) ~[dsf-bpe-server-1.7.1.jar:1.7.1]
-	at dev.dsf.bpe.subscription.ConcurrentSubscriptionHandlerFactory.lambda$createEventResourceHandler$1(ConcurrentSubscriptionHandlerFactory.java:64) ~[dsf-bpe-server-1.7.1.jar:1.7.1]
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) [?:?]
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
-	at java.base/java.lang.Thread.run(Thread.java:840) [?:?]
-Caused by: java.lang.ClassNotFoundException: ca.uhn.fhir.rest.client.impl.RestfulClientFactory
-	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445) ~[?:?]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592) ~[?:?]
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
-	... 106 more
-2025-05-15 11:24:59,332 [Thread-1] INFO  dev.dsf.common.jetty.JettyServer - Stopping jetty server ...
-2025-05-15 11:24:59,335 [Thread-1] INFO  org.eclipse.jetty.server.Server - Stopped Server@51efb731{STOPPING}[11.0.25,sto=0]
-2025-05-15 11:24:59,343 [Thread-1] INFO  org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@5e13f156{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
-2025-05-15 11:24:59,349 [Thread-1] INFO  org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@f2a1813{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}
-2025-05-15 11:24:59,366 [Thread-1] INFO  org.eclipse.jetty.server.handler.ContextHandler.bpe - Closing Spring root WebApplicationContext
-2025-05-15 11:24:59,368 [Thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Closing websocket wss://hrp/fhir/ws
-2025-05-15 11:24:59,371 [Thread-1] WARN  dev.dsf.fhir.client.ClientEndpoint - Websocket closed, session 8c320938-de98-48bd-93a8-a252eae7e109: 1000 - 
-2025-05-15 11:24:59,373 [Thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Websocket closed: NORMAL_CLOSURE - 
-2025-05-15 11:24:59,374 [Thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Closing websocket wss://hrp/fhir/ws
-2025-05-15 11:24:59,374 [Grizzly(2)] WARN  dev.dsf.fhir.client.ClientEndpoint - Websocket closed, session f94370b4-954c-4703-991d-a9fa924a437a: 1006 - Closed abnormally.
-2025-05-15 11:24:59,376 [Grizzly(2)] INFO  dev.dsf.fhir.client.ClientEndpoint - Trying to reconnect websocket
-2025-05-15 11:24:59,377 [Grizzly(2)] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
-2025-05-15 11:24:59,378 [Grizzly(2)] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Websocket closed: CLOSED_ABNORMALLY - Closed abnormally.
-2025-05-15 11:24:59,378 [pool-8-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving QuestionnaireResponse websocket subscription ...
-2025-05-15 11:24:59,391 [pool-8-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 502: Bad Gateway
-2025-05-15 11:24:59,393 [pool-8-thread-1] WARN  dev.dsf.fhir.client.FhirWebserviceClientJersey - Request failed: org.glassfish.jersey.message.internal.MessageBodyProviderNotFoundException - MessageBodyReader not found for media type=text/html, type=class org.hl7.fhir.r4.model.OperationOutcome, genericType=class org.hl7.fhir.r4.model.OperationOutcome.
-2025-05-15 11:24:59,398 [pool-8-thread-1] WARN  dev.dsf.bpe.subscription.FhirConnectorImpl - Error while retrieving QuestionnaireResponse websocket subscription (HTTP 502 Bad Gateway), trying again in 5000 ms (retry 1)
-2025-05-15 11:24:59,401 [Thread-1] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@5a6dd1e7{/bpe,null,STOPPED}
+2025-05-15 14:22:14,385 [main] INFO  dev.dsf.tools.db.DbMigrator - Executing DB migration ...
+2025-05-15 14:22:21,288 [main] DEBUG dev.dsf.tools.db.DbMigrator - UPDATE SUMMARY
+2025-05-15 14:22:21,289 [main] DEBUG dev.dsf.tools.db.DbMigrator - Run:                          9
+2025-05-15 14:22:21,289 [main] DEBUG dev.dsf.tools.db.DbMigrator - Previously run:               0
+2025-05-15 14:22:21,290 [main] DEBUG dev.dsf.tools.db.DbMigrator - Filtered out:                 0
+2025-05-15 14:22:21,290 [main] DEBUG dev.dsf.tools.db.DbMigrator - -------------------------------
+2025-05-15 14:22:21,291 [main] DEBUG dev.dsf.tools.db.DbMigrator - Total change sets:            9
+2025-05-15 14:22:21,291 [main] INFO  dev.dsf.tools.db.DbMigrator - Executing DB migration [Done]
+2025-05-15 14:22:21,841 [main] DEBUG dev.dsf.common.jetty.JettyServer - Java classpath: [lib/camunda-dmn-model-7.22.0.jar, lib/hapi-fhir-validation-resources-r4-5.1.0.jar, lib/camunda-xml-model-7.22.0.jar, lib/jakarta.activation-api-2.1.3.jar, lib/feel-engine-1.17.5-scala-shaded.jar, lib/org.hl7.fhir.r5-5.1.0.jar, lib/spring-jdbc-6.2.5.jar, lib/jersey-entity-filtering-3.1.10.jar, lib/slf4j-api-2.0.17.jar, lib/dsf-common-status-1.7.1.jar, lib/micrometer-observation-1.14.5.jar, lib/asm-commons-9.7.1.jar, lib/jetty-http-11.0.25.jar, lib/dsf-fhir-validation-1.7.1.jar, lib/jaxb-core-4.0.5.jar, lib/jetty-annotations-11.0.25.jar, lib/jakarta.activation-1.2.1.jar, lib/spring-aop-6.2.5.jar, lib/hapi-fhir-validation-5.1.0.jar, lib/jakarta.websocket-client-api-2.1.1.jar, lib/tyrus-core-2.2.0.jar, lib/hapi-fhir-converter-5.1.0.jar, lib/java-jwt-4.5.0.jar, lib/hk2-api-3.0.6.jar, lib/log4j-core-2.24.3.jar, lib/jetty-alpn-client-11.0.25.jar, lib/commons-dbcp2-2.13.0.jar, lib/jackson-core-2.18.3.jar, lib/jetty-util-ajax-11.0.25.jar, lib/tyrus-container-grizzly-client-2.2.0.jar, lib/jcl-over-slf4j-2.0.17.jar, lib/org.hl7.fhir.dstu2-5.1.0.jar, lib/jakarta.validation-api-3.0.2.jar, lib/error_prone_annotations-2.3.3.jar, lib/camunda-engine-dmn-7.22.0.jar, lib/dsf-common-ui-1.7.1.jar, lib/jersey-container-servlet-3.1.10.jar, lib/dsf-common-jetty-1.7.1.jar, lib/org.hl7.fhir.dstu3-5.1.0.jar, lib/jetty-util-11.0.25.jar, lib/txw2-4.0.5.jar, lib/jaxb-runtime-4.0.5.jar, lib/failureaccess-1.0.1.jar, lib/xpp3-1.1.4c.jar, lib/jersey-media-jaxb-3.1.10.jar, lib/jetty-openid-11.0.25.jar, lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar, lib/grizzly-http-server-4.0.2.jar, lib/hapi-fhir-structures-r4-5.1.0.jar, lib/joda-time-2.12.5.jar, lib/jersey-apache-connector-3.1.10.jar, lib/dsf-fhir-webservice-client-1.7.1.jar, lib/dsf-common-auth-1.7.1.jar, lib/camunda-cmmn-model-7.22.0.jar, lib/jetty-client-11.0.25.jar, lib/jackson-module-jakarta-xmlbind-annotations-2.18.3.jar, lib/grizzly-http-4.0.2.jar, lib/grizzly-framework-4.0.2.jar, lib/httpcore-4.4.16.jar, lib/attoparser-2.0.7.RELEASE.jar, lib/hapi-fhir-validation-resources-r5-5.1.0.jar, lib/log4j-slf4j2-impl-2.24.3.jar, lib/jakarta.xml.bind-api-4.0.2.jar, lib/jetty-plus-11.0.25.jar, lib/istack-commons-runtime-4.1.2.jar, lib/commons-collections4-4.4.jar, lib/jetty-webapp-11.0.25.jar, lib/dsf-fhir-rest-adapter-1.7.1.jar, lib/jetty-io-11.0.25.jar, lib/camunda-engine-feel-api-7.22.0.jar, lib/postgresql-42.7.5.jar, lib/bcmail-jdk18on-1.80.jar, lib/bcprov-jdk18on-1.80.jar, lib/spring-context-6.2.5.jar, lib/dsf-bpe-server-1.7.1.jar, lib/jackson-annotations-2.18.3.jar, lib/ognl-3.3.4.jar, lib/Saxon-HE-9.5.1-5.jar, lib/j2objc-annotations-2.8.jar, lib/spring-expression-6.2.5.jar, lib/httpclient-4.5.14.jar, lib/hapi-fhir-structures-r5-5.1.0.jar, lib/jersey-common-3.1.10.jar, lib/jakarta.servlet-api-6.0.0.jar, lib/hapi-fhir-base-5.1.0.jar, lib/dsf-common-config-1.7.1.jar, lib/crypto-utils-3.8.0.jar, lib/dsf-common-documentation-1.7.1.jar, lib/spring-tx-6.2.5.jar, lib/caffeine-2.7.0.jar, lib/org.hl7.fhir.validation-5.1.0.jar, lib/asm-tree-9.7.1.jar, lib/tyrus-client-2.2.0.jar, lib/org.hl7.fhir.r4-5.1.0.jar, lib/jetty-xml-11.0.25.jar, lib/jakarta.transaction-api-1.3.3.jar, lib/jersey-client-3.1.10.jar, lib/dsf-tools-build-info-reader-1.7.1.jar, lib/micrometer-commons-1.14.5.jar, lib/jetty-server-11.0.25.jar, lib/hk2-locator-3.0.6.jar, lib/spring-beans-6.2.5.jar, lib/camunda-engine-7.22.0.jar, lib/jersey-server-3.1.10.jar, lib/bcpkix-jdk18on-1.80.jar, lib/camunda-bpmn-model-7.22.0.jar, lib/hk2-utils-3.0.6.jar, lib/jetty-jakarta-servlet-api-5.0.2.jar, lib/thymeleaf-3.1.3.RELEASE.jar, lib/org.hl7.fhir.utilities-5.1.0.jar, lib/checker-qual-3.48.3.jar, lib/commons-io-2.18.0.jar, lib/xpp3_xpath-1.1.4c.jar, lib/dsf-bpe-process-api-v1-1.7.1.jar, lib/jakarta.websocket-api-2.1.1.jar, lib/camunda-commons-logging-7.22.0.jar, lib/jetty-security-11.0.25.jar, lib/jersey-container-servlet-core-3.1.10.jar, lib/spring-web-6.2.5.jar, lib/jakarta.ws.rs-api-3.1.0.jar, lib/dsf-tools-docker-secrets-reader-1.7.1.jar, lib/jakarta.annotation-api-2.1.1.jar, lib/jakarta.inject-api-2.0.1.jar, lib/commons-text-1.13.0.jar, lib/commons-pool2-2.12.0.jar, lib/aopalliance-repackaged-3.0.6.jar, lib/guava-32.1.3-jre.jar, lib/unbescape-1.1.6.RELEASE.jar, lib/asm-9.7.1.jar, lib/commons-lang3-3.17.0.jar, lib/org.hl7.fhir.dstu2016may-5.1.0.jar, lib/dsf-fhir-websocket-client-1.7.1.jar, lib/spring-core-6.2.5.jar, lib/commons-compress-1.27.1.jar, lib/jersey-hk2-3.1.10.jar, lib/opencsv-5.9.jar, lib/javassist-3.30.2-GA.jar, lib/org.hl7.fhir.convertors-5.1.0.jar, lib/java-uuid-generator-4.3.0.jar, lib/jakarta.mail-1.6.7.jar, lib/camunda-engine-feel-juel-7.22.0.jar, lib/liquibase-core-4.31.1.jar, lib/jetty-jndi-11.0.25.jar, lib/spring-jcl-6.2.5.jar, lib/camunda-engine-spring-7.22.0.jar, lib/dsf-tools-db-migration-1.7.1.jar, lib/jersey-media-json-jackson-3.1.10.jar, lib/snakeyaml-2.4.jar, lib/camunda-commons-utils-7.22.0.jar, lib/dsf-fhir-auth-1.7.1.jar, lib/gson-2.12.1.jar, lib/camunda-engine-feel-scala-7.22.0.jar, lib/jul-to-slf4j-2.0.17.jar, lib/jsr305-3.0.2.jar, lib/camunda-juel-7.22.0.jar, lib/commons-codec-1.18.0.jar, lib/dsf-common-db-1.7.1.jar, lib/bcutil-jdk18on-1.80.jar, lib/jackson-databind-2.18.3.jar, lib/jetty-servlet-11.0.25.jar, lib/camunda-commons-typed-values-7.22.0.jar, lib/osgi-resource-locator-1.0.3.jar, lib/log4j-api-2.24.3.jar, lib/jaxb-api-2.3.1.jar, lib/tyrus-spi-2.2.0.jar, lib/mybatis-3.5.15.jar, lib/ucum-1.0.2.jar, lib_external/*, dsf_bpe.jar]
+2025-05-15 14:22:21,842 [main] DEBUG dev.dsf.common.jetty.JettyServer - Resources for jetty: [file:///opt/bpe/lib/dsf-bpe-server-1.7.1.jar]
+2025-05-15 14:22:21,844 [main] DEBUG dev.dsf.common.jetty.JettyServer - Init parameters: {}
+2025-05-15 14:22:22,643 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC authorization code flow enabled
+2025-05-15 14:22:22,646 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC bearer token enabled
+2025-05-15 14:22:22,650 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC back-channel logout enabled
+2025-05-15 14:22:23,031 [main] INFO  dev.dsf.common.auth.ClientCertificateAuthenticator - Using [CN=Test, C=DE] to validate client certificates
+2025-05-15 14:22:23,037 [main] INFO  dev.dsf.common.jetty.JettyServer - Starting jetty server ...
+2025-05-15 14:22:23,039 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.25; built: 2025-03-13T00:15:57.301Z; git: a2e9fae3ad8320f2a713d4fa29bba356a99d1295; jvm 17.0.14+7-LTS
+2025-05-15 14:22:23,220 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler.bpe - 1 Spring WebApplicationInitializers detected on classpath
+2025-05-15 14:22:23,295 [main] INFO  org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
+2025-05-15 14:22:23,517 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler.bpe - Initializing Spring root WebApplicationContext
+2025-05-15 14:22:23,893 [main] INFO  dev.dsf.bpe.spring.config.PropertiesConfig - Concurrency config: {process-threads: 20, engine-core-pool: 4, engine-queue: 40, engine-max-pool: 10}
+2025-05-15 14:22:23,917 [main] INFO  dev.dsf.common.config.ProxyConfigImpl - Forward proxy config: {url: null, username: null, password: null, no-proxy: []}
+2025-05-15 14:22:23,919 [main] INFO  dev.dsf.bpe.spring.config.FhirClientConfig - Local webservice client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, url: https://hrp/fhir, proxy: disabled}
+2025-05-15 14:22:23,920 [main] INFO  dev.dsf.bpe.spring.config.FhirClientConfig - Local websocket client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, url: wss://hrp/fhir/ws, proxy: disabled}
+2025-05-15 14:22:23,922 [main] INFO  dev.dsf.bpe.spring.config.FhirClientConfig - Remote webservice client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, proxy: disabled}
+2025-05-15 14:22:23,926 [main] INFO  dev.dsf.bpe.spring.config.MailConfig - Mail client config: SMTP client not configured, sending mails to debug log, configure at least SMTP server host and port
+2025-05-15 14:22:27,401 [main] INFO  dev.dsf.bpe.spring.config.AuthenticationConfig - Role config: {[name=webbrowser_test_user, thumbprints=[7b426682eceeb1f9e688890f82f67c9c3df7f98097e82fcf45edd537d5d8705f5159824568e54346dd350ef9c4c142fbfa3425248c113b34e6a3a6ae2226dba4], emails=[], tokenRoles=[admin], tokenGroups=[], dsfRoles=[ADMIN], practitionerRoles=[]]}
+2025-05-15 14:22:27,417 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Excluded processes: []
+2025-05-15 14:22:27,418 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Retired processes: []
+2025-05-15 14:22:27,490 [main] INFO  dev.dsf.tools.build.BuildInfoReaderImpl - System default timezone: Europe/Berlin
+2025-05-15 14:22:27,495 [main] INFO  dev.dsf.tools.build.BuildInfoReaderImpl - Artifact: dsf-bpe-server-jetty, version: 1.7.1, build: 2025-03-24T19:38:48+01:00, branch: main, commit: bffc318dc9150994236c1a40d0e6b736d4ec81f4
+2025-05-15 14:22:27,496 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Deploying process plugins ...
+2025-05-15 14:22:27,499 [main] DEBUG dev.dsf.fhir.client.AbstractFhirWebserviceClientJerseyWithRetry - First try ...
+2025-05-15 14:22:27,907 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:28,133 [main] WARN  dev.dsf.bpe.plugin.ProcessPluginLoaderImpl - Ignoring /opt/bpe/process/README.md: Not a .jar file
+2025-05-15 14:22:28,139 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ActivityDefinition/eyematics-initiate-process-activity-definition.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,188 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/StructureDefinition/eyematics-initiate-process-structure-definition.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,203 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/Task/eyematics-initiate-process-task.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,434 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,440 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,445 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/CodeSystem/eyematics-receive-process-code-system.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,460 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ValueSet/eyematics-receive-process-value-set.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,462 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,466 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,468 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading FHIR resource fhir/Task/eyematics-provide-process-task.xml from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,471 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading BPMN model bpe/eyematics-initiate-process.bpmn from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,657 [main] INFO  dev.dsf.bpe.plugin.AbstractProcessPlugin - Setting process history time to live for process dsfdev_eyematicsInitiateProcess from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar to P30D
+2025-05-15 14:22:28,666 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading BPMN model bpe/eyematics-provide-process.bpmn from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,695 [main] INFO  dev.dsf.bpe.plugin.AbstractProcessPlugin - Setting process history time to live for process dsfdev_eyematicsProvideProcess from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar to P30D
+2025-05-15 14:22:28,705 [main] DEBUG dev.dsf.bpe.plugin.AbstractProcessPlugin - Reading BPMN model bpe/eyematics-receive-process.bpmn from process plugin eyematics-dsf-process-plugin-1.4.0.1 and replacing all occurrences of #{version} with 1.4, #{date} with 2025-08-15 and #{organization} with hrp.dsf.test
+2025-05-15 14:22:28,728 [main] INFO  dev.dsf.bpe.plugin.AbstractProcessPlugin - Setting process history time to live for process dsfdev_eyematicsReceiveProcess from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar to P30D
+2025-05-15 14:22:28,871 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Deploying process models ...
+2025-05-15 14:22:28,992 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.initiate.SelectTargetsTask in BPMN element with id 'selectTargetsTask'
+2025-05-15 14:22:28,996 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.message.initiate.GetDataMessageTask in BPMN element with id 'getDataMessageTask'
+2025-05-15 14:22:29,035 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsInitiateProcess|1.4 from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar://bpe/eyematics-initiate-process.bpmn deployed with id 449274df-3187-11f0-9bb5-0242ac130009
+2025-05-15 14:22:29,110 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.EncryptProvideDataTask in BPMN element with id 'encryptProvideDataTask'
+2025-05-15 14:22:29,111 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.SelectReceiveTargetTask in BPMN element with id 'selectReceiveTargetTask'
+2025-05-15 14:22:29,112 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.CreateProvideBundleDataTask in BPMN element with id 'createProvideBundleDataTask'
+2025-05-15 14:22:29,112 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.StoreProvideDataTask in BPMN element with id 'storeProvideDataTask'
+2025-05-15 14:22:29,113 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.message.provide.SendProvideDataMessageTask in BPMN element with id 'sendProvideDataMessageTask'
+2025-05-15 14:22:29,114 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.provide.ReadDataProvideTask in BPMN element with id 'readDataProvideTask'
+2025-05-15 14:22:29,127 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsProvideProcess|1.4 from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar://bpe/eyematics-provide-process.bpmn deployed with id 44abc943-3187-11f0-9bb5-0242ac130009
+2025-05-15 14:22:29,173 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.receive.DownloadDataReceiveTask in BPMN element with id 'downloadDataReceiveTask'
+2025-05-15 14:22:29,174 [main] DEBUG dev.dsf.bpe.camunda.MultiVersionBpmnParse - Modifying ClassDelegateActivityBehavior for org.eyematics.process.service.receive.DecryptDataReceiveTask in BPMN element with id 'decryptDataReceiveTask'
+2025-05-15 14:22:29,184 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsReceiveProcess|1.4 from process/eyematics-dsf-process-plugin-1.0.0.1-SNAPSHOT.jar://bpe/eyematics-receive-process.bpmn deployed with id 44b5db67-3187-11f0-9bb5-0242ac130009
+2025-05-15 14:22:29,209 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsInitiateProcess|1.4 state change: NEW -> DRAFT
+2025-05-15 14:22:29,210 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsProvideProcess|1.4 state change: NEW -> DRAFT
+2025-05-15 14:22:29,210 [main] DEBUG dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Process dsfdev_eyematicsReceiveProcess|1.4 state change: NEW -> DRAFT
+2025-05-15 14:22:29,224 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Active process dsfdev_eyematicsInitiateProcess/1.4 (internal version 1) from bpe/eyematics-initiate-process.bpmn deployed 2025-05-15T14:22:28.895+0200
+2025-05-15 14:22:29,225 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Active process dsfdev_eyematicsProvideProcess/1.4 (internal version 1) from bpe/eyematics-provide-process.bpmn deployed 2025-05-15T14:22:29.091+0200
+2025-05-15 14:22:29,225 [main] INFO  dev.dsf.bpe.plugin.BpmnProcessStateChangeServiceImpl - Active process dsfdev_eyematicsReceiveProcess/1.4 (internal version 1) from bpe/eyematics-receive-process.bpmn deployed 2025-05-15T14:22:29.157+0200
+2025-05-15 14:22:29,235 [main] DEBUG dev.dsf.bpe.plugin.FhirResourceHandlerImpl - Executing process plugin resources bundle
+2025-05-15 14:22:29,276 [main] DEBUG dev.dsf.fhir.client.AbstractFhirWebserviceClientJerseyWithRetry - First try ...
+2025-05-15 14:22:35,816 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:35,817 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: null
+2025-05-15 14:22:35,817 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: null
+2025-05-15 14:22:35,817 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: null
+2025-05-15 14:22:35,875 [main] INFO  org.eyematics.process.EyeMaticsProcessPluginDeploymentStateListener - Providing Public Key, If Not Exists.
+2025-05-15 14:22:35,875 [main] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - Reading PublicKey Bundle on DSF FHIR server with baseUrl 'https://hrp/fhir' ...
+2025-05-15 14:22:35,891 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:35,893 [main] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - Creating new PublicKey Bundle on DSF FHIR server with baseUrl 'https://hrp/fhir' ...
+2025-05-15 14:22:35,910 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:35,986 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 201: Created
+2025-05-15 14:22:35,987 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: https://hrp/fhir/Bundle/a0183679-5986-4a4f-b6bd-907c93cb1d0d/_history/1
+2025-05-15 14:22:35,987 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: W/"1"
+2025-05-15 14:22:35,987 [main] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: Thu, 15 May 2025 12:22:35 GMT
+2025-05-15 14:22:35,992 [main] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - PublicKey Bundle has id 'Bundle/a0183679-5986-4a4f-b6bd-907c93cb1d0d/_history/1'
+2025-05-15 14:22:35,993 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Deploying process plugins [Done]
+2025-05-15 14:22:35,993 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Starting process engine ...
+2025-05-15 14:22:35,995 [main] INFO  dev.dsf.bpe.spring.config.PostStartupConfig - Starting process engine [Done]
+2025-05-15 14:22:35,996 [main] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
+2025-05-15 14:22:35,998 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Task websocket subscription ...
+2025-05-15 14:22:35,999 [main] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
+2025-05-15 14:22:36,000 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving QuestionnaireResponse websocket subscription ...
+2025-05-15 14:22:36,026 [pool-6-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:36,037 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Subscription with id 8ff3993b-cdc0-4749-9b45-c57043c10b00 found
+2025-05-15 14:22:36,038 [pool-6-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new Task resources ...
+2025-05-15 14:22:36,042 [pool-7-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:36,044 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Subscription with id 18ee10f0-1447-4227-8773-01e202dac9c2 found
+2025-05-15 14:22:36,045 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Executing search Task?_page=1&_count=20&_sort=_lastUpdated&status=requested
+2025-05-15 14:22:36,045 [pool-7-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new QuestionnaireResponse resources ...
+2025-05-15 14:22:36,047 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Executing search QuestionnaireResponse?_page=1&_count=20&_sort=_lastUpdated&status=completed
+2025-05-15 14:22:36,076 [pool-6-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:36,078 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'logoutService' as singleton resource with path '/bpe/logout'
+2025-05-15 14:22:36,078 [pool-6-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Result bundle.total <= 0
+2025-05-15 14:22:36,078 [pool-6-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new Task resources [Done]
+2025-05-15 14:22:36,080 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'processService' as singleton resource with path '/bpe/Process'
+2025-05-15 14:22:36,081 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'rootService' as singleton resource with path '/bpe/'
+2025-05-15 14:22:36,081 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'staticResourcesService' as singleton resource with path '/bpe/static'
+2025-05-15 14:22:36,082 [main] DEBUG dev.dsf.bpe.BpeJerseyApplication - Registering bean 'statusService' as singleton resource with path '/bpe/status'
+2025-05-15 14:22:36,083 [pool-7-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:22:36,084 [pool-7-thread-1] DEBUG dev.dsf.bpe.subscription.ExistingResourceLoaderImpl - Result bundle.total <= 0
+2025-05-15 14:22:36,084 [pool-7-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Downloading new QuestionnaireResponse resources [Done]
+2025-05-15 14:22:36,085 [pool-6-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Connecting Task websocket to local DSF FHIR server, subscription: 8ff3993b-cdc0-4749-9b45-c57043c10b00 ...
+2025-05-15 14:22:36,085 [pool-7-thread-1] INFO  dev.dsf.bpe.subscription.FhirConnectorImpl - Connecting QuestionnaireResponse websocket to local DSF FHIR server, subscription: 18ee10f0-1447-4227-8773-01e202dac9c2 ...
+2025-05-15 14:22:36,092 [pool-7-thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Connecting to websocket wss://hrp/fhir/ws and waiting for connection
+2025-05-15 14:22:36,092 [pool-6-thread-1] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Connecting to websocket wss://hrp/fhir/ws and waiting for connection
+2025-05-15 14:22:36,299 [Grizzly(1)] INFO  dev.dsf.fhir.client.ClientEndpoint - Websocket open, session ab1ab66e-ac12-4e8a-b6b7-7769a307c8b6
+2025-05-15 14:22:36,299 [Grizzly(1)] INFO  dev.dsf.fhir.client.ClientEndpoint - Websocket open, session b5716e31-5ea0-40a2-9817-cc7be0188e60
+2025-05-15 14:22:36,316 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Websocket message received, session b5716e31-5ea0-40a2-9817-cc7be0188e60: bound 18ee10f0-1447-4227-8773-01e202dac9c2
+2025-05-15 14:22:36,316 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Websocket message received, session ab1ab66e-ac12-4e8a-b6b7-7769a307c8b6: bound 8ff3993b-cdc0-4749-9b45-c57043c10b00
+2025-05-15 14:22:36,317 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Bound received
+2025-05-15 14:22:36,317 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Bound received
+2025-05-15 14:22:36,333 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@72a1ccad{/bpe,null,AVAILABLE}
+2025-05-15 14:22:36,334 [main] INFO  org.eclipse.jetty.webapp.WebAppContext - WebApp@1407473607 at http://ServerConnector@39941489{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}/bpe
+2025-05-15 14:22:36,335 [main] INFO  org.eclipse.jetty.webapp.WebAppContext - WebApp@1407473607 at http://ServerConnector@5af5d76f{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}/bpe
+2025-05-15 14:22:36,338 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@39941489{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2025-05-15 14:22:36,342 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@5af5d76f{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}
+2025-05-15 14:22:36,344 [main] INFO  org.eclipse.jetty.server.Server - Started Server@40bf4386{STARTING}[11.0.25,sto=0] @26682ms
+2025-05-15 14:23:26,940 [Grizzly(2)] DEBUG dev.dsf.fhir.client.ClientEndpoint - Websocket message received, session ab1ab66e-ac12-4e8a-b6b7-7769a307c8b6: {"resourceType":"Task","id":"f6f8cd8a-de84-4c71-8e59-a45f62108f21","meta":{"versionId":"1","lastUpdated":"2025-05-15T14:23:26.922+02:00","profile":["http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition|1.4"]},"instantiatesCanonical":"http://dsf.dev/bpe/Process/eyematicsProvideProcess|1.4","status":"requested","intent":"order","authoredOn":"2025-05-15T14:23:26+02:00","requester":{"type":"Organization","identifier":{"system":"http://dsf.dev/sid/organization-identifier","value":"dic.dsf.test"}},"restriction":{"recipient":[{"type":"Organization","identifier":{"system":"http://dsf.dev/sid/organization-identifier","value":"hrp.dsf.test"}}]},"input":[{"type":{"coding":[{"system":"http://dsf.dev/fhir/CodeSystem/bpmn-message","code":"message-name"}]},"valueString":"provideProcessStartEventMessage"},{"type":{"coding":[{"system":"http://dsf.dev/fhir/CodeSystem/bpmn-message","code":"business-key"}]},"valueString":"192d3421-1cde-4a08-b2e2-9afa10f57dd7"},{"type":{"coding":[{"system":"http://dsf.dev/fhir/CodeSystem/bpmn-message","code":"correlation-key"}]},"valueString":"eae30c63-0a26-498b-ac6d-645e4dde1552"}]}
+2025-05-15 14:23:26,943 [pool-2-thread-1] DEBUG dev.dsf.bpe.subscription.ConcurrentSubscriptionHandlerFactory - executing onResource for Task with id: Task/f6f8cd8a-de84-4c71-8e59-a45f62108f21/_history/1
+2025-05-15 14:23:27,070 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:27,070 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: https://hrp/fhir/Task/f6f8cd8a-de84-4c71-8e59-a45f62108f21/_history/2
+2025-05-15 14:23:27,071 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: W/"2"
+2025-05-15 14:23:27,071 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: Thu, 15 May 2025 12:23:27 GMT
+2025-05-15 14:23:27,231 [pool-2-thread-1] INFO  dev.dsf.bpe.listener.StartListener - Starting process http://dsf.dev/bpe/Process/eyematicsProvideProcess|1.4 at 2025-05-15T14:23:27+02:00 [task: https://hrp/fhir/Task/f6f8cd8a-de84-4c71-8e59-a45f62108f21, requester: dic.dsf.test, business-key: 192d3421-1cde-4a08-b2e2-9afa10f57dd7, correlation-key: eae30c63-0a26-498b-ac6d-645e4dde1552, message: provideProcessStartEventMessage]
+2025-05-15 14:23:27,250 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.ReadDataProvideTask - Reading Data from FHIR-Repository...
+2025-05-15 14:23:27,355 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.ReadDataProvideTask - Response Code -> 200
+2025-05-15 14:23:28,216 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.ReadDataProvideTask - Data -> org.hl7.fhir.r4.model.Bundle@3f3018e3
+2025-05-15 14:23:28,745 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.CreateProvideBundleDataTask - -> something to bundle
+2025-05-15 14:23:28,749 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.CreateProvideBundleDataTask - -> Amount of Items: 50
+2025-05-15 14:23:28,780 [pool-2-thread-1] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - Configuring KeyProvider with private-key from '/run/secrets/hrp_private_key.pem' and public-key from '/run/secrets/hrp_public_key.pem'
+2025-05-15 14:23:28,827 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.EncryptProvideDataTask - -> try to get public-key ....
+2025-05-15 14:23:28,829 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.EncryptProvideDataTask - EncryptProvideDataTask: Request-Organization -> dic.dsf.test
+2025-05-15 14:23:28,831 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.EncryptProvideDataTask - EncryptProvideDataTask: Recipient-Organization -> hrp.dsf.test
+2025-05-15 14:23:28,897 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:28,910 [pool-2-thread-1] INFO  org.eyematics.process.utils.crypto.KeyProviderImpl - Reading PublicKey Bundle on DSF FHIR server with baseUrl 'https://dic/fhir' ...
+2025-05-15 14:23:29,100 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:29,117 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.EncryptProvideDataTask - -> Sun RSA public key, 4096 bits
+  params: null
+  modulus: 723140495602965448749166127095828896938736443077065562500489902576008781973377086688761666084405842793768093583557135938014672724224197742738859487533237410651795893619066907388914433605162366489461247519096686627212270384241981322756759166220761791420294958959711467516366073441780471470664394391015807160241722937453041406641230750590498432756420380623730944824894899639343050385972082298828301240436184019666517120945481896976982919492404920111984328071547866462347372463978055360971635847698207970230942776867975122950017032753686571782336184820285326322647312552506908715435443138023397969641270595014225957333106703974789657565370268868634904406399628133840898729539408850898418322931653460268845018045092181234072718219906755652332748149729475535002486999093879043480938356643329093812550586907384800781626400004309409439631538937090659527914431494662997314338473982314993314872493037391690394110773493811816751579964300082008260413683983495668796171445054995947089714241856845603028994029375263072707477669559918241923170121530685950393349704502641554525182446103794697650100311636069102740578803188495666452852031524975967845755607321904754868353975034613825921898013545408594845138982691945699274423973081488672872395510019
+  public exponent: 65537
+2025-05-15 14:23:29,127 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.EncryptProvideDataTask - -> something to encrypt
+2025-05-15 14:23:29,275 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.SelectReceiveTargetTask - -> something to select
+2025-05-15 14:23:29,331 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:29,374 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:29,434 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.SelectReceiveTargetTask - -> https://dic/fhir
+2025-05-15 14:23:29,437 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.StoreProvideDataTask - StoreProvideDataTask -> something to store
+2025-05-15 14:23:29,476 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:29,508 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:29,658 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 201: Created
+2025-05-15 14:23:29,659 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: https://hrp/fhir/Binary/7cf21947-7edf-4b14-99b3-7e8bacfa813a/_history/1
+2025-05-15 14:23:29,660 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: W/"1"
+2025-05-15 14:23:29,660 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: Thu, 15 May 2025 12:23:29 GMT
+2025-05-15 14:23:29,661 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.StoreProvideDataTask - Target-Organization-Value -> dic.dsf.test
+2025-05-15 14:23:29,662 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.StoreProvideDataTask - Local-Organization-Value -> hrp.dsf.test
+2025-05-15 14:23:29,662 [pool-2-thread-1] INFO  org.eyematics.process.service.provide.StoreProvideDataTask - IdType -> https://hrp/fhir/Binary/7cf21947-7edf-4b14-99b3-7e8bacfa813a/_history/1
+2025-05-15 14:23:29,671 [pool-2-thread-1] INFO  org.eyematics.process.message.provide.SendProvideDataMessageTask - -> something to send
+2025-05-15 14:23:29,711 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:29,715 [pool-2-thread-1] INFO  dev.dsf.bpe.v1.activity.AbstractTaskMessageSend - Sending task http://dsf.dev/bpe/Process/eyematicsReceiveProcess|1.4 [recipient: dic.dsf.test, endpoint: dic.dsf.test_Endpoint, businessKey: 192d3421-1cde-4a08-b2e2-9afa10f57dd7, correlationKey: eae30c63-0a26-498b-ac6d-645e4dde1552, message: receiveProcessStartEventMessage] ...
+2025-05-15 14:23:30,158 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 201: Created
+2025-05-15 14:23:30,159 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: https://dic/fhir/Task/2ec0b918-81bf-4005-97cd-0af4de618cdf/_history/1
+2025-05-15 14:23:30,159 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: W/"1"
+2025-05-15 14:23:30,159 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: Thu, 15 May 2025 12:23:29 GMT
+2025-05-15 14:23:30,160 [pool-2-thread-1] INFO  dev.dsf.bpe.v1.activity.AbstractTaskMessageSend - Task http://dsf.dev/bpe/Process/eyematicsReceiveProcess|1.4 send [task: https://dic/fhir/Task/2ec0b918-81bf-4005-97cd-0af4de618cdf]
+2025-05-15 14:23:30,162 [pool-2-thread-1] DEBUG dev.dsf.bpe.listener.EndListener - Updating Task https://hrp/fhir/Task/f6f8cd8a-de84-4c71-8e59-a45f62108f21, new status: completed
+2025-05-15 14:23:30,228 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 200: OK
+2025-05-15 14:23:30,228 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Location: https://hrp/fhir/Task/f6f8cd8a-de84-4c71-8e59-a45f62108f21/_history/3
+2025-05-15 14:23:30,228 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header ETag: W/"3"
+2025-05-15 14:23:30,229 [pool-2-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP header Last-Modified: Thu, 15 May 2025 12:23:30 GMT
+2025-05-15 14:23:30,230 [pool-2-thread-1] INFO  dev.dsf.bpe.listener.EndListener - Process http://dsf.dev/bpe/Process/eyematicsProvideProcess|1.4 finished at 2025-05-15T14:23:30+02:00 [task: https://hrp/fhir/Task/f6f8cd8a-de84-4c71-8e59-a45f62108f21, requester: dic.dsf.test, business-key: 192d3421-1cde-4a08-b2e2-9afa10f57dd7, correlation-key: eae30c63-0a26-498b-ac6d-645e4dde1552]
+2025-05-15 14:25:22,059 [Grizzly(1)] WARN  dev.dsf.fhir.client.ClientEndpoint - Websocket closed, session b5716e31-5ea0-40a2-9817-cc7be0188e60: 1006 - Closed abnormally.
+2025-05-15 14:25:22,059 [Grizzly(2)] WARN  dev.dsf.fhir.client.ClientEndpoint - Websocket closed, session ab1ab66e-ac12-4e8a-b6b7-7769a307c8b6: 1006 - Closed abnormally.
+2025-05-15 14:25:22,060 [Grizzly(1)] INFO  dev.dsf.fhir.client.ClientEndpoint - Trying to reconnect websocket
+2025-05-15 14:25:22,060 [Grizzly(2)] INFO  dev.dsf.fhir.client.ClientEndpoint - Trying to reconnect websocket
+2025-05-15 14:25:22,061 [Grizzly(1)] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Closing websocket wss://hrp/fhir/ws
+2025-05-15 14:25:22,061 [Grizzly(2)] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Closing websocket wss://hrp/fhir/ws
+2025-05-15 14:25:22,062 [Grizzly(2)] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
+2025-05-15 14:25:22,062 [Grizzly(1)] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Subscription and connecting to websocket
+2025-05-15 14:25:22,063 [Grizzly(2)] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Websocket closed: CLOSED_ABNORMALLY - Closed abnormally.
+2025-05-15 14:25:22,063 [pool-8-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving Task websocket subscription ...
+2025-05-15 14:25:22,064 [pool-9-thread-1] DEBUG dev.dsf.bpe.subscription.FhirConnectorImpl - Retrieving QuestionnaireResponse websocket subscription ...
+2025-05-15 14:25:22,064 [Grizzly(1)] DEBUG dev.dsf.fhir.client.WebsocketClientTyrus - Websocket closed: CLOSED_ABNORMALLY - Closed abnormally.
+2025-05-15 14:25:22,083 [Thread-1] INFO  dev.dsf.common.jetty.JettyServer - Stopping jetty server ...
+2025-05-15 14:25:22,085 [Thread-1] INFO  org.eclipse.jetty.server.Server - Stopped Server@40bf4386{STOPPING}[11.0.25,sto=0]
+2025-05-15 14:25:22,086 [pool-8-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 502: Bad Gateway
+2025-05-15 14:25:22,089 [pool-8-thread-1] WARN  dev.dsf.fhir.client.FhirWebserviceClientJersey - Request failed: org.glassfish.jersey.message.internal.MessageBodyProviderNotFoundException - MessageBodyReader not found for media type=text/html, type=class org.hl7.fhir.r4.model.OperationOutcome, genericType=class org.hl7.fhir.r4.model.OperationOutcome.
+2025-05-15 14:25:22,090 [Thread-1] INFO  org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@39941489{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2025-05-15 14:25:22,090 [pool-8-thread-1] WARN  dev.dsf.bpe.subscription.FhirConnectorImpl - Error while retrieving Task websocket subscription (HTTP 502 Bad Gateway), trying again in 5000 ms (retry 1)
+2025-05-15 14:25:22,095 [Thread-1] INFO  org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@5af5d76f{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}
+2025-05-15 14:25:22,096 [pool-9-thread-1] DEBUG dev.dsf.fhir.client.FhirWebserviceClientJersey - HTTP 502: Bad Gateway
+2025-05-15 14:25:22,097 [pool-9-thread-1] WARN  dev.dsf.fhir.client.FhirWebserviceClientJersey - Request failed: org.glassfish.jersey.message.internal.MessageBodyProviderNotFoundException - MessageBodyReader not found for media type=text/html, type=class org.hl7.fhir.r4.model.OperationOutcome, genericType=class org.hl7.fhir.r4.model.OperationOutcome.
+2025-05-15 14:25:22,098 [pool-9-thread-1] WARN  dev.dsf.bpe.subscription.FhirConnectorImpl - Error while retrieving QuestionnaireResponse websocket subscription (HTTP 502 Bad Gateway), trying again in 5000 ms (retry 1)
+2025-05-15 14:25:22,101 [Thread-1] INFO  org.eclipse.jetty.server.handler.ContextHandler.bpe - Closing Spring root WebApplicationContext
+2025-05-15 14:25:22,116 [Thread-1] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@72a1ccad{/bpe,null,STOPPED}

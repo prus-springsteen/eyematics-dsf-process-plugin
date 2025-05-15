@@ -12,33 +12,31 @@ import org.eyematics.process.spring.config.receive.ReceiveConfig;
 
 import static org.eyematics.process.constant.InitiateConstants.PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS;
 import static org.eyematics.process.constant.ProvideConstants.PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS;
+import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS;
 
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
-	public static final String VERSION = "1.3.0.1";
+	public static final String VERSION = "1.0.0.1";
 	public static final LocalDate RELEASE_DATE = LocalDate.of(2025, 8, 15);
 
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return "eyematics-dsf-process-plugin";
 	}
 
 	@Override
-	public String getVersion()
-	{
+	public String getVersion() {
 		return VERSION;
 	}
 
 	@Override
-	public LocalDate getReleaseDate()
-	{
+	public LocalDate getReleaseDate() {
 		return RELEASE_DATE;
 	}
 
 	@Override
 	public List<String> getProcessModels() {
-		return List.of("bpe/eyematics-initiate-process.bpmn",
-				       "bpe/eyematics-provide-process.bpmn");
+		return List.of("bpe/eyematics-initiate-process.bpmn", "bpe/eyematics-provide-process.bpmn",
+				"bpe/eyematics-receive-process.bpmn");
 	}
 
 	@Override
@@ -47,38 +45,32 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		// EYEMATICS PROCESS (v1.0)
 
 		// INITIATE
-		String aEyematicsInitiateProcess = "fhir/ActivityDefinition/eyematics-initiate-process-activity-definition.xml";
-		String sEyematicsInitiateProcess = "fhir/StructureDefinition/eyematics-initiate-process-structure-definition.xml";
-		String tEyematicsInitiateProcess = "fhir/Task/eyematics-initiate-process-task.xml";
-
-		// RECEIVE
-		String sEyematicsReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml";
-		String cEyematicsReceiveProcess = "fhir/CodeSystem/eyematics-receive-process-code-system.xml";
-		String vEyematicsReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
+		String aInitiateProcess = "fhir/ActivityDefinition/eyematics-initiate-process-activity-definition.xml";
+		String sInitiateProcess = "fhir/StructureDefinition/eyematics-initiate-process-structure-definition.xml";
+		String tInitiateProcess = "fhir/Task/eyematics-initiate-process-task.xml";
 
 		// PROVIDE
-		String aEyematicsProvideProcess = "fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml";
-		String sEyematicsProvideProcess = "fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml";
-		String tEyematicsProvideProcess = "fhir/Task/eyematics-provide-process-task.xml";
+		String aProvideProcess = "fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml";
+		String sProvideProcess = "fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml";
+		String tProvideProcess = "fhir/Task/eyematics-provide-process-task.xml";
 
-		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS, List.of(aEyematicsInitiateProcess,
-																				    sEyematicsInitiateProcess,
-																				    tEyematicsInitiateProcess,
-																				    sEyematicsReceiveProcess,
-																				    cEyematicsReceiveProcess,
-																				    vEyematicsReceiveProcess),
-				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS, List.of(aEyematicsProvideProcess,
-						                                                           sEyematicsProvideProcess,
-						                                                           tEyematicsProvideProcess));
+		// RECEIVE
+		String aReceiveProcess = "fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml";
+		String sReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml";
+		String cReceiveProcess = "fhir/CodeSystem/eyematics-receive-process-code-system.xml";
+		String vReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
+
+		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
+				List.of(aInitiateProcess, sInitiateProcess, tInitiateProcess),
+				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
+				List.of(aProvideProcess, sProvideProcess, tProvideProcess),
+					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
+				List.of(aReceiveProcess, sReceiveProcess, cReceiveProcess, vReceiveProcess));
 	}
-
 
 	@Override
 	public List<Class<?>> getSpringConfigurations() {
-		return List.of(CryptoConfig.class,
-					   DicFhirClientConfig.class,
-				       InitiateConfig.class,
-				       ProvideConfig.class,
-				       ReceiveConfig.class);
+		return List.of(CryptoConfig.class, DicFhirClientConfig.class, InitiateConfig.class, ProvideConfig.class,
+				ReceiveConfig.class);
 	}
 }

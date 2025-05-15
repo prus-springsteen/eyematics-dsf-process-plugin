@@ -26,6 +26,8 @@ public class SendProvideDataMessageTask extends AbstractTaskMessageSend {
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
         logger.info("-> something to send");
 
+        /*
+        // Concurrency-Exception: Sub-Tasks
         int min = 1000;
         int max = 5000;
         try {
@@ -33,7 +35,7 @@ public class SendProvideDataMessageTask extends AbstractTaskMessageSend {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
+        */
         return Stream.of(api.getTaskHelper()
                             .createInput(new Reference().setReference(variables.getString(BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
                                                                                           CODE_SYSTEM_RECEIVE_PROCESS,

@@ -111,7 +111,7 @@
             </valueCoding>
         </extension>
     </extension>
-<!-- SUB-PROCESS -->
+<!-- SUB-PROCESS
     <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
         <extension url="message-name">
             <valueString value="receiveProcessStartEventMessage" />
@@ -196,7 +196,7 @@
                 <code value="REMOTE_ORGANIZATION" />
             </valueCoding>
         </extension>
-        <!---->
+
 
         <extension url="recipient">
             <valueCoding>
@@ -204,7 +204,7 @@
                 <code value="LOCAL_ALL" />
             </valueCoding>
         </extension>
-    </extension>
+    </extension> -->
     <url value="http://dsf.dev/bpe/Process/eyematicsInitiateProcess" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
