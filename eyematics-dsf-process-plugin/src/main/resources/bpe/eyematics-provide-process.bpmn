@@ -38,7 +38,7 @@
           <camunda:string>receiveProcessStartEventMessage</camunda:string>
         </camunda:field>
         <camunda:field name="instantiatesCanonical">
-          <camunda:string>http://dsf.dev/bpe/Process/eyematicsInitiateProcess|#{version}</camunda:string>
+          <camunda:string>http://dsf.dev/bpe/Process/eyematicsReceiveProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0h7rg6o</bpmn:incoming>
