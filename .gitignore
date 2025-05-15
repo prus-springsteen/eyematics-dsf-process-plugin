@@ -6,6 +6,11 @@
 **/*.iml
 
 **/*.ps1
+**/*.log
+**/*.log.gz
+**/*.jar
+
+
 **/eyematics-dsf-process-plugin-test-data-generator/
 **/eyematics-dsf-process-plugin-test-setup/
 
