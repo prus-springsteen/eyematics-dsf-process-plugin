@@ -1,0 +1,899 @@
+2025-05-15 11:20:39,628 [main] INFO  dev.dsf.tools.db.DbMigrator - Executing DB migration ...
+2025-05-15 11:20:41,050 [main] DEBUG dev.dsf.tools.db.DbMigrator - UPDATE SUMMARY
+2025-05-15 11:20:41,050 [main] DEBUG dev.dsf.tools.db.DbMigrator - Run:                          0
+2025-05-15 11:20:41,051 [main] DEBUG dev.dsf.tools.db.DbMigrator - Previously run:             137
+2025-05-15 11:20:41,051 [main] DEBUG dev.dsf.tools.db.DbMigrator - Filtered out:                 0
+2025-05-15 11:20:41,051 [main] DEBUG dev.dsf.tools.db.DbMigrator - -------------------------------
+2025-05-15 11:20:41,052 [main] DEBUG dev.dsf.tools.db.DbMigrator - Total change sets:          137
+2025-05-15 11:20:41,052 [main] INFO  dev.dsf.tools.db.DbMigrator - Executing DB migration [Done]
+2025-05-15 11:20:41,397 [main] DEBUG dev.dsf.common.jetty.JettyServer - Java classpath: [lib/hapi-fhir-validation-resources-r4-5.1.0.jar, lib/jakarta.activation-api-2.1.3.jar, lib/org.hl7.fhir.r5-5.1.0.jar, lib/jersey-entity-filtering-3.1.10.jar, lib/slf4j-api-2.0.17.jar, lib/dsf-common-status-1.7.1.jar, lib/micrometer-observation-1.14.5.jar, lib/asm-commons-9.7.1.jar, lib/jetty-http-11.0.25.jar, lib/websocket-jakarta-common-11.0.25.jar, lib/dsf-fhir-validation-1.7.1.jar, lib/jaxb-core-4.0.5.jar, lib/jetty-annotations-11.0.25.jar, lib/jakarta.activation-1.2.1.jar, lib/spring-aop-6.2.5.jar, lib/hapi-fhir-validation-5.1.0.jar, lib/jakarta.websocket-client-api-2.1.1.jar, lib/hapi-fhir-converter-5.1.0.jar, lib/java-jwt-4.5.0.jar, lib/hk2-api-3.0.6.jar, lib/log4j-core-2.24.3.jar, lib/jetty-alpn-client-11.0.25.jar, lib/websocket-core-server-11.0.25.jar, lib/commons-dbcp2-2.13.0.jar, lib/jackson-core-2.18.3.jar, lib/jetty-util-ajax-11.0.25.jar, lib/jcl-over-slf4j-2.0.17.jar, lib/org.hl7.fhir.dstu2-5.1.0.jar, lib/jakarta.validation-api-3.0.2.jar, lib/error_prone_annotations-2.3.3.jar, lib/dsf-common-ui-1.7.1.jar, lib/jersey-container-servlet-3.1.10.jar, lib/dsf-common-jetty-1.7.1.jar, lib/org.hl7.fhir.dstu3-5.1.0.jar, lib/jetty-util-11.0.25.jar, lib/txw2-4.0.5.jar, lib/jaxb-runtime-4.0.5.jar, lib/failureaccess-1.0.1.jar, lib/xpp3-1.1.4c.jar, lib/jersey-media-jaxb-3.1.10.jar, lib/jetty-openid-11.0.25.jar, lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar, lib/hapi-fhir-structures-r4-5.1.0.jar, lib/jersey-apache-connector-3.1.10.jar, lib/dsf-fhir-webservice-client-1.7.1.jar, lib/dsf-common-auth-1.7.1.jar, lib/jetty-client-11.0.25.jar, lib/jackson-module-jakarta-xmlbind-annotations-2.18.3.jar, lib/httpcore-4.4.16.jar, lib/attoparser-2.0.7.RELEASE.jar, lib/hapi-fhir-validation-resources-r5-5.1.0.jar, lib/log4j-slf4j2-impl-2.24.3.jar, lib/jakarta.xml.bind-api-4.0.2.jar, lib/spring-websocket-6.2.5.jar, lib/jetty-plus-11.0.25.jar, lib/istack-commons-runtime-4.1.2.jar, lib/commons-collections4-4.4.jar, lib/jetty-webapp-11.0.25.jar, lib/dsf-fhir-rest-adapter-1.7.1.jar, lib/jetty-io-11.0.25.jar, lib/websocket-core-client-11.0.25.jar, lib/postgresql-42.7.5.jar, lib/bcprov-jdk18on-1.80.jar, lib/spring-context-6.2.5.jar, lib/jackson-annotations-2.18.3.jar, lib/websocket-servlet-11.0.25.jar, lib/ognl-3.3.4.jar, lib/Saxon-HE-9.5.1-5.jar, lib/j2objc-annotations-2.8.jar, lib/spring-expression-6.2.5.jar, lib/httpclient-4.5.14.jar, lib/hapi-fhir-structures-r5-5.1.0.jar, lib/jersey-common-3.1.10.jar, lib/jakarta.servlet-api-6.0.0.jar, lib/hapi-fhir-base-5.1.0.jar, lib/dsf-common-config-1.7.1.jar, lib/crypto-utils-3.8.0.jar, lib/dsf-common-documentation-1.7.1.jar, lib/caffeine-2.7.0.jar, lib/org.hl7.fhir.validation-5.1.0.jar, lib/asm-tree-9.7.1.jar, lib/org.hl7.fhir.r4-5.1.0.jar, lib/jetty-xml-11.0.25.jar, lib/jakarta.transaction-api-1.3.3.jar, lib/jersey-client-3.1.10.jar, lib/dsf-tools-build-info-reader-1.7.1.jar, lib/websocket-jakarta-client-11.0.25.jar, lib/micrometer-commons-1.14.5.jar, lib/jetty-server-11.0.25.jar, lib/hk2-locator-3.0.6.jar, lib/spring-beans-6.2.5.jar, lib/jersey-server-3.1.10.jar, lib/bcpkix-jdk18on-1.80.jar, lib/hk2-utils-3.0.6.jar, lib/jetty-jakarta-servlet-api-5.0.2.jar, lib/thymeleaf-3.1.3.RELEASE.jar, lib/org.hl7.fhir.utilities-5.1.0.jar, lib/checker-qual-3.48.3.jar, lib/commons-io-2.18.0.jar, lib/xpp3_xpath-1.1.4c.jar, lib/dsf-fhir-server-1.7.1.jar, lib/jakarta.websocket-api-2.1.1.jar, lib/jetty-security-11.0.25.jar, lib/jersey-container-servlet-core-3.1.10.jar, lib/spring-web-6.2.5.jar, lib/jakarta.ws.rs-api-3.1.0.jar, lib/dsf-tools-docker-secrets-reader-1.7.1.jar, lib/jakarta.annotation-api-2.1.1.jar, lib/jakarta.inject-api-2.0.1.jar, lib/commons-text-1.13.0.jar, lib/commons-pool2-2.12.0.jar, lib/aopalliance-repackaged-3.0.6.jar, lib/guava-32.1.3-jre.jar, lib/unbescape-1.1.6.RELEASE.jar, lib/asm-9.7.1.jar, lib/commons-lang3-3.17.0.jar, lib/websocket-jakarta-server-11.0.25.jar, lib/org.hl7.fhir.dstu2016may-5.1.0.jar, lib/spring-core-6.2.5.jar, lib/commons-compress-1.27.1.jar, lib/jersey-hk2-3.1.10.jar, lib/opencsv-5.9.jar, lib/javassist-3.30.2-GA.jar, lib/org.hl7.fhir.convertors-5.1.0.jar, lib/websocket-core-common-11.0.25.jar, lib/jakarta.mail-1.6.7.jar, lib/liquibase-core-4.31.1.jar, lib/jetty-jndi-11.0.25.jar, lib/spring-jcl-6.2.5.jar, lib/dsf-tools-db-migration-1.7.1.jar, lib/jersey-media-json-jackson-3.1.10.jar, lib/snakeyaml-2.4.jar, lib/dsf-fhir-auth-1.7.1.jar, lib/gson-2.12.1.jar, lib/jul-to-slf4j-2.0.17.jar, lib/jsr305-3.0.2.jar, lib/commons-codec-1.18.0.jar, lib/dsf-common-db-1.7.1.jar, lib/bcutil-jdk18on-1.80.jar, lib/jackson-databind-2.18.3.jar, lib/jetty-servlet-11.0.25.jar, lib/osgi-resource-locator-1.0.3.jar, lib/log4j-api-2.24.3.jar, lib/jaxb-api-2.3.1.jar, lib/ucum-1.0.2.jar, dsf_fhir.jar]
+2025-05-15 11:20:41,397 [main] DEBUG dev.dsf.common.jetty.JettyServer - Resources for jetty: [file:///opt/fhir/lib/dsf-fhir-server-1.7.1.jar]
+2025-05-15 11:20:41,398 [main] DEBUG dev.dsf.common.jetty.JettyServer - Init parameters: {}
+2025-05-15 11:20:41,809 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC authorization code flow enabled
+2025-05-15 11:20:41,811 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC bearer token enabled
+2025-05-15 11:20:41,812 [main] INFO  dev.dsf.common.config.AbstractJettyConfig - OIDC back-channel logout enabled
+2025-05-15 11:20:42,000 [main] INFO  dev.dsf.common.auth.ClientCertificateAuthenticator - Using [CN=Test, C=DE] to validate client certificates
+2025-05-15 11:20:42,003 [main] INFO  dev.dsf.common.jetty.JettyServer - Starting jetty server ...
+2025-05-15 11:20:42,004 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.25; built: 2025-03-13T00:15:57.301Z; git: a2e9fae3ad8320f2a713d4fa29bba356a99d1295; jvm 17.0.14+7-LTS
+2025-05-15 11:20:42,133 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler.fhir - 1 Spring WebApplicationInitializers detected on classpath
+2025-05-15 11:20:42,143 [main] INFO  org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
+2025-05-15 11:20:42,246 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler.fhir - Initializing Spring root WebApplicationContext
+2025-05-15 11:20:42,495 [main] INFO  dev.dsf.common.config.ProxyConfigImpl - Forward proxy config: {url: null, username: null, password: null, no-proxy: []}
+2025-05-15 11:20:42,496 [main] INFO  dev.dsf.fhir.spring.config.ClientConfig - Remote webservice client config: {trustStorePath: /run/secrets/app_server_trust_certificates.pem, certificatePath: /run/secrets/app_hrp_client_certificate.pem, privateKeyPath: /run/secrets/app_hrp_client_certificate_private_key.pem, privateKeyPassword: ***, proxy: disabled, no_proxy: []}
+2025-05-15 11:20:42,676 [main] INFO  dev.dsf.fhir.spring.config.AuthenticationConfig - Role config: {[name=webbrowser_test_user, thumbprints=[7b426682eceeb1f9e688890f82f67c9c3df7f98097e82fcf45edd537d5d8705f5159824568e54346dd350ef9c4c142fbfa3425248c113b34e6a3a6ae2226dba4], emails=[], tokenRoles=[admin], tokenGroups=[], dsfRoles=[CREATE, READ, UPDATE, DELETE, SEARCH, HISTORY, PERMANENT_DELETE], practitionerRoles=[http://dsf.dev/fhir/CodeSystem/practitioner-role|DSF_ADMIN]]}
+2025-05-15 11:20:45,203 [main] INFO  dev.dsf.fhir.spring.config.InitialDataLoaderConfig - Loading data from JAR bundle ...
+2025-05-15 11:20:45,362 [main] DEBUG dev.dsf.fhir.service.InitialDataLoaderImpl - Executing command list for bundle with 51 entries
+2025-05-15 11:20:46,478 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.DeleteCommand for entry at index 0
+2025-05-15 11:20:46,478 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 1
+2025-05-15 11:20:46,501 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - CodeSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,530 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 2
+2025-05-15 11:20:46,533 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - CodeSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,534 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 3
+2025-05-15 11:20:46,536 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - CodeSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,537 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 4
+2025-05-15 11:20:46,540 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - CodeSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,540 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 5
+2025-05-15 11:20:46,542 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - CodeSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,543 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 6
+2025-05-15 11:20:46,552 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - CodeSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,553 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 7
+2025-05-15 11:20:46,556 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - NamingSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,556 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 8
+2025-05-15 11:20:46,558 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - NamingSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,559 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 9
+2025-05-15 11:20:46,561 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - NamingSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,561 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 10
+2025-05-15 11:20:46,563 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - NamingSystem with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,563 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 11
+2025-05-15 11:20:46,567 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,568 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 12
+2025-05-15 11:20:46,570 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,571 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 13
+2025-05-15 11:20:46,573 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,573 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 14
+2025-05-15 11:20:46,576 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,576 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 15
+2025-05-15 11:20:46,579 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,580 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 16
+2025-05-15 11:20:46,582 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,583 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 17
+2025-05-15 11:20:46,591 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - ValueSet with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,591 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 18
+2025-05-15 11:20:46,596 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,597 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 19
+2025-05-15 11:20:46,601 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,601 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 20
+2025-05-15 11:20:46,603 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,604 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 21
+2025-05-15 11:20:46,606 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,607 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 22
+2025-05-15 11:20:46,609 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,611 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 23
+2025-05-15 11:20:46,614 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,614 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 24
+2025-05-15 11:20:46,618 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,619 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 25
+2025-05-15 11:20:46,621 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,622 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 26
+2025-05-15 11:20:46,624 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,624 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 27
+2025-05-15 11:20:46,626 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,627 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 28
+2025-05-15 11:20:46,629 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,629 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 29
+2025-05-15 11:20:46,631 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,632 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 30
+2025-05-15 11:20:46,635 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,635 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 31
+2025-05-15 11:20:46,637 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,637 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 32
+2025-05-15 11:20:46,639 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,639 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 33
+2025-05-15 11:20:46,641 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,641 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 34
+2025-05-15 11:20:46,643 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,643 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 35
+2025-05-15 11:20:46,645 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,645 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 36
+2025-05-15 11:20:46,646 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,647 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 37
+2025-05-15 11:20:46,648 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,648 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 38
+2025-05-15 11:20:46,650 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,650 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 39
+2025-05-15 11:20:46,652 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,653 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 40
+2025-05-15 11:20:46,655 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,656 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 41
+2025-05-15 11:20:46,657 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,658 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 42
+2025-05-15 11:20:46,659 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,660 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 43
+2025-05-15 11:20:46,661 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,662 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 44
+2025-05-15 11:20:46,663 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,664 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 45
+2025-05-15 11:20:46,666 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,666 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 46
+2025-05-15 11:20:46,668 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,669 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 47
+2025-05-15 11:20:46,671 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,671 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 48
+2025-05-15 11:20:46,672 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - StructureDefinition with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,673 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 49
+2025-05-15 11:20:46,675 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - Subscription with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,676 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 50
+2025-05-15 11:20:46,677 [main] INFO  dev.dsf.fhir.help.ResponseGenerator - Subscription with criteria from 'If-None-Exist' header exists
+2025-05-15 11:20:46,678 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 18
+2025-05-15 11:20:46,678 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 19
+2025-05-15 11:20:46,678 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 20
+2025-05-15 11:20:46,678 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 21
+2025-05-15 11:20:46,679 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 22
+2025-05-15 11:20:46,679 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 23
+2025-05-15 11:20:46,679 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 24
+2025-05-15 11:20:46,679 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 25
+2025-05-15 11:20:46,679 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 26
+2025-05-15 11:20:46,680 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 27
+2025-05-15 11:20:46,680 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 28
+2025-05-15 11:20:46,680 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 29
+2025-05-15 11:20:46,680 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 30
+2025-05-15 11:20:46,680 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 31
+2025-05-15 11:20:46,681 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 32
+2025-05-15 11:20:46,681 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 33
+2025-05-15 11:20:46,681 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 34
+2025-05-15 11:20:46,681 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 35
+2025-05-15 11:20:46,681 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 36
+2025-05-15 11:20:46,682 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 37
+2025-05-15 11:20:46,682 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 38
+2025-05-15 11:20:46,682 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 39
+2025-05-15 11:20:46,682 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 40
+2025-05-15 11:20:46,682 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 41
+2025-05-15 11:20:46,683 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 42
+2025-05-15 11:20:46,683 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 43
+2025-05-15 11:20:46,683 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 44
+2025-05-15 11:20:46,683 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 45
+2025-05-15 11:20:46,683 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 46
+2025-05-15 11:20:46,683 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 47
+2025-05-15 11:20:46,684 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 48
+2025-05-15 11:20:46,684 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.DeleteCommand for entry at index 0
+2025-05-15 11:20:46,688 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 1
+2025-05-15 11:20:46,690 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 2
+2025-05-15 11:20:46,692 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 3
+2025-05-15 11:20:46,694 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 4
+2025-05-15 11:20:46,695 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 5
+2025-05-15 11:20:46,696 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 6
+2025-05-15 11:20:46,704 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 7
+2025-05-15 11:20:46,707 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 8
+2025-05-15 11:20:46,708 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 9
+2025-05-15 11:20:46,709 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 10
+2025-05-15 11:20:46,710 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 11
+2025-05-15 11:20:46,712 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 12
+2025-05-15 11:20:46,713 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 13
+2025-05-15 11:20:46,714 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 14
+2025-05-15 11:20:46,716 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 15
+2025-05-15 11:20:46,717 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 16
+2025-05-15 11:20:46,719 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 17
+2025-05-15 11:20:46,726 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 18
+2025-05-15 11:20:46,728 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 19
+2025-05-15 11:20:46,729 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 20
+2025-05-15 11:20:46,730 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 21
+2025-05-15 11:20:46,731 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 22
+2025-05-15 11:20:46,732 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 23
+2025-05-15 11:20:46,733 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 24
+2025-05-15 11:20:46,735 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 25
+2025-05-15 11:20:46,736 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 26
+2025-05-15 11:20:46,737 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 27
+2025-05-15 11:20:46,738 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 28
+2025-05-15 11:20:46,739 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 29
+2025-05-15 11:20:46,740 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 30
+2025-05-15 11:20:46,741 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 31
+2025-05-15 11:20:46,742 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 32
+2025-05-15 11:20:46,743 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 33
+2025-05-15 11:20:46,744 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 34
+2025-05-15 11:20:46,745 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 35
+2025-05-15 11:20:46,746 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 36
+2025-05-15 11:20:46,747 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 37
+2025-05-15 11:20:46,749 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 38
+2025-05-15 11:20:46,750 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 39
+2025-05-15 11:20:46,751 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 40
+2025-05-15 11:20:46,752 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 41
+2025-05-15 11:20:46,753 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 42
+2025-05-15 11:20:46,754 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 43
+2025-05-15 11:20:46,756 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 44
+2025-05-15 11:20:46,757 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 45
+2025-05-15 11:20:46,758 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 46
+2025-05-15 11:20:46,759 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 47
+2025-05-15 11:20:46,760 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 48
+2025-05-15 11:20:46,761 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 49
+2025-05-15 11:20:46,762 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 50
+2025-05-15 11:20:46,763 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 18
+2025-05-15 11:20:46,765 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 19
+2025-05-15 11:20:46,765 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 20
+2025-05-15 11:20:46,765 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 21
+2025-05-15 11:20:46,765 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 22
+2025-05-15 11:20:46,766 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 23
+2025-05-15 11:20:46,766 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 24
+2025-05-15 11:20:46,766 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 25
+2025-05-15 11:20:46,766 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 26
+2025-05-15 11:20:46,766 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 27
+2025-05-15 11:20:46,766 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 28
+2025-05-15 11:20:46,767 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 29
+2025-05-15 11:20:46,767 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 30
+2025-05-15 11:20:46,767 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 31
+2025-05-15 11:20:46,767 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 32
+2025-05-15 11:20:46,767 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 33
+2025-05-15 11:20:46,768 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 34
+2025-05-15 11:20:46,768 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 35
+2025-05-15 11:20:46,768 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 36
+2025-05-15 11:20:46,768 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 37
+2025-05-15 11:20:46,768 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 38
+2025-05-15 11:20:46,768 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 39
+2025-05-15 11:20:46,769 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 40
+2025-05-15 11:20:46,769 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 41
+2025-05-15 11:20:46,769 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 42
+2025-05-15 11:20:46,769 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 43
+2025-05-15 11:20:46,769 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 44
+2025-05-15 11:20:46,770 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 45
+2025-05-15 11:20:46,770 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 46
+2025-05-15 11:20:46,770 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 47
+2025-05-15 11:20:46,770 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 48
+2025-05-15 11:20:46,770 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.DeleteCommand for entry at index 0
+2025-05-15 11:20:46,771 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 1
+2025-05-15 11:20:46,772 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 2
+2025-05-15 11:20:46,772 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 3
+2025-05-15 11:20:46,772 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 4
+2025-05-15 11:20:46,772 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 5
+2025-05-15 11:20:46,773 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 6
+2025-05-15 11:20:46,773 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 7
+2025-05-15 11:20:46,773 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 8
+2025-05-15 11:20:46,773 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 9
+2025-05-15 11:20:46,773 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 10
+2025-05-15 11:20:46,774 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 11
+2025-05-15 11:20:46,774 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 12
+2025-05-15 11:20:46,774 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 13
+2025-05-15 11:20:46,775 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 14
+2025-05-15 11:20:46,775 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 15
+2025-05-15 11:20:46,775 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 16
+2025-05-15 11:20:46,776 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 17
+2025-05-15 11:20:46,776 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 18
+2025-05-15 11:20:46,777 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 19
+2025-05-15 11:20:46,777 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 20
+2025-05-15 11:20:46,777 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 21
+2025-05-15 11:20:46,777 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 22
+2025-05-15 11:20:46,778 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 23
+2025-05-15 11:20:46,778 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 24
+2025-05-15 11:20:46,778 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 25
+2025-05-15 11:20:46,778 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 26
+2025-05-15 11:20:46,779 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 27
+2025-05-15 11:20:46,779 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 28
+2025-05-15 11:20:46,779 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 29
+2025-05-15 11:20:46,779 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 30
+2025-05-15 11:20:46,779 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 31
+2025-05-15 11:20:46,780 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 32
+2025-05-15 11:20:46,780 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 33
+2025-05-15 11:20:46,780 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 34
+2025-05-15 11:20:46,780 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 35
+2025-05-15 11:20:46,781 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 36
+2025-05-15 11:20:46,781 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 37
+2025-05-15 11:20:46,781 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 38
+2025-05-15 11:20:46,781 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 39
+2025-05-15 11:20:46,781 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 40
+2025-05-15 11:20:46,782 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 41
+2025-05-15 11:20:46,782 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 42
+2025-05-15 11:20:46,782 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 43
+2025-05-15 11:20:46,783 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 44
+2025-05-15 11:20:46,783 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 45
+2025-05-15 11:20:46,783 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 46
+2025-05-15 11:20:46,783 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 47
+2025-05-15 11:20:46,784 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateStructureDefinitionCommand for entry at index 48
+2025-05-15 11:20:46,784 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 49
+2025-05-15 11:20:46,784 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CreateCommand for entry at index 50
+2025-05-15 11:20:46,784 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 18
+2025-05-15 11:20:46,784 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 19
+2025-05-15 11:20:46,784 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 20
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 21
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 22
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 23
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 24
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 25
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 26
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 27
+2025-05-15 11:20:46,785 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 28
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 29
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 30
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 31
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 32
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 33
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 34
+2025-05-15 11:20:46,786 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 35
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 36
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 37
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 38
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 39
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 40
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 41
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 42
+2025-05-15 11:20:46,787 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 43
+2025-05-15 11:20:46,788 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 44
+2025-05-15 11:20:46,788 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 45
+2025-05-15 11:20:46,788 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 46
+2025-05-15 11:20:46,789 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 47
+2025-05-15 11:20:46,789 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 48
+2025-05-15 11:20:46,789 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Committing DB transaction
+2025-05-15 11:20:46,790 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Committing events
+2025-05-15 11:20:46,791 [main] INFO  dsf-audit-logger - Delete of CodeSystem for identity 'initial.data.loader' via bundle at index 0 successful, status: 204 No Content
+2025-05-15 11:20:46,792 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 1 successful, status: 200 OK
+2025-05-15 11:20:46,793 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 2 successful, status: 200 OK
+2025-05-15 11:20:46,793 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 3 successful, status: 200 OK
+2025-05-15 11:20:46,794 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 4 successful, status: 200 OK
+2025-05-15 11:20:46,794 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 5 successful, status: 200 OK
+2025-05-15 11:20:46,795 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 6 successful, status: 200 OK
+2025-05-15 11:20:46,795 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 7 successful, status: 200 OK
+2025-05-15 11:20:46,795 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 8 successful, status: 200 OK
+2025-05-15 11:20:46,796 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 9 successful, status: 200 OK
+2025-05-15 11:20:46,796 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 10 successful, status: 200 OK
+2025-05-15 11:20:46,797 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 11 successful, status: 200 OK
+2025-05-15 11:20:46,797 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 12 successful, status: 200 OK
+2025-05-15 11:20:46,797 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 13 successful, status: 200 OK
+2025-05-15 11:20:46,798 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 14 successful, status: 200 OK
+2025-05-15 11:20:46,798 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 15 successful, status: 200 OK
+2025-05-15 11:20:46,799 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 16 successful, status: 200 OK
+2025-05-15 11:20:46,799 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 17 successful, status: 200 OK
+2025-05-15 11:20:46,799 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 18 successful, status: 200 OK
+2025-05-15 11:20:46,800 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 19 successful, status: 200 OK
+2025-05-15 11:20:46,800 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 20 successful, status: 200 OK
+2025-05-15 11:20:46,801 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 21 successful, status: 200 OK
+2025-05-15 11:20:46,801 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 22 successful, status: 200 OK
+2025-05-15 11:20:46,802 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 23 successful, status: 200 OK
+2025-05-15 11:20:46,802 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 24 successful, status: 200 OK
+2025-05-15 11:20:46,803 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 25 successful, status: 200 OK
+2025-05-15 11:20:46,803 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 26 successful, status: 200 OK
+2025-05-15 11:20:46,803 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 27 successful, status: 200 OK
+2025-05-15 11:20:46,804 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 28 successful, status: 200 OK
+2025-05-15 11:20:46,805 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 29 successful, status: 200 OK
+2025-05-15 11:20:46,805 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 30 successful, status: 200 OK
+2025-05-15 11:20:46,806 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 31 successful, status: 200 OK
+2025-05-15 11:20:46,806 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 32 successful, status: 200 OK
+2025-05-15 11:20:46,807 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 33 successful, status: 200 OK
+2025-05-15 11:20:46,807 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 34 successful, status: 200 OK
+2025-05-15 11:20:46,807 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 35 successful, status: 200 OK
+2025-05-15 11:20:46,808 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 36 successful, status: 200 OK
+2025-05-15 11:20:46,808 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 37 successful, status: 200 OK
+2025-05-15 11:20:46,809 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 38 successful, status: 200 OK
+2025-05-15 11:20:46,809 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 39 successful, status: 200 OK
+2025-05-15 11:20:46,809 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 40 successful, status: 200 OK
+2025-05-15 11:20:46,810 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 41 successful, status: 200 OK
+2025-05-15 11:20:46,810 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 42 successful, status: 200 OK
+2025-05-15 11:20:46,811 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 43 successful, status: 200 OK
+2025-05-15 11:20:46,811 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 44 successful, status: 200 OK
+2025-05-15 11:20:46,812 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 45 successful, status: 200 OK
+2025-05-15 11:20:46,812 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 46 successful, status: 200 OK
+2025-05-15 11:20:46,813 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 47 successful, status: 200 OK
+2025-05-15 11:20:46,813 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 48 successful, status: 200 OK
+2025-05-15 11:20:46,814 [main] INFO  dsf-audit-logger - Create of Subscription for identity 'initial.data.loader' via bundle at index 49 successful, status: 200 OK
+2025-05-15 11:20:46,814 [main] INFO  dsf-audit-logger - Create of Subscription for identity 'initial.data.loader' via bundle at index 50 successful, status: 200 OK
+2025-05-15 11:20:46,815 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: null 204 No Content
+2025-05-15 11:20:46,816 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/CodeSystem/10d78743-7de8-4a46-952b-ae5e7dc0e458/_history/1 200 OK
+2025-05-15 11:20:46,816 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/CodeSystem/c8213f7f-8de9-4672-9324-93fe4bc46098/_history/1 200 OK
+2025-05-15 11:20:46,816 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/CodeSystem/c8213f7f-8de9-4672-9324-93fe4bc46098/_history/1 200 OK
+2025-05-15 11:20:46,817 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/CodeSystem/4d3840b4-d822-420c-bfa4-fabe7aa408f4/_history/1 200 OK
+2025-05-15 11:20:46,817 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/CodeSystem/bb11dc69-6892-4ffd-9da4-d328e818b812/_history/1 200 OK
+2025-05-15 11:20:46,817 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/CodeSystem/fd60ee2a-ce6f-49ad-8bab-5339529f72fc/_history/1 200 OK
+2025-05-15 11:20:46,817 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/NamingSystem/f8a26acd-510c-4956-9b05-1abc81f71b89/_history/1 200 OK
+2025-05-15 11:20:46,818 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/NamingSystem/3957de42-642d-4198-8e24-1bd51feb141e/_history/1 200 OK
+2025-05-15 11:20:46,819 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/NamingSystem/7a5a7099-62c6-43fa-95c1-7254a6c6c83f/_history/1 200 OK
+2025-05-15 11:20:46,820 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/NamingSystem/14127d58-dbd2-4ed6-82cf-4cc645f13509/_history/1 200 OK
+2025-05-15 11:20:46,820 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/ffb43813-c5fa-45e6-99e3-7f2ef84a0d45/_history/1 200 OK
+2025-05-15 11:20:46,821 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/6b800221-866e-4533-b604-d60fa83f0696/_history/1 200 OK
+2025-05-15 11:20:46,821 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/55636c69-9caf-49a1-8df5-811f6d86b4d2/_history/1 200 OK
+2025-05-15 11:20:46,821 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/4ba54528-7feb-4e7b-ace8-6480f9ef67bf/_history/1 200 OK
+2025-05-15 11:20:46,822 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/9d4a0efd-4531-48fc-b627-08c2fa664034/_history/1 200 OK
+2025-05-15 11:20:46,822 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/9a68720c-a9aa-414b-a0ff-4fc7fafdf98b/_history/1 200 OK
+2025-05-15 11:20:46,822 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/ValueSet/bb41fce5-9744-4e3e-be00-6487e2c94935/_history/1 200 OK
+2025-05-15 11:20:46,822 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/ef871dfc-7201-46b3-87d5-ee36b843c678/_history/1 200 OK
+2025-05-15 11:20:46,823 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/aa668504-aab3-4013-b91d-35c36d659f48/_history/1 200 OK
+2025-05-15 11:20:46,823 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/48d164d8-a53e-4281-b0aa-a3775e152c03/_history/1 200 OK
+2025-05-15 11:20:46,823 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/d402edb7-fe38-485a-b9e8-61d956a0af2c/_history/1 200 OK
+2025-05-15 11:20:46,823 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/cdb00619-8568-4adc-b223-b980492ce241/_history/1 200 OK
+2025-05-15 11:20:46,823 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/f508b6ac-4d2a-4a1c-9c00-3a102374d262/_history/1 200 OK
+2025-05-15 11:20:46,824 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/d9f0b13d-85f6-4fd4-9f30-f615cecadff7/_history/1 200 OK
+2025-05-15 11:20:46,824 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/455037f0-c7f5-47ea-a22e-a20f0c1e7e7f/_history/1 200 OK
+2025-05-15 11:20:46,824 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/b2d64204-a6fa-47d4-86a8-25f9a287a51a/_history/1 200 OK
+2025-05-15 11:20:46,824 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/0ff31ada-5268-4312-a2e5-341ec321513b/_history/1 200 OK
+2025-05-15 11:20:46,825 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/87cb64ab-64bb-4b65-979f-38274bff1e18/_history/1 200 OK
+2025-05-15 11:20:46,825 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/5e4582d7-440b-4147-9305-17eed7945b11/_history/1 200 OK
+2025-05-15 11:20:46,825 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/6ad3a8c0-68d8-4306-af55-2cfffc2ab828/_history/1 200 OK
+2025-05-15 11:20:46,825 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/de15e19e-75c6-4ac7-9469-20f2836f2a4e/_history/1 200 OK
+2025-05-15 11:20:46,826 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/0e108a68-17f8-40ef-9a6c-2d491659b4f9/_history/1 200 OK
+2025-05-15 11:20:46,826 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/ebedad48-b9d3-4d1d-8f65-35389c39bb66/_history/1 200 OK
+2025-05-15 11:20:46,826 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/daad72cf-53d0-42af-b3be-f54862e0e029/_history/1 200 OK
+2025-05-15 11:20:46,826 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/7bc91454-9c6a-4c86-8fc6-3d78ab27102c/_history/1 200 OK
+2025-05-15 11:20:46,827 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/3c00dd2f-2302-4595-8f46-ab19879cba90/_history/1 200 OK
+2025-05-15 11:20:46,827 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/4217f598-4ac9-4571-94d7-4869bbe88109/_history/1 200 OK
+2025-05-15 11:20:46,827 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/73b85f4b-5c29-4e67-a3c2-cfeda58ed23a/_history/1 200 OK
+2025-05-15 11:20:46,828 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/c30de289-9d74-4b02-bb83-77136e3b68d3/_history/1 200 OK
+2025-05-15 11:20:46,828 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/108d7e0b-5d8f-4b32-8ce6-c430840e6e86/_history/1 200 OK
+2025-05-15 11:20:46,828 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/b63b80d8-1c41-40e8-af05-3d604e04a10e/_history/1 200 OK
+2025-05-15 11:20:46,828 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/2fb66df8-cda6-4955-bb6d-564569d577a6/_history/1 200 OK
+2025-05-15 11:20:46,828 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/2f536f68-69d8-4519-8b83-e9999b098254/_history/1 200 OK
+2025-05-15 11:20:46,829 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/a246f9ff-4f11-49ef-9848-c125c679ebdf/_history/1 200 OK
+2025-05-15 11:20:46,829 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/515eefe5-0f6a-4ae6-99c3-e6035f668875/_history/1 200 OK
+2025-05-15 11:20:46,829 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/8fab48c0-a554-404b-89a6-d69777c7cc7a/_history/1 200 OK
+2025-05-15 11:20:46,829 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/9c0e105b-0c44-4f01-b91b-b328dfd14a15/_history/1 200 OK
+2025-05-15 11:20:46,830 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/StructureDefinition/35419319-5e5b-41c8-9767-0451f66a8557/_history/1 200 OK
+2025-05-15 11:20:46,830 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Subscription/7e05acb0-b75d-4590-b126-ef3887dfb579/_history/1 200 OK
+2025-05-15 11:20:46,830 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Subscription/0c7fc77f-bb1c-46a1-b66b-bd672558523d/_history/1 200 OK
+2025-05-15 11:20:46,833 [main] INFO  dev.dsf.fhir.spring.config.InitialDataLoaderConfig - Loading data from external bundle ...
+2025-05-15 11:20:46,839 [main] DEBUG dev.dsf.fhir.service.InitialDataLoaderImpl - Executing command list for bundle with 10 entries
+2025-05-15 11:20:47,624 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 0
+2025-05-15 11:20:47,633 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 1
+2025-05-15 11:20:47,636 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 2
+2025-05-15 11:20:47,639 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 3
+2025-05-15 11:20:47,643 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 4
+2025-05-15 11:20:47,645 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 5
+2025-05-15 11:20:47,646 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 6
+2025-05-15 11:20:47,648 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 7
+2025-05-15 11:20:47,653 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 8
+2025-05-15 11:20:47,655 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 9
+2025-05-15 11:20:47,657 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 0
+2025-05-15 11:20:47,658 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 1
+2025-05-15 11:20:47,658 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 2
+2025-05-15 11:20:47,658 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 3
+2025-05-15 11:20:47,658 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 4
+2025-05-15 11:20:47,658 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 5
+2025-05-15 11:20:47,659 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 7
+2025-05-15 11:20:47,659 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 8
+2025-05-15 11:20:47,659 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 9
+2025-05-15 11:20:47,659 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 0
+2025-05-15 11:20:47,663 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart bdd48de2-f1d2-44bb-be06-4bebded0490a found
+2025-05-15 11:20:48,159 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Organization/bdd48de2-f1d2-44bb-be06-4bebded0490a/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,161 [main] INFO  dsf-audit-logger - Update of Organization/bdd48de2-f1d2-44bb-be06-4bebded0490a/_history/3 allowed for identity 'initial.data.loader' via bundle at index 0, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,163 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Organization with IdPart bdd48de2-f1d2-44bb-be06-4bebded0490a is 3
+2025-05-15 11:20:48,187 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart bdd48de2-f1d2-44bb-be06-4bebded0490a updated, new version 4
+2025-05-15 11:20:48,188 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 1
+2025-05-15 11:20:48,189 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 16163e5f-0a8c-41a4-b792-9eac2547d65f found
+2025-05-15 11:20:48,209 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Organization/16163e5f-0a8c-41a4-b792-9eac2547d65f/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,210 [main] INFO  dsf-audit-logger - Update of Organization/16163e5f-0a8c-41a4-b792-9eac2547d65f/_history/3 allowed for identity 'initial.data.loader' via bundle at index 1, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,212 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Organization with IdPart 16163e5f-0a8c-41a4-b792-9eac2547d65f is 3
+2025-05-15 11:20:48,219 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 16163e5f-0a8c-41a4-b792-9eac2547d65f updated, new version 4
+2025-05-15 11:20:48,219 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 2
+2025-05-15 11:20:48,221 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:20:48,235 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Organization/84c5c28b-3999-4c2e-866f-c2ea78b07ac8/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,235 [main] INFO  dsf-audit-logger - Update of Organization/84c5c28b-3999-4c2e-866f-c2ea78b07ac8/_history/3 allowed for identity 'initial.data.loader' via bundle at index 2, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,237 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 is 3
+2025-05-15 11:20:48,242 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 updated, new version 4
+2025-05-15 11:20:48,242 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 3
+2025-05-15 11:20:48,244 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart b11625fe-6e01-457d-8db8-0fc4caec78cf found
+2025-05-15 11:20:48,326 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Endpoint/b11625fe-6e01-457d-8db8-0fc4caec78cf/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,327 [main] INFO  dsf-audit-logger - Update of Endpoint/b11625fe-6e01-457d-8db8-0fc4caec78cf/_history/3 allowed for identity 'initial.data.loader' via bundle at index 3, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,328 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Endpoint with IdPart b11625fe-6e01-457d-8db8-0fc4caec78cf is 3
+2025-05-15 11:20:48,334 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart b11625fe-6e01-457d-8db8-0fc4caec78cf updated, new version 4
+2025-05-15 11:20:48,334 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 4
+2025-05-15 11:20:48,336 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart c720b05f-0344-4aa8-84ff-b6d7fb23d065 found
+2025-05-15 11:20:48,377 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Endpoint/c720b05f-0344-4aa8-84ff-b6d7fb23d065/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,378 [main] INFO  dsf-audit-logger - Update of Endpoint/c720b05f-0344-4aa8-84ff-b6d7fb23d065/_history/3 allowed for identity 'initial.data.loader' via bundle at index 4, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,380 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Endpoint with IdPart c720b05f-0344-4aa8-84ff-b6d7fb23d065 is 3
+2025-05-15 11:20:48,387 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart c720b05f-0344-4aa8-84ff-b6d7fb23d065 updated, new version 4
+2025-05-15 11:20:48,388 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 5
+2025-05-15 11:20:48,391 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart 1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee found
+2025-05-15 11:20:48,432 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Endpoint/1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,433 [main] INFO  dsf-audit-logger - Update of Endpoint/1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee/_history/3 allowed for identity 'initial.data.loader' via bundle at index 5, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,436 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Endpoint with IdPart 1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee is 3
+2025-05-15 11:20:48,445 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart 1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee updated, new version 4
+2025-05-15 11:20:48,446 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 6
+2025-05-15 11:20:48,450 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 9a7ec369-b458-4fef-9c4e-3817319bc567 found
+2025-05-15 11:20:48,472 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of Organization/9a7ec369-b458-4fef-9c4e-3817319bc567/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,472 [main] INFO  dsf-audit-logger - Update of Organization/9a7ec369-b458-4fef-9c4e-3817319bc567/_history/3 allowed for identity 'initial.data.loader' via bundle at index 6, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,474 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Organization with IdPart 9a7ec369-b458-4fef-9c4e-3817319bc567 is 3
+2025-05-15 11:20:48,481 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 9a7ec369-b458-4fef-9c4e-3817319bc567 updated, new version 4
+2025-05-15 11:20:48,481 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 7
+2025-05-15 11:20:48,486 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart e268a863-5f2c-4f44-9a09-787b81e0d565 found
+2025-05-15 11:20:48,544 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of OrganizationAffiliation/e268a863-5f2c-4f44-9a09-787b81e0d565/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,544 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation/e268a863-5f2c-4f44-9a09-787b81e0d565/_history/3 allowed for identity 'initial.data.loader' via bundle at index 7, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,546 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for OrganizationAffiliation with IdPart e268a863-5f2c-4f44-9a09-787b81e0d565 is 3
+2025-05-15 11:20:48,554 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart e268a863-5f2c-4f44-9a09-787b81e0d565 updated, new version 4
+2025-05-15 11:20:48,554 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 8
+2025-05-15 11:20:48,558 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart 1e9f3e85-ab07-4084-9ba7-c67cf736193a found
+2025-05-15 11:20:48,581 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of OrganizationAffiliation/1e9f3e85-ab07-4084-9ba7-c67cf736193a/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,582 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation/1e9f3e85-ab07-4084-9ba7-c67cf736193a/_history/3 allowed for identity 'initial.data.loader' via bundle at index 8, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,584 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for OrganizationAffiliation with IdPart 1e9f3e85-ab07-4084-9ba7-c67cf736193a is 3
+2025-05-15 11:20:48,591 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart 1e9f3e85-ab07-4084-9ba7-c67cf736193a updated, new version 4
+2025-05-15 11:20:48,592 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 9
+2025-05-15 11:20:48,594 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart 630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7 found
+2025-05-15 11:20:48,615 [main] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of OrganizationAffiliation/630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7/_history/3 authorized for identity 'initial.data.loader'
+2025-05-15 11:20:48,616 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation/630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7/_history/3 allowed for identity 'initial.data.loader' via bundle at index 9, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:48,618 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for OrganizationAffiliation with IdPart 630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7 is 3
+2025-05-15 11:20:48,624 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart 630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7 updated, new version 4
+2025-05-15 11:20:48,624 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 0
+2025-05-15 11:20:48,627 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 1
+2025-05-15 11:20:48,628 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 2
+2025-05-15 11:20:48,629 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 3
+2025-05-15 11:20:48,630 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 4
+2025-05-15 11:20:48,631 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 5
+2025-05-15 11:20:48,632 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 7
+2025-05-15 11:20:48,633 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 8
+2025-05-15 11:20:48,634 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 9
+2025-05-15 11:20:48,635 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 0
+2025-05-15 11:20:48,636 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart bdd48de2-f1d2-44bb-be06-4bebded0490a found
+2025-05-15 11:20:48,638 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 1
+2025-05-15 11:20:48,639 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 16163e5f-0a8c-41a4-b792-9eac2547d65f found
+2025-05-15 11:20:48,639 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 2
+2025-05-15 11:20:48,640 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:20:48,640 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 3
+2025-05-15 11:20:48,641 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart b11625fe-6e01-457d-8db8-0fc4caec78cf found
+2025-05-15 11:20:48,642 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 4
+2025-05-15 11:20:48,643 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart c720b05f-0344-4aa8-84ff-b6d7fb23d065 found
+2025-05-15 11:20:48,643 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 5
+2025-05-15 11:20:48,644 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Endpoint with IdPart 1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee found
+2025-05-15 11:20:48,644 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 6
+2025-05-15 11:20:48,645 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 9a7ec369-b458-4fef-9c4e-3817319bc567 found
+2025-05-15 11:20:48,645 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 7
+2025-05-15 11:20:48,646 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart e268a863-5f2c-4f44-9a09-787b81e0d565 found
+2025-05-15 11:20:48,647 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 8
+2025-05-15 11:20:48,647 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart 1e9f3e85-ab07-4084-9ba7-c67cf736193a found
+2025-05-15 11:20:48,648 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 9
+2025-05-15 11:20:48,649 [main] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - OrganizationAffiliation with IdPart 630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7 found
+2025-05-15 11:20:48,651 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 0
+2025-05-15 11:20:48,651 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 1
+2025-05-15 11:20:48,651 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 2
+2025-05-15 11:20:48,652 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 3
+2025-05-15 11:20:48,652 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 4
+2025-05-15 11:20:48,652 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 5
+2025-05-15 11:20:48,652 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 7
+2025-05-15 11:20:48,652 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 8
+2025-05-15 11:20:48,653 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 9
+2025-05-15 11:20:48,653 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Committing DB transaction
+2025-05-15 11:20:48,659 [main] DEBUG dev.dsf.fhir.dao.command.TransactionCommandList - Committing events
+2025-05-15 11:20:48,659 [pool-2-thread-1] INFO  dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Refreshing subscriptions
+2025-05-15 11:20:48,659 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 0 successful, status: 200 OK
+2025-05-15 11:20:48,660 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 1 successful, status: 200 OK
+2025-05-15 11:20:48,661 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 2 successful, status: 200 OK
+2025-05-15 11:20:48,662 [main] INFO  dsf-audit-logger - Update of Endpoint for identity 'initial.data.loader' via bundle at index 3 successful, status: 200 OK
+2025-05-15 11:20:48,663 [main] INFO  dsf-audit-logger - Update of Endpoint for identity 'initial.data.loader' via bundle at index 4 successful, status: 200 OK
+2025-05-15 11:20:48,663 [main] INFO  dsf-audit-logger - Update of Endpoint for identity 'initial.data.loader' via bundle at index 5 successful, status: 200 OK
+2025-05-15 11:20:48,665 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Current active subscription-ids (after refreshing): [0c7fc77f-bb1c-46a1-b66b-bd672558523d, 7e05acb0-b75d-4590-b126-ef3887dfb579]
+2025-05-15 11:20:48,664 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 6 successful, status: 200 OK
+2025-05-15 11:20:48,665 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Organization with id bdd48de2-f1d2-44bb-be06-4bebded0490a
+2025-05-15 11:20:48,666 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Organization with id bdd48de2-f1d2-44bb-be06-4bebded0490a
+2025-05-15 11:20:48,666 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Organization with id 16163e5f-0a8c-41a4-b792-9eac2547d65f
+2025-05-15 11:20:48,665 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation for identity 'initial.data.loader' via bundle at index 7 successful, status: 200 OK
+2025-05-15 11:20:48,666 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Organization with id 16163e5f-0a8c-41a4-b792-9eac2547d65f
+2025-05-15 11:20:48,666 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Organization with id 84c5c28b-3999-4c2e-866f-c2ea78b07ac8
+2025-05-15 11:20:48,666 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Organization with id 84c5c28b-3999-4c2e-866f-c2ea78b07ac8
+2025-05-15 11:20:48,666 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation for identity 'initial.data.loader' via bundle at index 8 successful, status: 200 OK
+2025-05-15 11:20:48,667 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Endpoint with id b11625fe-6e01-457d-8db8-0fc4caec78cf
+2025-05-15 11:20:48,667 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Endpoint with id b11625fe-6e01-457d-8db8-0fc4caec78cf
+2025-05-15 11:20:48,667 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation for identity 'initial.data.loader' via bundle at index 9 successful, status: 200 OK
+2025-05-15 11:20:48,667 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Endpoint with id c720b05f-0344-4aa8-84ff-b6d7fb23d065
+2025-05-15 11:20:48,668 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Endpoint with id c720b05f-0344-4aa8-84ff-b6d7fb23d065
+2025-05-15 11:20:48,667 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Organization/bdd48de2-f1d2-44bb-be06-4bebded0490a/_history/4 200 OK
+2025-05-15 11:20:48,668 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Endpoint with id 1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee
+2025-05-15 11:20:48,668 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Endpoint with id 1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee
+2025-05-15 11:20:48,668 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Organization/16163e5f-0a8c-41a4-b792-9eac2547d65f/_history/4 200 OK
+2025-05-15 11:20:48,668 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Organization with id 9a7ec369-b458-4fef-9c4e-3817319bc567
+2025-05-15 11:20:48,668 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Organization/84c5c28b-3999-4c2e-866f-c2ea78b07ac8/_history/4 200 OK
+2025-05-15 11:20:48,668 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type Organization with id 9a7ec369-b458-4fef-9c4e-3817319bc567
+2025-05-15 11:20:48,669 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Endpoint/b11625fe-6e01-457d-8db8-0fc4caec78cf/_history/4 200 OK
+2025-05-15 11:20:48,669 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type OrganizationAffiliation with id e268a863-5f2c-4f44-9a09-787b81e0d565
+2025-05-15 11:20:48,669 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Endpoint/c720b05f-0344-4aa8-84ff-b6d7fb23d065/_history/4 200 OK
+2025-05-15 11:20:48,669 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type OrganizationAffiliation with id e268a863-5f2c-4f44-9a09-787b81e0d565
+2025-05-15 11:20:48,669 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type OrganizationAffiliation with id 1e9f3e85-ab07-4084-9ba7-c67cf736193a
+2025-05-15 11:20:48,669 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Endpoint/1ee91b09-195e-4ac8-9cf1-3e22dfa8cfee/_history/4 200 OK
+2025-05-15 11:20:48,669 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type OrganizationAffiliation with id 1e9f3e85-ab07-4084-9ba7-c67cf736193a
+2025-05-15 11:20:48,670 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/Organization/9a7ec369-b458-4fef-9c4e-3817319bc567/_history/4 200 OK
+2025-05-15 11:20:48,670 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type OrganizationAffiliation with id 630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7
+2025-05-15 11:20:48,670 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type OrganizationAffiliation with id 630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7
+2025-05-15 11:20:48,670 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/OrganizationAffiliation/e268a863-5f2c-4f44-9a09-787b81e0d565/_history/4 200 OK
+2025-05-15 11:20:48,670 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/OrganizationAffiliation/1e9f3e85-ab07-4084-9ba7-c67cf736193a/_history/4 200 OK
+2025-05-15 11:20:48,671 [main] INFO  dev.dsf.fhir.service.InitialDataLoaderImpl - Result: https://hrp/fhir/OrganizationAffiliation/630d0b7c-d7c1-4f46-a3f9-1f3c681b29d7/_history/4 200 OK
+2025-05-15 11:20:48,671 [main] INFO  dev.dsf.fhir.service.InitialDataMigratorImpl - Executing initial data migration jobs ...
+2025-05-15 11:20:48,671 [main] INFO  dev.dsf.fhir.service.InitialDataMigratorImpl - Executing initial data migration jobs [Done]
+2025-05-15 11:20:48,672 [main] INFO  dev.dsf.tools.build.BuildInfoReaderImpl - System default timezone: Europe/Berlin
+2025-05-15 11:20:48,674 [main] INFO  dev.dsf.tools.build.BuildInfoReaderImpl - Artifact: dsf-fhir-server-jetty, version: 1.7.1, build: 2025-03-24T19:43:20+01:00, branch: main, commit: bffc318dc9150994236c1a40d0e6b736d4ec81f4
+2025-05-15 11:20:48,813 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'activityDefinitionService' as singleton resource with path '/fhir/ActivityDefinition'
+2025-05-15 11:20:48,815 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'binaryService' as singleton resource with path '/fhir/Binary'
+2025-05-15 11:20:48,815 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'bundleService' as singleton resource with path '/fhir/Bundle'
+2025-05-15 11:20:48,815 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'codeSystemService' as singleton resource with path '/fhir/CodeSystem'
+2025-05-15 11:20:48,816 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'documentReferenceService' as singleton resource with path '/fhir/DocumentReference'
+2025-05-15 11:20:48,816 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'endpointService' as singleton resource with path '/fhir/Endpoint'
+2025-05-15 11:20:48,816 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'groupService' as singleton resource with path '/fhir/Group'
+2025-05-15 11:20:48,816 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'healthcareServiceService' as singleton resource with path '/fhir/HealthcareService'
+2025-05-15 11:20:48,817 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'libraryService' as singleton resource with path '/fhir/Library'
+2025-05-15 11:20:48,817 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'locationService' as singleton resource with path '/fhir/Location'
+2025-05-15 11:20:48,817 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'logoutService' as singleton resource with path '/fhir/logout'
+2025-05-15 11:20:48,817 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'measureService' as singleton resource with path '/fhir/Measure'
+2025-05-15 11:20:48,818 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'measureReportService' as singleton resource with path '/fhir/MeasureReport'
+2025-05-15 11:20:48,818 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'namingSystemService' as singleton resource with path '/fhir/NamingSystem'
+2025-05-15 11:20:48,818 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'organizationService' as singleton resource with path '/fhir/Organization'
+2025-05-15 11:20:48,818 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'organizationAffiliationService' as singleton resource with path '/fhir/OrganizationAffiliation'
+2025-05-15 11:20:48,818 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'patientService' as singleton resource with path '/fhir/Patient'
+2025-05-15 11:20:48,819 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'practitionerRoleService' as singleton resource with path '/fhir/PractitionerRole'
+2025-05-15 11:20:48,819 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'practitionerService' as singleton resource with path '/fhir/Practitioner'
+2025-05-15 11:20:48,819 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'provenanceService' as singleton resource with path '/fhir/Provenance'
+2025-05-15 11:20:48,819 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'questionnaireService' as singleton resource with path '/fhir/Questionnaire'
+2025-05-15 11:20:48,820 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'questionnaireResponseService' as singleton resource with path '/fhir/QuestionnaireResponse'
+2025-05-15 11:20:48,820 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'researchStudyService' as singleton resource with path '/fhir/ResearchStudy'
+2025-05-15 11:20:48,820 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'structureDefinitionService' as singleton resource with path '/fhir/StructureDefinition'
+2025-05-15 11:20:48,821 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'subscriptionService' as singleton resource with path '/fhir/Subscription'
+2025-05-15 11:20:48,821 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'taskService' as singleton resource with path '/fhir/Task'
+2025-05-15 11:20:48,821 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'valueSetService' as singleton resource with path '/fhir/ValueSet'
+2025-05-15 11:20:48,821 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'rootService' as singleton resource with path '/fhir/'
+2025-05-15 11:20:48,822 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'conformanceService' as singleton resource with path '/fhir/metadata'
+2025-05-15 11:20:48,822 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'staticResourcesService' as singleton resource with path '/fhir/static'
+2025-05-15 11:20:48,822 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'statusService' as singleton resource with path '/fhir/status'
+2025-05-15 11:20:48,823 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'fhirAdapter' as singleton provider
+2025-05-15 11:20:48,824 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'thymeleafAdapter' as singleton provider
+2025-05-15 11:20:48,824 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'browserPolicyHeaderResponseFilter' as singleton provider
+2025-05-15 11:20:48,824 [main] DEBUG dev.dsf.fhir.FhirJerseyApplication - Registering bean 'dataFormatExceptionHandler' as singleton provider
+2025-05-15 11:20:49,678 [main] INFO  org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@58dd584a{/fhir,null,AVAILABLE}
+2025-05-15 11:20:49,679 [main] INFO  org.eclipse.jetty.webapp.WebAppContext - WebApp@1825247481 at http://ServerConnector@2c1d57bc{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}/fhir
+2025-05-15 11:20:49,680 [main] INFO  org.eclipse.jetty.webapp.WebAppContext - WebApp@1825247481 at http://ServerConnector@153d6d74{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}/fhir
+2025-05-15 11:20:49,684 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@2c1d57bc{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2025-05-15 11:20:49,689 [main] INFO  org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@153d6d74{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}
+2025-05-15 11:20:49,690 [main] INFO  org.eclipse.jetty.server.Server - Started Server@5396eeb1{STARTING}[11.0.25,sto=0] @11177ms
+2025-05-15 11:21:01,961 [jetty-server-35] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:01,964 [jetty-server-35] INFO  dev.dsf.fhir.authorization.AbstractAuthorizationRule - Search of Endpoint authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:01,965 [jetty-server-35] INFO  dsf-audit-logger - Search of Endpoint allowed for identity 'hrp.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:01,977 [jetty-server-35] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Read of Organization/84c5c28b-3999-4c2e-866f-c2ea78b07ac8/_history/4 authorized for identity 'hrp.dsf.test', matching access tag {ALL}
+2025-05-15 11:21:01,978 [jetty-server-35] DEBUG dev.dsf.fhir.webservice.impl.AbstractResourceServiceImpl - Include resource of type Organization with id Organization/84c5c28b-3999-4c2e-866f-c2ea78b07ac8/_history/4, allowed - Identity has role READ, matching access tag {ALL}
+2025-05-15 11:21:01,981 [jetty-server-35] INFO  dsf-audit-logger - Search of Endpoint for identity 'hrp.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:03,117 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:03,132 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,132 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,133 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,133 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,133 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,134 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,134 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,134 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,135 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,135 [jetty-server-36] WARN  ca.uhn.fhir.parser.LenientErrorHandler - Unknown element 'fhir_comments' found while parsing
+2025-05-15 11:21:03,268 [jetty-server-36] INFO  dev.dsf.fhir.webservice.secure.RootServiceSecure - Handling of batch or transaction bundles generaly allowed for all, entries will be individualy evaluated
+2025-05-15 11:21:03,269 [jetty-server-36] INFO  dsf-audit-logger - Handling of transaction or batch bundle allowed for identity 'hrp.dsf.test': Allowed for all, entries individualy evaluated
+2025-05-15 11:21:03,277 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 0
+2025-05-15 11:21:03,279 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 1
+2025-05-15 11:21:03,280 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 2
+2025-05-15 11:21:03,280 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand - Generating snapshot for bundle entry at index 2
+2025-05-15 11:21:03,281 [jetty-server-36] DEBUG dev.dsf.fhir.validation.SnapshotGeneratorImpl - Generating snapshot for StructureDefinition with id null, url http://dsf.dev/fhir/StructureDefinition/eyematics-receive-process-structure-definition, version 1.3, base http://dsf.dev/fhir/StructureDefinition/task-base
+2025-05-15 11:21:03,502 [jetty-server-36] DEBUG dev.dsf.fhir.validation.SnapshotGeneratorImpl - Snapshot generated for StructureDefinition with id null, url http://dsf.dev/fhir/StructureDefinition/eyematics-receive-process-structure-definition, version 1.3
+2025-05-15 11:21:03,504 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 2
+2025-05-15 11:21:03,504 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 3
+2025-05-15 11:21:03,505 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand - Generating snapshot for bundle entry at index 3
+2025-05-15 11:21:03,505 [jetty-server-36] DEBUG dev.dsf.fhir.validation.SnapshotGeneratorImpl - Generating snapshot for StructureDefinition with id null, url http://dsf.dev/fhir/StructureDefinition/eyematics-initiate-process-structure-definition, version 1.3, base http://dsf.dev/fhir/StructureDefinition/task-base
+2025-05-15 11:21:03,508 [jetty-server-36] DEBUG dev.dsf.fhir.validation.SnapshotGeneratorImpl - Snapshot generated for StructureDefinition with id null, url http://dsf.dev/fhir/StructureDefinition/eyematics-initiate-process-structure-definition, version 1.3
+2025-05-15 11:21:03,510 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 3
+2025-05-15 11:21:03,511 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 4
+2025-05-15 11:21:03,511 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand - Generating snapshot for bundle entry at index 4
+2025-05-15 11:21:03,512 [jetty-server-36] DEBUG dev.dsf.fhir.validation.SnapshotGeneratorImpl - Generating snapshot for StructureDefinition with id null, url http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition, version 1.3, base http://dsf.dev/fhir/StructureDefinition/task-base
+2025-05-15 11:21:03,515 [jetty-server-36] DEBUG dev.dsf.fhir.validation.SnapshotGeneratorImpl - Snapshot generated for StructureDefinition with id null, url http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition, version 1.3
+2025-05-15 11:21:03,517 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 4
+2025-05-15 11:21:03,518 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 5
+2025-05-15 11:21:03,520 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 6
+2025-05-15 11:21:03,521 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 7
+2025-05-15 11:21:03,526 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 7
+2025-05-15 11:21:03,526 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 8
+2025-05-15 11:21:03,527 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running pre-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 8
+2025-05-15 11:21:03,527 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 0
+2025-05-15 11:21:03,529 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - CodeSystem with IdPart 99c28c79-8e22-4be7-8ebe-f29d0a4edbdc found
+2025-05-15 11:21:03,735 [jetty-server-36] INFO  dev.dsf.fhir.dao.command.ValidationHelperImpl - Resource CodeSystem validated with messages: [CodeSystem 1:1 - WARNING: csd-0: Name should be usable as an identifier for the module by machine processing applications such as code generation [name.matches('[A-Z]([A-Za-z0-9_]){0,254}')]]
+2025-05-15 11:21:03,736 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of CodeSystem/99c28c79-8e22-4be7-8ebe-f29d0a4edbdc/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:03,737 [jetty-server-36] INFO  dsf-audit-logger - Update of CodeSystem/99c28c79-8e22-4be7-8ebe-f29d0a4edbdc/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 0, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:03,738 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for CodeSystem with IdPart 99c28c79-8e22-4be7-8ebe-f29d0a4edbdc is 1
+2025-05-15 11:21:03,744 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - CodeSystem with IdPart 99c28c79-8e22-4be7-8ebe-f29d0a4edbdc updated, new version 2
+2025-05-15 11:21:03,749 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 1
+2025-05-15 11:21:03,751 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ValueSet with IdPart 73c2aab4-2bfe-4eb7-a934-6220ac42d1ae found
+2025-05-15 11:21:03,761 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of ValueSet/73c2aab4-2bfe-4eb7-a934-6220ac42d1ae/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:03,762 [jetty-server-36] INFO  dsf-audit-logger - Update of ValueSet/73c2aab4-2bfe-4eb7-a934-6220ac42d1ae/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 1, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:03,763 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for ValueSet with IdPart 73c2aab4-2bfe-4eb7-a934-6220ac42d1ae is 1
+2025-05-15 11:21:03,768 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ValueSet with IdPart 73c2aab4-2bfe-4eb7-a934-6220ac42d1ae updated, new version 2
+2025-05-15 11:21:03,771 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 2
+2025-05-15 11:21:03,774 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart e03195ba-fd9f-4a06-a80a-1223f351de47 found
+2025-05-15 11:21:04,064 [jetty-server-36] INFO  dev.dsf.fhir.dao.command.ValidationHelperImpl - Resource StructureDefinition validated with messages: [StructureDefinition 1:1 - WARNING: sdf-0: Name should be usable as an identifier for the module by machine processing applications such as code generation [name.matches('[A-Z]([A-Za-z0-9_]){0,254}')]]
+2025-05-15 11:21:04,064 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of StructureDefinition/e03195ba-fd9f-4a06-a80a-1223f351de47/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:04,065 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition/e03195ba-fd9f-4a06-a80a-1223f351de47/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 2, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:04,066 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for StructureDefinition with IdPart e03195ba-fd9f-4a06-a80a-1223f351de47 is 1
+2025-05-15 11:21:04,072 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart e03195ba-fd9f-4a06-a80a-1223f351de47 updated, new version 2
+2025-05-15 11:21:04,074 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for StructureDefinition with IdPart e03195ba-fd9f-4a06-a80a-1223f351de47 is 1
+2025-05-15 11:21:04,107 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart e03195ba-fd9f-4a06-a80a-1223f351de47 updated, new version 2
+2025-05-15 11:21:04,113 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 2
+2025-05-15 11:21:04,114 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 3
+2025-05-15 11:21:04,117 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0 found
+2025-05-15 11:21:04,143 [jetty-server-36] INFO  dev.dsf.fhir.dao.command.ValidationHelperImpl - Resource StructureDefinition validated with messages: [StructureDefinition 1:1 - WARNING: sdf-0: Name should be usable as an identifier for the module by machine processing applications such as code generation [name.matches('[A-Z]([A-Za-z0-9_]){0,254}')]]
+2025-05-15 11:21:04,144 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of StructureDefinition/8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:04,144 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition/8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 3, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:04,146 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for StructureDefinition with IdPart 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0 is 1
+2025-05-15 11:21:04,151 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0 updated, new version 2
+2025-05-15 11:21:04,152 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for StructureDefinition with IdPart 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0 is 1
+2025-05-15 11:21:04,175 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0 updated, new version 2
+2025-05-15 11:21:04,179 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 3
+2025-05-15 11:21:04,179 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 4
+2025-05-15 11:21:04,182 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart dfbfa1e9-1458-493b-b73d-aca65fd56e21 found
+2025-05-15 11:21:04,206 [jetty-server-36] INFO  dev.dsf.fhir.dao.command.ValidationHelperImpl - Resource StructureDefinition validated with messages: [StructureDefinition 1:1 - WARNING: sdf-0: Name should be usable as an identifier for the module by machine processing applications such as code generation [name.matches('[A-Z]([A-Za-z0-9_]){0,254}')]]
+2025-05-15 11:21:04,207 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of StructureDefinition/dfbfa1e9-1458-493b-b73d-aca65fd56e21/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:04,207 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition/dfbfa1e9-1458-493b-b73d-aca65fd56e21/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 4, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:04,208 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for StructureDefinition with IdPart dfbfa1e9-1458-493b-b73d-aca65fd56e21 is 1
+2025-05-15 11:21:04,213 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart dfbfa1e9-1458-493b-b73d-aca65fd56e21 updated, new version 2
+2025-05-15 11:21:04,214 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for StructureDefinition with IdPart dfbfa1e9-1458-493b-b73d-aca65fd56e21 is 1
+2025-05-15 11:21:04,231 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart dfbfa1e9-1458-493b-b73d-aca65fd56e21 updated, new version 2
+2025-05-15 11:21:04,234 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 4
+2025-05-15 11:21:04,235 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 5
+2025-05-15 11:21:04,237 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ActivityDefinition with IdPart 3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a found
+2025-05-15 11:21:07,483 [jetty-server-36] INFO  dev.dsf.fhir.dao.command.ValidationHelperImpl - Resource ActivityDefinition validated with messages: [ActivityDefinition 1:1 - WARNING: adf-0: Name should be usable as an identifier for the module by machine processing applications such as code generation [name.matches('[A-Z]([A-Za-z0-9_]){0,254}')]]
+2025-05-15 11:21:07,487 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of ActivityDefinition/3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:07,488 [jetty-server-36] INFO  dsf-audit-logger - Update of ActivityDefinition/3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 5, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:07,489 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for ActivityDefinition with IdPart 3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a is 1
+2025-05-15 11:21:07,494 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ActivityDefinition with IdPart 3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a updated, new version 2
+2025-05-15 11:21:07,498 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 6
+2025-05-15 11:21:07,499 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ActivityDefinition with IdPart 2e4691c9-9379-4ad6-8ee7-d0c805ac038a found
+2025-05-15 11:21:08,797 [jetty-server-36] INFO  dev.dsf.fhir.dao.command.ValidationHelperImpl - Resource ActivityDefinition validated with messages: [ActivityDefinition 1:1 - WARNING: adf-0: Name should be usable as an identifier for the module by machine processing applications such as code generation [name.matches('[A-Z]([A-Za-z0-9_]){0,254}')]]
+2025-05-15 11:21:08,798 [jetty-server-36] INFO  dev.dsf.fhir.authorization.AbstractMetaTagAuthorizationRule - Update of ActivityDefinition/2e4691c9-9379-4ad6-8ee7-d0c805ac038a/_history/1 authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:08,799 [jetty-server-36] INFO  dsf-audit-logger - Update of ActivityDefinition/2e4691c9-9379-4ad6-8ee7-d0c805ac038a/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 6, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:21:08,800 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for ActivityDefinition with IdPart 2e4691c9-9379-4ad6-8ee7-d0c805ac038a is 1
+2025-05-15 11:21:08,805 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ActivityDefinition with IdPart 2e4691c9-9379-4ad6-8ee7-d0c805ac038a updated, new version 2
+2025-05-15 11:21:08,808 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 7
+2025-05-15 11:21:08,809 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart a1aa5473-5b50-4754-be01-4cdfe6fdcbb0 found
+2025-05-15 11:21:08,811 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,811 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,840 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,842 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,844 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,846 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,846 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,847 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,848 [jetty-server-36] INFO  dev.dsf.fhir.authorization.TaskAuthorizationRule - Update of Task/a1aa5473-5b50-4754-be01-4cdfe6fdcbb0/_history/1 (draft -> draft) authorized for local identity 'hrp.dsf.test'
+2025-05-15 11:21:08,849 [jetty-server-36] INFO  dsf-audit-logger - Update of Task/a1aa5473-5b50-4754-be01-4cdfe6fdcbb0/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 7, reason: Local identity, old Task.status draft, new Task.status draft
+2025-05-15 11:21:08,850 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Task with IdPart a1aa5473-5b50-4754-be01-4cdfe6fdcbb0 is 1
+2025-05-15 11:21:08,852 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart a1aa5473-5b50-4754-be01-4cdfe6fdcbb0 updated, new version 2
+2025-05-15 11:21:08,854 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 7
+2025-05-15 11:21:08,856 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 8
+2025-05-15 11:21:08,858 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart 4b1d9155-c4a1-4ec2-bbc2-4814c54025c3 found
+2025-05-15 11:21:08,858 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,858 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,879 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,881 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:21:08,885 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,885 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,886 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Organization with IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,886 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:08,887 [jetty-server-36] INFO  dev.dsf.fhir.authorization.TaskAuthorizationRule - Update of Task/4b1d9155-c4a1-4ec2-bbc2-4814c54025c3/_history/1 (draft -> draft) authorized for local identity 'hrp.dsf.test'
+2025-05-15 11:21:08,887 [jetty-server-36] INFO  dsf-audit-logger - Update of Task/4b1d9155-c4a1-4ec2-bbc2-4814c54025c3/_history/1 allowed for identity 'hrp.dsf.test' via bundle at index 8, reason: Local identity, old Task.status draft, new Task.status draft
+2025-05-15 11:21:08,888 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Task with IdPart 4b1d9155-c4a1-4ec2-bbc2-4814c54025c3 is 1
+2025-05-15 11:21:08,889 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart 4b1d9155-c4a1-4ec2-bbc2-4814c54025c3 updated, new version 2
+2025-05-15 11:21:08,891 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 8
+2025-05-15 11:21:08,893 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 0
+2025-05-15 11:21:08,894 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - CodeSystem with IdPart 99c28c79-8e22-4be7-8ebe-f29d0a4edbdc found
+2025-05-15 11:21:08,895 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 1
+2025-05-15 11:21:08,895 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type CodeSystem with id 99c28c79-8e22-4be7-8ebe-f29d0a4edbdc
+2025-05-15 11:21:08,895 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type CodeSystem with id 99c28c79-8e22-4be7-8ebe-f29d0a4edbdc
+2025-05-15 11:21:08,896 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ValueSet with IdPart 73c2aab4-2bfe-4eb7-a934-6220ac42d1ae found
+2025-05-15 11:21:08,896 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type ValueSet with id 73c2aab4-2bfe-4eb7-a934-6220ac42d1ae
+2025-05-15 11:21:08,896 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type ValueSet with id 73c2aab4-2bfe-4eb7-a934-6220ac42d1ae
+2025-05-15 11:21:08,896 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 2
+2025-05-15 11:21:08,897 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart e03195ba-fd9f-4a06-a80a-1223f351de47 found
+2025-05-15 11:21:08,897 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type StructureDefinition with id e03195ba-fd9f-4a06-a80a-1223f351de47
+2025-05-15 11:21:08,897 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 2
+2025-05-15 11:21:08,897 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type StructureDefinition with id e03195ba-fd9f-4a06-a80a-1223f351de47
+2025-05-15 11:21:08,897 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 3
+2025-05-15 11:21:08,898 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0 found
+2025-05-15 11:21:08,898 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type StructureDefinition with id 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0
+2025-05-15 11:21:08,898 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 3
+2025-05-15 11:21:08,898 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateStructureDefinitionCommand for entry at index 4
+2025-05-15 11:21:08,898 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type StructureDefinition with id 8f2b5bda-8cd5-4e5d-8c10-3519a3f956e0
+2025-05-15 11:21:08,899 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - StructureDefinition with IdPart dfbfa1e9-1458-493b-b73d-aca65fd56e21 found
+2025-05-15 11:21:08,899 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type StructureDefinition with id dfbfa1e9-1458-493b-b73d-aca65fd56e21
+2025-05-15 11:21:08,899 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 4
+2025-05-15 11:21:08,899 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type StructureDefinition with id dfbfa1e9-1458-493b-b73d-aca65fd56e21
+2025-05-15 11:21:08,900 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 5
+2025-05-15 11:21:08,900 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ActivityDefinition with IdPart 3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a found
+2025-05-15 11:21:08,901 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type ActivityDefinition with id 3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a
+2025-05-15 11:21:08,901 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 6
+2025-05-15 11:21:08,901 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type ActivityDefinition with id 3059c4a2-c9b0-48ba-b1f0-5d9a26172f7a
+2025-05-15 11:21:08,901 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - ActivityDefinition with IdPart 2e4691c9-9379-4ad6-8ee7-d0c805ac038a found
+2025-05-15 11:21:08,902 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type ActivityDefinition with id 2e4691c9-9379-4ad6-8ee7-d0c805ac038a
+2025-05-15 11:21:08,902 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 7
+2025-05-15 11:21:08,902 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No subscriptions for event ResourceUpdatedEvent for resource of type ActivityDefinition with id 2e4691c9-9379-4ad6-8ee7-d0c805ac038a
+2025-05-15 11:21:08,902 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart a1aa5473-5b50-4754-be01-4cdfe6fdcbb0 found
+2025-05-15 11:21:08,902 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Task with id a1aa5473-5b50-4754-be01-4cdfe6fdcbb0
+2025-05-15 11:21:08,902 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 7
+2025-05-15 11:21:08,903 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.UpdateCommand for entry at index 8
+2025-05-15 11:21:08,903 [jetty-server-36] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart 4b1d9155-c4a1-4ec2-bbc2-4814c54025c3 found
+2025-05-15 11:21:08,903 [pool-2-thread-1] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No matching subscriptions for event ResourceUpdatedEvent for resource of type Task with id a1aa5473-5b50-4754-be01-4cdfe6fdcbb0
+2025-05-15 11:21:08,903 [jetty-server-36] DEBUG dev.dsf.fhir.dao.command.BatchCommandList - Running post-execute of command dev.dsf.fhir.dao.command.CheckReferencesCommand for entry at index 8
+2025-05-15 11:21:08,903 [pool-2-thread-2] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Task with id 4b1d9155-c4a1-4ec2-bbc2-4814c54025c3
+2025-05-15 11:21:08,904 [pool-2-thread-2] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No matching subscriptions for event ResourceUpdatedEvent for resource of type Task with id 4b1d9155-c4a1-4ec2-bbc2-4814c54025c3
+2025-05-15 11:21:08,904 [jetty-server-36] INFO  dsf-audit-logger - Update of CodeSystem for identity 'hrp.dsf.test' via bundle at index 0 successful, status: 200 OK
+2025-05-15 11:21:08,905 [jetty-server-36] INFO  dsf-audit-logger - Update of ValueSet for identity 'hrp.dsf.test' via bundle at index 1 successful, status: 200 OK
+2025-05-15 11:21:08,905 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition for identity 'hrp.dsf.test' via bundle at index 2 successful, status: 200 OK
+2025-05-15 11:21:08,906 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition for identity 'hrp.dsf.test' via bundle at index 3 successful, status: 200 OK
+2025-05-15 11:21:08,907 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition for identity 'hrp.dsf.test' via bundle at index 4 successful, status: 200 OK
+2025-05-15 11:21:08,908 [jetty-server-36] INFO  dsf-audit-logger - Update of ActivityDefinition for identity 'hrp.dsf.test' via bundle at index 5 successful, status: 200 OK
+2025-05-15 11:21:09,019 [jetty-server-37] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,021 [jetty-server-37] INFO  dev.dsf.fhir.authorization.AbstractAuthorizationRule - Search of Bundle authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:09,021 [jetty-server-37] INFO  dsf-audit-logger - Search of Bundle allowed for identity 'hrp.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:09,029 [jetty-server-37] DEBUG dev.dsf.fhir.service.ReferenceExtractorImpl - Resource of type org.hl7.fhir.r4.model.Bundle not supported, returning no references
+2025-05-15 11:21:09,030 [jetty-server-37] INFO  dsf-audit-logger - Search of Bundle for identity 'hrp.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:09,075 [jetty-server-38] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,077 [jetty-server-38] INFO  dev.dsf.fhir.authorization.AbstractAuthorizationRule - Search of Subscription authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:09,078 [jetty-server-38] INFO  dsf-audit-logger - Search of Subscription allowed for identity 'hrp.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:09,083 [jetty-server-38] INFO  dsf-audit-logger - Search of Subscription for identity 'hrp.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:09,090 [jetty-server-39] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,093 [jetty-server-39] INFO  dev.dsf.fhir.authorization.AbstractAuthorizationRule - Search of Subscription authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:09,093 [jetty-server-39] INFO  dsf-audit-logger - Search of Subscription allowed for identity 'hrp.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:09,098 [jetty-server-39] INFO  dsf-audit-logger - Search of Subscription for identity 'hrp.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:09,124 [jetty-server-40] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,126 [jetty-server-40] INFO  dev.dsf.fhir.authorization.AbstractAuthorizationRule - Search of QuestionnaireResponse authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:09,127 [jetty-server-40] INFO  dsf-audit-logger - Search of QuestionnaireResponse allowed for identity 'hrp.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:09,132 [jetty-server-33] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,133 [jetty-server-40] INFO  dsf-audit-logger - Search of QuestionnaireResponse for identity 'hrp.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:09,134 [jetty-server-33] INFO  dev.dsf.fhir.authorization.AbstractAuthorizationRule - Search of Task authorized for identity 'hrp.dsf.test'
+2025-05-15 11:21:09,135 [jetty-server-33] INFO  dsf-audit-logger - Search of Task allowed for identity 'hrp.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:09,143 [jetty-server-33] INFO  dsf-audit-logger - Search of Task for identity 'hrp.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:09,279 [jetty-server-53] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,280 [jetty-server-54] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:21:09,301 [jetty-server-54] INFO  dev.dsf.fhir.websocket.ServerEndpoint - Websocket open, session 67956656-b78a-4812-944a-a3c8c6d87fd3, identity 'hrp.dsf.test'
+2025-05-15 11:21:09,301 [jetty-server-53] INFO  dev.dsf.fhir.websocket.ServerEndpoint - Websocket open, session 6a0e05e7-0a43-4768-ab95-a910f582d7d6, identity 'hrp.dsf.test'
+2025-05-15 11:21:09,318 [jetty-server-76] DEBUG dev.dsf.fhir.websocket.ServerEndpoint - Websocket message received, session 6a0e05e7-0a43-4768-ab95-a910f582d7d6: bind 7e05acb0-b75d-4590-b126-ef3887dfb579
+2025-05-15 11:21:09,319 [jetty-server-76] DEBUG dev.dsf.fhir.websocket.ServerEndpoint - Websocket bind message received, session 6a0e05e7-0a43-4768-ab95-a910f582d7d6, subscription: 7e05acb0-b75d-4590-b126-ef3887dfb579
+2025-05-15 11:21:09,319 [jetty-server-38] DEBUG dev.dsf.fhir.websocket.ServerEndpoint - Websocket message received, session 67956656-b78a-4812-944a-a3c8c6d87fd3: bind 0c7fc77f-bb1c-46a1-b66b-bd672558523d
+2025-05-15 11:21:09,319 [jetty-server-38] DEBUG dev.dsf.fhir.websocket.ServerEndpoint - Websocket bind message received, session 67956656-b78a-4812-944a-a3c8c6d87fd3, subscription: 0c7fc77f-bb1c-46a1-b66b-bd672558523d
+2025-05-15 11:21:09,319 [jetty-server-76] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Binding websocket session 6a0e05e7-0a43-4768-ab95-a910f582d7d6 to subscription 7e05acb0-b75d-4590-b126-ef3887dfb579
+2025-05-15 11:21:09,320 [jetty-server-38] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Binding websocket session 67956656-b78a-4812-944a-a3c8c6d87fd3 to subscription 0c7fc77f-bb1c-46a1-b66b-bd672558523d
+2025-05-15 11:22:29,157 [jetty-server-34] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 736903125cf5a9de7283d4d321fc90bb017710028f09ab7b93fd10bca868d533cbbdf518e4a131afaad12fd66406bfd7aeaac88a29cbee51f3a8a8c2a6285ad2, IdPart 16163e5f-0a8c-41a4-b792-9eac2547d65f found
+2025-05-15 11:22:29,164 [jetty-server-34] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:22:29,165 [jetty-server-34] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:22:29,177 [jetty-server-34] INFO  dev.dsf.fhir.authorization.TaskAuthorizationRule - Create of Task authorized for identity 'dic.dsf.test', Task.status requested, process allowed for current identity
+2025-05-15 11:22:29,282 [jetty-server-34] INFO  dsf-audit-logger - Create of resource Task allowed for user 'dic.dsf.test', reason: Local or remote identity, Task.status requested, Task.requester current identity's organization, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile
+2025-05-15 11:22:29,287 [jetty-server-34] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:22:29,289 [jetty-server-34] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:22:29,293 [jetty-server-34] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with ID Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/1 created
+2025-05-15 11:22:29,300 [pool-2-thread-3] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceCreatedEvent for resource of type Task with id 4fa3dc34-837a-41b6-aec3-fd936dfe9a89
+2025-05-15 11:22:29,301 [jetty-server-34] INFO  dsf-audit-logger - Create of resource Task for user 'dic.dsf.test' successful, status: 201 Created
+2025-05-15 11:22:29,302 [pool-2-thread-3] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Calling 1 remote connected to subscription with id 0c7fc77f-bb1c-46a1-b66b-bd672558523d
+2025-05-15 11:22:29,306 [pool-2-thread-3] INFO  dev.dsf.fhir.authorization.TaskAuthorizationRule - Read of Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/1 authorized for identity 'hrp.dsf.test', Task.restriction.recipient reference could be resolved and current identity part of referenced organization
+2025-05-15 11:22:29,306 [pool-2-thread-3] INFO  dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Sending event ResourceCreatedEvent to user hrp.dsf.test, read of Task allowed Task.restriction.recipient resolved and local identity part of referenced organization
+2025-05-15 11:22:29,329 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with thumbprint 22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:22:29,334 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart 4fa3dc34-837a-41b6-aec3-fd936dfe9a89 found
+2025-05-15 11:22:29,338 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.OrganizationDaoJdbc - Organization with identifier hrp.dsf.test, IdPart 84c5c28b-3999-4c2e-866f-c2ea78b07ac8 found
+2025-05-15 11:22:29,340 [jetty-server-72] INFO  dev.dsf.fhir.authorization.TaskAuthorizationRule - Update of Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/1 (requested -> in-progress) authorized for local identity 'hrp.dsf.test', old Task.status requested, new Task.status in-progress, process allowed for current identity
+2025-05-15 11:22:29,445 [jetty-server-72] INFO  dsf-audit-logger - Update of Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/1 allowed for identity 'hrp.dsf.test', reason: Local identity, Task.status in-progress, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile, Task.instantiatesCanonical not modified, Task.requester not modified, Task.restriction not modified, Task.input not modified, Task has no output
+2025-05-15 11:22:29,451 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:22:29,454 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.NamingSystemDaoJdbc - NamingSystem with uniqueId entry (uri/value(http://dsf.dev/sid/organization-identifier)) and check-logical-reference true found
+2025-05-15 11:22:29,457 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Latest version for Task with IdPart 4fa3dc34-837a-41b6-aec3-fd936dfe9a89 is 1
+2025-05-15 11:22:29,459 [jetty-server-72] DEBUG dev.dsf.fhir.dao.jdbc.AbstractResourceDaoJdbc - Task with IdPart 4fa3dc34-837a-41b6-aec3-fd936dfe9a89 updated, new version 2
+2025-05-15 11:22:29,468 [pool-2-thread-3] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - handling event ResourceUpdatedEvent for resource of type Task with id 4fa3dc34-837a-41b6-aec3-fd936dfe9a89
+2025-05-15 11:22:29,469 [pool-2-thread-3] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - No matching subscriptions for event ResourceUpdatedEvent for resource of type Task with id 4fa3dc34-837a-41b6-aec3-fd936dfe9a89
+2025-05-15 11:22:29,470 [jetty-server-72] INFO  dsf-audit-logger - Update of Task/4fa3dc34-837a-41b6-aec3-fd936dfe9a89/_history/1 for identity 'hrp.dsf.test' successful, status: 200 OK
+2025-05-15 11:24:59,357 [Thread-1] INFO  dev.dsf.common.jetty.JettyServer - Stopping jetty server ...
+2025-05-15 11:24:59,362 [Thread-1] INFO  org.eclipse.jetty.server.Server - Stopped Server@5396eeb1{STOPPING}[11.0.25,sto=0]
+2025-05-15 11:24:59,372 [Thread-1] INFO  org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@2c1d57bc{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2025-05-15 11:24:59,368 [jetty-server-38] DEBUG dev.dsf.fhir.websocket.ServerEndpoint - Websocket closed with error, session 6a0e05e7-0a43-4768-ab95-a910f582d7d6
+java.nio.channels.ClosedChannelException: null
+	at org.eclipse.jetty.websocket.core.internal.WebSocketSessionState.onEof(WebSocketSessionState.java:169) ~[websocket-core-common-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.websocket.core.internal.WebSocketCoreSession.onEof(WebSocketCoreSession.java:253) [websocket-core-common-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.websocket.core.internal.WebSocketConnection.onClose(WebSocketConnection.java:221) [websocket-core-common-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.io.SelectorManager.connectionClosed(SelectorManager.java:347) [jetty-io-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.io.ManagedSelector$DestroyEndPoint.run(ManagedSelector.java:1115) [jetty-io-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:969) [jetty-util-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1194) [jetty-util-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1149) [jetty-util-11.0.25.jar:11.0.25]
+	at java.base/java.lang.Thread.run(Thread.java:840) [?:?]
+2025-05-15 11:24:59,377 [jetty-server-38] INFO  dev.dsf.fhir.websocket.ServerEndpoint - Websocket closed with error, session 6a0e05e7-0a43-4768-ab95-a910f582d7d6: java.nio.channels.ClosedChannelException - 
+2025-05-15 11:24:59,368 [jetty-server-82] DEBUG dev.dsf.fhir.websocket.ServerEndpoint - Websocket closed with error, session 67956656-b78a-4812-944a-a3c8c6d87fd3
+java.nio.channels.ClosedChannelException: null
+	at org.eclipse.jetty.websocket.core.internal.WebSocketSessionState.onEof(WebSocketSessionState.java:169) ~[websocket-core-common-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.websocket.core.internal.WebSocketCoreSession.onEof(WebSocketCoreSession.java:253) [websocket-core-common-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.websocket.core.internal.WebSocketConnection.onClose(WebSocketConnection.java:221) [websocket-core-common-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.io.SelectorManager.connectionClosed(SelectorManager.java:347) [jetty-io-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.io.ManagedSelector$DestroyEndPoint.run(ManagedSelector.java:1115) [jetty-io-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:969) [jetty-util-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1194) [jetty-util-11.0.25.jar:11.0.25]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1149) [jetty-util-11.0.25.jar:11.0.25]
+	at java.base/java.lang.Thread.run(Thread.java:840) [?:?]
+2025-05-15 11:24:59,377 [Thread-1] INFO  org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@153d6d74{HTTP/1.1, (http/1.1)}{127.0.0.1:10000}
+2025-05-15 11:24:59,378 [jetty-server-82] INFO  dev.dsf.fhir.websocket.ServerEndpoint - Websocket closed with error, session 67956656-b78a-4812-944a-a3c8c6d87fd3: java.nio.channels.ClosedChannelException - 
+2025-05-15 11:24:59,379 [jetty-server-82] INFO  dev.dsf.fhir.websocket.ServerEndpoint - Websocket closed, session 67956656-b78a-4812-944a-a3c8c6d87fd3: 1006 - Session Closed
+2025-05-15 11:24:59,381 [jetty-server-82] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Removing websocket session 67956656-b78a-4812-944a-a3c8c6d87fd3
+2025-05-15 11:24:59,381 [jetty-server-38] INFO  dev.dsf.fhir.websocket.ServerEndpoint - Websocket closed, session 6a0e05e7-0a43-4768-ab95-a910f582d7d6: 1006 - Session Closed
+2025-05-15 11:24:59,383 [jetty-server-38] DEBUG dev.dsf.fhir.subscription.WebSocketSubscriptionManagerImpl - Removing websocket session 6a0e05e7-0a43-4768-ab95-a910f582d7d6
+2025-05-15 11:24:59,390 [Thread-1] INFO  org.eclipse.jetty.server.handler.ContextHandler.fhir - Closing Spring root WebApplicationContext
+2025-05-15 11:24:59,397 [Thread-1] INFO  org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@58dd584a{/fhir,null,STOPPED}

@@ -1,0 +1,129 @@
+2025-05-15 11:20:34,465 [main] INFO  dsf-audit-logger - Delete of CodeSystem for identity 'initial.data.loader' via bundle at index 0 successful, status: 204 No Content
+2025-05-15 11:20:34,467 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 1 successful, status: 200 OK
+2025-05-15 11:20:34,468 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 2 successful, status: 200 OK
+2025-05-15 11:20:34,470 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 3 successful, status: 200 OK
+2025-05-15 11:20:34,471 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 4 successful, status: 200 OK
+2025-05-15 11:20:34,472 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 5 successful, status: 200 OK
+2025-05-15 11:20:34,473 [main] INFO  dsf-audit-logger - Create of CodeSystem for identity 'initial.data.loader' via bundle at index 6 successful, status: 200 OK
+2025-05-15 11:20:34,475 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 7 successful, status: 200 OK
+2025-05-15 11:20:34,477 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 8 successful, status: 200 OK
+2025-05-15 11:20:34,480 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 9 successful, status: 200 OK
+2025-05-15 11:20:34,481 [main] INFO  dsf-audit-logger - Create of NamingSystem for identity 'initial.data.loader' via bundle at index 10 successful, status: 200 OK
+2025-05-15 11:20:34,482 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 11 successful, status: 200 OK
+2025-05-15 11:20:34,483 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 12 successful, status: 200 OK
+2025-05-15 11:20:34,484 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 13 successful, status: 200 OK
+2025-05-15 11:20:34,485 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 14 successful, status: 200 OK
+2025-05-15 11:20:34,485 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 15 successful, status: 200 OK
+2025-05-15 11:20:34,486 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 16 successful, status: 200 OK
+2025-05-15 11:20:34,487 [main] INFO  dsf-audit-logger - Create of ValueSet for identity 'initial.data.loader' via bundle at index 17 successful, status: 200 OK
+2025-05-15 11:20:34,488 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 18 successful, status: 200 OK
+2025-05-15 11:20:34,489 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 19 successful, status: 200 OK
+2025-05-15 11:20:34,490 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 20 successful, status: 200 OK
+2025-05-15 11:20:34,491 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 21 successful, status: 200 OK
+2025-05-15 11:20:34,492 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 22 successful, status: 200 OK
+2025-05-15 11:20:34,492 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 23 successful, status: 200 OK
+2025-05-15 11:20:34,494 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 24 successful, status: 200 OK
+2025-05-15 11:20:34,495 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 25 successful, status: 200 OK
+2025-05-15 11:20:34,496 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 26 successful, status: 200 OK
+2025-05-15 11:20:34,499 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 27 successful, status: 200 OK
+2025-05-15 11:20:34,500 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 28 successful, status: 200 OK
+2025-05-15 11:20:34,501 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 29 successful, status: 200 OK
+2025-05-15 11:20:34,502 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 30 successful, status: 200 OK
+2025-05-15 11:20:34,503 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 31 successful, status: 200 OK
+2025-05-15 11:20:34,504 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 32 successful, status: 200 OK
+2025-05-15 11:20:34,505 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 33 successful, status: 200 OK
+2025-05-15 11:20:34,506 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 34 successful, status: 200 OK
+2025-05-15 11:20:34,508 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 35 successful, status: 200 OK
+2025-05-15 11:20:34,509 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 36 successful, status: 200 OK
+2025-05-15 11:20:34,510 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 37 successful, status: 200 OK
+2025-05-15 11:20:34,512 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 38 successful, status: 200 OK
+2025-05-15 11:20:34,513 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 39 successful, status: 200 OK
+2025-05-15 11:20:34,513 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 40 successful, status: 200 OK
+2025-05-15 11:20:34,514 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 41 successful, status: 200 OK
+2025-05-15 11:20:34,515 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 42 successful, status: 200 OK
+2025-05-15 11:20:34,516 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 43 successful, status: 200 OK
+2025-05-15 11:20:34,517 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 44 successful, status: 200 OK
+2025-05-15 11:20:34,518 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 45 successful, status: 200 OK
+2025-05-15 11:20:34,518 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 46 successful, status: 200 OK
+2025-05-15 11:20:34,519 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 47 successful, status: 200 OK
+2025-05-15 11:20:34,520 [main] INFO  dsf-audit-logger - Create of StructureDefinition for identity 'initial.data.loader' via bundle at index 48 successful, status: 200 OK
+2025-05-15 11:20:34,521 [main] INFO  dsf-audit-logger - Create of Subscription for identity 'initial.data.loader' via bundle at index 49 successful, status: 200 OK
+2025-05-15 11:20:34,522 [main] INFO  dsf-audit-logger - Create of Subscription for identity 'initial.data.loader' via bundle at index 50 successful, status: 200 OK
+2025-05-15 11:20:36,363 [main] INFO  dsf-audit-logger - Update of Organization/7a5cef7b-9718-4115-b15c-c0d91b52422d/_history/3 allowed for identity 'initial.data.loader' via bundle at index 0, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,408 [main] INFO  dsf-audit-logger - Update of Organization/1ee20e02-b79b-43cf-b2ab-0916c1fea2ce/_history/3 allowed for identity 'initial.data.loader' via bundle at index 1, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,429 [main] INFO  dsf-audit-logger - Update of Organization/b89da27a-09c5-4ece-a646-f5d6abeece09/_history/3 allowed for identity 'initial.data.loader' via bundle at index 2, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,511 [main] INFO  dsf-audit-logger - Update of Endpoint/9e245afa-6140-49b1-b168-1fa647fec24c/_history/3 allowed for identity 'initial.data.loader' via bundle at index 3, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,539 [main] INFO  dsf-audit-logger - Update of Endpoint/f954b1d9-dc3d-4ef4-9c9d-00ddb5185280/_history/3 allowed for identity 'initial.data.loader' via bundle at index 4, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,566 [main] INFO  dsf-audit-logger - Update of Endpoint/84aa1ee7-8839-468b-be21-8571d5a7488f/_history/3 allowed for identity 'initial.data.loader' via bundle at index 5, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,590 [main] INFO  dsf-audit-logger - Update of Organization/7e7719f9-8cd4-4a6c-9ed2-4eaa4569d656/_history/3 allowed for identity 'initial.data.loader' via bundle at index 6, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,630 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation/43482d78-f4c4-4346-87f3-a8cb4809b8b3/_history/3 allowed for identity 'initial.data.loader' via bundle at index 7, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,653 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation/f96ba127-2d56-439b-aede-2692a60f427e/_history/3 allowed for identity 'initial.data.loader' via bundle at index 8, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,677 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation/83716ae2-284b-4939-9db2-41206da046b1/_history/3 allowed for identity 'initial.data.loader' via bundle at index 9, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:36,700 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 0 successful, status: 200 OK
+2025-05-15 11:20:36,701 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 1 successful, status: 200 OK
+2025-05-15 11:20:36,701 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 2 successful, status: 200 OK
+2025-05-15 11:20:36,702 [main] INFO  dsf-audit-logger - Update of Endpoint for identity 'initial.data.loader' via bundle at index 3 successful, status: 200 OK
+2025-05-15 11:20:36,702 [main] INFO  dsf-audit-logger - Update of Endpoint for identity 'initial.data.loader' via bundle at index 4 successful, status: 200 OK
+2025-05-15 11:20:36,703 [main] INFO  dsf-audit-logger - Update of Endpoint for identity 'initial.data.loader' via bundle at index 5 successful, status: 200 OK
+2025-05-15 11:20:36,704 [main] INFO  dsf-audit-logger - Update of Organization for identity 'initial.data.loader' via bundle at index 6 successful, status: 200 OK
+2025-05-15 11:20:36,704 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation for identity 'initial.data.loader' via bundle at index 7 successful, status: 200 OK
+2025-05-15 11:20:36,705 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation for identity 'initial.data.loader' via bundle at index 8 successful, status: 200 OK
+2025-05-15 11:20:36,705 [main] INFO  dsf-audit-logger - Update of OrganizationAffiliation for identity 'initial.data.loader' via bundle at index 9 successful, status: 200 OK
+2025-05-15 11:20:50,623 [jetty-server-35] INFO  dsf-audit-logger - Search of Endpoint allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:20:50,641 [jetty-server-35] INFO  dsf-audit-logger - Search of Endpoint for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:20:52,594 [jetty-server-36] INFO  dsf-audit-logger - Handling of transaction or batch bundle allowed for identity 'dic.dsf.test': Allowed for all, entries individualy evaluated
+2025-05-15 11:20:52,994 [jetty-server-36] INFO  dsf-audit-logger - Update of CodeSystem/83719ab3-e8eb-4554-b573-cf073ff86f3b/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 0, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:53,018 [jetty-server-36] INFO  dsf-audit-logger - Update of ValueSet/8c1d1da3-024b-4f08-aad4-df8ea22dc10d/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 1, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:53,353 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition/7f641ae4-f620-4a25-8c9a-12fb9058acf1/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 2, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:53,445 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition/78221a88-14d4-4a72-96e9-c355798fe315/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 3, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:53,514 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition/fb1a1586-6c36-480a-9c05-df4d1747a4a1/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 4, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:55,640 [jetty-server-36] INFO  dsf-audit-logger - Update of ActivityDefinition/e75f435c-5e0f-4eed-a0ff-ca955631e81a/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 5, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:59,761 [jetty-server-36] INFO  dsf-audit-logger - Update of ActivityDefinition/c659a53c-5163-4374-ad1e-185414a16720/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 6, reason: Identity is local identity and has role UPDATE
+2025-05-15 11:20:59,841 [jetty-server-36] INFO  dsf-audit-logger - Update of Task/bc6d3cf2-814b-45a5-a1b5-b01256217a14/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 7, reason: Local identity, old Task.status draft, new Task.status draft
+2025-05-15 11:20:59,912 [jetty-server-36] INFO  dsf-audit-logger - Update of Task/bc3e5ed5-bfb3-49d5-9c09-b299a9bdba5a/_history/1 allowed for identity 'dic.dsf.test' via bundle at index 8, reason: Local identity, old Task.status draft, new Task.status draft
+2025-05-15 11:20:59,955 [jetty-server-36] INFO  dsf-audit-logger - Update of CodeSystem for identity 'dic.dsf.test' via bundle at index 0 successful, status: 200 OK
+2025-05-15 11:20:59,956 [jetty-server-36] INFO  dsf-audit-logger - Update of ValueSet for identity 'dic.dsf.test' via bundle at index 1 successful, status: 200 OK
+2025-05-15 11:20:59,957 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition for identity 'dic.dsf.test' via bundle at index 2 successful, status: 200 OK
+2025-05-15 11:20:59,959 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition for identity 'dic.dsf.test' via bundle at index 3 successful, status: 200 OK
+2025-05-15 11:20:59,961 [jetty-server-36] INFO  dsf-audit-logger - Update of StructureDefinition for identity 'dic.dsf.test' via bundle at index 4 successful, status: 200 OK
+2025-05-15 11:20:59,961 [jetty-server-36] INFO  dsf-audit-logger - Update of ActivityDefinition for identity 'dic.dsf.test' via bundle at index 5 successful, status: 200 OK
+2025-05-15 11:21:00,098 [jetty-server-37] INFO  dsf-audit-logger - Search of Bundle allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:00,112 [jetty-server-37] INFO  dsf-audit-logger - Search of Bundle for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:00,185 [jetty-server-38] INFO  dsf-audit-logger - Search of Subscription allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:00,192 [jetty-server-38] INFO  dsf-audit-logger - Search of Subscription for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:00,195 [jetty-server-39] INFO  dsf-audit-logger - Search of Subscription allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:00,201 [jetty-server-39] INFO  dsf-audit-logger - Search of Subscription for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:00,234 [jetty-server-40] INFO  dsf-audit-logger - Search of Task allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:00,246 [jetty-server-40] INFO  dsf-audit-logger - Search of Task for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:21:00,260 [jetty-server-33] INFO  dsf-audit-logger - Search of QuestionnaireResponse allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:21:00,264 [jetty-server-33] INFO  dsf-audit-logger - Search of QuestionnaireResponse for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:22:15,502 [jetty-server-34] INFO  dsf-audit-logger - Update of Task/99b76a99-7d6e-4861-992e-2dbd99346da7/_history/2 allowed for identity 'dic.dsf.test', reason: Local identity, Task.status completed, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile, Task.instantiatesCanonical not modified, Task.requester not modified, Task.restriction not modified, Task.input not modified
+2025-05-15 11:22:15,534 [jetty-server-34] INFO  dsf-audit-logger - Update of Task/99b76a99-7d6e-4861-992e-2dbd99346da7/_history/2 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:27,423 [jetty-server-73] INFO  dsf-audit-logger - Read of Task/bc3e5ed5-bfb3-49d5-9c09-b299a9bdba5a/_history/2 allowed for identity 'dic.dsf.test', reason: Task.restriction.recipient resolved and local identity part of referenced organization
+2025-05-15 11:22:27,425 [jetty-server-73] INFO  dsf-audit-logger - Read of Task/bc3e5ed5-bfb3-49d5-9c09-b299a9bdba5a/_history/2 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:27,734 [jetty-server-59] INFO  dsf-audit-logger - Search of StructureDefinition allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:22:27,740 [jetty-server-59] INFO  dsf-audit-logger - Search of StructureDefinition for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:22:28,704 [jetty-server-35] INFO  dsf-audit-logger - Create of resource Task allowed for user 'dic.dsf.test', reason: Local or remote identity, Task.status requested, Task.requester current identity's organization, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile
+2025-05-15 11:22:28,717 [jetty-server-35] INFO  dsf-audit-logger - Create of resource Task for user 'dic.dsf.test' successful, status: 201 Created
+2025-05-15 11:22:28,761 [jetty-server-64] INFO  dsf-audit-logger - Update of Task/34ca7986-6d8c-4e25-a323-b2be59dc2dd5/_history/1 allowed for identity 'dic.dsf.test', reason: Local identity, Task.status in-progress, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile, Task.instantiatesCanonical not modified, Task.requester not modified, Task.restriction not modified, Task.input not modified (business-key added), Task has no output
+2025-05-15 11:22:28,772 [jetty-server-64] INFO  dsf-audit-logger - Update of Task/34ca7986-6d8c-4e25-a323-b2be59dc2dd5/_history/1 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:28,819 [jetty-server-75] INFO  dsf-audit-logger - Search of OrganizationAffiliation allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:22:28,829 [jetty-server-75] INFO  dsf-audit-logger - Search of OrganizationAffiliation for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:22:28,851 [jetty-server-57] INFO  dsf-audit-logger - Read of Endpoint/9e245afa-6140-49b1-b168-1fa647fec24c/_history/4 allowed for identity 'dic.dsf.test', reason: Identity has role READ, matching access tag {ALL}
+2025-05-15 11:22:28,851 [jetty-server-57] INFO  dsf-audit-logger - Read of Endpoint/9e245afa-6140-49b1-b168-1fa647fec24c/_history/4 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:28,865 [jetty-server-63] INFO  dsf-audit-logger - Read of Endpoint/84aa1ee7-8839-468b-be21-8571d5a7488f/_history/4 allowed for identity 'dic.dsf.test', reason: Identity has role READ, matching access tag {ALL}
+2025-05-15 11:22:28,866 [jetty-server-63] INFO  dsf-audit-logger - Read of Endpoint/84aa1ee7-8839-468b-be21-8571d5a7488f/_history/4 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:28,879 [jetty-server-79] INFO  dsf-audit-logger - Read of Endpoint/f954b1d9-dc3d-4ef4-9c9d-00ddb5185280/_history/4 allowed for identity 'dic.dsf.test', reason: Identity has role READ, matching access tag {ALL}
+2025-05-15 11:22:28,880 [jetty-server-79] INFO  dsf-audit-logger - Read of Endpoint/f954b1d9-dc3d-4ef4-9c9d-00ddb5185280/_history/4 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:28,906 [jetty-server-66] INFO  dsf-audit-logger - Search of Endpoint allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:22:28,910 [jetty-server-66] INFO  dsf-audit-logger - Search of Endpoint for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:22:29,100 [jetty-server-36] INFO  dsf-audit-logger - Search of Endpoint allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:22:29,105 [jetty-server-36] INFO  dsf-audit-logger - Search of Endpoint for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:22:29,343 [jetty-server-37] INFO  dsf-audit-logger - Search of Endpoint allowed for identity 'dic.dsf.test', reason: Identity has role SEARCH
+2025-05-15 11:22:29,347 [jetty-server-37] INFO  dsf-audit-logger - Search of Endpoint for identity 'dic.dsf.test successful, status: 200 OK'
+2025-05-15 11:22:29,412 [jetty-server-73] INFO  dsf-audit-logger - Create of resource Task allowed for user 'dic.dsf.test', reason: Local or remote identity, Task.status requested, Task.requester current identity's organization, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile
+2025-05-15 11:22:29,424 [jetty-server-73] INFO  dsf-audit-logger - Create of resource Task for user 'dic.dsf.test' successful, status: 201 Created
+2025-05-15 11:22:29,471 [jetty-server-59] INFO  dsf-audit-logger - Update of Task/ee49c5a4-c41e-4ee8-973b-d796d5367b41/_history/1 allowed for identity 'dic.dsf.test', reason: Local identity, Task.status in-progress, Task.restriction.recipient local organization, process with instantiatesCanonical and message-name allowed for current identity, Task defines needed profile, Task.instantiatesCanonical not modified, Task.requester not modified, Task.restriction not modified, Task.input not modified, Task has no output
+2025-05-15 11:22:29,486 [jetty-server-59] INFO  dsf-audit-logger - Update of Task/ee49c5a4-c41e-4ee8-973b-d796d5367b41/_history/1 for identity 'dic.dsf.test' successful, status: 200 OK
+2025-05-15 11:22:29,745 [jetty-server-35] INFO  dsf-audit-logger - Read of Task/34ca7986-6d8c-4e25-a323-b2be59dc2dd5/_history/2 allowed for identity 'dic.dsf.test', reason: Task.restriction.recipient resolved and local identity part of referenced organization
+2025-05-15 11:22:29,746 [jetty-server-35] INFO  dsf-audit-logger - Read of Task/34ca7986-6d8c-4e25-a323-b2be59dc2dd5/_history/2 for identity 'dic.dsf.test' successful, status: 200 OK

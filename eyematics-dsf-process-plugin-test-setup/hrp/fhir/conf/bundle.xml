@@ -1,0 +1,354 @@
+<Bundle xmlns="http://hl7.org/fhir">
+   <type value="transaction"></type>
+   <entry>
+      <fullUrl value="urn:uuid:636a8f10-b840-4788-bec1-d95a61293878"></fullUrl>
+      <resource>
+         <Organization xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <extension url="http://dsf.dev/fhir/StructureDefinition/extension-certificate-thumbprint">
+               <valueString value="83ebfee35e67745076ade424151909e7609fdfd8807764a09062b5c80f9f88ede2f62c991984c5af69a4e502b0a4d2968e64a34194067bf5fe930e06355897ec"></valueString>
+            </extension>
+            <identifier>
+               <system value="http://dsf.dev/sid/organization-identifier"></system>
+               <value value="cos.dsf.test"></value>
+            </identifier>
+            <active value="true"></active>
+            <name value="Test COS"></name>
+            <endpoint>
+               <reference value="urn:uuid:b144666d-9cf7-4ae3-98e0-63898659f682"></reference>
+               <type value="Endpoint"></type>
+            </endpoint>
+         </Organization>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Organization?identifier=http://dsf.dev/sid/organization-identifier|cos.dsf.test"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:fa3e01c6-f5a8-415b-9f71-d0f011ac73d5"></fullUrl>
+      <resource>
+         <Organization xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <extension url="http://dsf.dev/fhir/StructureDefinition/extension-certificate-thumbprint">
+               <valueString value="736903125cf5a9de7283d4d321fc90bb017710028f09ab7b93fd10bca868d533cbbdf518e4a131afaad12fd66406bfd7aeaac88a29cbee51f3a8a8c2a6285ad2"></valueString>
+            </extension>
+            <identifier>
+               <system value="http://dsf.dev/sid/organization-identifier"></system>
+               <value value="dic.dsf.test"></value>
+            </identifier>
+            <active value="true"></active>
+            <name value="Test DIC"></name>
+            <endpoint>
+               <reference value="urn:uuid:57cacf98-04ba-453e-ad4a-891e21b0c975"></reference>
+               <type value="Endpoint"></type>
+            </endpoint>
+         </Organization>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Organization?identifier=http://dsf.dev/sid/organization-identifier|dic.dsf.test"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:f5c36ed1-c234-4361-8ad2-ba1a80f6e67e"></fullUrl>
+      <resource>
+         <Organization xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <extension url="http://dsf.dev/fhir/StructureDefinition/extension-certificate-thumbprint">
+               <valueString value="22e640cb037ea3ae67d882c50e18cf0d00e213be617da3d226fc1ec270ddce4cb467132c9952152cdd9a06b9ade8775b1d14d5991dfa4cc2b803f7a422aa52f2"></valueString>
+            </extension>
+            <identifier>
+               <system value="http://dsf.dev/sid/organization-identifier"></system>
+               <value value="hrp.dsf.test"></value>
+            </identifier>
+            <active value="true"></active>
+            <name value="Test HRP"></name>
+            <endpoint>
+               <reference value="urn:uuid:eac79c81-e085-4a85-9722-e734a487417e"></reference>
+               <type value="Endpoint"></type>
+            </endpoint>
+         </Organization>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Organization?identifier=http://dsf.dev/sid/organization-identifier|hrp.dsf.test"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:b144666d-9cf7-4ae3-98e0-63898659f682"></fullUrl>
+      <resource>
+         <Endpoint xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/endpoint"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <identifier>
+               <system value="http://dsf.dev/sid/endpoint-identifier"></system>
+               <value value="cos.dsf.test_Endpoint"></value>
+            </identifier>
+            <status value="active"></status>
+            <connectionType>
+               <system value="http://terminology.hl7.org/CodeSystem/endpoint-connection-type"></system>
+               <code value="hl7-fhir-rest"></code>
+            </connectionType>
+            <name value="Test COS Endpoint"></name>
+            <managingOrganization>
+               <reference value="urn:uuid:636a8f10-b840-4788-bec1-d95a61293878"></reference>
+               <type value="Organization"></type>
+            </managingOrganization>
+            <payloadType>
+               <coding>
+                  <system value="http://hl7.org/fhir/resource-types"></system>
+                  <code value="Task"></code>
+               </coding>
+            </payloadType>
+            <payloadMimeType value="application/fhir+json"></payloadMimeType>
+            <payloadMimeType value="application/fhir+xml"></payloadMimeType>
+            <address value="https://cos/fhir"></address>
+         </Endpoint>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Endpoint?identifier=http://dsf.dev/sid/endpoint-identifier|cos.dsf.test_Endpoint"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:57cacf98-04ba-453e-ad4a-891e21b0c975"></fullUrl>
+      <resource>
+         <Endpoint xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/endpoint"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <identifier>
+               <system value="http://dsf.dev/sid/endpoint-identifier"></system>
+               <value value="dic.dsf.test_Endpoint"></value>
+            </identifier>
+            <status value="active"></status>
+            <connectionType>
+               <system value="http://terminology.hl7.org/CodeSystem/endpoint-connection-type"></system>
+               <code value="hl7-fhir-rest"></code>
+            </connectionType>
+            <name value="Test DIC Endpoint"></name>
+            <managingOrganization>
+               <reference value="urn:uuid:fa3e01c6-f5a8-415b-9f71-d0f011ac73d5"></reference>
+               <type value="Organization"></type>
+            </managingOrganization>
+            <payloadType>
+               <coding>
+                  <system value="http://hl7.org/fhir/resource-types"></system>
+                  <code value="Task"></code>
+               </coding>
+            </payloadType>
+            <payloadMimeType value="application/fhir+json"></payloadMimeType>
+            <payloadMimeType value="application/fhir+xml"></payloadMimeType>
+            <address value="https://dic/fhir"></address>
+         </Endpoint>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Endpoint?identifier=http://dsf.dev/sid/endpoint-identifier|dic.dsf.test_Endpoint"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:eac79c81-e085-4a85-9722-e734a487417e"></fullUrl>
+      <resource>
+         <Endpoint xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/endpoint"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <identifier>
+               <system value="http://dsf.dev/sid/endpoint-identifier"></system>
+               <value value="hrp.dsf.test_Endpoint"></value>
+            </identifier>
+            <status value="active"></status>
+            <connectionType>
+               <system value="http://terminology.hl7.org/CodeSystem/endpoint-connection-type"></system>
+               <code value="hl7-fhir-rest"></code>
+            </connectionType>
+            <name value="Test HRP Endpoint"></name>
+            <managingOrganization>
+               <reference value="urn:uuid:f5c36ed1-c234-4361-8ad2-ba1a80f6e67e"></reference>
+               <type value="Organization"></type>
+            </managingOrganization>
+            <payloadType>
+               <coding>
+                  <system value="http://hl7.org/fhir/resource-types"></system>
+                  <code value="Task"></code>
+               </coding>
+            </payloadType>
+            <payloadMimeType value="application/fhir+json"></payloadMimeType>
+            <payloadMimeType value="application/fhir+xml"></payloadMimeType>
+            <address value="https://hrp/fhir"></address>
+         </Endpoint>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Endpoint?identifier=http://dsf.dev/sid/endpoint-identifier|hrp.dsf.test_Endpoint"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:00c91f02-2e2f-44cb-b17a-68e10c065735"></fullUrl>
+      <resource>
+         <Organization xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization-parent"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <identifier>
+               <system value="http://dsf.dev/sid/organization-identifier"></system>
+               <value value="medizininformatik-initiative.de"></value>
+            </identifier>
+            <active value="true"></active>
+            <name value="Medizininformatik-Initiative"></name>
+         </Organization>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="Organization?identifier=http://dsf.dev/sid/organization-identifier|medizininformatik-initiative.de"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:d1e64572-04b3-47c8-b302-c1776b5e44f5"></fullUrl>
+      <resource>
+         <OrganizationAffiliation xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization-affiliation"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <active value="true"></active>
+            <organization>
+               <reference value="urn:uuid:00c91f02-2e2f-44cb-b17a-68e10c065735"></reference>
+               <type value="Organization"></type>
+            </organization>
+            <participatingOrganization>
+               <reference value="urn:uuid:636a8f10-b840-4788-bec1-d95a61293878"></reference>
+               <type value="Organization"></type>
+            </participatingOrganization>
+            <code>
+               <coding>
+                  <system value="http://dsf.dev/fhir/CodeSystem/organization-role"></system>
+                  <code value="DIC"></code>
+               </coding>
+            </code>
+            <endpoint>
+               <reference value="urn:uuid:b144666d-9cf7-4ae3-98e0-63898659f682"></reference>
+               <type value="Endpoint"></type>
+            </endpoint>
+         </OrganizationAffiliation>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="OrganizationAffiliation?primary-organization:identifier=http://dsf.dev/sid/organization-identifier|medizininformatik-initiative.de&amp;participating-organization:identifier=http://dsf.dev/sid/organization-identifier|cos.dsf.test"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:d1e64572-04b3-47c8-b302-c1776b5e43e4"></fullUrl>
+      <resource>
+         <OrganizationAffiliation xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization-affiliation"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <active value="true"></active>
+            <organization>
+               <reference value="urn:uuid:00c91f02-2e2f-44cb-b17a-68e10c065735"></reference>
+               <type value="Organization"></type>
+            </organization>
+            <participatingOrganization>
+               <reference value="urn:uuid:fa3e01c6-f5a8-415b-9f71-d0f011ac73d5"></reference>
+               <type value="Organization"></type>
+            </participatingOrganization>
+            <code>
+               <coding>
+                  <system value="http://dsf.dev/fhir/CodeSystem/organization-role"></system>
+                  <code value="DIC"></code>
+               </coding>
+            </code>
+            <endpoint>
+               <reference value="urn:uuid:57cacf98-04ba-453e-ad4a-891e21b0c975"></reference>
+               <type value="Endpoint"></type>
+            </endpoint>
+         </OrganizationAffiliation>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="OrganizationAffiliation?primary-organization:identifier=http://dsf.dev/sid/organization-identifier|medizininformatik-initiative.de&amp;participating-organization:identifier=http://dsf.dev/sid/organization-identifier|dic.dsf.test"></url>
+      </request>
+   </entry>
+   <entry>
+      <fullUrl value="urn:uuid:d1e64572-04b3-47c8-b302-c1776b5e42d3"></fullUrl>
+      <resource>
+         <OrganizationAffiliation xmlns="http://hl7.org/fhir">
+            <meta>
+               <profile value="http://dsf.dev/fhir/StructureDefinition/organization-affiliation"></profile>
+               <tag>
+                  <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"></system>
+                  <code value="ALL"></code>
+               </tag>
+            </meta>
+            <active value="true"></active>
+            <organization>
+               <reference value="urn:uuid:00c91f02-2e2f-44cb-b17a-68e10c065735"></reference>
+               <type value="Organization"></type>
+            </organization>
+            <participatingOrganization>
+               <reference value="urn:uuid:f5c36ed1-c234-4361-8ad2-ba1a80f6e67e"></reference>
+               <type value="Organization"></type>
+            </participatingOrganization>
+            <code>
+               <coding>
+                  <system value="http://dsf.dev/fhir/CodeSystem/organization-role"></system>
+                  <code value="DIC"></code>
+               </coding>
+            </code>
+            <endpoint>
+               <reference value="urn:uuid:eac79c81-e085-4a85-9722-e734a487417e"></reference>
+               <type value="Endpoint"></type>
+            </endpoint>
+         </OrganizationAffiliation>
+      </resource>
+      <request>
+         <method value="PUT"></method>
+         <url value="OrganizationAffiliation?primary-organization:identifier=http://dsf.dev/sid/organization-identifier|medizininformatik-initiative.de&amp;participating-organization:identifier=http://dsf.dev/sid/organization-identifier|hrp.dsf.test"></url>
+      </request>
+   </entry>
+</Bundle>

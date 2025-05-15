@@ -1,0 +1,34 @@
+**/.classpath
+**/.project
+**/.idea/
+**/.settings/
+**/target/
+**/*.iml
+
+**/*.ps1
+mii-process-eyematics-v1-test-data-generator/
+mii-process-eyematics-v1-test-setup/
+
+# mii-process-eyematics-v1-test-data-generator/cert/**/*.pem
+# mii-process-eyematics-v1-test-data-generator/cert/**/*.csr
+# mii-process-eyematics-v1-test-data-generator/cert/**/*.p12
+# mii-process-eyematics-v1-test-data-generator/cert/thumbprints.txt
+
+# mii-process-eyematics-v1-test-data-generator/bundle/*.xml
+
+# mii-process-eyematics-v1-test-setup/**/bpe/log/*.log
+# mii-process-eyematics-v1-test-setup/**/bpe/log/*.log.gz
+# mii-process-data-exchange-test-setup/**/bpe/last_event/time.file
+# mii-process-eyematics-v1-test-setup/**/bpe/plugin/*.jar
+# mii-process-eyematics-v1-test-setup/**/bpe/process/*.jar
+
+# mii-process-data-exchange-test-setup/keycloak/data
+# mii-process-data-exchange-test-setup/secrets/keycloak_trust_store.jks
+
+# mii-process-data-exchange-test-setup/**/fhir/conf/bundle.xml
+# mii-process-eyematics-v1-test-setup/**/fhir/log/*.log
+# mii-process-eyematics-v1-test-setup/**/fhir/log/*.log.gz
+
+# mii-process-eyematics-v1-test-setup/secrets/*.pem
+# mii-process-data-exchange-test-setup/.env
+# mii-process-data-exchange-test-setup/docker-compose.override.yml
