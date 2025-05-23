@@ -16,11 +16,11 @@ import java.util.Optional;
 import static org.eyematics.process.constant.EyeMaticsConstants.CODE_SYSTEM_RECEIVE_PROCESS;
 import static org.eyematics.process.constant.EyeMaticsConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE;
 
-public class DownloadDataReceiveTask extends AbstractServiceDelegate {
+public class DownloadRequestedDataTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(DownloadDataReceiveTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(DownloadRequestedDataTask.class);
 
-    public DownloadDataReceiveTask(ProcessPluginApi api) {
+    public DownloadRequestedDataTask(ProcessPluginApi api) {
         super(api);
     }
 
@@ -55,7 +55,7 @@ public class DownloadDataReceiveTask extends AbstractServiceDelegate {
             referenceBinary = client.read(Binary.class, dataReference.getIdPart(), dataReference.getVersionIdPart());
         else
             referenceBinary = client.read(Binary.class, dataReference.getIdPart());
-        logger.info("Data downloaded. -> {}", referenceBinary.toString());
+        logger.info("Data downloaded... -> {}", referenceBinary.toString().substring(0, 5));
 
         variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, referenceBinary.getData());
 

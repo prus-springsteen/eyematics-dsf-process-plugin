@@ -8,17 +8,15 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import static org.eyematics.process.constant.EyeMaticsConstants.*;
 
-public class SendProvideDataMessageTask extends AbstractTaskMessageSend {
+public class ProvideDataMessageTask extends AbstractTaskMessageSend {
 
-    private static final Logger logger = LoggerFactory.getLogger(SendProvideDataMessageTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProvideDataMessageTask.class);
 
-    public SendProvideDataMessageTask(ProcessPluginApi api) {
+    public ProvideDataMessageTask(ProcessPluginApi api) {
         super(api);
     }
 

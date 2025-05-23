@@ -25,7 +25,7 @@ public class StoreProvideDataTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("StoreProvideDataTask -> something to store");
+        logger.info("-> something to store");
         MediaType mediaType = MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM);
         byte[] content = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
         String targetOrganizationIdentifier = variables.getTarget().getOrganizationIdentifierValue();
@@ -42,6 +42,7 @@ public class StoreProvideDataTask extends AbstractServiceDelegate {
             logger.info("Target-Organization-Value -> {}", targetOrganizationIdentifier);
             logger.info("Local-Organization-Value -> {}", localOrganizationIdentifier);
             logger.info("IdType -> {}", idTypeVar);
+            logger.info("Security Context -> {}", this.getSecurityContext(targetOrganizationIdentifier));
             variables.setString(BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE, idTypeVar);
         }
         catch (Exception exception) {
@@ -49,9 +50,9 @@ public class StoreProvideDataTask extends AbstractServiceDelegate {
         }
     }
 
-    private String getSecurityContext(String dmsIdentifier) {
-        return api.getOrganizationProvider().getOrganization(dmsIdentifier)
-                .orElseThrow(() -> new RuntimeException("Could not find organization with id '" + dmsIdentifier + "'"))
+    private String getSecurityContext(String dicIdentifier) {
+        return api.getOrganizationProvider().getOrganization(dicIdentifier)
+                .orElseThrow(() -> new RuntimeException("Could not find organization with id '" + dicIdentifier + "'"))
                 .getIdElement().toVersionless().getValue();
     }
 

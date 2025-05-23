@@ -47,12 +47,12 @@ import java.util.Optional;
  *  openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in hrp_keypair.pem -out hrp_private_key.pem
  */
 
-public class EncryptProvideDataTask extends AbstractServiceDelegate {
+public class EncryptDataBundleTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(EncryptProvideDataTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(EncryptDataBundleTask.class);
     private final KeyProvider keyProvider;
 
-    public EncryptProvideDataTask(ProcessPluginApi api, KeyProvider keyProvider) {
+    public EncryptDataBundleTask(ProcessPluginApi api, KeyProvider keyProvider) {
         super(api);
         this.keyProvider = keyProvider;
     }
@@ -72,7 +72,7 @@ public class EncryptProvideDataTask extends AbstractServiceDelegate {
         String recOrg = variables.getStartTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
         logger.info("EncryptProvideDataTask: Recipient-Organization -> {}", recOrg);
         PublicKey pubKey = this.readPublicKey(reqOrg);
-        logger.info("-> {}", pubKey);
+        //logger.info("-> {}", pubKey);
         logger.info("-> something to encrypt");
         Bundle b = variables.getResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
         byte[] bundleEncrypted = this.encrypt(pubKey, b, recOrg, reqOrg);

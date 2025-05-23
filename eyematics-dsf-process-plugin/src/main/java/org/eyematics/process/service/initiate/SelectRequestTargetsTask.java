@@ -1,3 +1,7 @@
+/**
+ * @author Mathias Rühle (https://github.com/EmteZogaf)
+ * @see    https://github.com/medizininformatik-initiative/mii-process-feasibility/blob/develop/mii-process-feasibility/src/main/java/de/medizininformatik_initiative/process/feasibility/service/SelectRequestTargets.java
+ */
 package org.eyematics.process.service.initiate;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -21,19 +25,12 @@ import java.util.UUID;
 import static org.eyematics.process.constant.EyeMaticsConstants.*;
 import static dev.dsf.common.auth.conf.Identity.ORGANIZATION_IDENTIFIER_SYSTEM;
 
-public class SelectTargetsTask extends AbstractServiceDelegate {
+public class SelectRequestTargetsTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(SelectTargetsTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(SelectRequestTargetsTask.class);
 
-    public SelectTargetsTask(ProcessPluginApi api) {
+    public SelectRequestTargetsTask(ProcessPluginApi api) {
         super(api);
-        System.out.println("Logger-Name: " + logger.getName());
-        System.out.println("Logger-Level: " + logger.atInfo());
-        System.out.println("Logger-Debug: " + logger.isDebugEnabled());
-        System.out.println("Logger-Info: " + logger.isInfoEnabled());
-        System.out.println("Logger-Error: " + logger.isErrorEnabled());
-        System.out.println("Logger-Trace: " + logger.isTraceEnabled());
-        System.out.println("Logger-Warn: " + logger.isWarnEnabled());
     }
 
     @Override

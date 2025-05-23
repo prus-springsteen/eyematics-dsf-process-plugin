@@ -3,6 +3,7 @@ package org.eyematics.process.service.provide;
 import java.io.*;
 import java.util.Objects;
 import ca.uhn.fhir.context.FhirContext;
+import dev.dsf.fhir.client.BasicFhirWebserviceClient;
 import jakarta.ws.rs.core.MediaType;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -14,13 +15,13 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.utils.fhir.client.FhirClient;
 import org.eyematics.process.utils.fhir.client.FhirClientFactory;
 import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.IdType;
+import org.hl7.fhir.r4.model.StructureDefinition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.hl7.fhir.r4.model.IdType;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 
 // https://github.com/medizininformatik-initiative/dsf-plugin-numdashboard/blob/main/src/main/java/de/medizininformatik_initiative/process/report/service/CreateJson.java
@@ -28,12 +29,12 @@ import java.util.concurrent.TimeUnit;
 
 // Download with Pause and Resume...
 // https://www.baeldung.com/spring-resttemplate-download-large-file
-public class ReadDataProvideTask extends AbstractServiceDelegate {
+public class ReadProvideDataTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(ReadDataProvideTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReadProvideDataTask.class);
     private final FhirClientFactory fhirClientFactory;
 
-    public ReadDataProvideTask(ProcessPluginApi api, FhirClientFactory fhirClientFactory) {
+    public ReadProvideDataTask(ProcessPluginApi api, FhirClientFactory fhirClientFactory) {
         super(api);
         this.fhirClientFactory = fhirClientFactory;
     }
@@ -43,6 +44,7 @@ public class ReadDataProvideTask extends AbstractServiceDelegate {
         super.afterPropertiesSet();
         Objects.requireNonNull(fhirClientFactory, "fhirClientFactory");
     }
+
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
@@ -76,10 +78,12 @@ public class ReadDataProvideTask extends AbstractServiceDelegate {
 
         /*
          // Klappt nicht wegen ???...
-        TimeUnit.SECONDS.sleep((int)(Math.random() * ((20 - 5) + 1)));
+        // https://github.com/medizininformatik-initiative/mii-processes-common/tree/develop/src/main/java/de/medizininformatik_initiative/processes/common/fhir/client
+        // https://github.com/medizininformatik-initiative/mii-process-data-transfer/blob/issues/36_multiple_attachments/src/main/java/de/medizininformatik_initiative/process/data_transfer/service/EncryptAndStoreData.java#L352
+        //TimeUnit.SECONDS.sleep((int)(Math.random() * ((20 - 5) + 1)));
         FhirClient fhirClient = fhirClientFactory.getFhirClient();
-        IdType idType = new IdType(fhirClientFactory.getFhirClient().getFhirBaseUrl(), null, "StructureDefinition", "");
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(fhirClient.readBinary(idType).getContent());
+        IdType idType = new IdType("https://blaze-dev.ukmuenster.de/fhir", "Bundle", "StructureDefinition", "");
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(fhirClient.re(idType));
         try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
             FhirContext fhirContext = FhirContext.forR4();
             Bundle bundle = new Bundle();// fhirContext.newJsonParser().parseResource(Bundle.class, in);
@@ -91,6 +95,8 @@ public class ReadDataProvideTask extends AbstractServiceDelegate {
 
         }
         */
+
+
 
         /*
         // Klappt nicht wegen SSL...
@@ -106,9 +112,7 @@ public class ReadDataProvideTask extends AbstractServiceDelegate {
         }  finally {
 
         }
-
-         */
-
+        */
 
 
 
