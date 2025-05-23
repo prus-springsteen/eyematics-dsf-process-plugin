@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.eyematics.process.constant.EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE;
-
 public class StoreProvideDataTask extends AbstractServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(StoreProvideDataTask.class);
@@ -43,7 +41,7 @@ public class StoreProvideDataTask extends AbstractServiceDelegate {
             logger.info("Local-Organization-Value -> {}", localOrganizationIdentifier);
             logger.info("IdType -> {}", idTypeVar);
             logger.info("Security Context -> {}", this.getSecurityContext(targetOrganizationIdentifier));
-            variables.setString(BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE, idTypeVar);
+            variables.setString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE, idTypeVar);
         }
         catch (Exception exception) {
             logger.warn("Could not create binary -> {}", exception.getMessage());

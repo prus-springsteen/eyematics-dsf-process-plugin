@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
+import java.util.Objects;
 
 
 public class DecryptRequestedDataTask extends AbstractServiceDelegate {
@@ -32,6 +33,12 @@ public class DecryptRequestedDataTask extends AbstractServiceDelegate {
     }
 
     @Override
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        Objects.requireNonNull(this.keyProvider, "keyProvider");
+    }
+
+    @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> something to decrypt");
         byte[] bundleEncrypted = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
@@ -41,7 +48,7 @@ public class DecryptRequestedDataTask extends AbstractServiceDelegate {
         logger.info("Request-Organization -> {}", reqOrg);
         String recOrg = variables.getLatestTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
         logger.info("Recipient-Organization -> {}", recOrg);
-        Bundle bundleDecrypted = decryptBundle(keyProvider.getPrivateKey(), bundleEncrypted, reqOrg, recOrg);
+        Bundle bundleDecrypted = decryptBundle(this.keyProvider.getPrivateKey(), bundleEncrypted, reqOrg, recOrg);
         String o = this.parser.encodeResourceToString(bundleDecrypted);
         logger.info("Bundle -> {}", o.substring(0, 50));
     }

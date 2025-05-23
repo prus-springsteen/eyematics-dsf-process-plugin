@@ -7,14 +7,11 @@ import dev.dsf.fhir.client.BasicFhirWebserviceClient;
 import org.eyematics.process.constant.ProvideConstants;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.constant.ReceiveConstants;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Optional;
-
-import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS;
-import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE;
 
 public class DownloadRequestedDataTask extends AbstractServiceDelegate {
 
@@ -31,9 +28,9 @@ public class DownloadRequestedDataTask extends AbstractServiceDelegate {
 
         Optional<Reference> dataReferenceParameter = api.getTaskHelper()
                                                         .getFirstInputParameterValue(latestTask,
-                                                                                     CODE_SYSTEM_RECEIVE_PROCESS,
-                                                                                     CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE,
-                                                                                     Reference.class);
+                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE,
+                                                                Reference.class);
 
         logger.info("Reference-Input extracted -> {}", dataReferenceParameter.isPresent());
         Reference s = null;

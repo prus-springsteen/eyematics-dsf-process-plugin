@@ -8,22 +8,20 @@ import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
+import dev.dsf.common.auth.conf.Identity;
 import dev.dsf.fhir.client.FhirWebserviceClient;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.constant.EyeMaticsConstants;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Endpoint;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Organization;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-
-import static org.eyematics.process.constant.EyeMaticsConstants.*;
-import static dev.dsf.common.auth.conf.Identity.ORGANIZATION_IDENTIFIER_SYSTEM;
 
 public class SelectRequestTargetsTask extends AbstractServiceDelegate {
 
@@ -36,9 +34,9 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Triggering the Organization(s)");
-        Identifier parentIdentifier = new Identifier().setSystem(ORGANIZATION_IDENTIFIER_SYSTEM)
-                                                      .setValue("eyematics.org");
-        Coding memberOrganizationRole = new Coding().setSystem(CODESYSTEM_DSF_ORGANIZATION_ROLE).setCode(CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
+        Identifier parentIdentifier = new Identifier().setSystem(Identity.ORGANIZATION_IDENTIFIER_SYSTEM)
+                                                      .setValue(EyeMaticsConstants.NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS);
+        Coding memberOrganizationRole = new Coding().setSystem(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE).setCode(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
         FhirWebserviceClient client = api.getFhirWebserviceClientProvider().getLocalWebserviceClient();
         List<Target> targets = api.getOrganizationProvider().getOrganizations(parentIdentifier, memberOrganizationRole)
                 .stream()

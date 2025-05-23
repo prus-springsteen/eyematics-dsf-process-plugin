@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import java.net.URI;
 import static java.lang.String.format;
 
-
 public class SelectReceiveTargetTask extends AbstractServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(SelectReceiveTargetTask.class);

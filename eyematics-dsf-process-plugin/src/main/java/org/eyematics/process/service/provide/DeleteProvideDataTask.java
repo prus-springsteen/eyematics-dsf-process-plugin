@@ -5,14 +5,14 @@ import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.constant.ProvideConstants;
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.IdType;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import dev.dsf.fhir.client.BasicFhirWebserviceClient;
-
-import static org.eyematics.process.constant.EyeMaticsConstants.*;
 
 public class DeleteProvideDataTask extends AbstractServiceDelegate {
 
@@ -28,7 +28,7 @@ public class DeleteProvideDataTask extends AbstractServiceDelegate {
         Task task = variables.getStartTask();
 
         IdType binaryId = new IdType(
-                variables.getString(BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
+                variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
         /*
         String dmsIdentifier = variables.getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER);
         String projectIdentifier = variables
@@ -60,7 +60,7 @@ public class DeleteProvideDataTask extends AbstractServiceDelegate {
 
     private void deletePermanently(IdType binaryId) {
         BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
-                .withRetry(DSF_CLIENT_RETRY_6_TIMES, DSF_CLIENT_RETRY_INTERVAL_5MIN);
+                .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN);
         client.delete(Binary.class, binaryId.getIdPart());
         client.deletePermanently(Binary.class, binaryId.getIdPart());
     }

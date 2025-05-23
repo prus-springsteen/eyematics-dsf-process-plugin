@@ -3,16 +3,13 @@ package org.eyematics.process.message.provide;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractTaskMessageSend;
 import dev.dsf.bpe.v1.variables.Variables;
+import org.eyematics.process.constant.ProvideConstants;
+import org.eyematics.process.constant.ReceiveConstants;
 import org.hl7.fhir.r4.model.*;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.stream.Stream;
-
-import static org.eyematics.process.constant.EyeMaticsConstants.*;
-import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS;
-import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE;
 
 public class ProvideDataMessageTask extends AbstractTaskMessageSend {
 
@@ -37,8 +34,8 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
         }
         */
         return Stream.of(api.getTaskHelper()
-                            .createInput(new Reference().setReference(variables.getString(BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
-                                                                                          CODE_SYSTEM_RECEIVE_PROCESS,
-                                                                                          CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE));
+                            .createInput(new Reference().setReference(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
+                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE));
     }
 }

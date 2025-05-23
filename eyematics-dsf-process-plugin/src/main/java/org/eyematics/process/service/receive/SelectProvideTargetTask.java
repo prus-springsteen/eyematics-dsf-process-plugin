@@ -11,9 +11,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.net.URI;
-
 import static java.lang.String.format;
 
 public class SelectProvideTargetTask extends AbstractServiceDelegate {

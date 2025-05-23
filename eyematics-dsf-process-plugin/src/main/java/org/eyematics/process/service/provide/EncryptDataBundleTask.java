@@ -7,13 +7,13 @@ package org.eyematics.process.service.provide;
 
 import ca.uhn.fhir.context.FhirContext;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.eyematics.process.constant.EyeMaticsConstants;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.constants.NamingSystems;
 import dev.dsf.bpe.v1.variables.Variables;
-
 import static org.eyematics.process.constant.EyeMaticsConstants.*;
+
+import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.crypto.KeyProvider;
 import org.eyematics.process.utils.crypto.RsaAesGcmUtil;
@@ -60,7 +60,7 @@ public class EncryptDataBundleTask extends AbstractServiceDelegate {
     @Override
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
-        Objects.requireNonNull(keyProvider, "keyProvider");
+        Objects.requireNonNull(this.keyProvider, "keyProvider");
     }
 
     @Override
@@ -74,7 +74,7 @@ public class EncryptDataBundleTask extends AbstractServiceDelegate {
         PublicKey pubKey = this.readPublicKey(reqOrg);
         //logger.info("-> {}", pubKey);
         logger.info("-> something to encrypt");
-        Bundle b = variables.getResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
+        Bundle b = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
         byte[] bundleEncrypted = this.encrypt(pubKey, b, recOrg, reqOrg);
         variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, bundleEncrypted);
     }
@@ -96,7 +96,7 @@ public class EncryptDataBundleTask extends AbstractServiceDelegate {
 
     private String getEndpointUrl(String identifier) {
         return api.getEndpointProvider().getEndpointAddress(NamingSystems.OrganizationIdentifier.withValue(
-                                "eyematics.org"),
+                                EyeMaticsConstants.NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS),
                         NamingSystems.OrganizationIdentifier.withValue(identifier),
                         new Coding().setSystem(CODESYSTEM_DSF_ORGANIZATION_ROLE)
                                 .setCode(CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC))

@@ -11,6 +11,9 @@ public interface EyeMaticsConstants {
 	String PROCESS_VERSION = VERSION.substring(4, 7);
 	String RESOURCE_VERSION = VERSION.substring(0, 3);
 
+	String PROCESS_EYEMATICS_NAME_BASE = "eyematicsorg_";
+	String NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS = "eyematics.org";
+
 	String PROCESS_MII_NAME_BASE = "medizininformatik-initiativede_";
 	String PROCESS_MII_URI_BASE = "http://medizininformatik-initiative.de/bpe/Process/";
 
@@ -40,8 +43,7 @@ public interface EyeMaticsConstants {
 	long DSF_CLIENT_RETRY_INTERVAL_10SEC = 10000;
 	long DSF_CLIENT_RETRY_INTERVAL_5MIN = 300000;
 
-	String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
-	String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE = "data-reference";
+
 
 
 }

@@ -12,6 +12,7 @@ import dev.dsf.bpe.v1.variables.Variables;
 
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.fhir.client.FhirClient;
 import org.eyematics.process.utils.fhir.client.FhirClientFactory;
 import org.hl7.fhir.r4.model.Bundle;
@@ -42,9 +43,8 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
     @Override
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
-        Objects.requireNonNull(fhirClientFactory, "fhirClientFactory");
+        Objects.requireNonNull(this.fhirClientFactory, "fhirClientFactory");
     }
-
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
@@ -68,7 +68,7 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
             FhirContext fhirContext = FhirContext.forR4();
             Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, in);
             logger.info("Data -> {}", bundle);
-            variables.setResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
         } catch (Exception e) {
             // go handle the exception
         }  finally {
