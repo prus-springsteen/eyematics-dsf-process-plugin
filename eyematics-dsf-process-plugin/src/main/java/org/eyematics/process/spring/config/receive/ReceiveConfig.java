@@ -1,8 +1,10 @@
 package org.eyematics.process.spring.config.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import org.eyematics.process.service.receive.DecryptDataReceiveTask;
-import org.eyematics.process.service.receive.DownloadDataReceiveTask;
+import org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask;
+import org.eyematics.process.service.receive.DecryptRequestedDataTask;
+import org.eyematics.process.service.receive.DownloadRequestedDataTask;
+import org.eyematics.process.service.receive.SelectProvideTargetTask;
 import org.eyematics.process.spring.config.CryptoConfig;
 import org.eyematics.process.utils.listener.SetCorrelationKeyListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,17 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DownloadDataReceiveTask downloadDataReceiveTask() { return new DownloadDataReceiveTask(api); }
+    public DownloadRequestedDataTask downloadRequestedDataTask() { return new DownloadRequestedDataTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DecryptDataReceiveTask decryptDataReceiveTask() { return new DecryptDataReceiveTask(api, cryptoConfig.keyProviderDms()); }
+    public DecryptRequestedDataTask decryptRequestedDataTask() { return new DecryptRequestedDataTask(api, cryptoConfig.keyProviderDms()); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public SelectProvideTargetTask selectProvideTargetTask() { return new SelectProvideTargetTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public AcknowledgeReceivedMessageTask acknowledgeReceivedMessageTask() { return new AcknowledgeReceivedMessageTask(api); }
 }

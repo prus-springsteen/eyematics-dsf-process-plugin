@@ -17,8 +17,7 @@ import dev.dsf.bpe.v1.constants.BpmnExecutionVariables;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 
-public class SetCorrelationKeyListener implements ExecutionListener, InitializingBean
-{
+public class SetCorrelationKeyListener implements ExecutionListener, InitializingBean {
     private final ProcessPluginApi api;
     private static final Logger logger = LoggerFactory.getLogger(SetCorrelationKeyListener.class);
 
@@ -28,14 +27,12 @@ public class SetCorrelationKeyListener implements ExecutionListener, Initializin
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception
-    {
+    public void afterPropertiesSet() throws Exception {
         Objects.requireNonNull(api, "api");
     }
 
     @Override
-    public void notify(DelegateExecution execution) throws Exception
-    {
+    public void notify(DelegateExecution execution) throws Exception {
         logger.info("SetCorrelationKeyListener -> Adding Listener...");
         Variables variables = api.getVariables(execution);
         Target target = variables.getTarget();

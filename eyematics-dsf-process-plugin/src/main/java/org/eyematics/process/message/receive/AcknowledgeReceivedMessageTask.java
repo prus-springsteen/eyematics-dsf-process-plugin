@@ -1,4 +1,4 @@
-package org.eyematics.process.message.initiate;
+package org.eyematics.process.message.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractTaskMessageSend;
@@ -10,11 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.stream.Stream;
 
-public class GetDataMessageTask extends AbstractTaskMessageSend {
+public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
 
-    private static final Logger logger = LoggerFactory.getLogger(GetDataMessageTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(AcknowledgeReceivedMessageTask.class);
 
-    public GetDataMessageTask(ProcessPluginApi api) {
+    public AcknowledgeReceivedMessageTask(ProcessPluginApi api) {
         super(api);
     }
 

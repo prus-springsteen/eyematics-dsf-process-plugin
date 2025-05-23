@@ -1,0 +1,26 @@
+package org.eyematics.process.spring.config;
+
+import dev.dsf.bpe.v1.ProcessPluginApi;
+import dev.dsf.bpe.v1.ProcessPluginDeploymentStateListener;
+import org.eyematics.process.utils.listener.EyeMaticsProcessPluginDeploymentStateListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
+@Configuration
+public class EyeMaticsConfig {
+
+    @Autowired
+    private ProcessPluginApi api;
+
+    @Autowired
+    private CryptoConfig cryptoConfig;
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public ProcessPluginDeploymentStateListener processPluginDeploymentStateListener() {
+        return new EyeMaticsProcessPluginDeploymentStateListener(cryptoConfig.keyProviderDms());
+    }
+}

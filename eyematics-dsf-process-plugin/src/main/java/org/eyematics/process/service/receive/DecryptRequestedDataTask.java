@@ -18,13 +18,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 
 
-public class DecryptDataReceiveTask extends AbstractServiceDelegate {
+public class DecryptRequestedDataTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(DecryptDataReceiveTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(DecryptRequestedDataTask.class);
     private final KeyProvider keyProvider;
     private final IParser parser;
 
-    public DecryptDataReceiveTask(ProcessPluginApi api, KeyProvider keyProvider) {
+    public DecryptRequestedDataTask(ProcessPluginApi api, KeyProvider keyProvider) {
         super(api);
         this.keyProvider = keyProvider;
         FhirContext ctx = FhirContext.forR4();
@@ -33,17 +33,17 @@ public class DecryptDataReceiveTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("DecryptDataReceiveTask -> something to decrypt");
+        logger.info("-> something to decrypt");
         byte[] bundleEncrypted = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
         String bundleString = new String(bundleEncrypted, StandardCharsets.UTF_8);
-        logger.info("EncryptProvideDataTask: Bundle -> {}", bundleString);
+        logger.info("Bundle -> {}", bundleString.substring(0, 50));
         String reqOrg = variables.getLatestTask().getRequester().getIdentifier().getValue();
-        logger.info("EncryptProvideDataTask: Request-Organization -> {}", reqOrg);
+        logger.info("Request-Organization -> {}", reqOrg);
         String recOrg = variables.getLatestTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
-        logger.info("EncryptProvideDataTask: Recipient-Organization -> {}", recOrg);
+        logger.info("Recipient-Organization -> {}", recOrg);
         Bundle bundleDecrypted = decryptBundle(keyProvider.getPrivateKey(), bundleEncrypted, reqOrg, recOrg);
         String o = this.parser.encodeResourceToString(bundleDecrypted);
-        logger.info("EncryptProvideDataTask: Bundle -> {}", o);
+        logger.info("Bundle -> {}", o.substring(0, 50));
     }
 
     private Bundle decryptBundle(PrivateKey privateKey, byte[] bundleEncrypted, String sendingOrganization,
@@ -57,6 +57,7 @@ public class DecryptDataReceiveTask extends AbstractServiceDelegate {
         catch (Exception exception) {
             logger.warn("Could not decrypt data-set - {}", exception.getMessage());
             throw new RuntimeException("Could not decrypt received data-set", exception);
+            //throw new BpmnError(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DATA_RECEIVE_ERROR, error, exception);
         }
     }
 }

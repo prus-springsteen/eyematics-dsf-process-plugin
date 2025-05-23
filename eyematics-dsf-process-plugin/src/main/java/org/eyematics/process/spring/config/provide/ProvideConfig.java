@@ -1,7 +1,7 @@
 package org.eyematics.process.spring.config.provide;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import org.eyematics.process.message.provide.SendProvideDataMessageTask;
+import org.eyematics.process.message.provide.ProvideDataMessageTask;
 import org.eyematics.process.service.provide.*;
 import org.eyematics.process.spring.config.CryptoConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +24,15 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ReadDataProvideTask readDataProvideTask() { return new ReadDataProvideTask(api, dicFhirClientConfig.fhirClientFactory()); }
+    public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dicFhirClientConfig.fhirClientFactory()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CreateProvideBundleDataTask createProvideBundleDataTask() { return new CreateProvideBundleDataTask(api); }
+    public CreateDataBundleTask createDataBundleTask() { return new CreateDataBundleTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public EncryptProvideDataTask encryptProvideDataTask() { return new EncryptProvideDataTask(api, cryptoConfig.keyProviderDms()); }
+    public EncryptDataBundleTask encryptDataBundleTask() { return new EncryptDataBundleTask(api, cryptoConfig.keyProviderDms()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -44,5 +44,13 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SendProvideDataMessageTask sendProvideDataMessageTask() { return new SendProvideDataMessageTask(api); }
+    public ProvideDataMessageTask provideDataMessageTask() { return new ProvideDataMessageTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public StoreDataReceiptTask storeDataReceiptTask() { return  new StoreDataReceiptTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public DeleteProvideDataTask deleteProvideDataTask() { return  new DeleteProvideDataTask(api); }
 }

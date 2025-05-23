@@ -13,11 +13,11 @@ import org.slf4j.LoggerFactory;
 
 
 
-public class CreateProvideBundleDataTask extends AbstractServiceDelegate {
+public class CreateDataBundleTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(CreateProvideBundleDataTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(CreateDataBundleTask.class);
 
-    public CreateProvideBundleDataTask(ProcessPluginApi api) {
+    public CreateDataBundleTask(ProcessPluginApi api) {
         super(api);
     }
 
@@ -28,7 +28,7 @@ public class CreateProvideBundleDataTask extends AbstractServiceDelegate {
         Bundle b = variables.getResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
         logger.info("-> Amount of Items: {}", b.getEntry().size());
         Bundle toStore = new Bundle();
-        for (int i = 0; i < 2; i++) toStore.addEntry(b.getEntry().get(i));
+        for (int i = 0; i < b.getEntry().size(); i++) toStore.addEntry(b.getEntry().get(i));
 
         //toStore.addEntry(b.getEntry().get(1));
         variables.setResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, toStore);
