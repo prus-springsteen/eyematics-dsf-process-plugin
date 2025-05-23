@@ -37,7 +37,7 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Triggering the Organization(s)");
         Identifier parentIdentifier = new Identifier().setSystem(ORGANIZATION_IDENTIFIER_SYSTEM)
-                                                      .setValue(NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_MEDICAL_INFORMATICS_INITIATIVE_CONSORTIUM);
+                                                      .setValue("eyematics.org");
         Coding memberOrganizationRole = new Coding().setSystem(CODESYSTEM_DSF_ORGANIZATION_ROLE).setCode(CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
         FhirWebserviceClient client = api.getFhirWebserviceClientProvider().getLocalWebserviceClient();
         List<Target> targets = api.getOrganizationProvider().getOrganizations(parentIdentifier, memberOrganizationRole)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qnq7wk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.31.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
-  <bpmn:process id="dsfdev_eyematicsReceiveProcess" name="EyeMatics Receive Process" isExecutable="true" camunda:versionTag="#{version}">
+  <bpmn:process id="eyematicsorg_eyematicsReceiveProcess" name="EyeMatics Receive Process" isExecutable="true" camunda:versionTag="#{version}">
     <bpmn:serviceTask id="downloadRequestedDataTask" name="Download Requested Data Task" camunda:class="org.eyematics.process.service.receive.DownloadRequestedDataTask">
       <bpmn:incoming>Flow_18spp16</bpmn:incoming>
       <bpmn:outgoing>Flow_1a6we8f</bpmn:outgoing>
@@ -22,13 +22,13 @@
     <bpmn:sendTask id="acknowledgeReceivedMessageTask" name="Acknowledge Received Message Task" camunda:class="org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
-          <camunda:string>http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}</camunda:string>
+          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}</camunda:string>
         </camunda:field>
         <camunda:field name="messageName">
           <camunda:string>provideProcessReceiveReceiptEventMessage</camunda:string>
         </camunda:field>
         <camunda:field name="instantiatesCanonical">
-          <camunda:string>http://dsf.dev/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
+          <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1riebb4</bpmn:incoming>
@@ -44,7 +44,7 @@
   <bpmn:message id="Message_0mv4rmf" name="receiveProcessStartEventMessage" />
   <bpmn:message id="Message_2vm6cli" name="receiveProcessStartEventMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="dsfdev_eyematicsReceiveProcess">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="eyematicsorg_eyematicsReceiveProcess">
       <bpmndi:BPMNShape id="Activity_04pq1bq_di" bpmnElement="downloadRequestedDataTask">
         <dc:Bounds x="300" y="60" width="100" height="80" />
         <bpmndi:BPMNLabel />

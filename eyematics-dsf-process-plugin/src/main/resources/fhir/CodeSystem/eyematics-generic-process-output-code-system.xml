@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://dsf.dev/fhir/CodeSystem/eyematics-generic-process-output-code-system" />
+    <url value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-output-code-system" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Generic Process Output CodeSystem" />

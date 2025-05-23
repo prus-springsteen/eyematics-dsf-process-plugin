@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.util.stream.Stream;
 
 import static org.eyematics.process.constant.EyeMaticsConstants.*;
+import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS;
+import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE;
 
 public class ProvideDataMessageTask extends AbstractTaskMessageSend {
 

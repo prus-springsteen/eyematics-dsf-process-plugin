@@ -44,6 +44,6 @@ public class SelectProvideTargetTask extends AbstractServiceDelegate {
                                 organizationIdentifier.getValue())));
         Target target = variables.createTarget(organizationIdentifier.getValue(), endpoint.getIdentifierFirstRep().getValue(), endpoint.getAddress(), correlationKey);
         variables.setTarget(target);
-        logger.info("-> {}", endpoint.getAddress());
+        logger.info("-> {}", target);
     }
 }

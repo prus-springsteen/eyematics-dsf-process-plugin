@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition" />
+    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Provide Process Structure Definition" />
@@ -23,7 +23,7 @@
     <differential>
         <element id="Task.instantiatesCanonical">
             <path value="Task.instantiatesCanonical" />
-            <fixedCanonical value="http://dsf.dev/bpe/Process/eyematicsProvideProcess|#{version}" />
+            <fixedCanonical value="http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}" />
         </element>
         <element id="Task.input">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">

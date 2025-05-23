@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://dsf.dev/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
+    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Receive Process Structure Definition" />
@@ -23,7 +23,7 @@
     <differential>
         <element id="Task.instantiatesCanonical">
             <path value="Task.instantiatesCanonical" />
-            <fixedCanonical value="http://dsf.dev/bpe/Process/eyematicsReceiveProcess|#{version}" />
+            <fixedCanonical value="http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}" />
         </element>
         <!-- requester / recipient -->
         <element id="Task.input">
@@ -72,7 +72,7 @@
             <path value="Task.input.type" />
             <binding>
                 <strength value="required" />
-                <valueSet value="http://dsf.dev/fhir/ValueSet/eyematics-receive-process-value-set" />
+                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set" />
             </binding>
         </element>
         <element id="Task.input:data-set-reference-input.type.coding">
@@ -83,7 +83,7 @@
         <element id="Task.input:data-set-reference-input.type.coding.system">
             <path value="Task.input.type.coding.system" />
             <min value="1" />
-            <fixedUri value="http://dsf.dev/fhir/CodeSystem/eyematics-receive-process-code-system" />
+            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system" />
         </element>
         <element id="Task.input:data-set-reference-input.type.coding.code">
             <path value="Task.input.type.coding.code" />

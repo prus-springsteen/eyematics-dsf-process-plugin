@@ -42,9 +42,6 @@ public interface EyeMaticsConstants {
 
 	String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
 	String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE = "data-reference";
-	String CODE_SYSTEM_RECEIVE_PROCESS = "http://dsf.dev/fhir/CodeSystem/eyematics-receive-process-code-system";
-	String CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE = "data-set-reference-input";
-
 
 
 }

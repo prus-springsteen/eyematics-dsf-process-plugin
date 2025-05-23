@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
-import static org.eyematics.process.constant.EyeMaticsConstants.CODE_SYSTEM_RECEIVE_PROCESS;
-import static org.eyematics.process.constant.EyeMaticsConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE;
+import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS;
+import static org.eyematics.process.constant.ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE;
 
 public class DownloadRequestedDataTask extends AbstractServiceDelegate {
 

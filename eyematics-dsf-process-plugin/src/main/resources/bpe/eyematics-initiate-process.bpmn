@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1srzmx1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.31.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
-  <bpmn:process id="dsfdev_eyematicsInitiateProcess" name="EyeMatics Initiate Process" isExecutable="true" camunda:versionTag="#{version}">
+  <bpmn:process id="eyematicsorg_eyematicsInitiateProcess" name="EyeMatics Initiate Process" isExecutable="true" camunda:versionTag="#{version}">
     <bpmn:startEvent id="eyematicsInitiateProcessStartEvent" name="Initiate Process Start Event">
       <bpmn:outgoing>Flow_0eepfqw</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0h5x0xa" messageRef="Message_2pg57ek" />
@@ -17,13 +17,13 @@
     <bpmn:sendTask id="requestDataMessageTask" name="Request Data Message Task" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
-          <camunda:string>http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
+          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
         </camunda:field>
         <camunda:field name="messageName">
           <camunda:string>provideProcessStartEventMessage</camunda:string>
         </camunda:field>
         <camunda:field name="instantiatesCanonical">
-          <camunda:string>http://dsf.dev/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
+          <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0hkd9oq</bpmn:incoming>
@@ -40,7 +40,7 @@
   <bpmn:message id="Message_2pg57ek" name="initiateProcessStartEventMessage" />
   <bpmn:message id="Message_0mv4rmf" name="receiveProcessStartEventMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="dsfdev_eyematicsInitiateProcess">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="eyematicsorg_eyematicsInitiateProcess">
       <bpmndi:BPMNShape id="Event_1ir0eoy_di" bpmnElement="eyematicsInitiateProcessStartEvent">
         <dc:Bounds x="132" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>

@@ -10,7 +10,7 @@
             <valueString value="provideProcessStartEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}" />
+            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>
@@ -104,7 +104,7 @@
             <valueString value="provideProcessReceiveReceiptEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://dsf.dev/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}" />
+            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>
@@ -193,7 +193,7 @@
         </extension>
 
     </extension>
-    <url value="http://dsf.dev/bpe/Process/eyematicsProvideProcess" />
+    <url value="http://eyematics.org/bpe/Process/eyematicsProvideProcess" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Provide Process" />

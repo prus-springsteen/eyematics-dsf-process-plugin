@@ -96,7 +96,7 @@ public class EncryptDataBundleTask extends AbstractServiceDelegate {
 
     private String getEndpointUrl(String identifier) {
         return api.getEndpointProvider().getEndpointAddress(NamingSystems.OrganizationIdentifier.withValue(
-                                NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_MEDICAL_INFORMATICS_INITIATIVE_CONSORTIUM),
+                                "eyematics.org"),
                         NamingSystems.OrganizationIdentifier.withValue(identifier),
                         new Coding().setSystem(CODESYSTEM_DSF_ORGANIZATION_ROLE)
                                 .setCode(CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC))

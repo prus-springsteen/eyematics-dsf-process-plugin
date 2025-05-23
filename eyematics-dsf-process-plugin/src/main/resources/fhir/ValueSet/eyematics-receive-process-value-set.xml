@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://dsf.dev/fhir/ValueSet/eyematics-receive-process-value-set"/>
+    <url value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set"/>
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Receive Process ValueSet"/>
@@ -20,7 +20,7 @@
     <immutable value="true"/>
     <compose>
         <include>
-            <system value="http://dsf.dev/fhir/CodeSystem/eyematics-receive-process-code-system"/>
+            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system"/>
         </include>
     </compose>
 </ValueSet>
