@@ -1,5 +1,0 @@
-<Loggers>
-    <Logger name="*" level="INFO">
-        <AppenderRef ref="CONSOLE"/>
-    </Logger>
-</Loggers>
