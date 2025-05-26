@@ -23,12 +23,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.utils.logger.DataLogger;
-
 import org.bouncycastle.pkcs.PKCSException;
+import org.eyematics.process.utils.client.logging.DataLogger;
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.DocumentReference;

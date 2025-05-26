@@ -7,7 +7,7 @@ import dev.dsf.bpe.v1.ProcessPluginDefinition;
 import org.eyematics.process.spring.config.CryptoConfig;
 import org.eyematics.process.spring.config.EyeMaticsConfig;
 import org.eyematics.process.spring.config.initiate.InitiateConfig;
-import org.eyematics.process.spring.config.provide.DicFhirClientConfig;
+import org.eyematics.process.spring.config.provide.ProvideFhirClientConfig;
 import org.eyematics.process.spring.config.provide.ProvideConfig;
 import org.eyematics.process.spring.config.receive.ReceiveConfig;
 
@@ -76,7 +76,7 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 
 	@Override
 	public List<Class<?>> getSpringConfigurations() {
-		return List.of(EyeMaticsConfig.class, CryptoConfig.class, DicFhirClientConfig.class, InitiateConfig.class,
+		return List.of(EyeMaticsConfig.class, CryptoConfig.class, ProvideFhirClientConfig.class, InitiateConfig.class,
 				ProvideConfig.class, ReceiveConfig.class);
 	}
 }

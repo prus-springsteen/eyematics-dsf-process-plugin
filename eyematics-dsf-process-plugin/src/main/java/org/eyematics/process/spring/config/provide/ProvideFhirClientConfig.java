@@ -4,12 +4,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.eyematics.process.utils.fhir.client.FhirClientFactory;
-import org.eyematics.process.utils.fhir.client.token.OAuth2TokenClient;
-import org.eyematics.process.utils.fhir.client.token.OAuth2TokenProvider;
-import org.eyematics.process.utils.fhir.client.token.TokenClient;
-import org.eyematics.process.utils.fhir.client.token.TokenProvider;
-import org.eyematics.process.utils.logger.DataLogger;
+import org.eyematics.process.utils.client.FhirClientFactory;
+import org.eyematics.process.utils.client.logging.DataLogger;
+import org.eyematics.process.utils.client.token.OAuth2TokenClient;
+import org.eyematics.process.utils.client.token.OAuth2TokenProvider;
+import org.eyematics.process.utils.client.token.TokenClient;
+import org.eyematics.process.utils.client.token.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
 
 @Configuration
-public class DicFhirClientConfig
+public class ProvideFhirClientConfig
 {
 	@Autowired
 	private FhirContext fhirContext;
@@ -30,7 +30,7 @@ public class DicFhirClientConfig
 
 	@ProcessDocumentation(required = true, processNames = {
 			"medizininformatik-initiativede_executeDataSharing" }, description = "The base address of the DIC FHIR server to read/store FHIR resources", example = "http://foo.bar/fhir")
-	@Value("${de.medizininformatik.initiative.data.sharing.dic.fhir.server.base.url:#{null}}")
+	@Value("${org.eyematics.provide.fhir.server.base.url:#{null}}")
 	private String fhirStoreBaseUrl;
 
 	@ProcessDocumentation(processNames = {
@@ -109,6 +109,11 @@ public class DicFhirClientConfig
 	private String fhirStoreOAuth2IssuerUrl;
 
 	@ProcessDocumentation(processNames = {
+			"medizininformatik-initiativede_dataSend" }, description = "The path for oidc discovery protocol", recommendation = "Change default value only if path differs from the oidc specification")
+	@Value("${de.medizininformatik.initiative.data.transfer.dic.fhir.server.oauth2.discovery.path:/.well-known/openid-configuration}")
+	private String fhirStoreOAuth2DiscoveryPath;
+
+	@ProcessDocumentation(processNames = {
 			"medizininformatik-initiativede_executeDataSharing" }, description = "Identifier of the client (username) used for authentication when accessing the oidc provider token endpoint")
 	@Value("${de.medizininformatik.initiative.data.sharing.dic.fhir.server.oauth2.client.id:#{null}}")
 	private String fhirStoreOAuth2ClientId;
@@ -149,9 +154,19 @@ public class DicFhirClientConfig
 	private String fhirStoreOAuth2ProxyPassword;
 
 	@ProcessDocumentation(processNames = {
+			"medizininformatik-initiativede_dataSend" }, description = "If set to true, OIDC validation will only log a warning and not throw an illegal state exception")
+	@Value("${de.medizininformatik.initiative.data.transfer.dic.fhir.server.oauth2.discovery.validation.lenient:false}")
+	private boolean fhirStoreOAuth2DiscoveryValidationLenient;
+
+	@ProcessDocumentation(processNames = {
 			"medizininformatik-initiativede_executeDataSharing" }, description = "To enable debug logging of FHIR resources set to `true`")
 	@Value("${de.medizininformatik.initiative.data.sharing.dic.fhir.dataLoggingEnabled:false}")
 	private boolean fhirDataLoggingEnabled;
+
+	@ProcessDocumentation(processNames = {
+			"medizininformatik-initiativede_dataSend" }, description = "To enable an additional connection test on startup of the client reading Binary resources as stream, set to `true`")
+	@Value("${de.medizininformatik.initiative.data.transfer.dic.fhir.server.binary.stream.client.connection.test.enabled:false}")
+	private boolean fhirBinaryStreamClientConnectionTestEnabled;
 
 	@Value("${dev.dsf.bpe.fhir.server.organization.identifier.value}")
 	private String localIdentifierValue;
@@ -173,10 +188,14 @@ public class DicFhirClientConfig
 					: new String(api.getProxyConfig().getPassword());
 		}
 
+		// Async client never used in this process, therefore setting connection test to false
+		// and initial polling interval to default value
 		return new FhirClientFactory(trustStorePath, certificatePath, privateKeyPath, fhirStorePrivateKeyPassword,
-				fhirStoreConnectTimeout, fhirStoreSocketTimeout, fhirStoreConnectionRequestTimeout, "https://blaze-dev.ukmuenster.de", // fhirStoreBaseUrl
+				fhirStoreConnectTimeout, fhirStoreSocketTimeout, fhirStoreConnectionRequestTimeout, fhirStoreBaseUrl,
 				fhirStoreUsername, fhirStorePassword, fhirStoreBearerToken, tokenProvider(), proxyUrl, proxyUsername,
-				proxyPassword, fhirStoreHapiClientVerbose, fhirContext, localIdentifierValue, dataLogger());
+				proxyPassword, fhirStoreHapiClientVerbose,
+				FhirClientFactory.DEFAULT_INITIAL_POLLING_INTERVAL_MILLISECONDS, fhirContext, localIdentifierValue,
+				dataLogger(), false, fhirBinaryStreamClientConnectionTestEnabled);
 	}
 
 	public TokenProvider tokenProvider()
@@ -199,9 +218,10 @@ public class DicFhirClientConfig
 					: new String(api.getProxyConfig().getPassword());
 		}
 
-		return new OAuth2TokenClient(fhirStoreOAuth2IssuerUrl, fhirStoreOAuth2ClientId, fhirStoreOAuth2ClientSecret,
-				fhirStoreOAuth2ConnectTimeout, fhirStoreOAuth2SocketTimeout, trustStoreOAuth2Path, proxyUrl,
-				proxyUsername, proxyPassword);
+		return new OAuth2TokenClient(fhirStoreOAuth2IssuerUrl, fhirStoreOAuth2DiscoveryPath, fhirStoreOAuth2ClientId,
+				fhirStoreOAuth2ClientSecret, fhirStoreOAuth2ConnectTimeout, fhirStoreOAuth2SocketTimeout,
+				trustStoreOAuth2Path, proxyUrl, proxyUsername, proxyPassword,
+				fhirStoreOAuth2DiscoveryValidationLenient);
 	}
 
 	public DataLogger dataLogger()

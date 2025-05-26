@@ -13,8 +13,9 @@ import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.ProvideConstants;
-import org.eyematics.process.utils.fhir.client.FhirClient;
-import org.eyematics.process.utils.fhir.client.FhirClientFactory;
+import org.eyematics.process.utils.client.BinaryStreamFhirClient;
+import org.eyematics.process.utils.client.FhirClient;
+import org.eyematics.process.utils.client.FhirClientFactory;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.IdType;
 import org.hl7.fhir.r4.model.StructureDefinition;
@@ -64,7 +65,8 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
         int status = con.getResponseCode();
         logger.info("Response Code -> {}", status);
         // if (status == HttpURLConnection.HTTP_OK)
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+        try (InputStream in = con.getInputStream()) {
+            logger.info("Stream -> {}", in); // sun.net.www.protocol.http.HttpURLConnection$HttpInputStream@3ac8963d
             FhirContext fhirContext = FhirContext.forR4();
             Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, in);
             logger.info("Data -> {}", bundle);
@@ -77,73 +79,23 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
 
 
         /*
-         // Klappt nicht wegen ???...
+        // Klappt ...
         // https://github.com/medizininformatik-initiative/mii-processes-common/tree/develop/src/main/java/de/medizininformatik_initiative/processes/common/fhir/client
         // https://github.com/medizininformatik-initiative/mii-process-data-transfer/blob/issues/36_multiple_attachments/src/main/java/de/medizininformatik_initiative/process/data_transfer/service/EncryptAndStoreData.java#L352
-        //TimeUnit.SECONDS.sleep((int)(Math.random() * ((20 - 5) + 1)));
-        FhirClient fhirClient = fhirClientFactory.getFhirClient();
+        // TimeUnit.SECONDS.sleep((int)(Math.random() * ((20 - 5) + 1)));
+        BinaryStreamFhirClient fhirClient = fhirClientFactory.getBinaryStreamFhirClient();
         IdType idType = new IdType("https://blaze-dev.ukmuenster.de/fhir", "Bundle", "StructureDefinition", "");
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(fhirClient.re(idType));
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (InputStream  in = fhirClient.readBundle(idType, "application/fhir+xml")) {
+            logger.info("Stream -> {}", in); // sun.net.www.protocol.http.HttpURLConnection$HttpInputStream@3ac8963d
             FhirContext fhirContext = FhirContext.forR4();
-            Bundle bundle = new Bundle();// fhirContext.newJsonParser().parseResource(Bundle.class, in);
-            logger.info("Data -> {}", in);
-            variables.setResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
-        } catch (Exception e) {
-            // go handle the exception
-        }  finally {
-
-        }
-        */
-
-
-
-        /*
-        // Klappt nicht wegen SSL...
-        BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider().getWebserviceClient("https://blaze-dev.ukmuenster.de/").withRetry(6, 5);
-        InputStream inputStream = client.readBinary("StructureDefinition", MediaType.APPLICATION_XML_TYPE);
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
-            FhirContext fhirContext = FhirContext.forR4();
-            Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, in);
+            Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, in); // jdk.internal.net.http.ResponseSubscribers$HttpResponseInputStream@9082505
             logger.info("Data -> {}", bundle);
-            variables.setResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
         } catch (Exception e) {
-            // go handle the exception
-        }  finally {
-
+            logger.info("Exception -> {}", e.getMessage());
         }
         */
 
 
-
-        /*
-        // Klappt nicht wegen Konvertierung ...
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_OCTET_STREAM, MediaType.ALL));
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<InputStream> response = restTemplate.exchange(
-                "https://blaze-dev.ukmuenster.de/fhir/StructureDefinition",
-                HttpMethod.GET,
-                entity,
-                InputStream .class
-        );
-
-        InputStream inputStream = response.getBody();
-
-        try {
-
-            assert inputStream != null;
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream))) {
-                FhirContext fhirContext = FhirContext.forR4();
-                Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, in);
-                logger.info("Data -> {}", bundle);
-                variables.setResource(EyeMaticsConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
     }
 }

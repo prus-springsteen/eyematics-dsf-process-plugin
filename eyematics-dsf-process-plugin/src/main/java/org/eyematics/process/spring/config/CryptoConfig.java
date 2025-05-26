@@ -2,9 +2,9 @@ package org.eyematics.process.spring.config;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
+import org.eyematics.process.utils.client.logging.DataLogger;
 import org.eyematics.process.utils.crypto.KeyProvider;
 import org.eyematics.process.utils.crypto.KeyProviderImpl;
-import org.eyematics.process.utils.logger.DataLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

@@ -20,7 +20,7 @@ public class ProvideConfig {
     private CryptoConfig cryptoConfig;
 
     @Autowired
-    private DicFhirClientConfig dicFhirClientConfig;
+    private ProvideFhirClientConfig dicFhirClientConfig;
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
