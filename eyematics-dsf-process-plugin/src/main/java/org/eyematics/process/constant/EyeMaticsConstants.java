@@ -43,6 +43,7 @@ public interface EyeMaticsConstants {
 	long DSF_CLIENT_RETRY_INTERVAL_10SEC = 10000;
 	long DSF_CLIENT_RETRY_INTERVAL_5MIN = 300000;
 
+	String MEDIA_TYPE_APPLICATION_FHIR_XML = "application/fhir+xml";
 
 
 

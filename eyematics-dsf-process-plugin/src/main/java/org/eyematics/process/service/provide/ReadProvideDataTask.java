@@ -8,6 +8,7 @@ import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.client.BinaryStreamFhirClient;
 import org.eyematics.process.utils.client.FhirClientFactory;
@@ -46,7 +47,7 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
         BinaryStreamFhirClient fhirClient = this.fhirClientFactory.getBinaryStreamFhirClient();
         IdType idType = new IdType(this.fhirClientFactory.getFhirBaseUrl(),
                 "Bundle", "StructureDefinition", "");
-        try (InputStream  in = fhirClient.readBundle(idType, "application/fhir+xml")) {
+        try (InputStream  in = fhirClient.readBundle(idType, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_XML)) {
             logger.info("Stream -> {}", in);
             FhirContext fhirContext = FhirContext.forR4();
             Bundle bundle = fhirContext.newXmlParser().parseResource(Bundle.class, in);
