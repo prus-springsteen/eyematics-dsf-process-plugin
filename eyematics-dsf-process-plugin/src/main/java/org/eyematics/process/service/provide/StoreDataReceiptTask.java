@@ -23,6 +23,7 @@ public class StoreDataReceiptTask extends AbstractServiceDelegate {
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
 
+
     @Override
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
@@ -38,14 +39,15 @@ public class StoreDataReceiptTask extends AbstractServiceDelegate {
         String dmsIdentifier = variables.getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER);
         */
 
-        /*
+
         Task startTask = variables.getStartTask();
         Task currentTask = variables.getLatestTask();
 
-        if (!currentTask.getId().equals(startTask.getId()))
+        if (!currentTask.getId().equals(startTask.getId())) {
             handleReceivedResponse(startTask, currentTask);
-        else if (Task.TaskStatus.INPROGRESS.equals(startTask.getStatus()))
+        } else if (Task.TaskStatus.INPROGRESS.equals(startTask.getStatus())) {
             handleMissingResponse(startTask);
+        }
 
         variables.updateTask(startTask);
 
@@ -54,9 +56,8 @@ public class StoreDataReceiptTask extends AbstractServiceDelegate {
                     .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(startTask);
         }
-
-         */
     }
+
 
     private void handleReceivedResponse(Task startTask, Task currentTask) {
         this.dataSetStatusGenerator.transformInputToOutput(currentTask, startTask, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,

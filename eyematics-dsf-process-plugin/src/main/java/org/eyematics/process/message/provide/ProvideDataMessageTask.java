@@ -43,7 +43,6 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
                                     ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE));
     }
 
-    /*
     @Override
     protected void handleSendTaskError(DelegateExecution execution, Variables variables, Exception exception,
                                        String errorMessage) {
@@ -77,8 +76,4 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
     // Override in order not to add error message of AbstractTaskMessageSend
     @Override
     protected void addErrorMessage(Task task, String errorMessage) {}
-
-
-     */
-
 }

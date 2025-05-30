@@ -14,6 +14,12 @@ public interface EyeMaticsConstants {
 	String PROCESS_EYEMATICS_NAME_BASE = "eyematicsorg_";
 	String NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS = "eyematics.org";
 
+	String PROCESS_MII_NAME_BASE = "medizininformatik-initiativede_";
+	String PROCESS_MII_URI_BASE = "http://medizininformatik-initiative.de/bpe/Process/";
+
+	String NAMINGSYSTEM_MII_PROJECT_IDENTIFIER = "http://medizininformatik-initiative.de/sid/project-identifier";
+	String NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_MEDICAL_INFORMATICS_INITIATIVE_CONSORTIUM = "medizininformatik-initiative.de";
+
 	String CODESYSTEM_DSF_ORGANIZATION_ROLE = "http://dsf.dev/fhir/CodeSystem/organization-role";
 	String CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DMS = "DMS";
 	String CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC = "DIC";
@@ -31,8 +37,9 @@ public interface EyeMaticsConstants {
 	String CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_MISSING = "receipt-missing";
 	String CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_OK = "receipt-ok";
 	String CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_ERROR = "receipt-error";
-	String CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIVE_OK = "receive-ok";
-	String CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIVE_ERROR = "receive-error";
+
+	String CODESYSTEM_DATA_SET_STATUS_VALUE_PROVIDE_OK = "provide-ok";
+	String CODESYSTEM_DATA_SET_STATUS_VALUE_PROVIDE_ERROR = "provide-error";
 
 
 	int DSF_CLIENT_RETRY_6_TIMES = 6;

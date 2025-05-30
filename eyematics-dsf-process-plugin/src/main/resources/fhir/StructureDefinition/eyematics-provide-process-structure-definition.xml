@@ -116,7 +116,7 @@
         <element id="Task.output:data-set-status.value[x].system">
             <path value="Task.output.value[x].system"/>
             <min value="1"/>
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
+            <fixedUri value="http://eyematics.org/fhir/CodeSystem/data-set-status"/>
         </element>
         <element id="Task.output:data-set-status.value[x].code">
             <path value="Task.output.value[x].code"/>

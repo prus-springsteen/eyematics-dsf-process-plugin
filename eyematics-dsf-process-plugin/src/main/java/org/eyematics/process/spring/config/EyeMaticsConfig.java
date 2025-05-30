@@ -27,8 +27,5 @@ public class EyeMaticsConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DataSetStatusGenerator dataSetStatusGenerator()
-    {
-        return new DataSetStatusGenerator();
-    }
+    public DataSetStatusGenerator dataSetStatusGenerator() { return new DataSetStatusGenerator(); }
 }

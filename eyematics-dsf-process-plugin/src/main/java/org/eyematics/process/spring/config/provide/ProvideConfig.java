@@ -26,6 +26,7 @@ public class ProvideConfig {
     @Autowired
     private DataSetStatusGenerator dataSetStatusGenerator;
 
+
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dicFhirClientConfig.fhirClientFactory()); }
