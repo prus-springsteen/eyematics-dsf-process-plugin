@@ -5,19 +5,75 @@ import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.utils.generator.DataSetStatusGenerator;
+import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 public class StoreDataReceiptTask extends AbstractServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(StoreDataReceiptTask.class);
+    private final DataSetStatusGenerator dataSetStatusGenerator;
 
-    public StoreDataReceiptTask(ProcessPluginApi api) {
+    public StoreDataReceiptTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api);
+        this.dataSetStatusGenerator = dataSetStatusGenerator;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        Objects.requireNonNull(dataSetStatusGenerator, "dataSetStatusGenerator");
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> nothing to store, yet");
+        logger.info("-> something to store, now");
+        /*
+        String projectIdentifier = variables
+                .getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_PROJECT_IDENTIFIER);
+        String dmsIdentifier = variables.getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER);
+        */
+
+        /*
+        Task startTask = variables.getStartTask();
+        Task currentTask = variables.getLatestTask();
+
+        if (!currentTask.getId().equals(startTask.getId()))
+            handleReceivedResponse(startTask, currentTask);
+        else if (Task.TaskStatus.INPROGRESS.equals(startTask.getStatus()))
+            handleMissingResponse(startTask);
+
+        variables.updateTask(startTask);
+
+        if (Task.TaskStatus.FAILED.equals(startTask.getStatus())) {
+            api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
+                    .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
+                    .update(startTask);
+        }
+
+         */
+    }
+
+    private void handleReceivedResponse(Task startTask, Task currentTask) {
+        this.dataSetStatusGenerator.transformInputToOutput(currentTask, startTask, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS);
+
+        if (startTask.getOutput().stream().filter(Task.TaskOutputComponent::hasExtension)
+                .flatMap(o -> o.getExtension().stream())
+                .anyMatch(e -> EyeMaticsConstants.EXTENSION_DATA_SET_STATUS_ERROR_URL.equals(e.getUrl()))) {
+            startTask.setStatus(Task.TaskStatus.FAILED);
+        }
+    }
+
+    private void handleMissingResponse(Task startTask) {
+        startTask.setStatus(Task.TaskStatus.FAILED);
+        startTask.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(
+                "ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_MISSING",
+                EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
     }
 }

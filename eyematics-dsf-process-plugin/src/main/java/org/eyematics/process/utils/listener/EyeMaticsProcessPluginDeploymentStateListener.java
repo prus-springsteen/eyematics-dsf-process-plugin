@@ -26,7 +26,7 @@ public class EyeMaticsProcessPluginDeploymentStateListener implements ProcessPlu
     @Override
     public void afterPropertiesSet() throws Exception {
         Objects.requireNonNull(keyProvider, "keyProvider");
-        // Woran liegt das?
+        // Ist im Docker irgendwo fest hinterlegt...
         Configurator.setLevel("org.eyematics", Level.INFO);
     }
 

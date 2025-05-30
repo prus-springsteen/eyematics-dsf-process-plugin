@@ -27,8 +27,7 @@ public class DeleteProvideDataTask extends AbstractServiceDelegate {
         logger.info("-> something to delete");
         Task task = variables.getStartTask();
 
-        IdType binaryId = new IdType(
-                variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
+        IdType binaryId = new IdType(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
         /*
         String dmsIdentifier = variables.getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER);
         String projectIdentifier = variables
@@ -43,8 +42,8 @@ public class DeleteProvideDataTask extends AbstractServiceDelegate {
         */
         try
         {
-            logger.info("-> nothing to delete");
-            //deletePermanently(binaryId);
+            logger.info("-> now deleting ...");
+            deletePermanently(binaryId);
         }
         catch (Exception exception)
         {

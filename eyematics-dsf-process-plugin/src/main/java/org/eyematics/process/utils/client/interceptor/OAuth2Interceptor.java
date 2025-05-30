@@ -1,3 +1,7 @@
+/**
+ * @author Reto Wettstein (https://github.com/wetret)
+ */
+
 package org.eyematics.process.utils.client.interceptor;
 
 import java.util.Objects;
