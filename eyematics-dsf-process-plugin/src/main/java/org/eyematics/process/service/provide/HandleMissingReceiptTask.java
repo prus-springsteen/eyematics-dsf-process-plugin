@@ -8,16 +8,16 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HandleProvideErrorTask extends AbstractServiceDelegate {
+public class HandleMissingReceiptTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(HandleProvideErrorTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(HandleMissingReceiptTask.class);
 
-    public HandleProvideErrorTask(ProcessPluginApi api) {
+    public HandleMissingReceiptTask(ProcessPluginApi api) {
         super(api);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> oh no, there is an error ....");
+        logger.info("-> oh no, the receipt is missung ....");
     }
 }

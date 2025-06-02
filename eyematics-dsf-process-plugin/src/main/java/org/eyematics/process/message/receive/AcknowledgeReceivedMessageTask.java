@@ -24,7 +24,9 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
         logger.info("-> something to send");
-        return Stream.of(this.dataSetStatusGenerator.createDataSetStatusInput(EyeMaticsConstants.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_OK, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
-                EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, null));
+        return Stream.of(this.dataSetStatusGenerator.createDataSetStatusInput(EyeMaticsConstants.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_OK,
+                EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
+                null));
     }
 }

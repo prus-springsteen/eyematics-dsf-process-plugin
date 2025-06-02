@@ -5,19 +5,22 @@ import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FinalizeInitiateProcessTask extends AbstractServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(FinalizeInitiateProcessTask.class);
+    private final DataSetStatusGenerator dataSetStatusGenerator;
 
-    public FinalizeInitiateProcessTask(ProcessPluginApi api) {
+    public FinalizeInitiateProcessTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api);
+        this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Summing up the process in an Output .... later");
+        logger.info("-> Summing up the process in an Output...");
     }
 }

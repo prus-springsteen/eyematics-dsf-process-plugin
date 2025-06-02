@@ -53,12 +53,6 @@
         <dc:Bounds x="460" y="60" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0ig3rr1_di" bpmnElement="eyematicsReceiveProcessStartEvent">
-        <dc:Bounds x="192" y="82" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="168" y="125" width="84" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_157l3oe_di" bpmnElement="acknowledgeReceivedMessageTask">
         <dc:Bounds x="780" y="60" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -68,9 +62,15 @@
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0sn7w90_di" bpmnElement="eyematicsReceiveProcessEndEvent">
-        <dc:Bounds x="1022" y="82" width="36" height="36" />
+        <dc:Bounds x="942" y="82" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="998" y="125" width="84" height="27" />
+          <dc:Bounds x="918" y="125" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ig3rr1_di" bpmnElement="eyematicsReceiveProcessStartEvent">
+        <dc:Bounds x="202" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="178" y="125" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1a6we8f_di" bpmnElement="Flow_1a6we8f">
@@ -82,12 +82,12 @@
         <di:waypoint x="620" y="100" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18spp16_di" bpmnElement="Flow_18spp16">
-        <di:waypoint x="228" y="100" />
+        <di:waypoint x="238" y="100" />
         <di:waypoint x="300" y="100" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_11ffjn8_di" bpmnElement="Flow_11ffjn8">
         <di:waypoint x="880" y="100" />
-        <di:waypoint x="1022" y="100" />
+        <di:waypoint x="942" y="100" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1riebb4_di" bpmnElement="Flow_1riebb4">
         <di:waypoint x="720" y="100" />

@@ -53,7 +53,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleProvideErrorTask handleProvideErrorTask() { return  new HandleProvideErrorTask(api); }
+    public HandleMissingReceiptTask handleMissingReceiptTask() { return  new HandleMissingReceiptTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -61,6 +61,6 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public StoreDataReceiptTask storeDataReceiptTask() { return  new StoreDataReceiptTask(api, dataSetStatusGenerator); }
+    public FinalizeProvideProcessTask storeDataReceiptTask() { return  new FinalizeProvideProcessTask(api, dataSetStatusGenerator); }
 
 }

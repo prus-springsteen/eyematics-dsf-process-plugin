@@ -7,13 +7,18 @@
     </bpmn:startEvent>
     <bpmn:serviceTask id="selectRequestTargetsTask" name="Select Request Targets Task" camunda:class="org.eyematics.process.service.initiate.SelectRequestTargetsTask">
       <bpmn:incoming>Flow_0eepfqw</bpmn:incoming>
-      <bpmn:outgoing>Flow_0hkd9oq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0akizlr</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0eepfqw" sourceRef="eyematicsInitiateProcessStartEvent" targetRef="selectRequestTargetsTask" />
-    <bpmn:sequenceFlow id="Flow_0hkd9oq" sourceRef="selectRequestTargetsTask" targetRef="requestDataMessageTask" />
     <bpmn:endEvent id="eyematicsInitiateProcessEndEvent" name="Initiate Process End Event">
-      <bpmn:incoming>Flow_0xnsm16</bpmn:incoming>
+      <bpmn:incoming>Flow_1sbo85s</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0akizlr" sourceRef="selectRequestTargetsTask" targetRef="requestDataMessageTask" />
+    <bpmn:serviceTask id="finalizeInitiateProcessTask" name="Finalize Initiate Process Task" camunda:class="org.eyematics.process.service.initiate.FinalizeInitiateProcessTask">
+      <bpmn:incoming>Flow_0i7iomo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1sbo85s</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1sbo85s" sourceRef="finalizeInitiateProcessTask" targetRef="eyematicsInitiateProcessEndEvent" />
     <bpmn:sendTask id="requestDataMessageTask" name="Request Data Message Task" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
@@ -26,60 +31,56 @@
           <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0hkd9oq</bpmn:incoming>
-      <bpmn:outgoing>Flow_1e1tkif</bpmn:outgoing>
+      <bpmn:incoming>Flow_0akizlr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0i7iomo</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="${targets.entries}" camunda:elementVariable="target" />
     </bpmn:sendTask>
-    <bpmn:sequenceFlow id="Flow_1e1tkif" sourceRef="requestDataMessageTask" targetRef="finalizeInitiateProcessTask" />
-    <bpmn:serviceTask id="finalizeInitiateProcessTask" name="Finalize Initiate Process Task" camunda:class="org.eyematics.process.service.initiate.FinalizeInitiateProcessTask">
-      <bpmn:incoming>Flow_1e1tkif</bpmn:incoming>
-      <bpmn:outgoing>Flow_0xnsm16</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0xnsm16" sourceRef="finalizeInitiateProcessTask" targetRef="eyematicsInitiateProcessEndEvent" />
+    <bpmn:sequenceFlow id="Flow_0i7iomo" sourceRef="requestDataMessageTask" targetRef="finalizeInitiateProcessTask" />
   </bpmn:process>
   <bpmn:message id="Message_2pg57ek" name="initiateProcessStartEventMessage" />
   <bpmn:message id="Message_0mv4rmf" name="receiveProcessStartEventMessage" />
+  <bpmn:message id="Message_18ld88c" name="feasibilitySingleDicResultMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="eyematicsorg_eyematicsInitiateProcess">
       <bpmndi:BPMNShape id="Event_1ir0eoy_di" bpmnElement="eyematicsInitiateProcessStartEvent">
-        <dc:Bounds x="132" y="102" width="36" height="36" />
+        <dc:Bounds x="202" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="114" y="145" width="76" height="27" />
+          <dc:Bounds x="184" y="145" width="76" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02qi7yn_di" bpmnElement="selectRequestTargetsTask">
-        <dc:Bounds x="220" y="80" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0b54jtx_di" bpmnElement="requestDataMessageTask">
-        <dc:Bounds x="400" y="80" width="100" height="80" />
+      <bpmndi:BPMNShape id="BPMNShape_0dziaqm" bpmnElement="finalizeInitiateProcessTask">
+        <dc:Bounds x="600" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1n5kvw1_di" bpmnElement="eyematicsInitiateProcessEndEvent">
-        <dc:Bounds x="732" y="102" width="36" height="36" />
+        <dc:Bounds x="752" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="714" y="145" width="76" height="27" />
+          <dc:Bounds x="734" y="145" width="76" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_09u3qwt_di" bpmnElement="finalizeInitiateProcessTask">
-        <dc:Bounds x="570" y="80" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_02qi7yn_di" bpmnElement="selectRequestTargetsTask">
+        <dc:Bounds x="290" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b54jtx_di" bpmnElement="requestDataMessageTask">
+        <dc:Bounds x="450" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0eepfqw_di" bpmnElement="Flow_0eepfqw">
-        <di:waypoint x="168" y="120" />
-        <di:waypoint x="220" y="120" />
+        <di:waypoint x="238" y="120" />
+        <di:waypoint x="290" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0hkd9oq_di" bpmnElement="Flow_0hkd9oq">
-        <di:waypoint x="320" y="120" />
-        <di:waypoint x="400" y="120" />
+      <bpmndi:BPMNEdge id="Flow_0i7iomo_di" bpmnElement="Flow_0i7iomo">
+        <di:waypoint x="550" y="120" />
+        <di:waypoint x="600" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1e1tkif_di" bpmnElement="Flow_1e1tkif">
-        <di:waypoint x="500" y="120" />
-        <di:waypoint x="570" y="120" />
+      <bpmndi:BPMNEdge id="Flow_1sbo85s_di" bpmnElement="Flow_1sbo85s">
+        <di:waypoint x="700" y="120" />
+        <di:waypoint x="752" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0xnsm16_di" bpmnElement="Flow_0xnsm16">
-        <di:waypoint x="670" y="120" />
-        <di:waypoint x="732" y="120" />
+      <bpmndi:BPMNEdge id="Flow_0akizlr_di" bpmnElement="Flow_0akizlr">
+        <di:waypoint x="390" y="120" />
+        <di:waypoint x="450" y="120" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -13,12 +13,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
-public class StoreDataReceiptTask extends AbstractServiceDelegate {
+public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(StoreDataReceiptTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(FinalizeProvideProcessTask.class);
     private final DataSetStatusGenerator dataSetStatusGenerator;
 
-    public StoreDataReceiptTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+    public FinalizeProvideProcessTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api);
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
