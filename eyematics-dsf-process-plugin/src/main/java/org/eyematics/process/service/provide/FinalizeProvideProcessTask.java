@@ -33,12 +33,6 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> something to store, now");
-        /*
-        String projectIdentifier = variables
-                .getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_PROJECT_IDENTIFIER);
-        String dmsIdentifier = variables.getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER);
-        */
-
 
         Task startTask = variables.getStartTask();
         Task currentTask = variables.getLatestTask();

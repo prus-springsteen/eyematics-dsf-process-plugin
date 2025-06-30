@@ -7,12 +7,40 @@
     <bpmn:participant id="Participant_1st8s8m" name="Initiate Process" processRef="Process_1xvt6v7" />
     <bpmn:participant id="Participant_1x0yfsr" name="Provide Process" processRef="Process_0keovjf" />
     <bpmn:participant id="Participant_0ypp6xp" name="Receive Process" processRef="Process_1vl05mg" />
-    <bpmn:messageFlow id="Flow_05sbyag" sourceRef="requestDataMessageTask" targetRef="eyematicsProvideProcessStartEvent" />
-    <bpmn:messageFlow id="Flow_1q6bg9p" sourceRef="provideDataMessageTask" targetRef="eyematicsReceiveProcessStartEvent" />
-    <bpmn:messageFlow id="Flow_00ppcnb" sourceRef="acknowledgeReceivedMessageTask" targetRef="eyematicsProvideProcessReceiveReceiptEvent" />
+    <bpmn:messageFlow id="Flow_1t6isau" sourceRef="RequestDataMessageTask" targetRef="eyematicsProvideProcessStartEvent" />
+    <bpmn:messageFlow id="Flow_0u8ladg" sourceRef="InitiateReceiveProcessTask" targetRef="PrepareReceiveDataTask" />
+    <bpmn:messageFlow id="Flow_0jb9le5" sourceRef="provideDataMessageTask" targetRef="ReceiveProcessStartEvent" />
+    <bpmn:messageFlow id="Flow_12qawwk" sourceRef="AcknowledgeReceivedMessageTask" targetRef="eyematicsProvideProcessReceiveReceiptEvent" />
   </bpmn:collaboration>
   <bpmn:process id="Process_1xvt6v7" isExecutable="false">
-    <bpmn:sendTask id="requestDataMessageTask" name="Request Data Message Task" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
+    <bpmn:startEvent id="eyematicsInitiateProcessStartEvent" name="Initiate Process Start Event">
+      <bpmn:outgoing>Flow_1aiyums</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0prfenc" messageRef="Message_2pg57ek" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="InitiateReceiveTargetTask" name="Initiate Receive Target Task" camunda:class="org.eyematics.process.service.initiate.InitiateReceiveTargetTask">
+      <bpmn:incoming>Flow_1aiyums</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sj9kw1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="selectRequestTargetsTask" name="Select Request Targets Task" camunda:class="org.eyematics.process.service.initiate.SelectRequestTargetsTask">
+      <bpmn:incoming>Flow_0sj9kw1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0d5fww4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="InitiateReceiveProcessTask" name="Initiate Receive Process Task" camunda:class="org.eyematics.process.message.initiate.InitiateReceiveProcessTask">
+      <bpmn:extensionElements>
+        <camunda:field name="profile">
+          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-defintion|#{version}</camunda:string>
+        </camunda:field>
+        <camunda:field name="messageName">
+          <camunda:string>receiveProcessInitiateEventMessage</camunda:string>
+        </camunda:field>
+        <camunda:field name="instantiatesCanonical">
+          <camunda:string>http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}</camunda:string>
+        </camunda:field>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0d5fww4</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yk585e</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="RequestDataMessageTask" name="Request Data Message Task" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
           <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
@@ -24,28 +52,22 @@
           <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0akizlr</bpmn:incoming>
-      <bpmn:outgoing>Flow_0i7iomo</bpmn:outgoing>
+      <bpmn:incoming>Flow_1yk585e</bpmn:incoming>
+      <bpmn:outgoing>Flow_1eoul3o</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="${targets.entries}" camunda:elementVariable="target" />
     </bpmn:sendTask>
-    <bpmn:serviceTask id="selectRequestTargetsTask" name="Select Request Targets Task" camunda:class="org.eyematics.process.service.initiate.SelectRequestTargetsTask">
-      <bpmn:incoming>Flow_0eepfqw</bpmn:incoming>
-      <bpmn:outgoing>Flow_0akizlr</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:serviceTask id="finalizeInitiateProcessTask" name="Finalize Initiate Process Task" camunda:class="org.eyematics.process.service.initiate.FinalizeInitiateProcessTask">
-      <bpmn:incoming>Flow_0i7iomo</bpmn:incoming>
+      <bpmn:incoming>Flow_1eoul3o</bpmn:incoming>
       <bpmn:outgoing>Flow_1sbo85s</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="eyematicsInitiateProcessEndEvent" name="Initiate Process End Event">
       <bpmn:incoming>Flow_1sbo85s</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:startEvent id="eyematicsInitiateProcessStartEvent" name="Initiate Process Start Event">
-      <bpmn:outgoing>Flow_0eepfqw</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0h5x0xa" messageRef="Message_2pg57ek" />
-    </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0akizlr" sourceRef="selectRequestTargetsTask" targetRef="requestDataMessageTask" />
-    <bpmn:sequenceFlow id="Flow_0i7iomo" sourceRef="requestDataMessageTask" targetRef="finalizeInitiateProcessTask" />
-    <bpmn:sequenceFlow id="Flow_0eepfqw" sourceRef="eyematicsInitiateProcessStartEvent" targetRef="selectRequestTargetsTask" />
+    <bpmn:sequenceFlow id="Flow_1aiyums" sourceRef="eyematicsInitiateProcessStartEvent" targetRef="InitiateReceiveTargetTask" />
+    <bpmn:sequenceFlow id="Flow_0sj9kw1" sourceRef="InitiateReceiveTargetTask" targetRef="selectRequestTargetsTask" />
+    <bpmn:sequenceFlow id="Flow_0d5fww4" sourceRef="selectRequestTargetsTask" targetRef="InitiateReceiveProcessTask" />
+    <bpmn:sequenceFlow id="Flow_1yk585e" sourceRef="InitiateReceiveProcessTask" targetRef="RequestDataMessageTask" />
+    <bpmn:sequenceFlow id="Flow_1eoul3o" sourceRef="RequestDataMessageTask" targetRef="finalizeInitiateProcessTask" />
     <bpmn:sequenceFlow id="Flow_1sbo85s" sourceRef="finalizeInitiateProcessTask" targetRef="eyematicsInitiateProcessEndEvent" />
   </bpmn:process>
   <bpmn:process id="Process_0keovjf" isExecutable="false">
@@ -108,26 +130,6 @@
       <bpmn:outgoing>Flow_1aq1svv</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0nllou2" messageRef="Message_27pktrl" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:boundaryEvent id="dataProvideErrorEvent" attachedToRef="provideDataMessageTask">
-      <bpmn:outgoing>Flow_130sq4j</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0uho9zt" errorRef="Error_1drpd7l" camunda:errorCodeVariable="dataProvideError" />
-    </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1ah56wr" sourceRef="eyematicsProvideProcessStartEvent" targetRef="readProvideDataTask" />
-    <bpmn:sequenceFlow id="Flow_0v0dwm8" sourceRef="readProvideDataTask" targetRef="createDataBundleTask" />
-    <bpmn:sequenceFlow id="Flow_05slqed" sourceRef="createDataBundleTask" targetRef="encryptDataBundleTask" />
-    <bpmn:sequenceFlow id="Flow_0hwi134" sourceRef="encryptDataBundleTask" targetRef="selectReceiveTargetTask" />
-    <bpmn:sequenceFlow id="Flow_19ds8ie" sourceRef="selectReceiveTargetTask" targetRef="storeProvideDataTask" />
-    <bpmn:sequenceFlow id="Flow_01wl9ab" sourceRef="storeProvideDataTask" targetRef="provideDataMessageTask" />
-    <bpmn:sequenceFlow id="Flow_0hpqg3y" sourceRef="provideDataMessageTask" targetRef="Gateway_0d5hn6e" />
-    <bpmn:sequenceFlow id="Flow_1yo5amk" sourceRef="Gateway_0d5hn6e" targetRef="waitForRetrieval" />
-    <bpmn:sequenceFlow id="Flow_0nixdsa" sourceRef="Gateway_0d5hn6e" targetRef="eyematicsProvideProcessReceiveReceiptEvent" />
-    <bpmn:sequenceFlow id="Flow_1s6vhsk" sourceRef="waitForRetrieval" targetRef="handleMissingReceiptTask" />
-    <bpmn:sequenceFlow id="Flow_1aq1svv" sourceRef="eyematicsProvideProcessReceiveReceiptEvent" targetRef="Gateway_056j4wv" />
-    <bpmn:sequenceFlow id="Flow_16i01wn" sourceRef="handleMissingReceiptTask" targetRef="Gateway_056j4wv" />
-    <bpmn:sequenceFlow id="Flow_130sq4j" sourceRef="dataProvideErrorEvent" targetRef="Gateway_056j4wv" />
-    <bpmn:sequenceFlow id="Flow_1hmepm8" sourceRef="Gateway_056j4wv" targetRef="deleteProvideDataTask" />
-    <bpmn:sequenceFlow id="Flow_1ddtkc8" sourceRef="deleteProvideDataTask" targetRef="finalizeProvideProcessTask" />
-    <bpmn:sequenceFlow id="Flow_06mptsp" sourceRef="finalizeProvideProcessTask" targetRef="eyematicsProvideProcessEndEvent" />
     <bpmn:serviceTask id="handleMissingReceiptTask" name="Handle Missing Receipt Task" camunda:class="org.eyematics.process.service.provide.HandleMissingReceiptTask">
       <bpmn:incoming>Flow_1s6vhsk</bpmn:incoming>
       <bpmn:outgoing>Flow_16i01wn</bpmn:outgoing>
@@ -149,307 +151,473 @@
     <bpmn:endEvent id="eyematicsProvideProcessEndEvent" name="Provide Process End Event">
       <bpmn:incoming>Flow_06mptsp</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:boundaryEvent id="dataProvideErrorEvent" attachedToRef="provideDataMessageTask">
+      <bpmn:outgoing>Flow_130sq4j</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0uho9zt" errorRef="Error_1drpd7l" camunda:errorCodeVariable="dataProvideError" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1ah56wr" sourceRef="eyematicsProvideProcessStartEvent" targetRef="readProvideDataTask" />
+    <bpmn:sequenceFlow id="Flow_0v0dwm8" sourceRef="readProvideDataTask" targetRef="createDataBundleTask" />
+    <bpmn:sequenceFlow id="Flow_05slqed" sourceRef="createDataBundleTask" targetRef="encryptDataBundleTask" />
+    <bpmn:sequenceFlow id="Flow_0hwi134" sourceRef="encryptDataBundleTask" targetRef="selectReceiveTargetTask" />
+    <bpmn:sequenceFlow id="Flow_19ds8ie" sourceRef="selectReceiveTargetTask" targetRef="storeProvideDataTask" />
+    <bpmn:sequenceFlow id="Flow_01wl9ab" sourceRef="storeProvideDataTask" targetRef="provideDataMessageTask" />
+    <bpmn:sequenceFlow id="Flow_0hpqg3y" sourceRef="provideDataMessageTask" targetRef="Gateway_0d5hn6e" />
+    <bpmn:sequenceFlow id="Flow_1yo5amk" sourceRef="Gateway_0d5hn6e" targetRef="waitForRetrieval" />
+    <bpmn:sequenceFlow id="Flow_0nixdsa" sourceRef="Gateway_0d5hn6e" targetRef="eyematicsProvideProcessReceiveReceiptEvent" />
+    <bpmn:sequenceFlow id="Flow_1s6vhsk" sourceRef="waitForRetrieval" targetRef="handleMissingReceiptTask" />
+    <bpmn:sequenceFlow id="Flow_1aq1svv" sourceRef="eyematicsProvideProcessReceiveReceiptEvent" targetRef="Gateway_056j4wv" />
+    <bpmn:sequenceFlow id="Flow_16i01wn" sourceRef="handleMissingReceiptTask" targetRef="Gateway_056j4wv" />
+    <bpmn:sequenceFlow id="Flow_130sq4j" sourceRef="dataProvideErrorEvent" targetRef="Gateway_056j4wv" />
+    <bpmn:sequenceFlow id="Flow_1hmepm8" sourceRef="Gateway_056j4wv" targetRef="deleteProvideDataTask" />
+    <bpmn:sequenceFlow id="Flow_1ddtkc8" sourceRef="deleteProvideDataTask" targetRef="finalizeProvideProcessTask" />
+    <bpmn:sequenceFlow id="Flow_06mptsp" sourceRef="finalizeProvideProcessTask" targetRef="eyematicsProvideProcessEndEvent" />
   </bpmn:process>
   <bpmn:process id="Process_1vl05mg" isExecutable="false">
-    <bpmn:startEvent id="eyematicsReceiveProcessStartEvent" name="Receive Process Start Event">
+    <bpmn:startEvent id="eyematicsReceiveProcessInitiateEvent" name="Receive Process Initiate Event">
       <bpmn:outgoing>Flow_18spp16</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0hxfc4s" messageRef="Message_2vm6cli" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1vfhkc2" messageRef="Message_2vm6cli" />
     </bpmn:startEvent>
-    <bpmn:serviceTask id="downloadRequestedDataTask" name="Download Requested Data Task" camunda:class="org.eyematics.process.service.receive.DownloadRequestedDataTask">
+    <bpmn:serviceTask id="PrepareReceiveDataTask" name="Prepare Receive Data Task" camunda:class="org.eyematics.process.service.receive.PrepareReceiveDataTask">
       <bpmn:incoming>Flow_18spp16</bpmn:incoming>
-      <bpmn:outgoing>Flow_1a6we8f</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z966b1</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="decryptRequestedDataTask" name="Decrypt Requested Data Task" camunda:class="org.eyematics.process.service.receive.DecryptRequestedDataTask">
-      <bpmn:incoming>Flow_1a6we8f</bpmn:incoming>
-      <bpmn:outgoing>Flow_07l6162</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="selectProvideTargetTask" name="Select Provide Target Task" camunda:class="org.eyematics.process.service.receive.SelectProvideTargetTask">
-      <bpmn:incoming>Flow_07l6162</bpmn:incoming>
-      <bpmn:outgoing>Flow_1riebb4</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sendTask id="acknowledgeReceivedMessageTask" name="Acknowledge Received Message Task" camunda:class="org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask">
-      <bpmn:extensionElements>
-        <camunda:field name="profile">
-          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}</camunda:string>
-        </camunda:field>
-        <camunda:field name="messageName">
-          <camunda:string>provideProcessReceiveReceiptEventMessage</camunda:string>
-        </camunda:field>
-        <camunda:field name="instantiatesCanonical">
-          <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
-        </camunda:field>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1riebb4</bpmn:incoming>
-      <bpmn:outgoing>Flow_11ffjn8</bpmn:outgoing>
-    </bpmn:sendTask>
-    <bpmn:endEvent id="eyematicsReceiveProcessEndEvent" name="Receive Process End Event">
-      <bpmn:incoming>Flow_11ffjn8</bpmn:incoming>
+    <bpmn:endEvent id="Event_0xptxan" name="Receive Process Full End Event">
+      <bpmn:incoming>Flow_0ki9xci</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_18spp16" sourceRef="eyematicsReceiveProcessStartEvent" targetRef="downloadRequestedDataTask" />
-    <bpmn:sequenceFlow id="Flow_1a6we8f" sourceRef="downloadRequestedDataTask" targetRef="decryptRequestedDataTask" />
-    <bpmn:sequenceFlow id="Flow_07l6162" sourceRef="decryptRequestedDataTask" targetRef="selectProvideTargetTask" />
-    <bpmn:sequenceFlow id="Flow_1riebb4" sourceRef="selectProvideTargetTask" targetRef="acknowledgeReceivedMessageTask" />
-    <bpmn:sequenceFlow id="Flow_11ffjn8" sourceRef="acknowledgeReceivedMessageTask" targetRef="eyematicsReceiveProcessEndEvent" />
+    <bpmn:subProcess id="ReceiveSubProcess" name="Receive Subprocess">
+      <bpmn:incoming>Flow_0z966b1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ki9xci</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${targets.entries}" camunda:elementVariable="target">
+        <bpmn:extensionElements>
+          <camunda:failedJobRetryTimeCycle>R0/PT5S</camunda:failedJobRetryTimeCycle>
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
+      <bpmn:startEvent id="StartSendAndReceive" name="Start Send and Receive ">
+        <bpmn:outgoing>Flow_0fw41va</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:eventBasedGateway id="Gateway_1b6x5vf">
+        <bpmn:extensionElements>
+          <camunda:executionListener class="org.eyematics.process.utils.listener.CorrelationKeyReceiveProcessListener" event="start" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0fw41va</bpmn:incoming>
+        <bpmn:outgoing>Flow_01zfu68</bpmn:outgoing>
+        <bpmn:outgoing>Flow_0i47abi</bpmn:outgoing>
+      </bpmn:eventBasedGateway>
+      <bpmn:intermediateCatchEvent id="ReceiveProcessStartEvent" name="Receive Process Start Event">
+        <bpmn:incoming>Flow_0i47abi</bpmn:incoming>
+        <bpmn:outgoing>Flow_0j105z2</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_0y848n1" messageRef="Message_0mv4rmf" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:intermediateCatchEvent id="Event_0i9gmj0" name="Just Waiting Five More Minutes">
+        <bpmn:incoming>Flow_01zfu68</bpmn:incoming>
+        <bpmn:outgoing>Flow_1dvhc66</bpmn:outgoing>
+        <bpmn:timerEventDefinition id="TimerEventDefinition_0l4goi3">
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+        </bpmn:timerEventDefinition>
+      </bpmn:intermediateCatchEvent>
+      <bpmn:serviceTask id="DownloadRequestedDataTask" name="Download Requested Data Task" camunda:class="org.eyematics.process.service.receive.DownloadRequestedDataTask">
+        <bpmn:incoming>Flow_0j105z2</bpmn:incoming>
+        <bpmn:outgoing>Flow_11ytt6e</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="LogReceiveFailedTask" name="Log Receive Failed Task" camunda:class="org.eyematics.process.service.receive.LogReceiveFailedTask">
+        <bpmn:incoming>Flow_1dvhc66</bpmn:incoming>
+        <bpmn:outgoing>Flow_0w8tl50</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="DecryptRequestedDataTask" name="Decrypt Requested Data Task" camunda:class="org.eyematics.process.service.receive.DecryptRequestedDataTask">
+        <bpmn:incoming>Flow_11ytt6e</bpmn:incoming>
+        <bpmn:outgoing>Flow_1mddodc</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="SelectProvideTargetTask" name="Select Provide Target Task" camunda:class="org.eyematics.process.service.receive.SelectProvideTargetTask">
+        <bpmn:incoming>Flow_1mddodc</bpmn:incoming>
+        <bpmn:outgoing>Flow_008izfr</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sendTask id="AcknowledgeReceivedMessageTask" name="Acknowledge Received Message Task" camunda:class="org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask">
+        <bpmn:extensionElements>
+          <camunda:field name="profile">
+            <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}</camunda:string>
+          </camunda:field>
+          <camunda:field name="messageName">
+            <camunda:string>provideProcessReceiveReceiptEventMessage</camunda:string>
+          </camunda:field>
+          <camunda:field name="instantiatesCanonical">
+            <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
+          </camunda:field>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_008izfr</bpmn:incoming>
+        <bpmn:outgoing>Flow_1dx7fqg</bpmn:outgoing>
+      </bpmn:sendTask>
+      <bpmn:endEvent id="Event_00dkfcj" name="Receive Process End Event" camunda:asyncAfter="true">
+        <bpmn:incoming>Flow_0w8tl50</bpmn:incoming>
+        <bpmn:incoming>Flow_1dx7fqg</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0fw41va" sourceRef="StartSendAndReceive" targetRef="Gateway_1b6x5vf" />
+      <bpmn:sequenceFlow id="Flow_01zfu68" sourceRef="Gateway_1b6x5vf" targetRef="Event_0i9gmj0" />
+      <bpmn:sequenceFlow id="Flow_0i47abi" sourceRef="Gateway_1b6x5vf" targetRef="ReceiveProcessStartEvent" />
+      <bpmn:sequenceFlow id="Flow_0j105z2" sourceRef="ReceiveProcessStartEvent" targetRef="DownloadRequestedDataTask" />
+      <bpmn:sequenceFlow id="Flow_1dvhc66" sourceRef="Event_0i9gmj0" targetRef="LogReceiveFailedTask" />
+      <bpmn:sequenceFlow id="Flow_11ytt6e" sourceRef="DownloadRequestedDataTask" targetRef="DecryptRequestedDataTask" />
+      <bpmn:sequenceFlow id="Flow_0w8tl50" sourceRef="LogReceiveFailedTask" targetRef="Event_00dkfcj" />
+      <bpmn:sequenceFlow id="Flow_1mddodc" sourceRef="DecryptRequestedDataTask" targetRef="SelectProvideTargetTask" />
+      <bpmn:sequenceFlow id="Flow_008izfr" sourceRef="SelectProvideTargetTask" targetRef="AcknowledgeReceivedMessageTask" />
+      <bpmn:sequenceFlow id="Flow_1dx7fqg" sourceRef="AcknowledgeReceivedMessageTask" targetRef="Event_00dkfcj" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_18spp16" sourceRef="eyematicsReceiveProcessInitiateEvent" targetRef="PrepareReceiveDataTask" />
+    <bpmn:sequenceFlow id="Flow_0z966b1" sourceRef="PrepareReceiveDataTask" targetRef="ReceiveSubProcess" />
+    <bpmn:sequenceFlow id="Flow_0ki9xci" sourceRef="ReceiveSubProcess" targetRef="Event_0xptxan" />
   </bpmn:process>
   <bpmn:message id="Message_2vm6cli" name="receiveProcessStartEventMessage" />
   <bpmn:error id="Error_1drpd7l" name="dataProvideError" errorCode="dataProvideError" />
+  <bpmn:message id="Message_0mv4rmf" name="receiveProcessStartEventMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_19ldkbl">
+      <bpmndi:BPMNShape id="Participant_1st8s8m_di" bpmnElement="Participant_1st8s8m" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="810" height="380" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ibx6wt" bpmnElement="eyematicsInitiateProcessStartEvent">
+        <dc:Bounds x="222" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="202" y="328" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18dnm63_di" bpmnElement="InitiateReceiveTargetTask">
+        <dc:Bounds x="290" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_14c3816" bpmnElement="selectRequestTargetsTask">
+        <dc:Bounds x="410" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01x7x2r_di" bpmnElement="InitiateReceiveProcessTask">
+        <dc:Bounds x="530" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0n3b1ug" bpmnElement="RequestDataMessageTask">
+        <dc:Bounds x="650" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1k7uluw" bpmnElement="finalizeInitiateProcessTask">
+        <dc:Bounds x="770" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_11jsllo" bpmnElement="eyematicsInitiateProcessEndEvent">
+        <dc:Bounds x="902" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="884" y="325" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1aiyums_di" bpmnElement="Flow_1aiyums">
+        <di:waypoint x="258" y="300" />
+        <di:waypoint x="290" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sj9kw1_di" bpmnElement="Flow_0sj9kw1">
+        <di:waypoint x="390" y="300" />
+        <di:waypoint x="410" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d5fww4_di" bpmnElement="Flow_0d5fww4">
+        <di:waypoint x="510" y="300" />
+        <di:waypoint x="530" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yk585e_di" bpmnElement="Flow_1yk585e">
+        <di:waypoint x="630" y="300" />
+        <di:waypoint x="650" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1eoul3o_di" bpmnElement="Flow_1eoul3o">
+        <di:waypoint x="750" y="300" />
+        <di:waypoint x="770" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0dfophy" bpmnElement="Flow_1sbo85s">
+        <di:waypoint x="870" y="300" />
+        <di:waypoint x="902" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_0ypp6xp_di" bpmnElement="Participant_0ypp6xp" isHorizontal="true">
+        <dc:Bounds x="1010" y="80" width="1230" height="380" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_148r7vk" bpmnElement="eyematicsReceiveProcessInitiateEvent">
+        <dc:Bounds x="1072" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1048" y="315" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1b2bdbc" bpmnElement="PrepareReceiveDataTask">
+        <dc:Bounds x="1170" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xptxan_di" bpmnElement="Event_0xptxan">
+        <dc:Bounds x="2162" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2139" y="315" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0pzj6m5" bpmnElement="ReceiveSubProcess" isExpanded="true">
+        <dc:Bounds x="1320" y="140" width="770" height="300" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1a8x2ym" bpmnElement="StartSendAndReceive">
+        <dc:Bounds x="1372" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1353" y="246" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0b09dw6" bpmnElement="Gateway_1b6x5vf">
+        <dc:Bounds x="1465" y="195" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17jsrqq_di" bpmnElement="ReceiveProcessStartEvent">
+        <dc:Bounds x="1472" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1378" y="336" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_087etey" bpmnElement="Event_0i9gmj0">
+        <dc:Bounds x="1582" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1560" y="245" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1r8cj65" bpmnElement="DownloadRequestedDataTask">
+        <dc:Bounds x="1550" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_16xhow2" bpmnElement="LogReceiveFailedTask">
+        <dc:Bounds x="1680" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0ioay57" bpmnElement="DecryptRequestedDataTask">
+        <dc:Bounds x="1680" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_126kest" bpmnElement="SelectProvideTargetTask">
+        <dc:Bounds x="1810" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1aasxea" bpmnElement="AcknowledgeReceivedMessageTask">
+        <dc:Bounds x="1940" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0jgozke" bpmnElement="Event_00dkfcj">
+        <dc:Bounds x="1972" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1948" y="165" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0fw41va_di" bpmnElement="Flow_0fw41va">
+        <di:waypoint x="1408" y="220" />
+        <di:waypoint x="1465" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01zfu68_di" bpmnElement="Flow_01zfu68">
+        <di:waypoint x="1515" y="220" />
+        <di:waypoint x="1582" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i47abi_di" bpmnElement="Flow_0i47abi">
+        <di:waypoint x="1490" y="245" />
+        <di:waypoint x="1490" y="332" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j105z2_di" bpmnElement="Flow_0j105z2">
+        <di:waypoint x="1508" y="350" />
+        <di:waypoint x="1550" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_193dtmm" bpmnElement="Flow_1dvhc66">
+        <di:waypoint x="1618" y="220" />
+        <di:waypoint x="1680" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_06gl4xj" bpmnElement="Flow_11ytt6e">
+        <di:waypoint x="1650" y="350" />
+        <di:waypoint x="1680" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0w8tl50_di" bpmnElement="Flow_0w8tl50">
+        <di:waypoint x="1780" y="220" />
+        <di:waypoint x="1972" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1htspf4" bpmnElement="Flow_1mddodc">
+        <di:waypoint x="1780" y="350" />
+        <di:waypoint x="1810" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0wg5qtc" bpmnElement="Flow_008izfr">
+        <di:waypoint x="1910" y="350" />
+        <di:waypoint x="1940" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0xnbqd6" bpmnElement="Flow_1dx7fqg">
+        <di:waypoint x="1990" y="310" />
+        <di:waypoint x="1990" y="238" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18spp16_di" bpmnElement="Flow_18spp16">
+        <di:waypoint x="1108" y="290" />
+        <di:waypoint x="1170" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1cqonaa" bpmnElement="Flow_0z966b1">
+        <di:waypoint x="1270" y="290" />
+        <di:waypoint x="1320" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ki9xci_di" bpmnElement="Flow_0ki9xci">
+        <di:waypoint x="2090" y="290" />
+        <di:waypoint x="2162" y="290" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1x0yfsr_di" bpmnElement="Participant_1x0yfsr" isHorizontal="true">
-        <dc:Bounds x="160" y="380" width="1480" height="340" />
+        <dc:Bounds x="700" y="520" width="1502" height="340" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0utq5qa_di" bpmnElement="eyematicsProvideProcessStartEvent">
-        <dc:Bounds x="222" y="502" width="36" height="36" />
+        <dc:Bounds x="762" y="642" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="202" y="545" width="81" height="27" />
+          <dc:Bounds x="742" y="685" width="81" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12i1mte_di" bpmnElement="readProvideDataTask">
-        <dc:Bounds x="300" y="480" width="100" height="80" />
+        <dc:Bounds x="840" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0q3c3pw_di" bpmnElement="createDataBundleTask">
-        <dc:Bounds x="420" y="480" width="100" height="80" />
+        <dc:Bounds x="960" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0l3p2ud_di" bpmnElement="encryptDataBundleTask">
-        <dc:Bounds x="540" y="480" width="100" height="80" />
+        <dc:Bounds x="1080" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12lqbad_di" bpmnElement="selectReceiveTargetTask">
-        <dc:Bounds x="660" y="480" width="100" height="80" />
+        <dc:Bounds x="1200" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0az3clc_di" bpmnElement="storeProvideDataTask">
-        <dc:Bounds x="780" y="480" width="100" height="80" />
+        <dc:Bounds x="1320" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1anh2xp_di" bpmnElement="provideDataMessageTask">
-        <dc:Bounds x="900" y="480" width="100" height="80" />
+        <dc:Bounds x="1440" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0d5hn6e_di" bpmnElement="Gateway_0d5hn6e">
-        <dc:Bounds x="1025" y="495" width="50" height="50" />
+        <dc:Bounds x="1565" y="635" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1mhzwqb_di" bpmnElement="waitForRetrieval">
-        <dc:Bounds x="1092" y="632" width="36" height="36" />
+        <dc:Bounds x="1632" y="772" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1081" y="675" width="60" height="14" />
+          <dc:Bounds x="1621" y="815" width="60" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0g58j5z_di" bpmnElement="eyematicsProvideProcessReceiveReceiptEvent">
-        <dc:Bounds x="1092" y="502" width="36" height="36" />
+        <dc:Bounds x="1632" y="642" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1071" y="545" width="82" height="40" />
+          <dc:Bounds x="1611" y="685" width="82" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0pbq2v5_di" bpmnElement="handleMissingReceiptTask">
-        <dc:Bounds x="1160" y="610" width="100" height="80" />
+        <dc:Bounds x="1700" y="750" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_056j4wv_di" bpmnElement="Gateway_056j4wv" isMarkerVisible="true">
-        <dc:Bounds x="1255" y="495" width="50" height="50" />
+        <dc:Bounds x="1795" y="635" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1odhi08_di" bpmnElement="deleteProvideDataTask">
-        <dc:Bounds x="1320" y="480" width="100" height="80" />
+        <dc:Bounds x="1860" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0t19sv9_di" bpmnElement="finalizeProvideProcessTask">
-        <dc:Bounds x="1440" y="480" width="100" height="80" />
+        <dc:Bounds x="1980" y="620" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0dqh5q3_di" bpmnElement="eyematicsProvideProcessEndEvent">
-        <dc:Bounds x="1572" y="502" width="36" height="36" />
+        <dc:Bounds x="2112" y="642" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1550" y="545" width="81" height="27" />
+          <dc:Bounds x="2090" y="685" width="81" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_08mlo90_di" bpmnElement="dataProvideErrorEvent">
-        <dc:Bounds x="982" y="462" width="36" height="36" />
+        <dc:Bounds x="1522" y="602" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1038" y="206" width="64" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1ah56wr_di" bpmnElement="Flow_1ah56wr">
-        <di:waypoint x="258" y="520" />
-        <di:waypoint x="300" y="520" />
+        <di:waypoint x="798" y="660" />
+        <di:waypoint x="840" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0v0dwm8_di" bpmnElement="Flow_0v0dwm8">
-        <di:waypoint x="400" y="520" />
-        <di:waypoint x="420" y="520" />
+        <di:waypoint x="940" y="660" />
+        <di:waypoint x="960" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_05slqed_di" bpmnElement="Flow_05slqed">
-        <di:waypoint x="520" y="520" />
-        <di:waypoint x="540" y="520" />
+        <di:waypoint x="1060" y="660" />
+        <di:waypoint x="1080" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0hwi134_di" bpmnElement="Flow_0hwi134">
-        <di:waypoint x="640" y="520" />
-        <di:waypoint x="660" y="520" />
+        <di:waypoint x="1180" y="660" />
+        <di:waypoint x="1200" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_19ds8ie_di" bpmnElement="Flow_19ds8ie">
-        <di:waypoint x="760" y="520" />
-        <di:waypoint x="780" y="520" />
+        <di:waypoint x="1300" y="660" />
+        <di:waypoint x="1320" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_01wl9ab_di" bpmnElement="Flow_01wl9ab">
-        <di:waypoint x="880" y="520" />
-        <di:waypoint x="900" y="520" />
+        <di:waypoint x="1420" y="660" />
+        <di:waypoint x="1440" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0hpqg3y_di" bpmnElement="Flow_0hpqg3y">
-        <di:waypoint x="1000" y="520" />
-        <di:waypoint x="1025" y="520" />
+        <di:waypoint x="1540" y="660" />
+        <di:waypoint x="1565" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1yo5amk_di" bpmnElement="Flow_1yo5amk">
-        <di:waypoint x="1050" y="545" />
-        <di:waypoint x="1050" y="650" />
-        <di:waypoint x="1092" y="650" />
+        <di:waypoint x="1590" y="685" />
+        <di:waypoint x="1590" y="790" />
+        <di:waypoint x="1632" y="790" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0nixdsa_di" bpmnElement="Flow_0nixdsa">
-        <di:waypoint x="1075" y="520" />
-        <di:waypoint x="1092" y="520" />
+        <di:waypoint x="1615" y="660" />
+        <di:waypoint x="1632" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1s6vhsk_di" bpmnElement="Flow_1s6vhsk">
-        <di:waypoint x="1128" y="650" />
-        <di:waypoint x="1160" y="650" />
+        <di:waypoint x="1668" y="790" />
+        <di:waypoint x="1700" y="790" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1aq1svv_di" bpmnElement="Flow_1aq1svv">
-        <di:waypoint x="1128" y="520" />
-        <di:waypoint x="1255" y="520" />
+        <di:waypoint x="1668" y="660" />
+        <di:waypoint x="1795" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_16i01wn_di" bpmnElement="Flow_16i01wn">
-        <di:waypoint x="1260" y="650" />
-        <di:waypoint x="1280" y="650" />
-        <di:waypoint x="1280" y="545" />
+        <di:waypoint x="1800" y="790" />
+        <di:waypoint x="1820" y="790" />
+        <di:waypoint x="1820" y="685" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_130sq4j_di" bpmnElement="Flow_130sq4j">
-        <di:waypoint x="1000" y="462" />
-        <di:waypoint x="1000" y="420" />
-        <di:waypoint x="1280" y="420" />
-        <di:waypoint x="1280" y="495" />
+        <di:waypoint x="1540" y="602" />
+        <di:waypoint x="1540" y="560" />
+        <di:waypoint x="1820" y="560" />
+        <di:waypoint x="1820" y="635" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1hmepm8_di" bpmnElement="Flow_1hmepm8">
-        <di:waypoint x="1305" y="520" />
-        <di:waypoint x="1320" y="520" />
+        <di:waypoint x="1845" y="660" />
+        <di:waypoint x="1860" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1ddtkc8_di" bpmnElement="Flow_1ddtkc8">
-        <di:waypoint x="1420" y="520" />
-        <di:waypoint x="1440" y="520" />
+        <di:waypoint x="1960" y="660" />
+        <di:waypoint x="1980" y="660" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_06mptsp_di" bpmnElement="Flow_06mptsp">
-        <di:waypoint x="1540" y="520" />
-        <di:waypoint x="1572" y="520" />
+        <di:waypoint x="2080" y="660" />
+        <di:waypoint x="2112" y="660" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Participant_1st8s8m_di" bpmnElement="Participant_1st8s8m" isHorizontal="true">
-        <dc:Bounds x="160" y="80" width="580" height="250" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0b54jtx_di" bpmnElement="requestDataMessageTask">
-        <dc:Bounds x="420" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02qi7yn_di" bpmnElement="selectRequestTargetsTask">
-        <dc:Bounds x="300" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0dziaqm" bpmnElement="finalizeInitiateProcessTask">
-        <dc:Bounds x="540" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1n5kvw1_di" bpmnElement="eyematicsInitiateProcessEndEvent">
-        <dc:Bounds x="672" y="182" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="654" y="225" width="76" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1ir0eoy_di" bpmnElement="eyematicsInitiateProcessStartEvent">
-        <dc:Bounds x="222" y="182" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="204" y="225" width="76" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_0akizlr_di" bpmnElement="Flow_0akizlr">
-        <di:waypoint x="400" y="200" />
-        <di:waypoint x="420" y="200" />
+      <bpmndi:BPMNEdge id="Flow_0u8ladg_di" bpmnElement="Flow_0u8ladg">
+        <di:waypoint x="580" y="260" />
+        <di:waypoint x="580" y="180" />
+        <di:waypoint x="1220" y="180" />
+        <di:waypoint x="1220" y="250" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0i7iomo_di" bpmnElement="Flow_0i7iomo">
-        <di:waypoint x="520" y="200" />
-        <di:waypoint x="540" y="200" />
+      <bpmndi:BPMNEdge id="Flow_1t6isau_di" bpmnElement="Flow_1t6isau">
+        <di:waypoint x="700" y="340" />
+        <di:waypoint x="700" y="490" />
+        <di:waypoint x="780" y="490" />
+        <di:waypoint x="780" y="642" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0eepfqw_di" bpmnElement="Flow_0eepfqw">
-        <di:waypoint x="258" y="200" />
-        <di:waypoint x="300" y="200" />
+      <bpmndi:BPMNEdge id="Flow_0jb9le5_di" bpmnElement="Flow_0jb9le5">
+        <di:waypoint x="1490" y="620" />
+        <di:waypoint x="1490" y="368" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1sbo85s_di" bpmnElement="Flow_1sbo85s">
-        <di:waypoint x="640" y="200" />
-        <di:waypoint x="672" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Participant_0ypp6xp_di" bpmnElement="Participant_0ypp6xp" isHorizontal="true">
-        <dc:Bounds x="850" y="80" width="790" height="250" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0ig3rr1_di" bpmnElement="eyematicsReceiveProcessStartEvent">
-        <dc:Bounds x="932" y="182" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="908" y="144.5" width="84" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_04pq1bq_di" bpmnElement="downloadRequestedDataTask">
-        <dc:Bounds x="1010" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0bxpki3" bpmnElement="decryptRequestedDataTask">
-        <dc:Bounds x="1130" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1goqp1u_di" bpmnElement="selectProvideTargetTask">
-        <dc:Bounds x="1250" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_157l3oe_di" bpmnElement="acknowledgeReceivedMessageTask">
-        <dc:Bounds x="1370" y="160" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0sn7w90_di" bpmnElement="eyematicsReceiveProcessEndEvent">
-        <dc:Bounds x="1512" y="182" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1488" y="225" width="84" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_18spp16_di" bpmnElement="Flow_18spp16">
-        <di:waypoint x="968" y="200" />
-        <di:waypoint x="1010" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1a6we8f_di" bpmnElement="Flow_1a6we8f">
-        <di:waypoint x="1110" y="200" />
-        <di:waypoint x="1130" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_07l6162_di" bpmnElement="Flow_07l6162">
-        <di:waypoint x="1230" y="200" />
-        <di:waypoint x="1250" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1riebb4_di" bpmnElement="Flow_1riebb4">
-        <di:waypoint x="1350" y="200" />
-        <di:waypoint x="1370" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_11ffjn8_di" bpmnElement="Flow_11ffjn8">
-        <di:waypoint x="1470" y="200" />
-        <di:waypoint x="1512" y="200" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_05sbyag_di" bpmnElement="Flow_05sbyag">
-        <di:waypoint x="467" y="240" />
-        <di:waypoint x="467" y="360" />
-        <di:waypoint x="240" y="360" />
-        <di:waypoint x="240" y="502" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1q6bg9p_di" bpmnElement="Flow_1q6bg9p">
-        <di:waypoint x="950" y="480" />
-        <di:waypoint x="950" y="218" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_00ppcnb_di" bpmnElement="Flow_00ppcnb">
-        <di:waypoint x="1406" y="240" />
-        <di:waypoint x="1406" y="360" />
-        <di:waypoint x="1110" y="360" />
-        <di:waypoint x="1110" y="502" />
+      <bpmndi:BPMNEdge id="Flow_12qawwk_di" bpmnElement="Flow_12qawwk">
+        <di:waypoint x="1989" y="390" />
+        <di:waypoint x="1989" y="490" />
+        <di:waypoint x="1650" y="490" />
+        <di:waypoint x="1650" y="642" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

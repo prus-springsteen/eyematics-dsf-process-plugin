@@ -11,10 +11,13 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
+import org.hl7.fhir.r4.model.Coding;
+import org.hl7.fhir.r4.model.StringType;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public class RequestDataMessageTask extends AbstractTaskMessageSend {
@@ -30,6 +33,7 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
         logger.info("-> nothing to send");
+        logger.info("Correlation Key -> {}", variables.getTarget().getCorrelationKey());
         return Stream.empty();
     }
 
@@ -46,11 +50,27 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
         logger.warn("handleEndEventError -> Exception: {}\tErrorMessage: {}", exception, errorMessage);
     }
     */
-
+     /*
     @Override
     protected void handleSendTaskError(DelegateExecution execution, Variables variables, Exception exception,
                                        String errorMessage) {
         logger.warn("handleSendTaskError -> Exception: {}\tErrorMessage: {}", exception, errorMessage);
+        Task startTask = variables.getStartTask();
+
+        logger.info("Here are the output-vars: \n -> {}", startTask.getOutput());
+        List<Task.TaskOutputComponent> taskOutputComponentList = startTask.getOutput();
+        String oValue = variables.getTarget().getOrganizationIdentifierValue();
+        taskOutputComponentList.stream()
+                .filter(o -> o.castToCoding(o.getValue()).getCode().equals(oValue))
+                .findFirst()
+                .ifPresent(o -> {
+                    Coding c = o.getValue().castToCoding(o);
+                    c.addExtension().setUrl(EyeMaticsConstants.EXTENSION_DATA_SET_STATUS_ERROR_URL)
+                            .setValue(new StringType(errorMessage));
+                });
+
+        variables.updateTask(startTask);
+        */
              /*
         Task startTask = variables.getStartTask();
         Task currentTask = variables.getLatestTask();
@@ -81,12 +101,12 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
                 exception.getMessage());
 
         throw new BpmnError(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_ERROR,
-                "Send data-set - " + exception.getMessage());*/
+                "Send data-set - " + exception.getMessage());
     }
 
     // Override in order not to add error message of AbstractTaskMessageSend
     @Override
     protected void addErrorMessage(Task task, String errorMessage) {}
-
+    */
 
 }

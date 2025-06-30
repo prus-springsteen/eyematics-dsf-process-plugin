@@ -1,4 +1,4 @@
-package org.eyematics.process.service.provide;
+package org.eyematics.process.service.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
@@ -8,16 +8,18 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HandleMissingReceiptTask extends AbstractServiceDelegate {
+public class LogReceiveFailedTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(HandleMissingReceiptTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(LogReceiveFailedTask.class);
 
-    public HandleMissingReceiptTask(ProcessPluginApi api) {
+    public LogReceiveFailedTask(ProcessPluginApi api) {
         super(api);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> oh no, the receipt is missing ....");
+        logger.info("-> something to log");
     }
+
+
 }

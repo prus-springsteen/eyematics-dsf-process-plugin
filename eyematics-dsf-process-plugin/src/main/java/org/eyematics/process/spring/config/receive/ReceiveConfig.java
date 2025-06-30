@@ -2,12 +2,9 @@ package org.eyematics.process.spring.config.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask;
-import org.eyematics.process.service.receive.DecryptRequestedDataTask;
-import org.eyematics.process.service.receive.DownloadRequestedDataTask;
-import org.eyematics.process.service.receive.SelectProvideTargetTask;
+import org.eyematics.process.service.receive.*;
 import org.eyematics.process.spring.config.CryptoConfig;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.listener.SetCorrelationKeyListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -26,10 +23,13 @@ public class ReceiveConfig {
     @Autowired
     private DataSetStatusGenerator dataSetStatusGenerator;
 
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public PrepareReceiveDataTask prepareReceiveDataTask() { return new PrepareReceiveDataTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SetCorrelationKeyListener setCorrelationKeyListener() { return new SetCorrelationKeyListener(api); }
+    public LogReceiveFailedTask logReceiveFailedTask() { return new LogReceiveFailedTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

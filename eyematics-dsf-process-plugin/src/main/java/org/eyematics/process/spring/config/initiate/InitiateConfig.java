@@ -1,6 +1,8 @@
 package org.eyematics.process.spring.config.initiate;
 
+import org.eyematics.process.message.initiate.InitiateReceiveProcessTask;
 import org.eyematics.process.service.initiate.FinalizeInitiateProcessTask;
+import org.eyematics.process.service.initiate.InitiateReceiveTargetTask;
 import org.eyematics.process.service.initiate.SelectRequestTargetsTask;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.initiate.RequestDataMessageTask;
@@ -24,10 +26,17 @@ public class InitiateConfig {
     @Autowired
     private DataSetStatusGenerator dataSetStatusGenerator;
 
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public InitiateReceiveTargetTask initiateReceiveTargetTask() { return new InitiateReceiveTargetTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public SelectRequestTargetsTask selectRequestTargetsTask() { return new SelectRequestTargetsTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public InitiateReceiveProcessTask initiateReceiveProcessTask() { return new InitiateReceiveProcessTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

@@ -40,7 +40,7 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
         return Stream.of(api.getTaskHelper()
                             .createInput(new Reference().setReference(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
                                     ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE));
+                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE));
     }
 
     @Override
@@ -75,5 +75,5 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
 
     // Override in order not to add error message of AbstractTaskMessageSend
     @Override
-    protected void addErrorMessage(Task task, String errorMessage) {}
+    protected void addErrorMessage(Task task, String errorMessage) { }
 }

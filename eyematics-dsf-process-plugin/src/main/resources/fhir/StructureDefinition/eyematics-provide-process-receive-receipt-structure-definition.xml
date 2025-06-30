@@ -61,6 +61,7 @@
             <max value="1" />
         </element>
         <!-- DATA-SET STATUS -->
+
         <element id="Task.input:data-set-status">
             <path value="Task.input"/>
             <sliceName value="data-set-status"/>
@@ -89,12 +90,12 @@
             <path value="Task.input.type"/>
             <binding>
                 <strength value="required"/>
-                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-data-set-status-value-set|#{version}"/>
+                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-value-set|#{version}"/>
             </binding>
         </element>
         <element id="Task.input:data-set-status.type.coding">
             <path value="Task.input.type.coding"/>
-            <min value="1"/>
+            <min value="0"/>
             <max value="1"/>
         </element>
         <element id="Task.input:data-set-status.type.coding.system">
@@ -113,18 +114,20 @@
                 <code value="Coding"/>
             </type>
         </element>
+    <!--
         <element id="Task.input:data-set-status.value[x].system">
             <path value="Task.input.value[x].system"/>
             <min value="1"/>
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/data-set-status"/>
+            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
         </element>
         <element id="Task.input:data-set-status.value[x].code">
             <path value="Task.input.value[x].code"/>
             <min value="1"/>
             <binding>
                 <strength value="required"/>
-                <valueSet value="http://eyematics.org/fhir/ValueSet/data-set-status|#{version}"/>
+                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
+    -->
     </differential>
 </StructureDefinition>
