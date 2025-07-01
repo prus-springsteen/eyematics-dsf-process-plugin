@@ -8,5 +8,7 @@ public interface ProvideConstants {
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED = "dataSetEncrypted";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE = "data-reference";
+    String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_ERROR = "dataProvideError";
+    String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_ERROR_MESSAGE = "dataProvideErrorMessage";
 
 }

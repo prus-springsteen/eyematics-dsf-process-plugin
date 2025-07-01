@@ -41,16 +41,16 @@ public class DecryptRequestedDataTask extends AbstractServiceDelegate {
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> something to decrypt");
-        byte[] bundleEncrypted = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
+        byte[] bundleEncrypted = (byte[]) delegateExecution.getVariableLocal(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
         String bundleString = new String(bundleEncrypted, StandardCharsets.UTF_8);
-        logger.info("Bundle -> {}", bundleString.substring(0, 50));
+        logger.info("Bundle -> {}", bundleString.substring(0, 100));
         String reqOrg = variables.getLatestTask().getRequester().getIdentifier().getValue();
         logger.info("Request-Organization -> {}", reqOrg);
         String recOrg = variables.getLatestTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
         logger.info("Recipient-Organization -> {}", recOrg);
-        Bundle bundleDecrypted = decryptBundle(this.keyProvider.getPrivateKey(), bundleEncrypted, reqOrg, recOrg);
+        Bundle bundleDecrypted = this.decryptBundle(this.keyProvider.getPrivateKey(), bundleEncrypted, reqOrg, recOrg);
         String o = this.parser.encodeResourceToString(bundleDecrypted);
-        logger.info("Bundle -> {}", o.substring(0, 50));
+        logger.info("Bundle -> {}", o.substring(0, 100));
     }
 
     private Bundle decryptBundle(PrivateKey privateKey, byte[] bundleEncrypted, String sendingOrganization,

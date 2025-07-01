@@ -13,13 +13,11 @@ import dev.dsf.fhir.client.FhirWebserviceClient;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.hl7.fhir.r4.model.Coding;
-import org.hl7.fhir.r4.model.Endpoint;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Organization;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +44,9 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                     Identifier organizationIdentifier = organization.getIdentifierFirstRep();
                     String path = URI.create(organization.getEndpointFirstRep().getReference()).getPath();
                     Endpoint endpoint = client.read(Endpoint.class, path.substring(path.lastIndexOf("/") + 1));
+
+                    //this.addOrganizationForOutput(organizationIdentifier.getValue(), variables);
+
                     return variables.createTarget(organizationIdentifier.getValue(),
                                                   endpoint.getIdentifierFirstRep().getValue(),
                                                   endpoint.getAddress(),
@@ -53,5 +54,14 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                 }).toList();
         logger.info("-> {}", targets);
         variables.setTargets(variables.createTargets(targets));
+    }
+
+    private void addOrganizationForOutput(String organization, Variables variables) {
+        Task startTask = variables.getStartTask();
+        Task.TaskOutputComponent output = new Task.TaskOutputComponent();
+        output.setValue(new Coding().setSystem(EyeMaticsConstants.CODESYSTEM_DATA_SET_STATUS).setCode(organization));
+        output.getType().addCoding().setSystem(organization).setCode(organization);
+        startTask.addOutput(output);
+        variables.updateTask(startTask);
     }
 }

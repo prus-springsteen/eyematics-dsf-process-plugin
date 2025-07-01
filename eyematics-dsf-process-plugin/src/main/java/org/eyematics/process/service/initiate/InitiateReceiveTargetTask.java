@@ -1,7 +1,7 @@
-package org.eyematics.process.service.receive;
+package org.eyematics.process.service.initiate;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;;
+import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -11,19 +11,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class SelectProvideTargetTask extends AbstractServiceDelegate {
+public class InitiateReceiveTargetTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(SelectProvideTargetTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(InitiateReceiveTargetTask.class);
 
-    public SelectProvideTargetTask(ProcessPluginApi api) {
+    public InitiateReceiveTargetTask(ProcessPluginApi api) {
         super(api);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to select");
-        Target target = SelectTarget.getRequestTargetExecution(this.api, delegateExecution);
+        logger.info("-> Triggering the Organization for Receive ...");
+        Target target = SelectTarget.getRequestTarget(this.api, variables, null);
+        logger.info("-> Target -> {}", target.toString());
         variables.setTarget(target);
-        logger.info("-> {}", target);
     }
 }

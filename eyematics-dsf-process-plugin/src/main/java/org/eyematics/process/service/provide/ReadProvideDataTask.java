@@ -47,14 +47,17 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
         BinaryStreamFhirClient fhirClient = this.fhirClientFactory.getBinaryStreamFhirClient();
         IdType idType = new IdType(this.fhirClientFactory.getFhirBaseUrl(),
                 "Bundle", "StructureDefinition", "");
+        Bundle bundle = new Bundle();
+
         try (InputStream  in = fhirClient.readBundle(idType, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_XML)) {
             logger.info("Stream -> {}", in);
             FhirContext fhirContext = FhirContext.forR4();
-            Bundle bundle = fhirContext.newXmlParser().parseResource(Bundle.class, in);
-            logger.info("Data -> {}", bundle);
-            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+            bundle = fhirContext.newXmlParser().parseResource(Bundle.class, in);
         } catch (Exception e) {
             logger.info("Exception -> {}", e.getMessage());
         }
+
+        logger.info("Data -> {}", bundle);
+        variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
     }
 }

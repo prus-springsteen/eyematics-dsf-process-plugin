@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-output-value-set"/>
+    <url value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-value-set"/>
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Generic Process Output ValueSet"/>
@@ -20,7 +20,8 @@
     <immutable value="true"/>
     <compose>
         <include>
-            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-output-code-system"/>
+            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
+            <version value="#{version}" />
         </include>
     </compose>
 </ValueSet>

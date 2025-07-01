@@ -1,3 +1,7 @@
+/**
+ * @author Reto Wettstein (https://github.com/wetret)
+ */
+
 package org.eyematics.process.utils.client.logging;
 
 import org.hl7.fhir.instance.model.api.IBaseResource;

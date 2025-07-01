@@ -5,23 +5,23 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set"/>
+    <url value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-initiate-value-set"/>
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Receive Process ValueSet"/>
-    <title value="EyeMatics Receive Process ValueSet"/>
+    <name value="EyeMatics Receive Initiate Process ValueSet"/>
+    <title value="EyeMatics Receive Initiate Process ValueSet"/>
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false"/>
     <!-- date managed by bpe -->
     <date value="#{date}"/>
     <publisher value="DSF"/>
-    <description value="ValueSet with standard values for the EyeMatics Receive Process"/>
+    <description value="ValueSet with standard values for the EyeMatics Receive Initiate Process "/>
     <immutable value="true"/>
     <compose>
         <include>
-            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system"/>
-            <!-- <version value="#{version}" /> -->
+            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system"/>
+            <version value="#{version}" />
         </include>
     </compose>
 </ValueSet>

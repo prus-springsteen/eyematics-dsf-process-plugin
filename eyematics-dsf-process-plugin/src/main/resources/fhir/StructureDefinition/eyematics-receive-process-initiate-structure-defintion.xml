@@ -5,10 +5,10 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
+    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-defintion" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Receive Process Structure Definition" />
+    <name value="EyeMatics Receive Process Initiate Structure Definition" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
@@ -31,8 +31,8 @@
                 <valueString value="Parameter" />
             </extension>
             <path value="Task.input" />
-            <min value="4" />
-            <max value="4" />
+            <min value="3" />
+           <!-- <max value="3" /> -->
         </element>
         <element id="Task.input:message-name">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -43,7 +43,7 @@
         </element>
         <element id="Task.input:message-name.value[x]">
             <path value="Task.input.value[x]" />
-            <fixedString value="receiveProcessStartEventMessage" />
+            <fixedString value="receiveProcessInitiateEventMessage" />
         </element>
         <element id="Task.input:business-key">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -61,41 +61,60 @@
             <sliceName value="correlation-key" />
             <max value="1" />
         </element>
-        <!-- INPUT-DATA: Dataset Reference Input. START -->
-        <element id="Task.input:data-set-reference-input">
+        <!-- INPUT-DATA: Correlation Key and DIC Identifier. START -->
+        <element id="Task.input:dic-correlation-key">
             <path value="Task.input" />
-            <sliceName value="data-set-reference-input" />
+            <sliceName value="dic-correlation-key" />
             <min value="1" />
-            <!-- <max value="99" /> -->
         </element>
-        <element id="Task.input:data-set-reference-input.type">
+        <element id="Task.input:dic-correlation-key.extension">
+            <path value="Task.input.extension" />
+            <slicing>
+                <discriminator>
+                    <type value="value" />
+                    <path value="url" />
+                </discriminator>
+                <rules value="open" />
+            </slicing>
+        </element>
+        <element id="Task.input:dic-correlation-key.extension:dic-identifier">
+            <path value="Task.input.extension" />
+            <sliceName value="dic-identifier" />
+            <min value="1" />
+            <max value="1" />
+            <type>
+                <code value="Extension" />
+                <profile value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-dic-identifier-extension|#{version}" />
+            </type>
+        </element>
+        <element id="Task.input:dic-correlation-key.type">
             <path value="Task.input.type" />
             <binding>
                 <strength value="required" />
-                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set" />
+                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-initiate-value-set|#{version}" />
             </binding>
         </element>
-        <element id="Task.input:data-set-reference-input.type.coding">
+        <element id="Task.input:dic-correlation-key.type.coding">
             <path value="Task.input.type.coding" />
-                <min value="0" />
-                <max value="*" />
+            <min value="1" />
+            <max value="1" />
         </element>
-        <element id="Task.input:data-set-reference-input.type.coding.system">
+        <element id="Task.input:dic-correlation-key.type.coding.system">
             <path value="Task.input.type.coding.system" />
             <min value="1" />
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system" />
+            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system" />
         </element>
-        <element id="Task.input:data-set-reference-input.type.coding.code">
+        <element id="Task.input:dic-correlation-key.type.coding.code">
             <path value="Task.input.type.coding.code" />
             <min value="1" />
-            <fixedCode value="data-set-reference-input" />
+            <fixedCode value="dic-correlation-key" />
         </element>
-        <element id="Task.input:data-set-reference-input.value[x]">
+        <element id="Task.input:dic-correlation-key.value[x]">
             <path value="Task.input.value[x]" />
             <type>
-                <code value="Reference" />
+                <code value="string" />
             </type>
         </element>
-        <!-- INPUT-DATA: Dataset Reference Input. END -->
+        <!-- INPUT-DATA: Correlation Key and DIC Identifier. END -->
     </differential>
 </StructureDefinition>

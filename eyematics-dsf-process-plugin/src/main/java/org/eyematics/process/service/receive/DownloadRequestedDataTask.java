@@ -29,7 +29,7 @@ public class DownloadRequestedDataTask extends AbstractServiceDelegate {
         Optional<Reference> dataReferenceParameter = api.getTaskHelper()
                                                         .getFirstInputParameterValue(latestTask,
                                                                 ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_REFERENCE,
+                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
                                                                 Reference.class);
 
         logger.info("Reference-Input extracted -> {}", dataReferenceParameter.isPresent());
@@ -54,8 +54,8 @@ public class DownloadRequestedDataTask extends AbstractServiceDelegate {
             referenceBinary = client.read(Binary.class, dataReference.getIdPart());
         logger.info("Data downloaded... -> {}", referenceBinary.toString().substring(0, 5));
 
-        variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, referenceBinary.getData());
-
+        delegateExecution.setVariableLocal(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, referenceBinary.getData());
+        //variables.setByteArray();
         logger.info("Data stored for Decryption.");
     }
 
