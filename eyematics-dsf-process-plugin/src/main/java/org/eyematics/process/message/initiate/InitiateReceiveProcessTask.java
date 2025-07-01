@@ -1,3 +1,7 @@
+/**
+ * @see    https://github.com/medizininformatik-initiative/mii-process-data-sharing/blob/main/src/main/java/de/medizininformatik_initiative/process/data_sharing/message/SendMergeDataSharing.java
+ */
+
 package org.eyematics.process.message.initiate;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -6,7 +10,6 @@ import dev.dsf.bpe.v1.variables.Targets;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import dev.dsf.bpe.v1.constants.NamingSystems;
-import dev.dsf.fhir.client.FhirWebserviceClient;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.hl7.fhir.r4.model.*;
