@@ -12,25 +12,25 @@
         <extension url="task-profile">
             <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}" />
         </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="hrp.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
 
         <extension url="requester">
             <valueCoding>
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="hrp.dsf.test" />
+                        <value value="dic.a.test" />
+                    </valueIdentifier>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
+                <code value="LOCAL_ORGANIZATION" />
+            </valueCoding>
+        </extension>
+        <extension url="requester">
+            <valueCoding>
+                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
+                    <valueIdentifier>
+                        <system value="http://dsf.dev/sid/organization-identifier" />
+                        <value value="dic.a.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
@@ -43,20 +43,19 @@
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="cos.dsf.test" />
+                        <value value="dic.b.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
                 <code value="LOCAL_ORGANIZATION" />
             </valueCoding>
         </extension>
-
         <extension url="requester">
             <valueCoding>
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="cos.dsf.test" />
+                        <value value="dic.b.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
@@ -69,11 +68,23 @@
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.dsf.test" />
+                        <value value="dic.c.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
                 <code value="LOCAL_ORGANIZATION" />
+            </valueCoding>
+        </extension>
+        <extension url="requester">
+            <valueCoding>
+                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
+                    <valueIdentifier>
+                        <system value="http://dsf.dev/sid/organization-identifier" />
+                        <value value="dic.c.test" />
+                    </valueIdentifier>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
+                <code value="REMOTE_ORGANIZATION" />
             </valueCoding>
         </extension>
 
@@ -82,7 +93,19 @@
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.dsf.test" />
+                        <value value="dic.d.test" />
+                    </valueIdentifier>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
+                <code value="LOCAL_ORGANIZATION" />
+            </valueCoding>
+        </extension>
+        <extension url="requester">
+            <valueCoding>
+                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
+                    <valueIdentifier>
+                        <system value="http://dsf.dev/sid/organization-identifier" />
+                        <value value="dic.d.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
@@ -106,25 +129,25 @@
         <extension url="task-profile">
             <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}" />
         </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="hrp.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
 
         <extension url="requester">
             <valueCoding>
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="hrp.dsf.test" />
+                        <value value="dic.a.test" />
+                    </valueIdentifier>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
+                <code value="LOCAL_ORGANIZATION" />
+            </valueCoding>
+        </extension>
+        <extension url="requester">
+            <valueCoding>
+                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
+                    <valueIdentifier>
+                        <system value="http://dsf.dev/sid/organization-identifier" />
+                        <value value="dic.a.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
@@ -137,20 +160,19 @@
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="cos.dsf.test" />
+                        <value value="dic.b.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
                 <code value="LOCAL_ORGANIZATION" />
             </valueCoding>
         </extension>
-
         <extension url="requester">
             <valueCoding>
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="cos.dsf.test" />
+                        <value value="dic.b.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
@@ -163,11 +185,23 @@
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.dsf.test" />
+                        <value value="dic.c.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
                 <code value="LOCAL_ORGANIZATION" />
+            </valueCoding>
+        </extension>
+        <extension url="requester">
+            <valueCoding>
+                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
+                    <valueIdentifier>
+                        <system value="http://dsf.dev/sid/organization-identifier" />
+                        <value value="dic.c.test" />
+                    </valueIdentifier>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
+                <code value="REMOTE_ORGANIZATION" />
             </valueCoding>
         </extension>
 
@@ -176,7 +210,19 @@
                 <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
                     <valueIdentifier>
                         <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.dsf.test" />
+                        <value value="dic.d.test" />
+                    </valueIdentifier>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
+                <code value="LOCAL_ORGANIZATION" />
+            </valueCoding>
+        </extension>
+        <extension url="requester">
+            <valueCoding>
+                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
+                    <valueIdentifier>
+                        <system value="http://dsf.dev/sid/organization-identifier" />
+                        <value value="dic.d.test" />
                     </valueIdentifier>
                 </extension>
                 <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
