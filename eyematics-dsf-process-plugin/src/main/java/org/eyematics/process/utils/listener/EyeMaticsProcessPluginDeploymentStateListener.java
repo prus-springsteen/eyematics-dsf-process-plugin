@@ -1,3 +1,8 @@
+/**
+ * @author Reto Wettstein (https://github.com/wetret)
+ * @see    https://https://github.com/medizininformatik-initiative/mii-process-data-sharing/blob/main/src/main/java/de/medizininformatik_initiative/process/data_sharing/DataSharingProcessPluginDeploymentStateListener.java
+ */
+
 package org.eyematics.process.utils.listener;
 
 import org.eyematics.process.constant.InitiateConstants;
