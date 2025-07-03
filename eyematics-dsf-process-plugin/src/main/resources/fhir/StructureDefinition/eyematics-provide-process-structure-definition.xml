@@ -114,11 +114,11 @@
                 <code value="Coding"/>
             </type>
         </element>
-<!--
+
         <element id="Task.output:data-set-status.value[x].system">
             <path value="Task.output.value[x].system"/>
             <min value="1"/>
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
+            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system"/>
         </element>
         <element id="Task.output:data-set-status.value[x].code">
             <path value="Task.output.value[x].code"/>
@@ -128,6 +128,6 @@
                 <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
--->
+
     </differential>
 </StructureDefinition>
