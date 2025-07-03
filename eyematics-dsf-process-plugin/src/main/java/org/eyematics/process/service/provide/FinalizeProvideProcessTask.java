@@ -52,7 +52,6 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
         }
     }
 
-
     private void handleReceivedResponse(Task startTask, Task currentTask) {
         this.dataSetStatusGenerator.transformInputToOutput(currentTask, startTask, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                 EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS);

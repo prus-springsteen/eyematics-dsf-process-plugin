@@ -56,22 +56,20 @@
 			<artifactId>slf4j-simple</artifactId>
 		</dependency>
 		<!-- MII-PROCESSES-COMMON-DEPENDENCIES -->
-
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-structures-dstu3</artifactId>
+			<version>${hapi.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>hapi-fhir-structures-r4</artifactId>
 			<version>${hapi.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>hapi-fhir-client</artifactId>
 			<version>${hapi.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-core</artifactId>
-			<version>2.9.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -88,7 +86,7 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>copy-process-plugin-to-dev-setup/cos</id>
+						<id>copy-process-plugin-to-dev-setup/dic-b</id>
 						<phase>package</phase>
 						<goals>
 							<goal>copy</goal>
@@ -101,11 +99,11 @@
 									<version>${project.version}</version>
 								</artifactItem>
 							</artifactItems>
-							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/cos/bpe/process</outputDirectory>
+							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/dic-b/bpe/process</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
-						<id>copy-process-plugin-to-dev-setup/dic</id>
+						<id>copy-process-plugin-to-dev-setup/dic-a</id>
 						<phase>package</phase>
 						<goals>
 							<goal>copy</goal>
@@ -118,11 +116,11 @@
 									<version>${project.version}</version>
 								</artifactItem>
 							</artifactItems>
-							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/dic/bpe/process</outputDirectory>
+							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/dic-a/bpe/process</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
-						<id>copy-process-plugin-to-dev-setup/hrp</id>
+						<id>copy-process-plugin-to-dev-setup/dic-c</id>
 						<phase>package</phase>
 						<goals>
 							<goal>copy</goal>
@@ -135,7 +133,24 @@
 									<version>${project.version}</version>
 								</artifactItem>
 							</artifactItems>
-							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/hrp/bpe/process</outputDirectory>
+							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/dic-c/bpe/process</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-process-plugin-to-dev-setup/dic-d</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>../eyematics-dsf-process-plugin-test-setup/dic-d/bpe/process</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -146,21 +161,28 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>../eyematics-dsf-process-plugin-test-setup/cos/bpe/process</directory>
+							<directory>../eyematics-dsf-process-plugin-test-setup/dic-b/bpe/process</directory>
 							<includes>
 								<include>*.jar</include>
 							</includes>
 							<followSymlinks>false</followSymlinks>
 						</fileset>
 						<fileset>
-							<directory>../eyematics-dsf-process-plugin-test-setup/dic/bpe/process</directory>
+							<directory>../eyematics-dsf-process-plugin-test-setup/dic-a/bpe/process</directory>
 							<includes>
 								<include>*.jar</include>
 							</includes>
 							<followSymlinks>false</followSymlinks>
 						</fileset>
 						<fileset>
-							<directory>../eyematics-dsf-process-plugin-test-setup/hrp/bpe/process</directory>
+							<directory>../eyematics-dsf-process-plugin-test-setup/dic-c/bpe/process</directory>
+							<includes>
+								<include>*.jar</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+						<fileset>
+							<directory>../eyematics-dsf-process-plugin-test-setup/dic-d/bpe/process</directory>
 							<includes>
 								<include>*.jar</include>
 							</includes>
@@ -186,7 +208,6 @@
 					</workingPackages>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>
