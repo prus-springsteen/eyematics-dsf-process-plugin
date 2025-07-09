@@ -33,7 +33,10 @@ public class PrepareReceiveDataTask extends AbstractServiceDelegate {
         Task task = variables.getStartTask();
         List<Target> targetsList = this.getTargets(task, variables);
         Targets targets = variables.createTargets(targetsList);
-        variables.setTargets(targets);
+        //variables.setTargets(targets);
+        Target target = targets.getEntries().get(0);
+        logger.info("-> Target: {}", target);
+        variables.setTarget(target);
     }
 
     private List<Target> getTargets(Task task, Variables variables) {

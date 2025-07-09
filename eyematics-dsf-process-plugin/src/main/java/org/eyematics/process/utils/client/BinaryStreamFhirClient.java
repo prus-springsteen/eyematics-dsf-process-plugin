@@ -26,16 +26,16 @@ public interface BinaryStreamFhirClient extends FhirClient
 	 *            not <code>null</code>
 	 * @return not <code>null</code>
 	 */
-	default InputStream read(IdType idType, String mimeType)
+	default InputStream readBinary(IdType idType, String mimeType)
 	{
-		return read(idType, mimeType, false);
+		return readBinary(idType, mimeType, false);
 	}
 
 	/**
 	 * Method as workaround for HAPI Binary streaming deviation from FHIR standard: <a href=
 	 * "https://github.com/hapifhir/hapi-fhir-jpaserver-starter/issues/179">https://github.com/hapifhir/hapi-fhir-jpaserver-starter/issues/179</a>
 	 * <p>
-	 * Works as {@link #read(IdType, String)}, except it additionally uses the <code>$binary-access-read</code>
+	 * Works as {@link #readBinary(IdType, String)}, except it additionally uses the <code>$binary-access-read</code>
 	 * operation if parameter <code>useHapiBlobStorageOperation</code> is set to <code>true</code>, e.g. GET
 	 * http://foo.bar/fhir/Binary/1/$binary-access-read.
 	 *
@@ -43,7 +43,7 @@ public interface BinaryStreamFhirClient extends FhirClient
 	 *            set to <code>true</code> if HAPI uses an external Binary storage solution by setting the ENV variable
 	 *            <code>HAPI_FHIR_BINARY_STORAGE_ENABLED</code>
 	 */
-	InputStream read(IdType idType, String mimeType, boolean useHapiBlobStorageOperation);
+	InputStream readBinary(IdType idType, String mimeType, boolean useHapiBlobStorageOperation);
 
 
 	InputStream readBundle(IdType idType, String mimeType);

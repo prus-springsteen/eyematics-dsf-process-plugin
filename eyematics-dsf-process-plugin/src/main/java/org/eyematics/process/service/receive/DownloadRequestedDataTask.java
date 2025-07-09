@@ -1,62 +1,70 @@
 package org.eyematics.process.service.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import dev.dsf.fhir.client.BasicFhirWebserviceClient;
+import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.ReceiveConstants;
+import org.eyematics.process.utils.generator.AbstractExtendedServiceDelegate;
+import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
-public class DownloadRequestedDataTask extends AbstractServiceDelegate {
+public class DownloadRequestedDataTask extends AbstractExtendedServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(DownloadRequestedDataTask.class);
 
-    public DownloadRequestedDataTask(ProcessPluginApi api) {
-        super(api);
+    public DownloadRequestedDataTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+        super(api, dataSetStatusGenerator);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to download");
-        Task latestTask = variables.getLatestTask();
+        try {
+            Task latestTask = variables.getLatestTask();
+            Optional<Reference> dataReferenceParameter = api.getTaskHelper()
+                    .getFirstInputParameterValue(latestTask,
+                            ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                            ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
+                            Reference.class);
 
-        Optional<Reference> dataReferenceParameter = api.getTaskHelper()
-                                                        .getFirstInputParameterValue(latestTask,
-                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
-                                                                Reference.class);
+            logger.info("Reference-Input extracted -> {}", dataReferenceParameter.isPresent());
+            Reference s = null;
+            String referenceInput = "";
+            if (dataReferenceParameter.isPresent()) s = dataReferenceParameter.get();
+            if (s != null) referenceInput = s.getReference();
 
-        logger.info("Reference-Input extracted -> {}", dataReferenceParameter.isPresent());
-        Reference s = null;
-        String referenceInput = "";
-        if(dataReferenceParameter.isPresent()) s = dataReferenceParameter.get();
-        if (s != null) {
-            referenceInput = s.getReference();
+            logger.info("Data extracted.");
+
+            // https://github.com/medizininformatik-initiative/dsf-plugin-numdashboard/blob/main/src/main/java/de/medizininformatik_initiative/process/report/service/DownloadReport.java
+            logger.info("Downloading data...");
+            IdType dataReference = new IdType(referenceInput);
+            BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider()
+                                                  .getWebserviceClient(dataReference.getBaseUrl())
+                                                  .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES,
+                                                          EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN);
+            Binary referenceBinary = null;
+
+            if (dataReference.hasVersionIdPart()) {
+                referenceBinary = client.read(Binary.class, dataReference.getIdPart(), dataReference.getVersionIdPart());
+            } else {
+                referenceBinary = client.read(Binary.class, dataReference.getIdPart());
+            }
+
+            logger.info("Data downloaded... -> {}", referenceBinary.toString().substring(0, 5));
+            variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, referenceBinary.getData());
+            logger.info("Data stored for Decryption.");
+        } catch (Exception exception) {
+            logger.error("Could not download data from providing DIC: {}", exception.getMessage());
+            delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_ERROR_MESSAGE, EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILED.getStatusCode());
+            super.handleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILED, variables, exception, "Data Download Failed");
         }
-        logger.info("Data extracted.");
-
-        // https://github.com/medizininformatik-initiative/dsf-plugin-numdashboard/blob/main/src/main/java/de/medizininformatik_initiative/process/report/service/DownloadReport.java
-        // HOW TO ADD CERTIFICATE? -> DIFFERENCE BETWEEN LOCAL, REMOTE, ... etc.
-        logger.info("Downloading data...");
-        IdType dataReference = new IdType(referenceInput);
-        BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider().getWebserviceClient(dataReference.getBaseUrl()).withRetry(6, 5);
-        Binary referenceBinary = null;
-
-        if (dataReference.hasVersionIdPart())
-            referenceBinary = client.read(Binary.class, dataReference.getIdPart(), dataReference.getVersionIdPart());
-        else
-            referenceBinary = client.read(Binary.class, dataReference.getIdPart());
-        logger.info("Data downloaded... -> {}", referenceBinary.toString().substring(0, 5));
-
-        delegateExecution.setVariableLocal(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, referenceBinary.getData());
-        //variables.setByteArray();
-        logger.info("Data stored for Decryption.");
     }
 
 

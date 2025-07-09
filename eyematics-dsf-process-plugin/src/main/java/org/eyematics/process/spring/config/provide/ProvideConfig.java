@@ -29,19 +29,19 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dicFhirClientConfig.fhirClientFactory()); }
+    public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dicFhirClientConfig.fhirClientFactory(), dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CreateDataBundleTask createDataBundleTask() { return new CreateDataBundleTask(api); }
+    public CreateDataBundleTask createDataBundleTask() { return new CreateDataBundleTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public EncryptDataBundleTask encryptDataBundleTask() { return new EncryptDataBundleTask(api, cryptoConfig.keyProviderDms()); }
+    public EncryptDataBundleTask encryptDataBundleTask() { return new EncryptDataBundleTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDms()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public StoreProvideDataTask storeProvideDataTask() { return new StoreProvideDataTask(api); }
+    public StoreProvideDataTask storeProvideDataTask() { return new StoreProvideDataTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -53,7 +53,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleMissingReceiptTask handleMissingReceiptTask() { return  new HandleMissingReceiptTask(api); }
+    public HandleMissingReceiptTask handleMissingReceiptTask() { return  new HandleMissingReceiptTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

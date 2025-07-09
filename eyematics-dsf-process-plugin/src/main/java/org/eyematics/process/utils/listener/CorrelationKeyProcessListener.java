@@ -37,6 +37,5 @@ public class CorrelationKeyProcessListener implements ExecutionListener, Initial
         Variables variables = api.getVariables(execution);
         Target target = variables.getTarget();
         execution.setVariableLocal(BpmnExecutionVariables.CORRELATION_KEY, target.getCorrelationKey());
-        logger.info("CorrelationKeyProvideProcessListener -> Target {} -> CK {}", target.getOrganizationIdentifierValue(), target.getCorrelationKey());
     }
 }

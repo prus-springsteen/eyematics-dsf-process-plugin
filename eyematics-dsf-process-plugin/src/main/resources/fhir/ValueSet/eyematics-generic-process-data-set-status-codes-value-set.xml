@@ -22,34 +22,54 @@
         <include>
             <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
             <version value="#{version}" />
+            <!-- PROVIDE PROCESS: START -->
             <concept>
-                <code value="not-allowed" />
-                <display value="Not allowed" />
+                <code value="data-read-failed" />
+                <display value="Data Read Failed" />
             </concept>
             <concept>
-                <code value="not-reachable" />
-                <display value="Not reachable" />
+                <code value="data-bundle-failed" />
+                <display value="Data Bundle Failed" />
             </concept>
             <concept>
-                <code value="receipt-missing" />
-                <display value="Receipt missing" />
+                <code value="data-encrypt-failed" />
+                <display value="Data Encrypt Failed" />
             </concept>
             <concept>
-                <code value="receipt-ok" />
-                <display value="Receipt ok" />
+                <code value="data-store-failed" />
+                <display value="Data Store Failed" />
             </concept>
             <concept>
-                <code value="receipt-error" />
-                <display value="Receipt error" />
+                <code value="data-provide-failed" />
+                <display value="Date Provide Failed" />
             </concept>
             <concept>
-                <code value="receive-ok" />
-                <display value="Receive ok" />
+                <code value="data-provide-forbidden" />
+                <display value="Data Provide Forbidden" />
             </concept>
             <concept>
-                <code value="receive-error" />
-                <display value="Receive error" />
+                <code value="data-receipt-missing" />
+                <display value="Data Receipt Missing" />
             </concept>
+            <!-- PROVIDE PROCESS: END -->
+            <!-- RECEIVE PROCESS: START -->
+            <concept>
+                <code value="data-download-failed" />
+                <display value="Data Download Failed" />
+            </concept>
+            <concept>
+                <code value="data-decrypt-failed" />
+                <display value="Data Decrypt Failed" />
+            </concept>
+            <concept>
+                <code value="data-receive-successful" />
+                <display value="Data Receive Successful" />
+            </concept>
+            <concept>
+                <code value="data-receipt-failed" />
+                <display value="Data Decrypt Failed" />
+            </concept>
+            <!-- RECEIVE PROCESS: END -->
         </include>
     </compose>
 </ValueSet>

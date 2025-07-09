@@ -23,7 +23,8 @@ public class SelectProvideTargetTask extends AbstractServiceDelegate {
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> something to select");
         Target target = SelectTarget.getRequestTargetExecution(this.api, delegateExecution);
-        variables.setTarget(target);
+        //variables.setTarget(target);
+        logger.warn("-> nothing needs to be selected.");
         logger.info("-> {}", target);
     }
 }

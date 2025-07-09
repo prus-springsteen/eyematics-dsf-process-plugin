@@ -8,52 +8,76 @@
     <url value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="MII_Data_Set_Status" />
-    <title value="MII Data-Set Status" />
+    <name value="EyeMatics Generic Status" />
+    <title value="EyeMatics Generic Status" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
     <!-- date managed by bpe -->
     <date value="#{date}" />
-    <publisher value="Medizininformatik-Initiative" />
+    <publisher value="EyeMatics.org" />
     <description value="CodeSystem with standard values for the status of transferring data-sets" />
     <caseSensitive value="true" />
     <hierarchyMeaning value="grouped-by" />
     <versionNeeded value="false" />
     <content value="complete" />
+    <!-- PROVIDE PROCESS: START -->
     <concept>
-        <code value="not-allowed" />
-        <display value="Not allowed" />
-        <definition value="Not allowed to send data-set to DMS" />
+        <code value="data-read-failed" />
+        <display value="Data Read Failed" />
+        <definition value="Reading data from local FHIR-Repository failed." />
     </concept>
     <concept>
-        <code value="not-reachable" />
-        <display value="Not reachable" />
-        <definition value="DMS cannot be reached" />
+        <code value="data-bundle-failed" />
+        <display value="Data Bundle Failed" />
+        <definition value="Bundling data failed." />
     </concept>
     <concept>
-        <code value="receipt-missing" />
-        <display value="Receipt missing" />
-        <definition value="No receipt received from DMS" />
+        <code value="data-encrypt-failed" />
+        <display value="Data Encrypt Failed" />
+        <definition value="Failed to encrypt bundled data." />
     </concept>
     <concept>
-        <code value="receipt-ok" />
-        <display value="Receipt ok" />
-        <definition value="Ok received from DMS" />
+        <code value="data-store-failed" />
+        <display value="Data Store Failed" />
+        <definition value="Storing data to provide failed." />
     </concept>
     <concept>
-        <code value="receipt-error" />
-        <display value="Receipt error" />
-        <definition value="Error received from DMS" />
+        <code value="data-provide-failed" />
+        <display value="Date Provide Failed" />
+        <definition value="Data could not be provided as receiving DIC is not reachable." />
     </concept>
     <concept>
-        <code value="receive-ok" />
-        <display value="Receive ok" />
-        <definition value="Data-set received from DIC" />
+        <code value="data-provide-forbidden" />
+        <display value="Data Provide Forbidden" />
+        <definition value="Forbidden to provide data to DIC." />
     </concept>
     <concept>
-        <code value="receive-error" />
-        <display value="Receive error" />
-        <definition value="Error receiving data-set from DIC" />
+        <code value="data-receipt-missing" />
+        <display value="Data Receipt Missing" />
+        <definition value="Failed receiving data-set from DIC" />
     </concept>
+    <!-- PROVIDE PROCESS: END -->
+    <!-- RECEIVE PROCESS: START -->
+    <concept>
+        <code value="data-download-failed" />
+        <display value="Data Download Failed" />
+        <definition value="Data could not be downloaded from DIC." />
+    </concept>
+    <concept>
+        <code value="data-decrypt-failed" />
+        <display value="Data Decrypt Failed" />
+        <definition value="Failed to decrypt downloaded data." />
+    </concept>
+    <concept>
+        <code value="data-receive-successful" />
+        <display value="Data Receive Successful" />
+        <definition value="Received data successfully." />
+    </concept>
+    <concept>
+        <code value="data-receipt-failed" />
+        <display value="Data Decrypt Failed" />
+        <definition value="Failed to send receipt to providing DIC." />
+    </concept>
+    <!-- RECEIVE PROCESS: END -->
 </CodeSystem>

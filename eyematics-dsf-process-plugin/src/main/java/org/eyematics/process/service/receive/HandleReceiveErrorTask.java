@@ -8,18 +8,16 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LogReceiveFailedTask extends AbstractServiceDelegate {
+public class HandleReceiveErrorTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogReceiveFailedTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(HandleReceiveErrorTask.class);
 
-    public LogReceiveFailedTask(ProcessPluginApi api) {
+    public HandleReceiveErrorTask(ProcessPluginApi api) {
         super(api);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to log");
+        logger.warn("Exception abgefangen ....");
     }
-
-
 }

@@ -1,4 +1,4 @@
-package org.eyematics.process.service.provide;
+package org.eyematics.process.service.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.variables.Variables;
@@ -10,11 +10,11 @@ import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HandleMissingReceiptTask extends AbstractExtendedServiceDelegate {
+public class HandleReceiveMissingTask extends AbstractExtendedServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(HandleMissingReceiptTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(HandleReceiveMissingTask.class);
 
-    public HandleMissingReceiptTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+    public HandleReceiveMissingTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api, dataSetStatusGenerator);
     }
 
@@ -23,4 +23,6 @@ public class HandleMissingReceiptTask extends AbstractExtendedServiceDelegate {
         logger.warn("The receipt from {} is missing for data provided.", variables.getTarget().getOrganizationIdentifierValue());
         super.processTaskError(EyeMaticsGenericStatus.DATA_RECEIPT_MISSING, variables, "Data Receipt Missing");
     }
+
+
 }

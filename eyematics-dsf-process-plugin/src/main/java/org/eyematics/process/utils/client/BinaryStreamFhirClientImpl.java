@@ -26,7 +26,7 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 
 public class BinaryStreamFhirClientImpl extends AbstractHttpFhirClient implements BinaryStreamFhirClient
 {
-	private static final Logger logger = LoggerFactory.getLogger(AsyncFhirClientImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(BinaryStreamFhirClientImpl.class);
 
 	public BinaryStreamFhirClientImpl(KeyStore trustStore, KeyStore keyStore, char[] keyStorePassword,
 									  int connectTimeout, int socketTimeout, String fhirServerBasicAuthUsername,
@@ -40,7 +40,7 @@ public class BinaryStreamFhirClientImpl extends AbstractHttpFhirClient implement
 	}
 
 	@Override
-	public InputStream read(IdType idType, String mimeType, boolean useHapiBlobStorageOperation)
+	public InputStream readBinary(IdType idType, String mimeType, boolean useHapiBlobStorageOperation)
 	{
 		if (!ResourceType.Binary.name().equals(idType.getResourceType()))
 			throw new UnsupportedOperationException(

@@ -13,6 +13,7 @@ import dev.dsf.fhir.client.FhirWebserviceClient;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.constant.InitiateConstants;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +54,7 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                                                   UUID.randomUUID().toString());
                 }).toList();
         logger.info("-> {}", targets);
-        variables.setTargets(variables.createTargets(targets));
+        delegateExecution.setVariable(InitiateConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_SELECTED_PROVIDE_TARGETS, variables.createTargets(targets));
     }
 
     private void addOrganizationForOutput(String organization, Variables variables) {

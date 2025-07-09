@@ -7,6 +7,7 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
@@ -48,32 +49,28 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
                                        String errorMessage) {
         Task task = variables.getStartTask();
 
-        String statusCode = EyeMaticsConstants.CODESYSTEM_DATA_SET_STATUS_VALUE_NOT_REACHABLE;
+        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_PROVIDE_FAILED;
         if (exception instanceof WebApplicationException webApplicationException
                 && webApplicationException.getResponse() != null
                 && webApplicationException.getResponse().getStatus() == Response.Status.FORBIDDEN.getStatusCode()) {
-            statusCode = EyeMaticsConstants.CODESYSTEM_DATA_SET_STATUS_VALUE_NOT_ALLOWED;
+            status = EyeMaticsGenericStatus.DATA_PROVIDE_FORBIDDEN;
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(statusCode, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
-                        EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "Send data-set failed"));
+                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(), status.getTypeSystem(),
+                        status.getTypeCode(), "Send data-set failed"));
         variables.updateTask(task);
 
-        variables.setString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_ERROR_MESSAGE,
-                "Send data-set failed");
-
         logger.warn(
-                "Could not send data-set with id '{}' to DMS with identifier '{}' referenced in Task with id '{}' - {}",
+                "Could not send data-set with id '{}' to DIC with identifier '{}' referenced in Task with id '{}' - {}",
                 variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE),
-                variables.getString("ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER"), task.getId(),
+                variables.getTarget().getOrganizationIdentifierValue(), task.getId(),
                 exception.getMessage());
         throw new BpmnError(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_ERROR,
                 "Send data-set - " + exception.getMessage());
     }
 
-    // Override in order not to add error message of AbstractTaskMessageSend
     @Override
-    protected void addErrorMessage(Task task, String errorMessage) { }
+    protected void addErrorMessage(Task task, String errorMessage) {}
 }

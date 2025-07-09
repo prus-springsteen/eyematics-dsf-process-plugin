@@ -1,8 +1,9 @@
 package org.eyematics.process.spring.config.initiate;
 
-import org.eyematics.process.message.initiate.InitiateReceiveProcessTask;
+import org.eyematics.process.message.initiate.InitiateReceiveProcessesTask;
+import org.eyematics.process.service.initiate.SetRequestTargetsTask;
 import org.eyematics.process.service.initiate.FinalizeInitiateProcessTask;
-import org.eyematics.process.service.initiate.InitiateReceiveTargetTask;
+import org.eyematics.process.service.initiate.InitiateReceiveTargetsTask;
 import org.eyematics.process.service.initiate.SelectRequestTargetsTask;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.initiate.RequestDataMessageTask;
@@ -28,15 +29,19 @@ public class InitiateConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateReceiveTargetTask initiateReceiveTargetTask() { return new InitiateReceiveTargetTask(api); }
-
-    @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public SelectRequestTargetsTask selectRequestTargetsTask() { return new SelectRequestTargetsTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateReceiveProcessTask initiateReceiveProcessTask() { return new InitiateReceiveProcessTask(api); }
+    public InitiateReceiveTargetsTask initiateReceiveTargetsTask() { return new InitiateReceiveTargetsTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public InitiateReceiveProcessesTask initiateReceiveProcessesTask() { return new InitiateReceiveProcessesTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public SetRequestTargetsTask setRequestTargetsTask() {return new SetRequestTargetsTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
