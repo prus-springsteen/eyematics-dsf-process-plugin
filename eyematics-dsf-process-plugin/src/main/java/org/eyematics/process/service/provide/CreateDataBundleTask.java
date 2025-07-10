@@ -4,7 +4,7 @@ import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.eyematics.process.constant.EyeMaticsGenericStatus;
+import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.generator.AbstractExtendedServiceDelegate;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;

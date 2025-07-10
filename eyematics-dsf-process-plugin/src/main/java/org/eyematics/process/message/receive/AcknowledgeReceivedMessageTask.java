@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.Response;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.constant.EyeMaticsGenericStatus;
+import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;

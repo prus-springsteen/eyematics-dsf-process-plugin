@@ -1,4 +1,4 @@
-package org.eyematics.process.constant;
+package org.eyematics.process.utils.generator;
 
 import org.apache.commons.text.CaseUtils;
 

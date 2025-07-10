@@ -3,6 +3,8 @@ package org.eyematics.process;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+
+import dev.dsf.bpe.subscription.TaskHandler;
 import dev.dsf.bpe.v1.ProcessPluginDefinition;
 import org.eyematics.process.spring.config.CryptoConfig;
 import org.eyematics.process.spring.config.EyeMaticsConfig;

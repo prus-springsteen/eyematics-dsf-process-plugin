@@ -11,7 +11,7 @@ import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.constants.NamingSystems;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.constant.EyeMaticsGenericStatus;
+import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.crypto.KeyProvider;
 import org.eyematics.process.utils.crypto.RsaAesGcmUtil;

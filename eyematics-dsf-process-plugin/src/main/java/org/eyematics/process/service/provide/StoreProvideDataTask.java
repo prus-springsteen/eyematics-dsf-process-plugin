@@ -2,7 +2,7 @@ package org.eyematics.process.service.provide;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.variables.Variables;
-import org.eyematics.process.constant.EyeMaticsGenericStatus;
+import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import jakarta.ws.rs.core.MediaType;
 import org.camunda.bpm.engine.delegate.BpmnError;

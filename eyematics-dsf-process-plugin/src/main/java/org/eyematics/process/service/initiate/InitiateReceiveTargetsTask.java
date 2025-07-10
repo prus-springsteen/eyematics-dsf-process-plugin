@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class InitiateReceiveTargetsTask extends AbstractServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(InitiateReceiveTargetsTask.class);
@@ -29,8 +28,7 @@ public class InitiateReceiveTargetsTask extends AbstractServiceDelegate {
         logger.info("-> Triggering the Organization for Receive ...");
         Targets selectedProvideTargets = (Targets) delegateExecution.getVariable(InitiateConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_SELECTED_PROVIDE_TARGETS);
         List<Target> targets = selectedProvideTargets.getEntries().stream()
-                                                     .map(entry -> SelectTarget.getRequestTarget(this.api, variables, null))
-                                                     .toList();
+                                                     .map(target -> SelectTarget.getRequestTarget(this.api, variables, null)).toList();
         variables.setTargets(variables.createTargets(targets));
         Targets initiateReceiveQueue = variables.createTargets(new ArrayList<>(selectedProvideTargets.getEntries()));
         delegateExecution.setVariable(InitiateConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_INITIATE_RECEIVE_QUEUE, initiateReceiveQueue);
