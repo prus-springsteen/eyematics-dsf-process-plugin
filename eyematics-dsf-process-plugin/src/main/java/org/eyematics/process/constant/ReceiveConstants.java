@@ -12,4 +12,7 @@ public interface ReceiveConstants {
 
     String CODE_SYSTEM_RECEIVE_PROCESS = "http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system";
     String CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE = "data-set-reference-input";
+
+    String BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED = "dataSetEncrypted";
+    String BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
 }

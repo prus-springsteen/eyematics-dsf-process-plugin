@@ -46,4 +46,5 @@ public class ReceiveConfig {
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public AcknowledgeReceivedMessageTask acknowledgeReceivedMessageTask() { return new AcknowledgeReceivedMessageTask(api, dataSetStatusGenerator); }
+
 }

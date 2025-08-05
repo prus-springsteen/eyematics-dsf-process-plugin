@@ -28,13 +28,13 @@ public class CorrelationKeyProcessListener implements ExecutionListener, Initial
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Objects.requireNonNull(api, "api");
+        Objects.requireNonNull(this.api, "api");
     }
 
     @Override
     public void notify(DelegateExecution execution) throws Exception {
         logger.info("CorrelationKeyProvideProcessListener -> Adding Listener...");
-        Variables variables = api.getVariables(execution);
+        Variables variables = this.api.getVariables(execution);
         Target target = variables.getTarget();
         execution.setVariableLocal(BpmnExecutionVariables.CORRELATION_KEY, target.getCorrelationKey());
         logger.info("CorrelationKeyProvideProcessListener -> Target {} -> CK {}", target.getOrganizationIdentifierValue(), target.getCorrelationKey());

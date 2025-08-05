@@ -2,12 +2,13 @@ package org.eyematics.process.service.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
+import dev.dsf.bpe.v1.constants.BpmnExecutionVariables;
+import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import dev.dsf.fhir.client.BasicFhirWebserviceClient;
-import org.eyematics.process.constant.ProvideConstants;
+import org.eyematics.process.constant.ReceiveConstants;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.eyematics.process.constant.ReceiveConstants;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,10 +54,18 @@ public class DownloadRequestedDataTask extends AbstractServiceDelegate {
         else
             referenceBinary = client.read(Binary.class, dataReference.getIdPart());
         logger.info("Data downloaded... -> {}", referenceBinary.toString().substring(0, 5));
-
-        delegateExecution.setVariableLocal(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, referenceBinary.getData());
-        //variables.setByteArray();
+        //Target t = (Target) delegateExecution.getVariable("target");
+        String ck = (String) delegateExecution.getVariableLocal(BpmnExecutionVariables.CORRELATION_KEY);
+        String distinctDatasetVariable = ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + "_" + ck;
+        variables.setByteArray(distinctDatasetVariable, referenceBinary.getData());
         logger.info("Data stored for Decryption.");
+
+        logger.error("Execution Variable in Download...without async and without error.");
+
+        //delegateExecution.setVariableLocal("dataReceiveError", "Here is an error!");
+
+
+
     }
 
 

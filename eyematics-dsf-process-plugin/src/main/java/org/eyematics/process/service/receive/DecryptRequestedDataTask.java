@@ -2,10 +2,14 @@ package org.eyematics.process.service.receive;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
+import dev.dsf.bpe.subscription.TaskHandler;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
+import dev.dsf.bpe.v1.constants.BpmnExecutionVariables;
+import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.eyematics.process.constant.ProvideConstants;
+import org.eyematics.process.constant.ReceiveConstants;
 import org.eyematics.process.utils.crypto.KeyProvider;
 import org.eyematics.process.utils.crypto.RsaAesGcmUtil;
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -40,8 +44,12 @@ public class DecryptRequestedDataTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to decrypt");
-        byte[] bundleEncrypted = (byte[]) delegateExecution.getVariableLocal(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
+        logger.info("-> something not to decrypt");
+        logger.info("-> Business Process Key: {}", delegateExecution.getProcessBusinessKey());
+        //Target t = (Target) delegateExecution.getVariable("target");
+        String ck = (String) delegateExecution.getVariableLocal(BpmnExecutionVariables.CORRELATION_KEY);
+        String distinctDatasetVariable = ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + "_" + ck;
+        byte[] bundleEncrypted = variables.getByteArray(distinctDatasetVariable);
         String bundleString = new String(bundleEncrypted, StandardCharsets.UTF_8);
         logger.info("Bundle -> {}", bundleString.substring(0, 100));
         String reqOrg = variables.getLatestTask().getRequester().getIdentifier().getValue();
@@ -51,6 +59,7 @@ public class DecryptRequestedDataTask extends AbstractServiceDelegate {
         Bundle bundleDecrypted = this.decryptBundle(this.keyProvider.getPrivateKey(), bundleEncrypted, reqOrg, recOrg);
         String o = this.parser.encodeResourceToString(bundleDecrypted);
         logger.info("Bundle -> {}", o.substring(0, 100));
+
     }
 
     private Bundle decryptBundle(PrivateKey privateKey, byte[] bundleEncrypted, String sendingOrganization,
