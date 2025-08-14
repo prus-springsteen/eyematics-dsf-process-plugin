@@ -1,72 +1,69 @@
 package org.eyematics.process.service.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
-import dev.dsf.bpe.v1.constants.BpmnExecutionVariables;
-import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import dev.dsf.fhir.client.BasicFhirWebserviceClient;
+import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.eyematics.process.utils.delegate.AbstractExtendedSubProcessServiceDelegate;
+import org.eyematics.process.utils.generator.DataSetStatusGenerator;
+import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.Optional;
 
-public class DownloadRequestedDataTask extends AbstractServiceDelegate {
+public class DownloadRequestedDataTask extends AbstractExtendedSubProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(DownloadRequestedDataTask.class);
 
-    public DownloadRequestedDataTask(ProcessPluginApi api) {
-        super(api);
+    public DownloadRequestedDataTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+        super(api, dataSetStatusGenerator);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to download");
+        logger.info("-> something not to download 14");
+        String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
         Task latestTask = variables.getLatestTask();
 
-        Optional<Reference> dataReferenceParameter = api.getTaskHelper()
-                                                        .getFirstInputParameterValue(latestTask,
-                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                                                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
-                                                                Reference.class);
+        Reference reference = api.getTaskHelper()
+                .getFirstInputParameterValue(latestTask,
+                        ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                        ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
+                        Reference.class)
+                .orElseThrow(() -> super.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
+                                                            variables,
+                                                "Could not find Reference-Input for downloading Data"));
+        logger.info("Reference-Input extracted -> {}", reference.getReference());
 
-        logger.info("Reference-Input extracted -> {}", dataReferenceParameter.isPresent());
-        Reference s = null;
-        String referenceInput = "";
-        if(dataReferenceParameter.isPresent()) s = dataReferenceParameter.get();
-        if (s != null) {
-            referenceInput = s.getReference();
+        try {
+            Binary referenceBinary = this.downloadData(reference.getReference());
+            logger.info("Data downloaded...");
+            delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey,
+                                               referenceBinary);
+            throw new Exception("Download error");
+        } catch (Exception exception) {
+            String errorMessage = exception.getMessage();
+            logger.error("Could not download data from DIC: {}", errorMessage);
+            super.handleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE, variables, errorMessage);
         }
-        logger.info("Data extracted.");
-
-        // https://github.com/medizininformatik-initiative/dsf-plugin-numdashboard/blob/main/src/main/java/de/medizininformatik_initiative/process/report/service/DownloadReport.java
-        // HOW TO ADD CERTIFICATE? -> DIFFERENCE BETWEEN LOCAL, REMOTE, ... etc.
-        logger.info("Downloading data...");
-        IdType dataReference = new IdType(referenceInput);
-        BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider().getWebserviceClient(dataReference.getBaseUrl()).withRetry(6, 5);
-        Binary referenceBinary = null;
-
-        if (dataReference.hasVersionIdPart())
-            referenceBinary = client.read(Binary.class, dataReference.getIdPart(), dataReference.getVersionIdPart());
-        else
-            referenceBinary = client.read(Binary.class, dataReference.getIdPart());
-        logger.info("Data downloaded... -> {}", referenceBinary.toString().substring(0, 5));
-        //Target t = (Target) delegateExecution.getVariable("target");
-        String ck = (String) delegateExecution.getVariableLocal(BpmnExecutionVariables.CORRELATION_KEY);
-        String distinctDatasetVariable = ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + "_" + ck;
-        variables.setByteArray(distinctDatasetVariable, referenceBinary.getData());
-        logger.info("Data stored for Decryption.");
-
-        logger.error("Execution Variable in Download...without async and without error.");
-
-        //delegateExecution.setVariableLocal("dataReceiveError", "Here is an error!");
-
-
-
     }
 
+    private Binary downloadData(String referenceInput) {
+        IdType dataReference = new IdType(referenceInput);
+        BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider()
+                .getWebserviceClient(dataReference.getBaseUrl()).withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES,
+                        EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN);
 
+        return dataReference.hasVersionIdPart()
+                ? client.read(Binary.class, dataReference.getIdPart(), dataReference.getVersionIdPart())
+                : client.read(Binary.class, dataReference.getIdPart());
+    }
 }

@@ -61,7 +61,6 @@
             <max value="1" />
         </element>
         <!-- DATA-SET STATUS -->
-
         <element id="Task.input:data-set-status">
             <path value="Task.input"/>
             <sliceName value="data-set-status"/>

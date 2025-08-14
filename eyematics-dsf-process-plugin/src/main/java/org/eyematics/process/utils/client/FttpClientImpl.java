@@ -32,7 +32,6 @@ import ca.uhn.fhir.rest.client.api.ServerValidationModeEnum;
 import ca.uhn.fhir.rest.client.interceptor.BasicAuthInterceptor;
 import ca.uhn.fhir.rest.client.interceptor.LoggingInterceptor;
 
-import static org.eyematics.process.constant.EyeMaticsConstants.CODESYSTEM_DATA_SET_STATUS_VALUE_FTTP_NOT_REACHABLE;
 import static org.eyematics.process.constant.EyeMaticsConstants.PSEUDONYM_PATTERN_STRING;
 
 public class FttpClientImpl implements FttpClient
@@ -40,6 +39,7 @@ public class FttpClientImpl implements FttpClient
     private static final Logger logger = LoggerFactory.getLogger(FttpClientImpl.class);
 
     private static final Pattern DIC_PSEUDONYM_PATTERN = Pattern.compile(PSEUDONYM_PATTERN_STRING);
+    private static final String CODESYSTEM_DATA_SET_STATUS_VALUE_FTTP_NOT_REACHABLE = "fttp-not-reachable";
 
     private final IRestfulClientFactory clientFactory;
 

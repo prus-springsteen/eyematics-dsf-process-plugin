@@ -29,15 +29,15 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public LogReceiveFailedTask logReceiveFailedTask() { return new LogReceiveFailedTask(api); }
+    public LogReceiveFailedTask logReceiveFailedTask() { return new LogReceiveFailedTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DownloadRequestedDataTask downloadRequestedDataTask() { return new DownloadRequestedDataTask(api); }
+    public DownloadRequestedDataTask downloadRequestedDataTask() { return new DownloadRequestedDataTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DecryptRequestedDataTask decryptRequestedDataTask() { return new DecryptRequestedDataTask(api, cryptoConfig.keyProviderDms()); }
+    public DecryptRequestedDataTask decryptRequestedDataTask() { return new DecryptRequestedDataTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDms()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -47,4 +47,11 @@ public class ReceiveConfig {
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public AcknowledgeReceivedMessageTask acknowledgeReceivedMessageTask() { return new AcknowledgeReceivedMessageTask(api, dataSetStatusGenerator); }
 
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public FinalizeReceiveSubprocessTask finalizeReceiveSubprocessTask() { return  new FinalizeReceiveSubprocessTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public FinalizeReceiveProcessTask finalizeReceiveProcessTask() { return new FinalizeReceiveProcessTask(api, dataSetStatusGenerator); }
 }
