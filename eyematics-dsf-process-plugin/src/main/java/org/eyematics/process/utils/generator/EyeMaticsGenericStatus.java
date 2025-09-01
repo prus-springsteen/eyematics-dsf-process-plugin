@@ -4,6 +4,11 @@ import org.apache.commons.text.CaseUtils;
 
 
 public enum EyeMaticsGenericStatus {
+    DATA_INITIATION_FAILURE,
+    DATA_INITIATION_FORBIDDEN,
+    DATA_REQUEST_SUCCESS,
+    DATA_REQUEST_FAILURE,
+    DATA_REQUEST_FORBIDDEN,
     DATA_READ_FAILURE,
     DATA_BUNDLE_FAILURE,
     DATA_ENCRYPTION_FAILURE,
@@ -35,6 +40,8 @@ public enum EyeMaticsGenericStatus {
 
     public String getErrorCode() {
         return switch (this) {
+            case DATA_INITIATION_FAILURE, DATA_INITIATION_FORBIDDEN -> "dataInitiateFailure";
+            case DATA_REQUEST_FAILURE, DATA_REQUEST_FORBIDDEN -> "dataRequestFailure";
             case DATA_PROVISION_FAILURE, DATA_PROVISION_FORBIDDEN -> "dataProvideFailure";
             case DATA_RECEIPT_FAILURE, DATA_RECEIPT_FORBIDDEN -> "dataAcknowledgeFailure";
             default -> CaseUtils.toCamelCase(this.name(), false, '_');

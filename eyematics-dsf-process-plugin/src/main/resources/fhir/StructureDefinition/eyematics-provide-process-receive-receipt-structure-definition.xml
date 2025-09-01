@@ -95,7 +95,7 @@
         <element id="Task.input:data-set-status.type.coding">
             <path value="Task.input.type.coding"/>
             <min value="0"/>
-            <max value="1"/>
+            <max value="*"/>
         </element>
         <element id="Task.input:data-set-status.type.coding.system">
             <path value="Task.input.type.coding.system"/>

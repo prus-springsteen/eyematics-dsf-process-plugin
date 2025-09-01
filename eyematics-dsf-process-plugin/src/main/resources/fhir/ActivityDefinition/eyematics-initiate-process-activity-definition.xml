@@ -112,8 +112,6 @@
                 <code value="REMOTE_ORGANIZATION" />
             </valueCoding>
         </extension>
-
-
         <!---->
         <extension url="recipient">
             <valueCoding>

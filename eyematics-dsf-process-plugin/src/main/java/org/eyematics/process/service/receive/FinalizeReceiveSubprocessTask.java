@@ -21,10 +21,9 @@ public class FinalizeReceiveSubprocessTask extends AbstractServiceDelegate {
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("Finalizing Subprocess ...");
-
         Task currentTask = variables.getLatestTask();
 
-        if (Task.TaskStatus.FAILED.equals(currentTask.getStatus())) {
+        if (currentTask != null && Task.TaskStatus.FAILED.equals(currentTask.getStatus())) {
             this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
                     .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(currentTask);

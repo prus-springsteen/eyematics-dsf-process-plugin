@@ -56,17 +56,18 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
+        String message = String.format("Could not send data-set with id '%s' to DIC with identifier '%s' referenced in Task with id '%s' - {%s}",
+                                       variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE),
+                                       variables.getTarget().getOrganizationIdentifierValue(),
+                                       task.getId(),
+                                       exception.getMessage());
         task.addOutput(
                 this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
-                        EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, exception.getMessage()));
+                        EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, message));
         variables.updateTask(task);
 
-        logger.warn(
-                "Could not send data-set with id '{}' to DIC with identifier '{}' referenced in Task with id '{}' - {}",
-                variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE),
-                variables.getTarget().getOrganizationIdentifierValue(), task.getId(),
-                exception.getMessage());
-        throw new BpmnError(status.getErrorCode(), exception.getMessage());
+        logger.warn(message);
+        throw new BpmnError(status.getErrorCode());
     }
 
     // Override in order not to add error message of AbstractTaskMessageSend

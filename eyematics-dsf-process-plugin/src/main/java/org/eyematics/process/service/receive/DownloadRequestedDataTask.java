@@ -31,6 +31,7 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> something not to download 14");
         String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
+        logger.info("-> Correlation Key: {}", correlationKey);
         Task latestTask = variables.getLatestTask();
 
         Reference reference = api.getTaskHelper()
@@ -46,9 +47,7 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
         try {
             Binary referenceBinary = this.downloadData(reference.getReference());
             logger.info("Data downloaded...");
-            delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey,
-                                               referenceBinary);
-            throw new Exception("Download error");
+            delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey, referenceBinary);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not download data from DIC: {}", errorMessage);

@@ -74,7 +74,7 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		String vReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
 
 		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
-				List.of(aInitiateProcess, sInitiateProcess, tInitiateProcess),
+				List.of(aInitiateProcess, sInitiateProcess, sGenericProcess, tInitiateProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
 				List.of(aProvideProcess, sProvideProcess, sProvideProcessReceiveReceipt, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,

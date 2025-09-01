@@ -24,6 +24,30 @@
             <version value="#{version}" />
             <!-- EyeMaticsGenericStatus: Start -->
             <concept>
+                <code value="data-initiation-failure" />
+                <display value="Data Initiation Failure" />
+            </concept>
+            <concept>
+                <code value="data-initiation-forbidden" />
+                <display value="Data Initiation Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-request-success" />
+                <display value="Data Request Success" />
+            </concept>
+            <concept>
+                <code value="data-request-failure" />
+                <display value="Data Request Failure" />
+            </concept>
+            <concept>
+                <code value="data-request-forbidden" />
+                <display value="Data Request Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-read-failure" />
+                <display value="Data Read Failure" />
+            </concept>
+            <concept>
                 <code value="data-bundle-failure" />
                 <display value="Data Bundle Failure" />
             </concept>
@@ -66,6 +90,10 @@
             <concept>
                 <code value="data-receipt-forbidden" />
                 <display value="Data Receipt Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-provision-missing" />
+                <display value="Data Provision Missing" />
             </concept>
             <!-- EyeMaticsGenericStatus: End -->
         </include>

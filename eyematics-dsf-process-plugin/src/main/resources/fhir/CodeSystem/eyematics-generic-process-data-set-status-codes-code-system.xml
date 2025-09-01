@@ -23,6 +23,31 @@
     <content value="complete" />
     <!-- EyeMaticsGenericStatus: Start -->
     <concept>
+        <code value="data-initiation-failure" />
+        <display value="Data initiation failure" />
+        <definition value="An error occurred during initiation of data sharing process." />
+    </concept>
+    <concept>
+        <code value="data-initiation-forbidden" />
+        <display value="Data initiation forbidden" />
+        <definition value="Initiation of data sharing process is forbidden." />
+    </concept>
+    <concept>
+        <code value="data-request-success" />
+        <display value="Data request success" />
+        <definition value="The request of the data was successful." />
+    </concept>
+    <concept>
+        <code value="data-request-failure" />
+        <display value="Data request failure" />
+        <definition value="An error occurred during a request of data." />
+    </concept>
+    <concept>
+        <code value="data-request-forbidden" />
+        <display value="Data request forbidden" />
+        <definition value="The request for data is forbidden." />
+    </concept>
+    <concept>
         <code value="data-read-failure" />
         <display value="Data read failure" />
         <definition value="An error occurred during reading of dataset." />
@@ -81,6 +106,11 @@
         <code value="data-receipt-forbidden" />
         <display value="Data receipt forbidden" />
         <definition value="Receipt of dataset is forbidden." />
+    </concept>
+    <concept>
+        <code value="data-provision-missing" />
+        <display value="Data provision missing" />
+        <definition value="Provision of dataset is missing." />
     </concept>
     <!-- EyeMaticsGenericStatus: End -->
 </CodeSystem>

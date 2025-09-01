@@ -26,22 +26,6 @@
 		<log4j.version>2.22.0</log4j.version>
 	</properties>
 
-	<!--
-	<description>TODO</description>
-	<url>https://github.com/datasharingframework/dsf-process-tutorial</url>
-
-	<scm>
-		<connection>scm:git:git://github.com/datasharingframework/dsf-process-tutorial.git</connection>
-		<developerConnection>scm:git:git@github.com:datasharingframework/dsf-process-tutorial.git</developerConnection>
-		<url>https://github.com/datasharingframework/dsf-process-tutorial</url>
-	</scm>
-	-->
-	<!--
-	<name>MII Processes Feasibility</name>
-	<description>Business processes for the MII feasibility project as plugins for the HiGHmed Data Sharing Framework.
-	</description>
-	<url>https://github.com/medizininformatik-initiative/mii-process-feasibility</url>
-	-->
 	<licenses>
 		<license>
 			<name>Apache License, Version 2.0</name>
@@ -50,14 +34,6 @@
 		</license>
 	</licenses>
 
-<!--
-	<repositories>
-		<repository>
-			<id>github</id>
-			<url>https://maven.pkg.github.com/medizininformatik-initiative/mii-processes-common</url>
-		</repository>
-	</repositories>
--->
 	<dependencies>
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
@@ -283,12 +259,6 @@
 		</profile>
 		<profile>
 			<id>validate-and-check</id>
-			<!-- reactivate when modifiying exercises or adding new ones 
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			-->
-
 			<build>
 				<plugins>
 					<plugin>

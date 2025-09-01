@@ -47,12 +47,6 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
                     .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(startTask);
         }
-
-        if (Task.TaskStatus.FAILED.equals(currentTask.getStatus())) {
-            this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
-                    .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
-                    .update(currentTask);
-        }
     }
 
     private void handleReceivedResponse(Task startTask, Task currentTask) {

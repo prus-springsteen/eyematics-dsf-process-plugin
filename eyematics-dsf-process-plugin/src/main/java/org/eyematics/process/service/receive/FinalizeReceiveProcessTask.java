@@ -29,6 +29,7 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
+        logger.info("Finalizing Process ...");
         Task startTask = variables.getLatestTask();
         List<Target> targetsList = variables.getTargets().getEntries();
 
@@ -56,6 +57,4 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
                     .update(startTask);
         }
     }
-
-
 }

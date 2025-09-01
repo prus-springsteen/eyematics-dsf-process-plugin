@@ -42,10 +42,7 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("Reading Data from FHIR-Repository...");
-        // Klappt mit BinaryStreamFhirClient ABER nicht mit StandardFhirClientImpl ...
-        // https://github.com/medizininformatik-initiative/mii-processes-common/tree/develop/src/main/java/de/medizininformatik_initiative/processes/common/fhir/client
-        // https://github.com/medizininformatik-initiative/mii-process-data-transfer/blob/issues/36_multiple_attachments/src/main/java/de/medizininformatik_initiative/process/data_transfer/service/EncryptAndStoreData.java#L352
+        logger.info("Reading Data from FHIR-Repository is initiated.");
         BinaryStreamFhirClient fhirClient = this.fhirClientFactory.getBinaryStreamFhirClient();
         IdType idType = new IdType(this.fhirClientFactory.getFhirBaseUrl(),
                 "Bundle", "StructureDefinition", "");
@@ -55,13 +52,16 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
             logger.info("Stream -> {}", in);
             FhirContext fhirContext = FhirContext.forR4();
             bundle = fhirContext.newXmlParser().parseResource(Bundle.class, in);
+            if (!bundle.hasEntry()) {
+                throw new Exception("Bundle contains no data. Please check the FHIR-Repository.");
+            }
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not read data from FHIR-Repository: {}", errorMessage);
             super.handleTaskError(EyeMaticsGenericStatus.DATA_READ_FAILURE, variables, errorMessage);
         }
 
-        logger.info("Data -> {}", bundle);
         variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+        logger.info("Data is stored for further processing.");
     }
 }

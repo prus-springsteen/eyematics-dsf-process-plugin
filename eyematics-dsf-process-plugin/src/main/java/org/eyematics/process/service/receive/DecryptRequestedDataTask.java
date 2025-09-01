@@ -43,18 +43,14 @@ public class DecryptRequestedDataTask extends AbstractExtendedSubProcessServiceD
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         try {
-            logger.info("-> something - hopefully - to decrypt");
             String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
+            logger.info("-> Correlation Key: {}", correlationKey);
             Binary bundleEncryptedBinary = (Binary) delegateExecution.getVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey);
             String bundleString = new String(bundleEncryptedBinary.getData(), StandardCharsets.UTF_8);
-            logger.info("Bundle -> {}", bundleString.substring(0, 100));
             String reqOrg = variables.getLatestTask().getRequester().getIdentifier().getValue();
-            logger.info("Request-Organization -> {}", reqOrg);
             String recOrg = variables.getLatestTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
-            logger.info("Recipient-Organization -> {}", recOrg);
             Bundle bundleDecrypted = this.decryptBundle(this.keyProvider.getPrivateKey(), bundleEncryptedBinary.getData(), reqOrg, recOrg);
             String o = this.parser.encodeResourceToString(bundleDecrypted);
-            logger.info("Bundle -> {}", o.substring(0, 100));
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not decrypt downloaded data from DIC: {}", errorMessage);

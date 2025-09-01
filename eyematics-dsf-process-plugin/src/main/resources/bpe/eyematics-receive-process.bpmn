@@ -52,11 +52,11 @@
         <bpmn:outgoing>Flow_01zfu68</bpmn:outgoing>
         <bpmn:outgoing>Flow_0i47abi</bpmn:outgoing>
       </bpmn:eventBasedGateway>
-      <bpmn:intermediateCatchEvent id="WaitForRetrieval" name="Just Waiting Five More Minutes">
+      <bpmn:intermediateCatchEvent id="WaitForRetrieval" name="Just Waiting 30 seconds">
         <bpmn:incoming>Flow_01zfu68</bpmn:incoming>
         <bpmn:outgoing>Flow_1dvhc66</bpmn:outgoing>
         <bpmn:timerEventDefinition id="TimerEventDefinition_0tnz7y9">
-          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30S</bpmn:timeDuration>
         </bpmn:timerEventDefinition>
       </bpmn:intermediateCatchEvent>
       <bpmn:sequenceFlow id="Flow_1dvhc66" sourceRef="WaitForRetrieval" targetRef="LogReceiveFailedTask" />
@@ -150,9 +150,9 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="eyematicsorg_eyematicsReceiveProcess">
       <bpmndi:BPMNShape id="Event_0ig3rr1_di" bpmnElement="EyematicsReceiveProcessInitiateEvent">
-        <dc:Bounds x="212" y="252" width="36" height="36" />
+        <dc:Bounds x="182" y="252" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="188" y="295" width="84" height="27" />
+          <dc:Bounds x="158" y="295" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1h2vwsh_di" bpmnElement="ReceiveSubProcess" isExpanded="true">
@@ -187,7 +187,7 @@
       <bpmndi:BPMNShape id="BPMNShape_1bn8bl0" bpmnElement="WaitForRetrieval">
         <dc:Bounds x="652" y="182" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="630" y="225" width="84" height="27" />
+          <dc:Bounds x="635" y="225" width="75" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0kcow37" bpmnElement="LogReceiveFailedTask">
@@ -314,7 +314,7 @@
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_18spp16_di" bpmnElement="Flow_18spp16">
-        <di:waypoint x="248" y="270" />
+        <di:waypoint x="218" y="270" />
         <di:waypoint x="290" y="270" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0z966b1_di" bpmnElement="Flow_0z966b1">
