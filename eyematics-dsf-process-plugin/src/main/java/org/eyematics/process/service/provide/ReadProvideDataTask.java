@@ -4,14 +4,16 @@ import java.io.*;
 import java.util.Objects;
 import ca.uhn.fhir.context.FhirContext;
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
+import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.client.BinaryStreamFhirClient;
 import org.eyematics.process.utils.client.FhirClientFactory;
+import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.IdType;
 import org.slf4j.Logger;
@@ -22,13 +24,13 @@ import org.slf4j.LoggerFactory;
 // https://www.baeldung.com/java-9-http-client
 // Download with Pause and Resume...
 // https://www.baeldung.com/spring-resttemplate-download-large-file
-public class ReadProvideDataTask extends AbstractServiceDelegate {
+public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(ReadProvideDataTask.class);
     private final FhirClientFactory fhirClientFactory;
 
-    public ReadProvideDataTask(ProcessPluginApi api, FhirClientFactory fhirClientFactory) {
-        super(api);
+    public ReadProvideDataTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator, FhirClientFactory fhirClientFactory) {
+        super(api, dataSetStatusGenerator);
         this.fhirClientFactory = fhirClientFactory;
     }
 
@@ -40,10 +42,7 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("Reading Data from FHIR-Repository...");
-        // Klappt mit BinaryStreamFhirClient ABER nicht mit StandardFhirClientImpl ...
-        // https://github.com/medizininformatik-initiative/mii-processes-common/tree/develop/src/main/java/de/medizininformatik_initiative/processes/common/fhir/client
-        // https://github.com/medizininformatik-initiative/mii-process-data-transfer/blob/issues/36_multiple_attachments/src/main/java/de/medizininformatik_initiative/process/data_transfer/service/EncryptAndStoreData.java#L352
+        logger.info("Reading Data from FHIR-Repository is initiated.");
         BinaryStreamFhirClient fhirClient = this.fhirClientFactory.getBinaryStreamFhirClient();
         IdType idType = new IdType(this.fhirClientFactory.getFhirBaseUrl(),
                 "Bundle", "StructureDefinition", "");
@@ -53,11 +52,16 @@ public class ReadProvideDataTask extends AbstractServiceDelegate {
             logger.info("Stream -> {}", in);
             FhirContext fhirContext = FhirContext.forR4();
             bundle = fhirContext.newXmlParser().parseResource(Bundle.class, in);
-        } catch (Exception e) {
-            logger.info("Exception -> {}", e.getMessage());
+            if (!bundle.hasEntry()) {
+                throw new Exception("Bundle contains no data. Please check the FHIR-Repository.");
+            }
+        } catch (Exception exception) {
+            String errorMessage = exception.getMessage();
+            logger.error("Could not read data from FHIR-Repository: {}", errorMessage);
+            super.handleTaskError(EyeMaticsGenericStatus.DATA_READ_FAILURE, variables, errorMessage);
         }
 
-        logger.info("Data -> {}", bundle);
         variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+        logger.info("Data is stored for further processing.");
     }
 }

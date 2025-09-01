@@ -36,7 +36,7 @@ public class InitiateConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateReceiveProcessTask initiateReceiveProcessTask() { return new InitiateReceiveProcessTask(api); }
+    public InitiateReceiveProcessTask initiateReceiveProcessTask() { return new InitiateReceiveProcessTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

@@ -23,7 +23,6 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
 
-
     @Override
     public void afterPropertiesSet() throws Exception {
         super.afterPropertiesSet();
@@ -32,21 +31,19 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to store, now");
+        logger.info("Adding data status to output of task.");
 
         Task startTask = variables.getStartTask();
         Task currentTask = variables.getLatestTask();
 
         if (!currentTask.getId().equals(startTask.getId())) {
-            handleReceivedResponse(startTask, currentTask);
-        } else if (Task.TaskStatus.INPROGRESS.equals(startTask.getStatus())) {
-            handleMissingResponse(startTask);
+            this.handleReceivedResponse(startTask, currentTask);
         }
 
         variables.updateTask(startTask);
 
         if (Task.TaskStatus.FAILED.equals(startTask.getStatus())) {
-            api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
+            this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
                     .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(startTask);
         }
@@ -55,19 +52,10 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
     private void handleReceivedResponse(Task startTask, Task currentTask) {
         this.dataSetStatusGenerator.transformInputToOutput(currentTask, startTask, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                 EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS);
-
         if (startTask.getOutput().stream().filter(Task.TaskOutputComponent::hasExtension)
                 .flatMap(o -> o.getExtension().stream())
                 .anyMatch(e -> EyeMaticsConstants.EXTENSION_DATA_SET_STATUS_ERROR_URL.equals(e.getUrl()))) {
             startTask.setStatus(Task.TaskStatus.FAILED);
         }
-    }
-
-    private void handleMissingResponse(Task startTask) {
-        startTask.setStatus(Task.TaskStatus.FAILED);
-        startTask.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(
-                "ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_MISSING",
-                EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
-                EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
     }
 }

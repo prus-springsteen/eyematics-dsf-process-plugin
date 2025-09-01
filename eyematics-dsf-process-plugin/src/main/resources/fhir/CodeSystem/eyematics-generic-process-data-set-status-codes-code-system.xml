@@ -8,52 +8,109 @@
     <url value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="MII_Data_Set_Status" />
-    <title value="MII Data-Set Status" />
+    <name value="EyeMatics Generic Dataset Status" />
+    <title value="EyeMatics Generic Dataset Status" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
     <!-- date managed by bpe -->
     <date value="#{date}" />
-    <publisher value="Medizininformatik-Initiative" />
-    <description value="CodeSystem with standard values for the status of transferring data-sets" />
+    <publisher value="EyeMatics.org" />
+    <description value="CodeSystem with standard values for the status of transferring datasets within EyeMatics-Process" />
     <caseSensitive value="true" />
     <hierarchyMeaning value="grouped-by" />
     <versionNeeded value="false" />
     <content value="complete" />
+    <!-- EyeMaticsGenericStatus: Start -->
     <concept>
-        <code value="not-allowed" />
-        <display value="Not allowed" />
-        <definition value="Not allowed to send data-set to DMS" />
+        <code value="data-initiation-failure" />
+        <display value="Data initiation failure" />
+        <definition value="An error occurred during initiation of data sharing process." />
     </concept>
     <concept>
-        <code value="not-reachable" />
-        <display value="Not reachable" />
-        <definition value="DMS cannot be reached" />
+        <code value="data-initiation-forbidden" />
+        <display value="Data initiation forbidden" />
+        <definition value="Initiation of data sharing process is forbidden." />
     </concept>
     <concept>
-        <code value="receipt-missing" />
-        <display value="Receipt missing" />
-        <definition value="No receipt received from DMS" />
+        <code value="data-request-success" />
+        <display value="Data request success" />
+        <definition value="The request of the data was successful." />
     </concept>
     <concept>
-        <code value="receipt-ok" />
-        <display value="Receipt ok" />
-        <definition value="Ok received from DMS" />
+        <code value="data-request-failure" />
+        <display value="Data request failure" />
+        <definition value="An error occurred during a request of data." />
     </concept>
     <concept>
-        <code value="receipt-error" />
-        <display value="Receipt error" />
-        <definition value="Error received from DMS" />
+        <code value="data-request-forbidden" />
+        <display value="Data request forbidden" />
+        <definition value="The request for data is forbidden." />
     </concept>
     <concept>
-        <code value="receive-ok" />
-        <display value="Receive ok" />
-        <definition value="Data-set received from DIC" />
+        <code value="data-read-failure" />
+        <display value="Data read failure" />
+        <definition value="An error occurred during reading of dataset." />
     </concept>
     <concept>
-        <code value="receive-error" />
-        <display value="Receive error" />
-        <definition value="Error receiving data-set from DIC" />
+        <code value="data-bundle-failure" />
+        <display value="Data bundle failure" />
+        <definition value="An error occurred during bundling of dataset." />
     </concept>
+    <concept>
+        <code value="data-encryption-failure" />
+        <display value="Data encryption failure" />
+        <definition value="An error occurred during encryption of dataset." />
+    </concept>
+    <concept>
+        <code value="data-store-failure" />
+        <display value="Data store failure" />
+        <definition value="An error occurred during storing of dataset." />
+    </concept>
+    <concept>
+        <code value="data-provision-failure" />
+        <display value="Data provision failure" />
+        <definition value="An error occurred during provision of dataset." />
+    </concept>
+    <concept>
+        <code value="data-provision-forbidden" />
+        <display value="Data provision forbidden" />
+        <definition value="Provision of dataset is forbidden." />
+    </concept>
+    <concept>
+        <code value="data-receipt-missing" />
+        <display value="Data receipt missing" />
+        <definition value="Receipt of dataset is missing." />
+    </concept>
+    <concept>
+        <code value="data-download-failure" />
+        <display value="Data download failure" />
+        <definition value="An error occurred during download of dataset from DIC." />
+    </concept>
+    <concept>
+        <code value="data-decryption-failure" />
+        <display value="Data decryption failure" />
+        <definition value="An error occurred during decryption of dataset." />
+    </concept>
+    <concept>
+        <code value="data-receipt-success" />
+        <display value="Data receipt success" />
+        <definition value="Receipt of dataset was successful." />
+    </concept>
+    <concept>
+        <code value="data-receipt-failure" />
+        <display value="Data receipt failure" />
+        <definition value="An error occurred during receipt of dataset." />
+    </concept>
+    <concept>
+        <code value="data-receipt-forbidden" />
+        <display value="Data receipt forbidden" />
+        <definition value="Receipt of dataset is forbidden." />
+    </concept>
+    <concept>
+        <code value="data-provision-missing" />
+        <display value="Data provision missing" />
+        <definition value="Provision of dataset is missing." />
+    </concept>
+    <!-- EyeMaticsGenericStatus: End -->
 </CodeSystem>

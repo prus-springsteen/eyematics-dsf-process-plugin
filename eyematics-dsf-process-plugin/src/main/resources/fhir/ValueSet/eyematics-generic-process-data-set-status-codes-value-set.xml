@@ -8,48 +8,94 @@
     <url value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="MII_Data_Set_Status_Send" />
-    <title value="MII Data Set Status Send" />
+    <name value="EyeMatics Generic Dataset Status" />
+    <title value="EyeMatics Generic Dataset Status" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
     <!-- date managed by bpe -->
     <date value="#{date}" />
-    <publisher value="Medizininformatik-Initiative" />
-    <description value="ValueSet with values for the status of sending data-sets" />
+    <publisher value="EyeMatics.org" />
+    <description value="ValueSet wwith standard values for the status of transferring datasets within EyeMatics-Process" />
     <immutable value="true" />
     <compose>
         <include>
             <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
             <version value="#{version}" />
+            <!-- EyeMaticsGenericStatus: Start -->
             <concept>
-                <code value="not-allowed" />
-                <display value="Not allowed" />
+                <code value="data-initiation-failure" />
+                <display value="Data Initiation Failure" />
             </concept>
             <concept>
-                <code value="not-reachable" />
-                <display value="Not reachable" />
+                <code value="data-initiation-forbidden" />
+                <display value="Data Initiation Forbidden" />
             </concept>
             <concept>
-                <code value="receipt-missing" />
-                <display value="Receipt missing" />
+                <code value="data-request-success" />
+                <display value="Data Request Success" />
             </concept>
             <concept>
-                <code value="receipt-ok" />
-                <display value="Receipt ok" />
+                <code value="data-request-failure" />
+                <display value="Data Request Failure" />
             </concept>
             <concept>
-                <code value="receipt-error" />
-                <display value="Receipt error" />
+                <code value="data-request-forbidden" />
+                <display value="Data Request Forbidden" />
             </concept>
             <concept>
-                <code value="receive-ok" />
-                <display value="Receive ok" />
+                <code value="data-read-failure" />
+                <display value="Data Read Failure" />
             </concept>
             <concept>
-                <code value="receive-error" />
-                <display value="Receive error" />
+                <code value="data-bundle-failure" />
+                <display value="Data Bundle Failure" />
             </concept>
+            <concept>
+                <code value="data-encryption-failure" />
+                <display value="Data Encryption Failure" />
+            </concept>
+            <concept>
+                <code value="data-store-failure" />
+                <display value="Data Store Failure" />
+            </concept>
+            <concept>
+                <code value="data-provision-failure" />
+                <display value="Data Provision Failure" />
+            </concept>
+            <concept>
+                <code value="data-provision-forbidden" />
+                <display value="Data Provision Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-receipt-missing" />
+                <display value="Data Receipt Missing" />
+            </concept>
+            <concept>
+                <code value="data-download-failure" />
+                <display value="Data Download Failure" />
+            </concept>
+            <concept>
+                <code value="data-decryption-failure" />
+                <display value="Data Decryption Failure" />
+            </concept>
+            <concept>
+                <code value="data-receipt-success" />
+                <display value="Data Receipt Success" />
+            </concept>
+            <concept>
+                <code value="data-receipt-failure" />
+                <display value="Data Receipt Failure" />
+            </concept>
+            <concept>
+                <code value="data-receipt-forbidden" />
+                <display value="Data Receipt Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-provision-missing" />
+                <display value="Data Provision Missing" />
+            </concept>
+            <!-- EyeMaticsGenericStatus: End -->
         </include>
     </compose>
 </ValueSet>

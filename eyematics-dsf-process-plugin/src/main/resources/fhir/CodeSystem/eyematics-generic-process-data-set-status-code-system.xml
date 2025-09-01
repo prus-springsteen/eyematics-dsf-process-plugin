@@ -8,22 +8,22 @@
     <url value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Generic Data-Set CodeSystem" />
-    <title value="EyeMatics Generic Data-Set CodeSystem" />
+    <name value="EyeMatics Generic Dataset CodeSystem" />
+    <title value="EyeMatics Generic Dataset CodeSystem" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
     <!-- date managed by bpe -->
     <date value="#{date}" />
     <publisher value="DSF" />
-    <description value="CodeSystem with Data-Set status for input or output" />
+    <description value="CodeSystem with Dataset status for input or output" />
     <caseSensitive value="true" />
     <hierarchyMeaning value="grouped-by" />
     <versionNeeded value="false" />
     <content value="complete" />
     <concept>
         <code value="data-set-status" />
-        <display value="Data-Set Status" />
-        <definition value="Data-set status of local organization" />
+        <display value="Dataset Status" />
+        <definition value="Dataset status of local organization" />
     </concept>
 </CodeSystem>

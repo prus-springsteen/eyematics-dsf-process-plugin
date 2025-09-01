@@ -9,7 +9,6 @@ import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ProvideConstants;
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.IdType;
-import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import dev.dsf.fhir.client.BasicFhirWebserviceClient;
@@ -25,35 +24,13 @@ public class DeleteProvideDataTask extends AbstractServiceDelegate {
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> something to delete");
-        Task task = variables.getStartTask();
-
         IdType binaryId = new IdType(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
-        /*
-        String dmsIdentifier = variables.getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_DMS_IDENTIFIER);
-        String projectIdentifier = variables
-                .getString(ConstantsDataTransfer.BPMN_EXECUTION_VARIABLE_PROJECT_IDENTIFIER);
-        IdType binaryId = new IdType(
-                variables.getString(BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
-
-        logger.info(
-                "Permanently deleting encrypted Binary with id '{}' provided for DMS '{}' and project-identifier '{}' "
-                        + "referenced in Task with id '{}'",
-                binaryId.getValue(), dmsIdentifier, projectIdentifier, task.getId());
-        */
-        try
-        {
+        try {
             logger.info("-> now deleting ...");
-            deletePermanently(binaryId);
+            if (!binaryId.isEmpty()) this.deletePermanently(binaryId);
         }
-        catch (Exception exception)
-        {
-            /*
-            logger.warn(
-                    "Could not permanently delete data-set for DMS '{}' and project-identifier '{}' referenced in Task with id '{}' - {}",
-                    dmsIdentifier, projectIdentifier, task.getId(), exception.getMessage());
-            */
-            String error = "Permanently deleting encrypted transferable data-set failed - " + exception.getMessage();
-            throw new RuntimeException(error, exception);
+        catch (Exception exception) {
+            logger.error("Permanently deleting encrypted transferable data-set failed - {}", exception.getMessage());
         }
     }
 

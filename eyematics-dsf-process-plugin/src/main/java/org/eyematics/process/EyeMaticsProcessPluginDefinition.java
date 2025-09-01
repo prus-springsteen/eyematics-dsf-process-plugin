@@ -17,7 +17,7 @@ import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_
 
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
 
-	public static final String VERSION = "1.1.0.1";
+	public static final String VERSION = "1.0.0.1";
 	public static final LocalDate RELEASE_DATE = LocalDate.of(2025, 8, 15);
 
 	@Override
@@ -74,11 +74,11 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		String vReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
 
 		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
-				List.of(aInitiateProcess, sInitiateProcess, tInitiateProcess),
+				List.of(aInitiateProcess, sInitiateProcess, sGenericProcess, tInitiateProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
 				List.of(aProvideProcess, sProvideProcess, sProvideProcessReceiveReceipt, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
-				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, cReceiveProcess, cReceiveInitiateProcess, vReceiveProcess, vReceiveInitiateProcess));
+				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, cReceiveProcess, cReceiveInitiateProcess, vReceiveProcess, vReceiveInitiateProcess, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes));
 	}
 
 	@Override
