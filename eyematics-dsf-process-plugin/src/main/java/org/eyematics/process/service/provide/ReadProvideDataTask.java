@@ -1,6 +1,5 @@
 package org.eyematics.process.service.provide;
 
-import java.io.*;
 import java.util.Objects;
 import ca.uhn.fhir.context.FhirContext;
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -8,11 +7,10 @@ import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.utils.client.*;
 import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
-import org.eyematics.process.utils.client.BinaryStreamFhirClient;
-import org.eyematics.process.utils.client.FhirClientFactory;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.IdType;
@@ -20,10 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-// https://github.com/medizininformatik-initiative/dsf-plugin-numdashboard/blob/main/src/main/java/de/medizininformatik_initiative/process/report/service/CreateJson.java
-// https://www.baeldung.com/java-9-http-client
-// Download with Pause and Resume...
-// https://www.baeldung.com/spring-resttemplate-download-large-file
 public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(ReadProvideDataTask.class);
@@ -43,25 +37,20 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("Reading Data from FHIR-Repository is initiated.");
-        BinaryStreamFhirClient fhirClient = this.fhirClientFactory.getBinaryStreamFhirClient();
-        IdType idType = new IdType(this.fhirClientFactory.getFhirBaseUrl(),
-                "Bundle", "StructureDefinition", "");
-        Bundle bundle = new Bundle();
-
-        try (InputStream  in = fhirClient.readBundle(idType, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_XML)) {
-            logger.info("Stream -> {}", in);
+        EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
+        IdType idType = new IdType(fhirClient.getFhirBaseUrl(),  "StructureDefinition", "", "");
+        try {
             FhirContext fhirContext = FhirContext.forR4();
-            bundle = fhirContext.newXmlParser().parseResource(Bundle.class, in);
+            Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, fhirClient.read(idType, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON));
             if (!bundle.hasEntry()) {
                 throw new Exception("Bundle contains no data. Please check the FHIR-Repository.");
             }
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+            logger.info("Data is stored for further processing.");
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not read data from FHIR-Repository: {}", errorMessage);
-            super.handleTaskError(EyeMaticsGenericStatus.DATA_READ_FAILURE, variables, errorMessage);
+            this.handleTaskError(EyeMaticsGenericStatus.DATA_READ_FAILURE, variables, errorMessage);
         }
-
-        variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
-        logger.info("Data is stored for further processing.");
     }
 }

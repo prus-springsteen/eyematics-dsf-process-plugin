@@ -7,10 +7,11 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class LogReceiveFailedTask extends AbstractServiceDelegate {
 
@@ -29,7 +30,7 @@ public class LogReceiveFailedTask extends AbstractServiceDelegate {
         Task task = new Task();
         task.setStatus(Task.TaskStatus.FAILED);
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_PROVISION_MISSING.getStatusCode(), EyeMaticsGenericStatus.getTypeSystem(),
+                this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_PROVIDE_MISSING.getStatusCode(), EyeMaticsGenericStatus.getTypeSystem(),
                         EyeMaticsGenericStatus.getTypeCode(), "Could not receive Data from " + providingOrganization + "."));
         String correlationKey = variables.getTarget().getCorrelationKey();
         variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task);

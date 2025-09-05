@@ -16,6 +16,7 @@ import org.springframework.beans.factory.InitializingBean;
 import java.util.List;
 import java.util.Objects;
 
+
 public class EyeMaticsProcessPluginDeploymentStateListener implements ProcessPluginDeploymentStateListener, InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(EyeMaticsProcessPluginDeploymentStateListener.class);
@@ -25,11 +26,9 @@ public class EyeMaticsProcessPluginDeploymentStateListener implements ProcessPlu
         this.keyProvider = keyProvider;
     }
 
-    // https://stackoverflow.com/questions/23434252/programmatically-change-log-level-in-log4j2
     @Override
     public void afterPropertiesSet() throws Exception {
         Objects.requireNonNull(keyProvider, "keyProvider");
-        // Ist im Docker irgendwo fest hinterlegt...
         Configurator.setLevel("org.eyematics", Level.INFO);
     }
 

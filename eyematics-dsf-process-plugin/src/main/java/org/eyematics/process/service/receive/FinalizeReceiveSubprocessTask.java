@@ -10,6 +10,7 @@ import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class FinalizeReceiveSubprocessTask extends AbstractServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(FinalizeReceiveSubprocessTask.class);
@@ -28,5 +29,6 @@ public class FinalizeReceiveSubprocessTask extends AbstractServiceDelegate {
                     .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(currentTask);
         }
+
     }
 }

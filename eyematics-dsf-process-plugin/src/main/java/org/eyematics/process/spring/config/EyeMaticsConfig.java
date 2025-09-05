@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+
 @Configuration
 public class EyeMaticsConfig {
 
@@ -23,7 +24,7 @@ public class EyeMaticsConfig {
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public ProcessPluginDeploymentStateListener processPluginDeploymentStateListener() {
-        return new EyeMaticsProcessPluginDeploymentStateListener(cryptoConfig.keyProviderDms());
+        return new EyeMaticsProcessPluginDeploymentStateListener(cryptoConfig.keyProviderDicReceive());
     }
 
     @Bean

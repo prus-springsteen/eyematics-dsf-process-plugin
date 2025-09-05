@@ -10,10 +10,11 @@ import org.eyematics.process.spring.config.initiate.InitiateConfig;
 import org.eyematics.process.spring.config.provide.ProvideFhirClientConfig;
 import org.eyematics.process.spring.config.provide.ProvideConfig;
 import org.eyematics.process.spring.config.receive.ReceiveConfig;
-
+import org.eyematics.process.spring.config.receive.ReceiveFhirClientConfig;
 import static org.eyematics.process.constant.InitiateConstants.PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS;
 import static org.eyematics.process.constant.ProvideConstants.PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS;
 import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS;
+
 
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
 
@@ -65,7 +66,7 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 
 		// RECEIVE
 		String aReceiveProcess = "fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml";
-		String sInitiateReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-initiate-structure-defintion.xml";
+		String sInitiateReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition.xml";
 		String sInitiateReceiveProcessExtension = "fhir/StructureDefinition/eyematics-receive-process-initiate-dic-identifier-extension.xml";
 		String sStartReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml";
 		String cReceiveInitiateProcess = "fhir/CodeSystem/eyematics-receive-process-initiate-code-system.xml";
@@ -84,6 +85,6 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 	@Override
 	public List<Class<?>> getSpringConfigurations() {
 		return List.of(EyeMaticsConfig.class, CryptoConfig.class, ProvideFhirClientConfig.class, InitiateConfig.class,
-				ProvideConfig.class, ReceiveConfig.class);
+				ProvideConfig.class, ReceiveConfig.class, ReceiveFhirClientConfig.class);
 	}
 }

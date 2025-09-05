@@ -16,6 +16,7 @@ import dev.dsf.bpe.v1.constants.BpmnExecutionVariables;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 
+
 public class CorrelationKeyProcessListener implements ExecutionListener, InitializingBean {
 
     private final ProcessPluginApi api;
@@ -33,10 +34,8 @@ public class CorrelationKeyProcessListener implements ExecutionListener, Initial
 
     @Override
     public void notify(DelegateExecution execution) throws Exception {
-        logger.info("CorrelationKeyProvideProcessListener -> Adding Listener...");
         Variables variables = this.api.getVariables(execution);
         Target target = variables.getTarget();
         execution.setVariableLocal(BpmnExecutionVariables.CORRELATION_KEY, target.getCorrelationKey());
-        logger.info("CorrelationKeyProvideProcessListener -> Target {} -> CK {}", target.getOrganizationIdentifierValue(), target.getCorrelationKey());
     }
 }

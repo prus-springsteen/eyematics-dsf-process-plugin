@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+
 @Configuration
 public class ProvideConfig {
 
@@ -21,7 +22,7 @@ public class ProvideConfig {
     private CryptoConfig cryptoConfig;
 
     @Autowired
-    private ProvideFhirClientConfig dicFhirClientConfig;
+    private ProvideFhirClientConfig provideFhirClientConfig;
 
     @Autowired
     private DataSetStatusGenerator dataSetStatusGenerator;
@@ -29,7 +30,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dataSetStatusGenerator, dicFhirClientConfig.fhirClientFactory()); }
+    public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dataSetStatusGenerator, provideFhirClientConfig.getFhirClientFactory()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -37,7 +38,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public EncryptDataBundleTask encryptDataBundleTask() { return new EncryptDataBundleTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDms()); }
+    public EncryptDataBundleTask encryptDataBundleTask() { return new EncryptDataBundleTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDicReceive()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -57,7 +58,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DeleteProvideDataTask deleteProvideDataTask() { return  new DeleteProvideDataTask(api); }
+    public DeleteProvideDataTask deleteProvideDataTask() { return  new DeleteProvideDataTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

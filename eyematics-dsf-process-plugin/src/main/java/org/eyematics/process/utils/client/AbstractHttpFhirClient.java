@@ -168,14 +168,13 @@ public abstract class AbstractHttpFhirClient implements FhirClient
 	protected HttpRequest.Builder createBaseRequest(String path, Map<String, String> headers)
 	{
 		HttpRequest.Builder builder = HttpRequest.newBuilder();
-		builder.timeout(Duration.ofMillis(socketTimeout));
+		//builder.timeout(Duration.ofMillis(socketTimeout));
 
 		path = path.startsWith("/") ? path.substring(1) : path;
 
 		// URI throws exception if | not escaped
 		path = path.replace("|", "%7C");
 		URI uri = URI.create(fhirServerBase + path);
-
 		builder.uri(uri);
 
 		// will be overwritten if headers-map contains accept header

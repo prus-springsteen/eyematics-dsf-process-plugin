@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+
 @Configuration
 public class CryptoConfig {
 
@@ -19,25 +20,25 @@ public class CryptoConfig {
     private ProcessPluginApi api;
 
     @ProcessDocumentation(required = true,
-            processNames = "DEV_DMS_PRIVATE_KEY_FILE",
-            description = "Location of the DMS private-key as 4096 Bit RSA PEM encoded, not encrypted file",
+            processNames = "eyematicsorg_receiveProcessPrivateKey",
+            description = "Location of the DIC private-key as 4096 Bit RSA PEM encoded, not encrypted file",
             recommendation = "Use docker secret file to configure",
-            example = "/run/secrets/dms_private_key.pem")
-    @Value("${dev.dms.private.key.file:#{null}}")
-    private String dmsPrivateKeyFile;
+            example = "/run/secrets/dic_private_key.pem")
+    @Value("${org.eyematics.dic.receive.private.key.file:#{null}}")
+    private String dicReceivePrivateKeyFile;
 
     @ProcessDocumentation(required = true,
-            processNames = "DEV_DMS_PUBLIC_KEY_FILE",
-            description = "Location of the DMS public-key as 4096 Bit RSA PEM encoded file",
+            processNames = "eyematicsorg_receiveProcessPublicKey",
+            description = "Location of the DIC public-key as 4096 Bit RSA PEM encoded file",
             recommendation = "Use docker secret file to configure",
-            example = "/run/secrets/dms_public_key.pem")
-    @Value("${dev.dms.public.key.file:#{null}}")
-    private String dmsPublicKeyFile;
+            example = "/run/secrets/dic_public_key.pem")
+    @Value("${org.eyematics.dic.receive.public.key.file:#{null}}")
+    private String dicReceivePublicKeyFile;
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public KeyProvider keyProviderDms() {
-        return KeyProviderImpl.fromFiles(api, dmsPrivateKeyFile, dmsPublicKeyFile, new DataLogger(false, null));
+    public KeyProvider keyProviderDicReceive() {
+        return KeyProviderImpl.fromFiles(api, dicReceivePrivateKeyFile, dicReceivePublicKeyFile, new DataLogger(false, null));
     }
 }
 

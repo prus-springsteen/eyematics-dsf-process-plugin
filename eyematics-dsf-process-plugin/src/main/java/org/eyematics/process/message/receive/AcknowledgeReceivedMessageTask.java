@@ -5,6 +5,7 @@ import dev.dsf.bpe.v1.activity.AbstractTaskMessageSend;
 import dev.dsf.bpe.v1.variables.Variables;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ReceiveConstants;
@@ -14,7 +15,8 @@ import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.stream.Stream;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
+
 
 public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
 
@@ -33,7 +35,7 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
 
         if (task.getOutput().isEmpty()) {
             task.addOutput(
-                    this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_RECEIPT_SUCCESS.getStatusCode(),
+                    this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
                             EyeMaticsGenericStatus.getTypeSystem(),
                             EyeMaticsGenericStatus.getTypeCode(), null));
             variables.updateTask(task);
@@ -47,16 +49,16 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
                                        String errorMessage) {
 
         Task task = variables.getLatestTask();
-        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_RECEIPT_FAILURE;
+        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_ACKNOWLEDGE_FAILURE;
 
         if (exception instanceof WebApplicationException webApplicationException
                 && webApplicationException.getResponse() != null
                 && webApplicationException.getResponse().getStatus() == Response.Status.FORBIDDEN.getStatusCode()) {
-            status = EyeMaticsGenericStatus.DATA_RECEIPT_FORBIDDEN;
+            status = EyeMaticsGenericStatus.DATA_ACKNOWLEDGE_FORBIDDEN;
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Could not acknowledge or send receipt for data-set with id '%s' to DIC with identifier '%s' referenced in Task with id '%s' - {%s}",
+        String message = String.format("Could not acknowledge or send receipt for data-set with id '%s' to DIC ('%s') referenced in Task with id '%s' - {%s}",
                                        variables.getString(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET),
                                        variables.getTarget().getOrganizationIdentifierValue(),
                                        task.getId(),
@@ -70,7 +72,8 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
         String correlationKey = variables.getTarget().getCorrelationKey();
         variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, CopyTask.getTaskCopy(task));
 
-        logger.error(message);
+        logger.warn(message);
+        throw new BpmnError(status.getErrorCode());
     }
 
     // Override in order not to add error message of AbstractTaskMessageSend

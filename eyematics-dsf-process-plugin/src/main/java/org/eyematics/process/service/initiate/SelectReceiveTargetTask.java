@@ -11,19 +11,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class InitiateReceiveTargetTask extends AbstractServiceDelegate {
+public class SelectReceiveTargetTask extends AbstractServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(InitiateReceiveTargetTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(SelectReceiveTargetTask.class);
 
-    public InitiateReceiveTargetTask(ProcessPluginApi api) {
+    public SelectReceiveTargetTask(ProcessPluginApi api) {
         super(api);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Triggering the Organization for Receive ...");
+        logger.info("-> Triggering the Receive Process");
         Target target = SelectTarget.getRequestTarget(this.api, variables, null);
-        logger.info("-> Target -> {}", target.toString());
         variables.setTarget(target);
     }
 }

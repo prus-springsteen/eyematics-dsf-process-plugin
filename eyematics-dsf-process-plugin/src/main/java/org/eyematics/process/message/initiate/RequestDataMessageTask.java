@@ -8,10 +8,12 @@ import jakarta.ws.rs.core.Response;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class RequestDataMessageTask extends AbstractTaskMessageSend {
@@ -25,7 +27,14 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
     }
 
     @Override
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        Objects.requireNonNull(this.dataSetStatusGenerator, "dataSetStatusGenerator");
+    }
+
+    @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
+        logger.info("-> Initiating Providing Process(es) in accordance with Participating Organization(s)");
         return Stream.empty();
     }
 
@@ -42,7 +51,7 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Requesting data from DIC (identifier: '%s') in Task with ID '%s': %s failed.",
+        String message = String.format("Requesting data from DIC ('%s') in Task with ID '%s': %s failed.",
                 variables.getTarget().getOrganizationIdentifierValue(),
                 task.getId(),
                 exception.getMessage());

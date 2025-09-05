@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+
 @Configuration
 public class ReceiveConfig {
 
@@ -19,6 +20,9 @@ public class ReceiveConfig {
 
     @Autowired
     private CryptoConfig cryptoConfig;
+
+    @Autowired
+    private ReceiveFhirClientConfig receiveFhirClientConfig;
 
     @Autowired
     private DataSetStatusGenerator dataSetStatusGenerator;
@@ -37,7 +41,11 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DecryptRequestedDataTask decryptRequestedDataTask() { return new DecryptRequestedDataTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDms()); }
+    public DecryptRequestedDataTask decryptRequestedDataTask() { return new DecryptRequestedDataTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDicReceive()); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public InsertRequestedDataTask depositRequestedDataTask() { return new InsertRequestedDataTask(api, dataSetStatusGenerator, receiveFhirClientConfig.getFhirClientFactory()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

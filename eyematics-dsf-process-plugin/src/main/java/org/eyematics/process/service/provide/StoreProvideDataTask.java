@@ -3,7 +3,7 @@ package org.eyematics.process.service.provide;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import jakarta.ws.rs.core.MediaType;
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+
 
 public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate {
 
@@ -63,7 +64,7 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
     private void handleStoreError(Exception exception, Variables variables) {
         String errorMessage = exception.getMessage();
         logger.error("Could not store dataset: {}", errorMessage);
-        super.handleTaskError(EyeMaticsGenericStatus.DATA_STORE_FAILURE, variables, errorMessage);
+        this.handleTaskError(EyeMaticsGenericStatus.DATA_STORE_FAILURE, variables, errorMessage);
     }
 
     private String getSecurityContext(String dicIdentifier) {

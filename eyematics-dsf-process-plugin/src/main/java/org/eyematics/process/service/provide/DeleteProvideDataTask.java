@@ -1,24 +1,27 @@
 package org.eyematics.process.service.provide;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
+import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
+import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.IdType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import dev.dsf.fhir.client.BasicFhirWebserviceClient;
 
-public class DeleteProvideDataTask extends AbstractServiceDelegate {
+
+public class DeleteProvideDataTask extends AbstractExtendedProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteProvideDataTask.class);
 
-    public DeleteProvideDataTask(ProcessPluginApi api) {
-        super(api);
+    public DeleteProvideDataTask(ProcessPluginApi api,  DataSetStatusGenerator dataSetStatusGenerator) {
+        super(api, dataSetStatusGenerator);
     }
 
     @Override
@@ -26,11 +29,11 @@ public class DeleteProvideDataTask extends AbstractServiceDelegate {
         logger.info("-> something to delete");
         IdType binaryId = new IdType(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
         try {
-            logger.info("-> now deleting ...");
             if (!binaryId.isEmpty()) this.deletePermanently(binaryId);
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
+            String errorMessage = exception.getMessage();
             logger.error("Permanently deleting encrypted transferable data-set failed - {}", exception.getMessage());
+            this.handleTaskError(EyeMaticsGenericStatus.DATA_DELETE_FAILURE, variables, errorMessage);
         }
     }
 

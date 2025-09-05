@@ -10,13 +10,14 @@ import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.Objects;
 import java.util.stream.Stream;
+
 
 public class ProvideDataMessageTask extends AbstractTaskMessageSend {
 
@@ -47,16 +48,16 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
     protected void handleSendTaskError(DelegateExecution execution, Variables variables, Exception exception,
                                        String errorMessage) {
         Task task = variables.getStartTask();
-        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_PROVISION_FAILURE;
+        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_PROVIDE_FAILURE;
 
         if (exception instanceof WebApplicationException webApplicationException
                 && webApplicationException.getResponse() != null
                 && webApplicationException.getResponse().getStatus() == Response.Status.FORBIDDEN.getStatusCode()) {
-            status = EyeMaticsGenericStatus.DATA_PROVISION_FORBIDDEN;
+            status = EyeMaticsGenericStatus.DATA_PROVIDE_FORBIDDEN;
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Could not send data-set with id '%s' to DIC with identifier '%s' referenced in Task with id '%s' - {%s}",
+        String message = String.format("Could not send data-set with id '%s' to DIC ('%s') referenced in Task with id '%s' - {%s}",
                                        variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE),
                                        variables.getTarget().getOrganizationIdentifierValue(),
                                        task.getId(),

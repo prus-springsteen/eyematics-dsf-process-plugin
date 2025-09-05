@@ -77,34 +77,6 @@ public class BinaryStreamFhirClientImpl extends AbstractHttpFhirClient implement
 	}
 
 	@Override
-	public InputStream readBundle(IdType idType, String mimeType) {
-		if (!ResourceType.Bundle.name().equals(idType.getResourceType()))
-			throw new UnsupportedOperationException(
-					"Expected resource type 'Bundle' but found resource type '" + idType.getResourceType() + "'");
-
-		String url = idType.getIdPart();
-
-		HttpClient client = createClient();
-		HttpRequest request = createBaseRequest(url, Map.of("Accept", mimeType)).GET().build();
-
-		try {
-			logger.debug("Reading Bundle with id '{}' as stream", url);
-			HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
-			if (response.statusCode() == HttpURLConnection.HTTP_OK) {
-				return response.body();
-			} else {
-				response.body().close();
-				throw new RuntimeException("Reading Bundle with id '" + url
-						+ "' as stream failed - status code: " + response.statusCode());
-			}
-		} catch (Exception exception) {
-			throw new RuntimeException(
-					"Reading URL '" + url + "' as stream failed - " + exception.getMessage(),
-					exception);
-		}
-	}
-
-	@Override
 	public MethodOutcome create(InputStream stream, String mimeType)
 	{
 		HttpClient client = createClient();

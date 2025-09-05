@@ -46,8 +46,6 @@ public interface BinaryStreamFhirClient extends FhirClient
 	InputStream read(IdType idType, String mimeType, boolean useHapiBlobStorageOperation);
 
 
-	InputStream readBundle(IdType idType, String mimeType);
-
 	/**
 	 * Creating Binary resource content.
 	 *

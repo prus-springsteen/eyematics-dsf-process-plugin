@@ -23,93 +23,103 @@
     <content value="complete" />
     <!-- EyeMaticsGenericStatus: Start -->
     <concept>
-        <code value="data-initiation-failure" />
-        <display value="Data initiation failure" />
+        <code value="data-initiate-failure" />
+        <display value="Data Initiate Failure" />
         <definition value="An error occurred during initiation of data sharing process." />
     </concept>
     <concept>
-        <code value="data-initiation-forbidden" />
-        <display value="Data initiation forbidden" />
+        <code value="data-initiate-forbidden" />
+        <display value="Data Initiate Forbidden" />
         <definition value="Initiation of data sharing process is forbidden." />
     </concept>
     <concept>
         <code value="data-request-success" />
-        <display value="Data request success" />
+        <display value="Data Request Success" />
         <definition value="The request of the data was successful." />
     </concept>
     <concept>
         <code value="data-request-failure" />
-        <display value="Data request failure" />
+        <display value="Data Request Failure" />
         <definition value="An error occurred during a request of data." />
     </concept>
     <concept>
         <code value="data-request-forbidden" />
-        <display value="Data request forbidden" />
+        <display value="Data Request Forbidden" />
         <definition value="The request for data is forbidden." />
     </concept>
     <concept>
         <code value="data-read-failure" />
-        <display value="Data read failure" />
+        <display value="Data Read Failure" />
         <definition value="An error occurred during reading of dataset." />
     </concept>
     <concept>
         <code value="data-bundle-failure" />
-        <display value="Data bundle failure" />
+        <display value="Data Bundle Failure" />
         <definition value="An error occurred during bundling of dataset." />
     </concept>
     <concept>
-        <code value="data-encryption-failure" />
-        <display value="Data encryption failure" />
+        <code value="data-encrypt-failure" />
+        <display value="Data Encrypt Failure" />
         <definition value="An error occurred during encryption of dataset." />
     </concept>
     <concept>
         <code value="data-store-failure" />
-        <display value="Data store failure" />
+        <display value="Data Store Failure" />
         <definition value="An error occurred during storing of dataset." />
     </concept>
     <concept>
-        <code value="data-provision-failure" />
-        <display value="Data provision failure" />
+        <code value="data-provide-failure" />
+        <display value="Data Provide Failure" />
         <definition value="An error occurred during provision of dataset." />
     </concept>
     <concept>
-        <code value="data-provision-forbidden" />
-        <display value="Data provision forbidden" />
+        <code value="data-provide-forbidden" />
+        <display value="Data Provide Forbidden" />
         <definition value="Provision of dataset is forbidden." />
     </concept>
     <concept>
-        <code value="data-receipt-missing" />
-        <display value="Data receipt missing" />
-        <definition value="Receipt of dataset is missing." />
+        <code value="data-acknowledged-missing" />
+        <display value="Data Acknowledge Missing" />
+        <definition value="Acknowledgement of dataset is missing." />
+    </concept>
+    <concept>
+        <code value="data-delete-failure" />
+        <display value="Data Delete Failure" />
+        <definition value="Provided dataset could not be deleted." />
     </concept>
     <concept>
         <code value="data-download-failure" />
-        <display value="Data download failure" />
+        <display value="Data Download Failure" />
         <definition value="An error occurred during download of dataset from DIC." />
     </concept>
     <concept>
-        <code value="data-decryption-failure" />
-        <display value="Data decryption failure" />
+        <code value="data-decrypt-failure" />
+        <display value="Data Decrypt Failure" />
         <definition value="An error occurred during decryption of dataset." />
     </concept>
     <concept>
-        <code value="data-receipt-success" />
-        <display value="Data receipt success" />
+        <code value="data-insert-failure" />
+        <display value="Data Insert Failure" />
+        <definition value="An error occurred during insertion of dataset." />
+    </concept>
+    <concept>
+        <code value="data-receive-success" />
+        <display value="Data Receive Success" />
         <definition value="Receipt of dataset was successful." />
     </concept>
     <concept>
-        <code value="data-receipt-failure" />
-        <display value="Data receipt failure" />
-        <definition value="An error occurred during receipt of dataset." />
+        <code value="data-acknowledge-failure" />
+        <display value="Data Acknowledge Failure" />
+        <definition value="An error occurred during acknowledge of dataset." />
     </concept>
     <concept>
-        <code value="data-receipt-forbidden" />
-        <display value="Data receipt forbidden" />
-        <definition value="Receipt of dataset is forbidden." />
+        <code value="data-acknowledge-forbidden" />
+        <display value="Data Acknowledge Forbidden" />
+        <definition value="Acknowledgement of dataset is forbidden." />
     </concept>
     <concept>
-        <code value="data-provision-missing" />
-        <display value="Data provision missing" />
+        <code value="data-provide-missing" />
+        <display value="Data Provide Missing" />
         <definition value="Provision of dataset is missing." />
     </concept>
     <!-- EyeMaticsGenericStatus: End -->

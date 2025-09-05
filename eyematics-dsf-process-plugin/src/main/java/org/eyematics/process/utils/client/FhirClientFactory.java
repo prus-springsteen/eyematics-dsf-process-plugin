@@ -178,6 +178,13 @@ public class FhirClientFactory implements InitializingBean
 		else
 			throw new RuntimeException("Configuration error: FHIR server base url not set");
 	}
+	public EyeMaticsFhirClient getEyeMaticsFhirClient()
+	{
+		if (configured())
+			return createEyeMaticsFhirClient();
+		else
+			throw new RuntimeException("Configuration error: FHIR server base url not set");
+	}
 
 	private boolean configured()
 	{
@@ -218,6 +225,19 @@ public class FhirClientFactory implements InitializingBean
 		KeyStore keyStore = readKeyStore(keyStorePassword);
 
 		return new BinaryStreamFhirClientImpl(trustStore, keyStore, keyStorePassword, connectTimeout, socketTimeout,
+				fhirServerBasicAuthUsername, fhirServerBasicAuthPassword, fhirServerBearerToken,
+				fhirServerOAuth2TokenProvider, fhirServerBase, proxyUrl, proxyUsername, proxyPassword, fhirContext,
+				localIdentifierValue, dataLogger);
+	}
+
+	protected EyeMaticsFhirClient createEyeMaticsFhirClient()
+	{
+		KeyStore trustStore = readTrustStore();
+
+		char[] keyStorePassword = UUID.randomUUID().toString().toCharArray();
+		KeyStore keyStore = readKeyStore(keyStorePassword);
+
+		return new EyeMaticsFhirClientImpl(trustStore, keyStore, keyStorePassword, connectTimeout, socketTimeout,
 				fhirServerBasicAuthUsername, fhirServerBasicAuthPassword, fhirServerBearerToken,
 				fhirServerOAuth2TokenProvider, fhirServerBase, proxyUrl, proxyUsername, proxyPassword, fhirContext,
 				localIdentifierValue, dataLogger);

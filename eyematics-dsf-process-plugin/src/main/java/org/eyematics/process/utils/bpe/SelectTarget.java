@@ -7,10 +7,9 @@ import dev.dsf.bpe.v1.variables.Variables;
 import dev.dsf.fhir.client.FhirWebserviceClient;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.hl7.fhir.r4.model.*;
-
 import java.net.URI;
-
 import static java.lang.String.format;
+
 
 public class SelectTarget {
 

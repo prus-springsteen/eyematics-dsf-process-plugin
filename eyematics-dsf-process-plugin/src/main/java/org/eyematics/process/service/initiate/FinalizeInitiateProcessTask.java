@@ -7,10 +7,11 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.Objects;
 
 
 public class FinalizeInitiateProcessTask extends AbstractServiceDelegate {
@@ -21,6 +22,12 @@ public class FinalizeInitiateProcessTask extends AbstractServiceDelegate {
     public FinalizeInitiateProcessTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api);
         this.dataSetStatusGenerator = dataSetStatusGenerator;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        Objects.requireNonNull(this.dataSetStatusGenerator, "dataSetStatusGenerator");
     }
 
     @Override

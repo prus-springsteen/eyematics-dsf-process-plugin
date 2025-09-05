@@ -16,7 +16,7 @@
     <!-- date managed by bpe -->
     <date value="#{date}" />
     <publisher value="EyeMatics.org" />
-    <description value="ValueSet wwith standard values for the status of transferring datasets within EyeMatics-Process" />
+    <description value="ValueSet with standard values for the status of transferring datasets within EyeMatics-Process" />
     <immutable value="true" />
     <compose>
         <include>
@@ -24,12 +24,12 @@
             <version value="#{version}" />
             <!-- EyeMaticsGenericStatus: Start -->
             <concept>
-                <code value="data-initiation-failure" />
-                <display value="Data Initiation Failure" />
+                <code value="data-initiate-failure" />
+                <display value="Data Initiate Failure" />
             </concept>
             <concept>
-                <code value="data-initiation-forbidden" />
-                <display value="Data Initiation Forbidden" />
+                <code value="data-initiate-forbidden" />
+                <display value="Data Initiate Forbidden" />
             </concept>
             <concept>
                 <code value="data-request-success" />
@@ -52,48 +52,56 @@
                 <display value="Data Bundle Failure" />
             </concept>
             <concept>
-                <code value="data-encryption-failure" />
-                <display value="Data Encryption Failure" />
+                <code value="data-encrypt-failure" />
+                <display value="Data Encrypt Failure" />
             </concept>
             <concept>
                 <code value="data-store-failure" />
                 <display value="Data Store Failure" />
             </concept>
             <concept>
-                <code value="data-provision-failure" />
-                <display value="Data Provision Failure" />
+                <code value="data-provide-failure" />
+                <display value="Data Provide Failure" />
             </concept>
             <concept>
-                <code value="data-provision-forbidden" />
-                <display value="Data Provision Forbidden" />
+                <code value="data-provide-forbidden" />
+                <display value="Data Provide Forbidden" />
             </concept>
             <concept>
-                <code value="data-receipt-missing" />
-                <display value="Data Receipt Missing" />
+                <code value="data-acknowledge-missing" />
+                <display value="Data Acknowledge Missing" />
+            </concept>
+            <concept>
+                <code value="data-delete-failure" />
+                <display value="Data Delete Failure" />
             </concept>
             <concept>
                 <code value="data-download-failure" />
                 <display value="Data Download Failure" />
             </concept>
             <concept>
-                <code value="data-decryption-failure" />
-                <display value="Data Decryption Failure" />
+                <code value="data-decrypt-failure" />
+                <display value="Data Decrypt Failure" />
             </concept>
             <concept>
-                <code value="data-receipt-success" />
-                <display value="Data Receipt Success" />
+                <code value="data-insert-failure" />
+                <display value="Data Insert Failure" />
             </concept>
             <concept>
-                <code value="data-receipt-failure" />
-                <display value="Data Receipt Failure" />
+                <code value="data-receive-success" />
+                <display value="Data Receive Success" />
             </concept>
             <concept>
-                <code value="data-receipt-forbidden" />
-                <display value="Data Receipt Forbidden" />
+                <code value="data-acknowledge-failure" />
+                <display value="Data Acknowledge Failure" />
             </concept>
             <concept>
-                <code value="data-provision-missing" />
-                <display value="Data Provision Missing" />
+                <code value="data-acknowledge-forbidden" />
+                <display value="Data Acknowledge Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-provide-missing" />
+                <display value="Data Provide Missing" />
             </concept>
             <!-- EyeMaticsGenericStatus: End -->
         </include>

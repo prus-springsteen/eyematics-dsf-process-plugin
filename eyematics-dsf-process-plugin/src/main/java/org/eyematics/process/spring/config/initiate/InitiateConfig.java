@@ -2,7 +2,7 @@ package org.eyematics.process.spring.config.initiate;
 
 import org.eyematics.process.message.initiate.InitiateReceiveProcessTask;
 import org.eyematics.process.service.initiate.FinalizeInitiateProcessTask;
-import org.eyematics.process.service.initiate.InitiateReceiveTargetTask;
+import org.eyematics.process.service.initiate.SelectReceiveTargetTask;
 import org.eyematics.process.service.initiate.SelectRequestTargetsTask;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.initiate.RequestDataMessageTask;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+
 
 @Configuration
 public class InitiateConfig {
@@ -28,7 +29,7 @@ public class InitiateConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateReceiveTargetTask initiateReceiveTargetTask() { return new InitiateReceiveTargetTask(api); }
+    public SelectReceiveTargetTask initiateReceiveTargetTask() { return new SelectReceiveTargetTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

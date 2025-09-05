@@ -16,8 +16,8 @@ import org.hl7.fhir.r4.model.StringType;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
+
 
 public class PrepareReceiveDataTask extends AbstractServiceDelegate {
 

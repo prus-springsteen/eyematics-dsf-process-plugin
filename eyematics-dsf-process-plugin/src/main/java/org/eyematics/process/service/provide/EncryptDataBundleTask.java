@@ -1,5 +1,4 @@
 /**
- * @author Reto Wettstein (https://github.com/wetret)
  * @see    https://github.com/medizininformatik-initiative/mii-process-data-transfer/blob/main/src/main/java/de/medizininformatik_initiative/process/data_transfer/service/EncryptData.java
  */
 
@@ -11,7 +10,7 @@ import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.constants.NamingSystems;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.crypto.KeyProvider;
 import org.eyematics.process.utils.crypto.RsaAesGcmUtil;
@@ -67,19 +66,17 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> try to get public-key ....");
         String reqOrg = variables.getStartTask().getRequester().getIdentifier().getValue();
-        logger.info("EncryptProvideDataTask: Request-Organization -> {}", reqOrg);
         String recOrg = variables.getStartTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
-        logger.info("EncryptProvideDataTask: Recipient-Organization -> {}", recOrg);
         try {
             PublicKey pubKey = this.readPublicKey(reqOrg);
             logger.info("-> something to encrypt");
-            Bundle b = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
-            byte[] bundleEncrypted = this.encrypt(pubKey, b, recOrg, reqOrg);
+            Bundle bundle = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
+            byte[] bundleEncrypted = this.encrypt(pubKey, bundle, recOrg, reqOrg);
             variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, bundleEncrypted);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not encrypt data: {}", errorMessage);
-            super.handleTaskError(EyeMaticsGenericStatus.DATA_ENCRYPTION_FAILURE, variables, errorMessage);
+            this.handleTaskError(EyeMaticsGenericStatus.DATA_ENCRYPT_FAILURE, variables, errorMessage);
         }
     }
 

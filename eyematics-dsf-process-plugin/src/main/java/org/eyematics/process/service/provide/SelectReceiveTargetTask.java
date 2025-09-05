@@ -1,8 +1,3 @@
-/**
- * @author Mathias Rühle  (https://github.com/EmteZogaf)
- * @see    https://github.com/medizininformatik-initiative/mii-process-feasibility/blob/develop/mii-process-feasibility/src/main/java/de/medizininformatik_initiative/process/feasibility/service/SelectResponseTarget.java
- */
-
 package org.eyematics.process.service.provide;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -12,9 +7,9 @@ import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.utils.bpe.SelectTarget;
-import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class SelectReceiveTargetTask extends AbstractServiceDelegate {
 

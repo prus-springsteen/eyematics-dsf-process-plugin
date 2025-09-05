@@ -15,15 +15,16 @@ import jakarta.ws.rs.core.Response;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.constant.ReceiveConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
+
 
 public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
 
@@ -36,8 +37,14 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
     }
 
     @Override
+    public void afterPropertiesSet() throws Exception {
+        super.afterPropertiesSet();
+        Objects.requireNonNull(this.dataSetStatusGenerator, "dataSetStatusGenerator");
+    }
+
+    @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
-        logger.info("-> something to send");
+        logger.info("-> Initiating Receive Process with Participating Organization(s)");
         Targets targets = variables.getTargets();
         List<Task.ParameterComponent> targetInputs = targets.getEntries().stream().map(this::transformToTargetInput).toList();
         return targetInputs.stream();
@@ -57,16 +64,16 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
     protected void handleSendTaskError(DelegateExecution execution, Variables variables, Exception exception,
                                        String errorMessage) {
         Task task = variables.getStartTask();
-        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_INITIATION_FAILURE;
+        EyeMaticsGenericStatus status = EyeMaticsGenericStatus.DATA_INITIATE_FAILURE;
 
         if (exception instanceof WebApplicationException webApplicationException
                 && webApplicationException.getResponse() != null
                 && webApplicationException.getResponse().getStatus() == Response.Status.FORBIDDEN.getStatusCode()) {
-            status = EyeMaticsGenericStatus.DATA_INITIATION_FORBIDDEN;
+            status = EyeMaticsGenericStatus.DATA_INITIATE_FORBIDDEN;
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Failed to initiate data sharing with DIC (identifier: '%s') in Task with ID '%s': %s",
+        String message = String.format("Failed to initiate data sharing with DIC ('%s') in Task with ID '%s': %s",
                                        variables.getTarget().getOrganizationIdentifierValue(),
                                        task.getId(),
                                        exception.getMessage());

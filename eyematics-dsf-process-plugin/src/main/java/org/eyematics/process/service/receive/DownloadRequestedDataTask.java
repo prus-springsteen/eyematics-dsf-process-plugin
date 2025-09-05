@@ -9,10 +9,11 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.utils.delegate.AbstractExtendedSubProcessServiceDelegate;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.generator.EyeMaticsGenericStatus;
+import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class DownloadRequestedDataTask extends AbstractExtendedSubProcessServiceDelegate {
 
@@ -51,7 +52,7 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not download data from DIC: {}", errorMessage);
-            super.handleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE, variables, errorMessage);
+            this.handleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE, variables, errorMessage);
         }
     }
 
