@@ -11,23 +11,50 @@
 **/*.log.gz
 **/*.jar
 
-eyematics-dsf-process-plugin-test-data-generator/bundle/*.xml
-eyematics-dsf-process-plugin-test-data-generator/cert/*/*
-eyematics-dsf-process-plugin-test-data-generator/cert/thumbprints.txt
-!eyematics-dsf-process-plugin-test-data-generator/cert/README.md
+/eyematics-dsf-process-plugin-test-data-generator/bundle/*.xml
+/eyematics-dsf-process-plugin-test-data-generator/cert/*/*
+/eyematics-dsf-process-plugin-test-data-generator/cert/thumbprints.txt
+/!eyematics-dsf-process-plugin-test-data-generator/cert/README.md
 
-eyematics-dsf-process-plugin-test-setup/**/bpe/log/*
-eyematics-dsf-process-plugin-test-setup/**/bpe/last_event/*
-eyematics-dsf-process-plugin-test-setup/**/bpe/plugin/*
-eyematics-dsf-process-plugin-test-setup/**/bpe/process/*
+/eyematics-dsf-process-plugin-test-setup/dic-a/bpe/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-a/bpe/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-a/bpe/plugin/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-a/bpe/process/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-a/fhir/conf/bundle.xml
+/eyematics-dsf-process-plugin-test-setup/dic-a/fhir/conf/config.properties
+/eyematics-dsf-process-plugin-test-setup/dic-a/fhir/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-a/fhir/log/*.log.gz
 
-eyematics-dsf-process-plugin-test-setup/keycloak/data
-eyematics-dsf-process-plugin-test-setup/secrets/keycloak_trust_store.jks
+/eyematics-dsf-process-plugin-test-setup/dic-b/bpe/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-b/bpe/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-b/bpe/plugin/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-b/bpe/process/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-b/fhir/conf/bundle.xml
+/eyematics-dsf-process-plugin-test-setup/dic-b/fhir/conf/config.properties
+/eyematics-dsf-process-plugin-test-setup/dic-b/fhir/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-b/fhir/log/*.log.gz
 
-eyematics-dsf-process-plugin-test-setup/**/fhir/conf/*
-eyematics-dsf-process-plugin-test-setup/**/fhir/log/*
+/eyematics-dsf-process-plugin-test-setup/dic-c/bpe/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-c/bpe/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-c/bpe/plugin/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-c/bpe/process/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-c/fhir/conf/bundle.xml
+/eyematics-dsf-process-plugin-test-setup/dic-c/fhir/conf/config.properties
+/eyematics-dsf-process-plugin-test-setup/dic-c/fhir/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-c/fhir/log/*.log.gz
 
-eyematics-dsf-process-plugin-test-setup/secrets/*.pem
-eyematics-dsf-process-plugin-test-setup/.env
-eyematics-dsf-process-plugin-test-setup/docker-compose.override.yml
+/eyematics-dsf-process-plugin-test-setup/dic-d/bpe/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-d/bpe/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-d/bpe/plugin/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-d/bpe/process/*.jar
+/eyematics-dsf-process-plugin-test-setup/dic-d/fhir/conf/bundle.xml
+/eyematics-dsf-process-plugin-test-setup/dic-d/fhir/conf/config.properties
+/eyematics-dsf-process-plugin-test-setup/dic-d/fhir/log/*.log
+/eyematics-dsf-process-plugin-test-setup/dic-d/fhir/log/*.log.gz
+
+/eyematics-dsf-process-plugin-test-setup/keycloak/data
+/eyematics-dsf-process-plugin-test-setup/secrets/keycloak_trust_store.jks
+/eyematics-dsf-process-plugin-test-setup/secrets/*.pem
+/eyematics-dsf-process-plugin-test-setup/.env
+/eyematics-dsf-process-plugin-test-setup/docker-compose.override.yml
 
