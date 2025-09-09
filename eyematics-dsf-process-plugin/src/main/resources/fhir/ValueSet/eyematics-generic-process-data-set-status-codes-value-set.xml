@@ -1,0 +1,109 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+    <meta>
+        <tag>
+            <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag" />
+            <code value="ALL" />
+        </tag>
+    </meta>
+    <url value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set" />
+    <!-- version managed by bpe -->
+    <version value="#{version}" />
+    <name value="EyeMatics Generic Dataset Status" />
+    <title value="EyeMatics Generic Dataset Status" />
+    <!-- status managed by bpe -->
+    <status value="unknown" />
+    <experimental value="false" />
+    <!-- date managed by bpe -->
+    <date value="#{date}" />
+    <publisher value="EyeMatics.org" />
+    <description value="ValueSet with standard values for the status of transferring datasets within EyeMatics-Process" />
+    <immutable value="true" />
+    <compose>
+        <include>
+            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
+            <version value="#{version}" />
+            <!-- EyeMaticsGenericStatus: Start -->
+            <concept>
+                <code value="data-initiate-failure" />
+                <display value="Data Initiate Failure" />
+            </concept>
+            <concept>
+                <code value="data-initiate-forbidden" />
+                <display value="Data Initiate Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-request-success" />
+                <display value="Data Request Success" />
+            </concept>
+            <concept>
+                <code value="data-request-failure" />
+                <display value="Data Request Failure" />
+            </concept>
+            <concept>
+                <code value="data-request-forbidden" />
+                <display value="Data Request Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-read-failure" />
+                <display value="Data Read Failure" />
+            </concept>
+            <concept>
+                <code value="data-bundle-failure" />
+                <display value="Data Bundle Failure" />
+            </concept>
+            <concept>
+                <code value="data-encrypt-failure" />
+                <display value="Data Encrypt Failure" />
+            </concept>
+            <concept>
+                <code value="data-store-failure" />
+                <display value="Data Store Failure" />
+            </concept>
+            <concept>
+                <code value="data-provide-failure" />
+                <display value="Data Provide Failure" />
+            </concept>
+            <concept>
+                <code value="data-provide-forbidden" />
+                <display value="Data Provide Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-acknowledge-missing" />
+                <display value="Data Acknowledge Missing" />
+            </concept>
+            <concept>
+                <code value="data-delete-failure" />
+                <display value="Data Delete Failure" />
+            </concept>
+            <concept>
+                <code value="data-download-failure" />
+                <display value="Data Download Failure" />
+            </concept>
+            <concept>
+                <code value="data-decrypt-failure" />
+                <display value="Data Decrypt Failure" />
+            </concept>
+            <concept>
+                <code value="data-insert-failure" />
+                <display value="Data Insert Failure" />
+            </concept>
+            <concept>
+                <code value="data-receive-success" />
+                <display value="Data Receive Success" />
+            </concept>
+            <concept>
+                <code value="data-acknowledge-failure" />
+                <display value="Data Acknowledge Failure" />
+            </concept>
+            <concept>
+                <code value="data-acknowledge-forbidden" />
+                <display value="Data Acknowledge Forbidden" />
+            </concept>
+            <concept>
+                <code value="data-provide-missing" />
+                <display value="Data Provide Missing" />
+            </concept>
+            <!-- EyeMaticsGenericStatus: End -->
+        </include>
+    </compose>
+</ValueSet>
