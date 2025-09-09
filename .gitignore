@@ -11,27 +11,20 @@
 **/*.log.gz
 **/*.jar
 
-eyematics-dsf-process-plugin-test-data-generator/cert/**/*.pem
-eyematics-dsf-process-plugin-test-data-generator/cert/**/*.csr
-eyematics-dsf-process-plugin-test-data-generator/cert/**/*.p12
-eyematics-dsf-process-plugin-test-data-generator/cert/thumbprints.txt
-
 eyematics-dsf-process-plugin-test-data-generator/bundle/*.xml
+eyematics-dsf-process-plugin-test-data-generator/cert/*/
 
-eyematics-dsf-process-plugin-test-setup/**/bpe/log/*.log
-eyematics-dsf-process-plugin-test-setup/**/bpe/log/*.log.gz
-eyematics-dsf-process-plugin-test-setup/**/bpe/last_event/time.file
-eyematics-dsf-process-plugin-test-setup/**/bpe/plugin/*.jar
-eyematics-dsf-process-plugin-test-setup/**/bpe/process/*.jar
+eyematics-dsf-process-plugin-test-setup/**/bpe/log/*
+eyematics-dsf-process-plugin-test-setup/**/bpe/last_event/*
+eyematics-dsf-process-plugin-test-setup/**/bpe/plugin/*
+eyematics-dsf-process-plugin-test-setup/**/bpe/process/*
 
 eyematics-dsf-process-plugin-test-setup/keycloak/data
 eyematics-dsf-process-plugin-test-setup/secrets/keycloak_trust_store.jks
 
-eyematics-dsf-process-plugin-test-setup/**/fhir/conf/bundle.xml
-eyematics-dsf-process-plugin-test-setup/**/fhir/log/*.log
-eyematics-dsf-process-plugin-test-setup/**/fhir/log/*.log.gz
+eyematics-dsf-process-plugin-test-setup/**/fhir/conf/*
+eyematics-dsf-process-plugin-test-setup/**/fhir/log/*
 
 eyematics-dsf-process-plugin-test-setup/secrets/*.pem
-eyematics-dsf-process-plugin-test-setup/secrets/*.password
 eyematics-dsf-process-plugin-test-setup/.env
 eyematics-dsf-process-plugin-test-setup/docker-compose.override.yml

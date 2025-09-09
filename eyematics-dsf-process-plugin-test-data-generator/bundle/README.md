@@ -1,1 +1,1 @@
-Empty directory for generated FHIR bundle
+Directory for generated FHIR bundle.
