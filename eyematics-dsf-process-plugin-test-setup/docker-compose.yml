@@ -109,7 +109,7 @@ services:
       --spi-truststore-file-password=password
       --spi-truststore-file-hostname-verification-policy=STRICT
 
-  dic-a-fhir-data-repository:
+  dic-a-fhir-local-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -128,8 +128,10 @@ services:
       - "127.0.0.1:8070:8070"
     volumes:
       - type: volume
-        source: dic-a-fhir-data-repository-data
+        source: dic-a-fhir-local-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-a-bpe
 
   dic-a-fhir-aggregated-data-repository:
     image: samply/blaze:1.0.4
@@ -152,6 +154,8 @@ services:
       - type: volume
         source: dic-a-fhir-aggregated-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-a-bpe
 
   dic-a-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -254,18 +258,6 @@ services:
       - type: bind
         source: ./dic-a/bpe/last_event
         target: /opt/bpe/last_event
-      - type: bind
-        source: ./json_sources/observation.json
-        target: /opt/bpe/observation.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/imagingstudy.json
-        target: /opt/bpe/imagingstudy.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/bundle.json
-        target: /opt/bpe/bundle.json
-        read_only: false
     environment:
       TZ: Europe/Berlin
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5003
@@ -292,7 +284,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-a-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: ytqFCErw9GfhVUrrM8xc0Grbu4r7qGig
-      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-data-repository:8070/fhir
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-local-data-repository:8070/fhir
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-aggregated-data-repository:8071/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_a_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_a_public_key.pem
@@ -312,7 +304,7 @@ services:
       - dic-a-fhir
       - keycloak
 
-  dic-b-fhir-data-repository:
+  dic-b-fhir-local-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -331,8 +323,10 @@ services:
       - "127.0.0.1:8072:8072"
     volumes:
       - type: volume
-        source: dic-b-fhir-data-repository-data
+        source: dic-b-fhir-local-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-b-bpe
 
   dic-b-fhir-aggregated-data-repository:
     image: samply/blaze:1.0.4
@@ -355,6 +349,8 @@ services:
       - type: volume
         source: dic-b-fhir-aggregated-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-b-bpe
 
   dic-b-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -459,18 +455,6 @@ services:
       - type: bind
         source: ./dic-b/bpe/last_event
         target: /opt/bpe/last_event
-      - type: bind
-        source: ./json_sources/observation.json
-        target: /opt/bpe/observation.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/imagingstudy.json
-        target: /opt/bpe/imagingstudy.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/bundle.json
-        target: /opt/bpe/bundle.json
-        read_only: false
     environment:
       TZ: Europe/Berlin
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
@@ -497,7 +481,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-b-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 5GtUIUfoXnQVcsRfd0Hg4EGv14iAknGq
-      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-data-repository:8072/fhir
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-local-data-repository:8072/fhir
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-aggregated-data-repository:8073/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_b_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_b_public_key.pem
@@ -517,7 +501,7 @@ services:
       - dic-b-fhir
       - keycloak
 
-  dic-c-fhir-data-repository:
+  dic-c-fhir-local-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -536,8 +520,10 @@ services:
       - "127.0.0.1:8074:8074"
     volumes:
       - type: volume
-        source: dic-c-fhir-data-repository-data
+        source: dic-c-fhir-local-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-c-bpe
 
   dic-c-fhir-aggregated-data-repository:
     image: samply/blaze:1.0.4
@@ -560,6 +546,8 @@ services:
       - type: volume
         source: dic-c-fhir-aggregated-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-c-bpe
 
   dic-c-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -663,18 +651,6 @@ services:
       - type: bind
         source: ./dic-c/bpe/last_event
         target: /opt/bpe/last_event
-      - type: bind
-        source: ./json_sources/observation.json
-        target: /opt/bpe/observation.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/imagingstudy.json
-        target: /opt/bpe/imagingstudy.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/bundle.json
-        target: /opt/bpe/bundle.json
-        read_only: false
     environment:
       TZ: Europe/Berlin
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5004
@@ -701,7 +677,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-c-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: VGTQD3WWH4uGUMz408NWNzcHF1MsfV0l
-      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-data-repository:8074/fhir
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-local-data-repository:8074/fhir
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-aggregated-data-repository:8075/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_c_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_c_public_key.pem
@@ -721,7 +697,7 @@ services:
       - dic-c-fhir
       - keycloak
 
-  dic-d-fhir-data-repository:
+  dic-d-fhir-local-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -740,8 +716,10 @@ services:
       - "127.0.0.1:8076:8076"
     volumes:
       - type: volume
-        source: dic-d-fhir-data-repository-data
+        source: dic-d-fhir-local-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-d-bpe
 
   dic-d-fhir-aggregated-data-repository:
     image: samply/blaze:1.0.4
@@ -764,6 +742,8 @@ services:
       - type: volume
         source: dic-d-fhir-aggregated-data-repository-data
         target: /app/data
+    depends_on:
+      - dic-d-bpe
 
   dic-d-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -869,18 +849,6 @@ services:
       - type: bind
         source: ./dic-d/bpe/last_event
         target: /opt/bpe/last_event
-      - type: bind
-        source: ./json_sources/observation.json
-        target: /opt/bpe/observation.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/imagingstudy.json
-        target: /opt/bpe/imagingstudy.json
-        read_only: true
-      - type: bind
-        source: ./json_sources/bundle.json
-        target: /opt/bpe/bundle.json
-        read_only: false
     environment:
       TZ: Europe/Berlin
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5009
@@ -907,7 +875,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-d-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 5GtUIUfoXnQVcsRfd0Hg4EGv14iAknGq
-      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-data-repository:8076/fhir
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-local-data-repository:8076/fhir
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-aggregated-data-repository:8077/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_d_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_d_public_key.pem
@@ -1095,11 +1063,11 @@ networks:
 volumes:
   db-data:
     name: eyematics-dsf-process-plugin-test-db
-  dic-a-fhir-data-repository-data:
+  dic-a-fhir-local-data-repository-data:
   dic-a-fhir-aggregated-data-repository-data:
-  dic-b-fhir-data-repository-data:
+  dic-b-fhir-local-data-repository-data:
   dic-b-fhir-aggregated-data-repository-data:
-  dic-c-fhir-data-repository-data:
+  dic-c-fhir-local-data-repository-data:
   dic-c-fhir-aggregated-data-repository-data:
-  dic-d-fhir-data-repository-data:
+  dic-d-fhir-local-data-repository-data:
   dic-d-fhir-aggregated-data-repository-data:

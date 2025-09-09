@@ -20,7 +20,7 @@ public class CryptoConfig {
     private ProcessPluginApi api;
 
     @ProcessDocumentation(required = true,
-            processNames = "eyematicsorg_receiveProcessPrivateKey",
+            processNames = "eyematicsorg_receiveProcess",
             description = "Location of the DIC private-key as 4096 Bit RSA PEM encoded, not encrypted file",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/dic_private_key.pem")
@@ -28,7 +28,7 @@ public class CryptoConfig {
     private String dicReceivePrivateKeyFile;
 
     @ProcessDocumentation(required = true,
-            processNames = "eyematicsorg_receiveProcessPublicKey",
+            processNames = "eyematicsorg_receiveProcess",
             description = "Location of the DIC public-key as 4096 Bit RSA PEM encoded file",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/dic_public_key.pem")

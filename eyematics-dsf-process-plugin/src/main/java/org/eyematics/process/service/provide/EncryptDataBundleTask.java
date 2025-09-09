@@ -1,7 +1,3 @@
-/**
- * @see    https://github.com/medizininformatik-initiative/mii-process-data-transfer/blob/main/src/main/java/de/medizininformatik_initiative/process/data_transfer/service/EncryptData.java
- */
-
 package org.eyematics.process.service.provide;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -29,22 +25,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * @see https://github.com/medizininformatik-initiative/mii-process-data-transfer/wiki/Process-Data-Transfer-Configuration-v1.0.x.x
- */
-
-/**  openssl genrsa -out dic_keypair.pem 4096
- *  openssl rsa -in dic_keypair.pem -pubout -out dic_public_key.pem
- *  openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in dic_keypair.pem -out dic_private_key.pem
- *
- *  openssl genrsa -out cos_keypair.pem 4096
- *  openssl rsa -in cos_keypair.pem -pubout -out cos_public_key.pem
- *  openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in cos_keypair.pem -out cos_private_key.pem
- *
- *  openssl genrsa -out hrp_keypair.pem 4096
- *  openssl rsa -in hrp_keypair.pem -pubout -out hrp_public_key.pem
- *  openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in hrp_keypair.pem -out hrp_private_key.pem
- */
 
 public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegate {
 
@@ -88,7 +68,7 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
                     "Could not find PublicKey Bundle of organization with identifier'" + url + "'");
         logger.debug("Downloaded PublicKey Bundle from organization with identifier '{}'", url);
         Bundle publicKeyBundle = publicKeyBundleOptional.get();
-        DocumentReference documentReference = getDocumentReference(publicKeyBundle);
+        DocumentReference documentReference = this.getDocumentReference(publicKeyBundle);
         Binary binary = getBinary(publicKeyBundle);
         PublicKey publicKey = getPublicKey(binary, publicKeyBundle.getId());
         checkHash(documentReference, publicKey);
