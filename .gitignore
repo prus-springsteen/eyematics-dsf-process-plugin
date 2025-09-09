@@ -14,7 +14,6 @@
 /eyematics-dsf-process-plugin-test-data-generator/bundle/*.xml
 /eyematics-dsf-process-plugin-test-data-generator/cert/*/*
 /eyematics-dsf-process-plugin-test-data-generator/cert/thumbprints.txt
-/!eyematics-dsf-process-plugin-test-data-generator/cert/README.md
 
 /eyematics-dsf-process-plugin-test-setup/dic-a/bpe/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-a/bpe/log/*.log.gz
