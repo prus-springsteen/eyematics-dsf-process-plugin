@@ -1,0 +1,1073 @@
+services:
+  proxy:
+    image: nginx:1.23
+    restart: "no"
+    ports:
+      - "127.0.0.1:443:443"
+    secrets:
+      - proxy_certificate_and_int_cas.pem
+      - proxy_certificate_private_key.pem
+      - proxy_trusted_client_cas.pem
+    volumes:
+      - type: bind
+        source: ./proxy/conf.d
+        target: /etc/nginx/conf.d
+        read_only: true
+      - type: bind
+        source: ./proxy/nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+    networks:
+      dic-a-fhir-frontend:
+        ipv4_address: 172.20.0.66
+      dic-a-bpe-frontend:
+        ipv4_address: 172.20.0.114
+      dic-c-fhir-frontend:
+        ipv4_address: 172.20.0.82
+      dic-c-bpe-frontend:
+        ipv4_address: 172.20.0.130
+      dic-b-fhir-frontend:
+        ipv4_address: 172.20.0.98
+      dic-b-bpe-frontend:
+        ipv4_address: 172.20.0.146
+      dic-d-fhir-frontend:
+        ipv4_address: 172.20.0.188
+      dic-d-bpe-frontend:
+        ipv4_address: 172.20.0.236
+      internet:
+        aliases:
+          - dic-a
+          - dic-b
+          - dic-c
+          - dic-d
+    environment:
+      TZ: Europe/Berlin
+
+  db:
+    image: postgres:15
+    restart: "no"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U liquibase_user -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      TZ: Europe/Berlin
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      POSTGRES_USER: liquibase_user
+      POSTGRES_DB: postgres
+    networks:
+      - db
+      - dic-b-fhir-backend
+      - dic-a-fhir-backend
+      - dic-c-fhir-backend
+      - dic-d-fhir-backend
+      - dic-b-bpe-backend
+      - dic-a-bpe-backend
+      - dic-c-bpe-backend
+      - dic-d-bpe-backend
+    secrets:
+      - db_liquibase.password
+    volumes:
+      - type: volume
+        source: db-data
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: ./db/init-db.sh
+        target: /docker-entrypoint-initdb.d/init-db.sh
+        read_only: true
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0
+    restart: "no"
+    ports:
+      - "127.0.0.1:8443:8443"
+    environment:
+      TZ: Europe/Berlin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    secrets:
+      - keycloak_certificate.pem
+      - keycloak_certificate_private_key.pem
+      - keycloak_trust_store.jks
+    volumes:
+      - type: bind
+        source: ./keycloak/import
+        target: /opt/keycloak/data/import
+      - type: bind
+        source: ./keycloak/data/h2
+        target: /opt/keycloak/data/h2
+    networks:
+      - internet
+    command: >-
+      start
+      --hostname keycloak
+      --import-realm
+      --https-certificate-file=/run/secrets/keycloak_certificate.pem
+      --https-certificate-key-file=/run/secrets/keycloak_certificate_private_key.pem
+      --spi-truststore-file-file=/run/secrets/keycloak_trust_store.jks
+      --spi-truststore-file-password=password
+      --spi-truststore-file-hostname-verification-policy=STRICT
+
+  dic-a-fhir-local-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8070/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-a-bpe-frontend
+      - dic-a-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8070'
+    ports:
+      - "127.0.0.1:8070:8070"
+    volumes:
+      - type: volume
+        source: dic-a-fhir-local-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-a-bpe
+
+  dic-a-fhir-aggregated-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8071/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-a-bpe-frontend
+      - dic-a-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8071'
+    ports:
+      - "127.0.0.1:8071:8071"
+    volumes:
+      - type: volume
+        source: dic-a-fhir-aggregated-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-a-bpe
+
+  dic-a-fhir:
+    image: ghcr.io/datasharingframework/fhir:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5000:5000"
+    secrets:
+      - db_liquibase.password
+      - db_dic_a_fhir_user.password
+      - db_dic_a_fhir_user_permanent_delete.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_a_client_certificate.pem
+      - app_dic_a_client_certificate_private_key.pem
+      - app_dic_a_client_certificate_private_key.pem.password
+    volumes:
+      - type: bind
+        source: ./dic-a/fhir/conf/bundle.xml
+        target: /opt/fhir/conf/bundle.xml
+      - type: bind
+        source: ./dic-a/fhir/log
+        target: /opt/fhir/log
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5000
+      DEV_DSF_FHIR_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_FHIR_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_a_fhir_user.password
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_PASSWORD_FILE: /run/secrets/db_dic_a_fhir_user_permanent_delete.password
+      DEV_DSF_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_a_client_certificate.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_a_client_certificate_private_key.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_a_client_certificate_private_key.pem.password
+      DEV_DSF_FHIR_DB_URL: jdbc:postgresql://db/dic_a_fhir
+      DEV_DSF_FHIR_DB_USER_GROUP: dic_a_fhir_users
+      DEV_DSF_FHIR_DB_USER_USERNAME: dic_a_fhir_server_user
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_GROUP: dic_a_fhir_permanent_delete_users
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_USERNAME: dic_a_fhir_server_permanent_delete_user
+      DEV_DSF_FHIR_SERVER_BASE_URL: https://dic-a/fhir
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_IDENTIFIER_VALUE: dic.a.test
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_THUMBPRINT: ${DIC_A_BUNDLE_USER_THUMBPRINT}
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-a
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-a-fhir
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: mF0GEtjFoyWIM3in4VCwifGI3azb4DTn
+      DEV_DSF_FHIR_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - CREATE
+              - READ
+              - UPDATE
+              - DELETE
+              - SEARCH
+              - HISTORY
+              - PERMANENT_DELETE
+            practitioner-role:
+              - http://dsf.dev/fhir/CodeSystem/practitioner-role|DSF_ADMIN
+    networks:
+      dic-a-fhir-frontend:
+        ipv4_address: 172.20.0.67
+      dic-a-fhir-backend:
+      internet:
+    depends_on:
+      - db
+      - proxy
+      - keycloak
+  dic-a-bpe:
+    image: ghcr.io/datasharingframework/bpe:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5003:5003"
+    secrets:
+      - db_liquibase.password
+      - db_dic_a_bpe_user.password
+      - db_dic_a_bpe_user_camunda.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_a_client_certificate.pem
+      - app_dic_a_client_certificate_private_key.pem
+      - app_dic_a_client_certificate_private_key.pem.password
+      - dic_a_private_key.pem
+      - dic_a_public_key.pem
+    volumes:
+      - type: bind
+        source: ./dic-a/bpe/plugin
+        target: /opt/bpe/plugin
+        read_only: true
+      - type: bind
+        source: ./dic-a/bpe/process
+        target: /opt/bpe/process
+        read_only: true
+      - type: bind
+        source: ./dic-a/bpe/log
+        target: /opt/bpe/log
+      - type: bind
+        source: ./dic-a/bpe/last_event
+        target: /opt/bpe/last_event
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5003
+      DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_a_bpe_user.password
+      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_a_bpe_user_camunda.password
+      DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_a_client_certificate.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_a_client_certificate_private_key.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_a_client_certificate_private_key.pem.password
+      DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_a_bpe
+      DEV_DSF_BPE_DB_USER_GROUP: dic_a_bpe_users
+      DEV_DSF_BPE_DB_USER_USERNAME: dic_a_bpe_server_user
+      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_a_camunda_users
+      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_a_camunda_server_user
+      DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-a/fhir
+      DEV_DSF_BPE_SERVER_BASE_URL: https://dic-a/bpe
+      DEV_DSF_BPE_SERVER_UI_THEME: dev
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-a
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-a-bpe
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: ytqFCErw9GfhVUrrM8xc0Grbu4r7qGig
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-local-data-repository:8070/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-aggregated-data-repository:8071/fhir
+      ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_a_private_key.pem
+      ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_a_public_key.pem
+      DEV_DSF_BPE_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - ADMIN
+    networks:
+      dic-a-bpe-frontend:
+        ipv4_address: 172.20.0.115
+      dic-a-bpe-backend:
+      internet:
+    depends_on:
+      - db
+      - dic-a-fhir
+      - keycloak
+
+  dic-b-fhir-local-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8072/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-b-bpe-frontend
+      - dic-b-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8072'
+    ports:
+      - "127.0.0.1:8072:8072"
+    volumes:
+      - type: volume
+        source: dic-b-fhir-local-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-b-bpe
+
+  dic-b-fhir-aggregated-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8073/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-b-bpe-frontend
+      - dic-b-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8073'
+    ports:
+      - "127.0.0.1:8073:8073"
+    volumes:
+      - type: volume
+        source: dic-b-fhir-aggregated-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-b-bpe
+
+  dic-b-fhir:
+    image: ghcr.io/datasharingframework/fhir:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5002:5002"
+    secrets:
+      - db_liquibase.password
+      - db_dic_b_fhir_user.password
+      - db_dic_b_fhir_user_permanent_delete.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_b_client_certificate.pem
+      - app_dic_b_client_certificate_private_key.pem
+      - app_dic_b_client_certificate_private_key.pem.password
+    volumes:
+      - type: bind
+        source: ./dic-b/fhir/conf/bundle.xml
+        target: /opt/fhir/conf/bundle.xml
+      - type: bind
+        source: ./dic-b/fhir/log
+        target: /opt/fhir/log
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5002
+      JETTY_CLIENT_TRUSTSTORE_PEM: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_FHIR_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_FHIR_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_b_fhir_user.password
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_PASSWORD_FILE: /run/secrets/db_dic_b_fhir_user_permanent_delete.password
+      DEV_DSF_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_b_client_certificate.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_b_client_certificate_private_key.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_b_client_certificate_private_key.pem.password
+      DEV_DSF_FHIR_DB_URL: jdbc:postgresql://db/dic_b_fhir
+      DEV_DSF_FHIR_DB_USER_GROUP: dic_b_fhir_users
+      DEV_DSF_FHIR_DB_USER_USERNAME: dic_b_fhir_server_user
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_GROUP: dic_b_fhir_permanent_delete_users
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_USERNAME: dic_b_fhir_server_permanent_delete_user
+      DEV_DSF_FHIR_SERVER_BASE_URL: https://dic-b/fhir
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_IDENTIFIER_VALUE: dic.b.test
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_THUMBPRINT: ${DIC_B_BUNDLE_USER_THUMBPRINT}
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-b
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-b-fhir
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: P7XhxzBixIf9vPdprItkbOXZwtSX2JNt
+      DEV_DSF_FHIR_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - CREATE
+              - READ
+              - UPDATE
+              - DELETE
+              - SEARCH
+              - HISTORY
+              - PERMANENT_DELETE
+            practitioner-role:
+              - http://dsf.dev/fhir/CodeSystem/practitioner-role|DSF_ADMIN
+
+    networks:
+      dic-b-fhir-frontend:
+        ipv4_address: 172.20.0.99
+      dic-b-fhir-backend:
+      internet:
+    depends_on:
+      - db
+      - proxy
+      - keycloak
+  dic-b-bpe:
+    image: ghcr.io/datasharingframework/bpe:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5005:5005"
+    secrets:
+      - db_liquibase.password
+      - db_dic_b_bpe_user.password
+      - db_dic_b_bpe_user_camunda.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_b_client_certificate.pem
+      - app_dic_b_client_certificate_private_key.pem
+      - app_dic_b_client_certificate_private_key.pem.password
+      - dic_b_private_key.pem
+      - dic_b_public_key.pem
+    volumes:
+      - type: bind
+        source: ./dic-b/bpe/plugin
+        target: /opt/bpe/plugin
+        read_only: true
+      - type: bind
+        source: ./dic-b/bpe/process
+        target: /opt/bpe/process
+        read_only: true
+      - type: bind
+        source: ./dic-b/bpe/log
+        target: /opt/bpe/log
+      - type: bind
+        source: ./dic-b/bpe/last_event
+        target: /opt/bpe/last_event
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+      DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_b_bpe_user.password
+      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_b_bpe_user_camunda.password
+      DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_b_client_certificate.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_b_client_certificate_private_key.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_b_client_certificate_private_key.pem.password
+      DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_b_bpe
+      DEV_DSF_BPE_DB_USER_GROUP: dic_b_bpe_users
+      DEV_DSF_BPE_DB_USER_USERNAME: dic_b_bpe_server_user
+      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_b_camunda_users
+      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_b_camunda_server_user
+      DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-b/fhir
+      DEV_DSF_BPE_SERVER_BASE_URL: https://dic-b/bpe
+      DEV_DSF_BPE_SERVER_UI_THEME: dev
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-b
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-b-bpe
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 5GtUIUfoXnQVcsRfd0Hg4EGv14iAknGq
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-local-data-repository:8072/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-aggregated-data-repository:8073/fhir
+      ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_b_private_key.pem
+      ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_b_public_key.pem
+      DEV_DSF_BPE_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - ADMIN
+    networks:
+      dic-b-bpe-frontend:
+        ipv4_address: 172.20.0.147
+      dic-b-bpe-backend:
+      internet:
+    depends_on:
+      - db
+      - dic-b-fhir
+      - keycloak
+
+  dic-c-fhir-local-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8074/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-c-bpe-frontend
+      - dic-c-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8074'
+    ports:
+      - "127.0.0.1:8074:8074"
+    volumes:
+      - type: volume
+        source: dic-c-fhir-local-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-c-bpe
+
+  dic-c-fhir-aggregated-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8075/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-c-bpe-frontend
+      - dic-c-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8075'
+    ports:
+      - "127.0.0.1:8075:8075"
+    volumes:
+      - type: volume
+        source: dic-c-fhir-aggregated-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-c-bpe
+
+  dic-c-fhir:
+    image: ghcr.io/datasharingframework/fhir:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5001:5001"
+    secrets:
+      - db_liquibase.password
+      - db_dic_c_fhir_user.password
+      - db_dic_c_fhir_user_permanent_delete.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_c_client_certificate.pem
+      - app_dic_c_client_certificate_private_key.pem
+      - app_dic_c_client_certificate_private_key.pem.password
+    volumes:
+      - type: bind
+        source: ./dic-c/fhir/conf/bundle.xml
+        target: /opt/fhir/conf/bundle.xml
+      - type: bind
+        source: ./dic-c/fhir/log
+        target: /opt/fhir/log
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5001
+      DEV_DSF_FHIR_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_FHIR_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_c_fhir_user.password
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_PASSWORD_FILE: /run/secrets/db_dic_c_fhir_user_permanent_delete.password
+      DEV_DSF_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_c_client_certificate.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_c_client_certificate_private_key.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_c_client_certificate_private_key.pem.password
+      DEV_DSF_FHIR_DB_URL: jdbc:postgresql://db/dic_c_fhir
+      DEV_DSF_FHIR_DB_USER_GROUP: dic_c_fhir_users
+      DEV_DSF_FHIR_DB_USER_USERNAME: dic_c_fhir_server_user
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_GROUP: dic_c_fhir_permanent_delete_users
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_USERNAME: dic_c_fhir_server_permanent_delete_user
+      DEV_DSF_FHIR_SERVER_BASE_URL: https://dic-c/fhir
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_IDENTIFIER_VALUE: dic.c.test
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_THUMBPRINT: ${DIC_C_BUNDLE_USER_THUMBPRINT}
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-c
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-c-fhir
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 9i9WRfIedG7N3QoL5WuGM8hCoySblAhK
+      DEV_DSF_FHIR_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - CREATE
+              - READ
+              - UPDATE
+              - DELETE
+              - SEARCH
+              - HISTORY
+              - PERMANENT_DELETE
+            practitioner-role:
+              - http://dsf.dev/fhir/CodeSystem/practitioner-role|DSF_ADMIN
+    networks:
+      dic-c-fhir-frontend:
+        ipv4_address: 172.20.0.83
+      dic-c-fhir-backend:
+      internet:
+    depends_on:
+      - db
+      - proxy
+      - keycloak
+
+  dic-c-bpe:
+    image: ghcr.io/datasharingframework/bpe:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5004:5004"
+    secrets:
+      - db_liquibase.password
+      - db_dic_c_bpe_user.password
+      - db_dic_c_bpe_user_camunda.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_c_client_certificate.pem
+      - app_dic_c_client_certificate_private_key.pem
+      - app_dic_c_client_certificate_private_key.pem.password
+      - dic_c_private_key.pem
+      - dic_c_public_key.pem
+    volumes:
+      - type: bind
+        source: ./dic-c/bpe/plugin
+        target: /opt/bpe/plugin
+        read_only: true
+      - type: bind
+        source: ./dic-c/bpe/process
+        target: /opt/bpe/process
+        read_only: true
+      - type: bind
+        source: ./dic-c/bpe/log
+        target: /opt/bpe/log
+      - type: bind
+        source: ./dic-c/bpe/last_event
+        target: /opt/bpe/last_event
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5004
+      DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_c_bpe_user.password
+      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_c_bpe_user_camunda.password
+      DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_c_client_certificate.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_c_client_certificate_private_key.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_c_client_certificate_private_key.pem.password
+      DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_c_bpe
+      DEV_DSF_BPE_DB_USER_GROUP: dic_c_bpe_users
+      DEV_DSF_BPE_DB_USER_USERNAME: dic_c_bpe_server_user
+      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_c_camunda_users
+      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_c_camunda_server_user
+      DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-c/fhir
+      DEV_DSF_BPE_SERVER_BASE_URL: https://dic-c/bpe
+      DEV_DSF_BPE_SERVER_UI_THEME: dev
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-c
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-c-bpe
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: VGTQD3WWH4uGUMz408NWNzcHF1MsfV0l
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-local-data-repository:8074/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-aggregated-data-repository:8075/fhir
+      ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_c_private_key.pem
+      ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_c_public_key.pem
+      DEV_DSF_BPE_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - ADMIN
+    networks:
+      dic-c-bpe-frontend:
+        ipv4_address: 172.20.0.131
+      dic-c-bpe-backend:
+      internet:
+    depends_on:
+      - db
+      - dic-c-fhir
+      - keycloak
+
+  dic-d-fhir-local-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8076/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-d-bpe-frontend
+      - dic-d-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8076'
+    ports:
+      - "127.0.0.1:8076:8076"
+    volumes:
+      - type: volume
+        source: dic-d-fhir-local-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-d-bpe
+
+  dic-d-fhir-aggregated-data-repository:
+    image: samply/blaze:1.0.4
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8077/health" ]
+      interval: 10s
+      timeout: 15s
+      retries: 5
+    networks:
+      - dic-d-bpe-frontend
+      - dic-d-bpe-backend
+      - internet
+    environment:
+      ALLOW_MULTIPLE_DELETE: 'true'
+      SERVER_PORT: '8077'
+    ports:
+      - "127.0.0.1:8077:8077"
+    volumes:
+      - type: volume
+        source: dic-d-fhir-aggregated-data-repository-data
+        target: /app/data
+    depends_on:
+      - dic-d-bpe
+
+  dic-d-fhir:
+    image: ghcr.io/datasharingframework/fhir:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5006:5006"
+    secrets:
+      - db_liquibase.password
+      - db_dic_d_fhir_user.password
+      - db_dic_d_fhir_user_permanent_delete.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_d_client_certificate.pem
+      - app_dic_d_client_certificate_private_key.pem
+      - app_dic_d_client_certificate_private_key.pem.password
+    volumes:
+      - type: bind
+        source: ./dic-d/fhir/conf/bundle.xml
+        target: /opt/fhir/conf/bundle.xml
+      - type: bind
+        source: ./dic-d/fhir/log
+        target: /opt/fhir/log
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006
+      JETTY_CLIENT_TRUSTSTORE_PEM: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_FHIR_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_FHIR_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_d_fhir_user.password
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_PASSWORD_FILE: /run/secrets/db_dic_d_fhir_user_permanent_delete.password
+      DEV_DSF_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_d_client_certificate.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_d_client_certificate_private_key.pem
+      DEV_DSF_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_d_client_certificate_private_key.pem.password
+      DEV_DSF_FHIR_DB_URL: jdbc:postgresql://db/dic_d_fhir
+      DEV_DSF_FHIR_DB_USER_GROUP: dic_d_fhir_users
+      DEV_DSF_FHIR_DB_USER_USERNAME: dic_d_fhir_server_user
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_GROUP: dic_d_fhir_permanent_delete_users
+      DEV_DSF_FHIR_DB_USER_PERMANENT_DELETE_USERNAME: dic_d_fhir_server_permanent_delete_user
+      DEV_DSF_FHIR_SERVER_BASE_URL: https://dic-d/fhir
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_IDENTIFIER_VALUE: dic.d.test
+      DEV_DSF_FHIR_SERVER_ORGANIZATION_THUMBPRINT: ${DIC_D_BUNDLE_USER_THUMBPRINT}
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-d
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-d-fhir
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: P7XhxzBi34f9vPdprItkbOXZwtSX2JNt
+      DEV_DSF_FHIR_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - CREATE
+              - READ
+              - UPDATE
+              - DELETE
+              - SEARCH
+              - HISTORY
+              - PERMANENT_DELETE
+            practitioner-role:
+              - http://dsf.dev/fhir/CodeSystem/practitioner-role|DSF_ADMIN
+
+    networks:
+      dic-d-fhir-frontend:
+        ipv4_address: 172.20.0.189
+      dic-d-fhir-backend:
+      internet:
+    depends_on:
+      - db
+      - proxy
+      - keycloak
+
+  dic-d-bpe:
+    image: ghcr.io/datasharingframework/bpe:1.7.1
+    restart: "no"
+    ports:
+      - "127.0.0.1:5009:5009"
+    secrets:
+      - db_liquibase.password
+      - db_dic_d_bpe_user.password
+      - db_dic_d_bpe_user_camunda.password
+      - app_server_trust_certificates.pem
+      - app_client_trust_certificates.pem
+      - app_dic_d_client_certificate.pem
+      - app_dic_d_client_certificate_private_key.pem
+      - app_dic_d_client_certificate_private_key.pem.password
+      - dic_d_private_key.pem
+      - dic_d_public_key.pem
+    volumes:
+      - type: bind
+        source: ./dic-d/bpe/plugin
+        target: /opt/bpe/plugin
+        read_only: true
+      - type: bind
+        source: ./dic-d/bpe/process
+        target: /opt/bpe/process
+        read_only: true
+      - type: bind
+        source: ./dic-d/bpe/log
+        target: /opt/bpe/log
+      - type: bind
+        source: ./dic-d/bpe/last_event
+        target: /opt/bpe/last_event
+    environment:
+      TZ: Europe/Berlin
+      EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5009
+      DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
+      DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_d_bpe_user.password
+      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_d_bpe_user_camunda.password
+      DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_d_client_certificate.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_d_client_certificate_private_key.pem
+      DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY_PASSWORD_FILE: /run/secrets/app_dic_d_client_certificate_private_key.pem.password
+      DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_d_bpe
+      DEV_DSF_BPE_DB_USER_GROUP: dic_d_bpe_users
+      DEV_DSF_BPE_DB_USER_USERNAME: dic_d_bpe_server_user
+      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_d_camunda_users
+      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_d_camunda_server_user
+      DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-d/fhir
+      DEV_DSF_BPE_SERVER_BASE_URL: https://dic-d/bpe
+      DEV_DSF_BPE_SERVER_UI_THEME: dev
+      DEV_DSF_SERVER_AUTH_TRUST_CLIENT_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_AUTHORIZATION_CODE_FLOW: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BACK_CHANNEL_LOGOUT: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_BEARER_TOKEN: 'true'
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_REALM_BASE_URL: https://keycloak:8443/realms/dic-d
+      DEV_DSF_SERVER_AUTH_OIDC_PROVIDER_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-d-bpe
+      DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 5GtUIUfoXnQVcsRfd0Hg4EGv14iAknGq
+      ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-local-data-repository:8076/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-aggregated-data-repository:8077/fhir
+      ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_d_private_key.pem
+      ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_d_public_key.pem
+      DEV_DSF_BPE_SERVER_ROLECONFIG: |
+        - webbrowser_test_user:
+            thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
+            token-role: admin
+            dsf-role:
+              - ADMIN
+    networks:
+      dic-d-bpe-frontend:
+        ipv4_address: 172.20.0.237
+      dic-d-bpe-backend:
+      internet:
+    depends_on:
+      - db
+      - dic-d-fhir
+      - keycloak
+
+secrets:
+  proxy_certificate_and_int_cas.pem:
+    file: ./secrets/proxy_certificate_and_int_cas.pem
+  proxy_certificate_private_key.pem:
+    file: ./secrets/proxy_certificate_private_key.pem
+  proxy_trusted_client_cas.pem:
+    file: ./secrets/proxy_trusted_client_cas.pem
+
+  db_liquibase.password:
+    file: ./secrets/db_liquibase.password
+
+  keycloak_certificate.pem:
+    file: ./secrets/keycloak_certificate_and_int_cas.pem
+  keycloak_certificate_private_key.pem:
+    file: ./secrets/keycloak_certificate_private_key.pem
+  keycloak_trust_store.jks:
+    file: ./secrets/keycloak_trust_store.jks
+
+  db_dic_a_fhir_user.password:
+    file: ./secrets/db_dic_a_fhir_user.password
+  db_dic_a_fhir_user_permanent_delete.password:
+    file: ./secrets/db_dic_a_fhir_user_permanent_delete.password
+  db_dic_a_bpe_user.password:
+    file: ./secrets/db_dic_a_bpe_user.password
+  db_dic_a_bpe_user_camunda.password:
+    file: ./secrets/db_dic_a_bpe_user_camunda.password
+
+  db_dic_c_fhir_user.password:
+    file: ./secrets/db_dic_c_fhir_user.password
+  db_dic_c_fhir_user_permanent_delete.password:
+    file: ./secrets/db_dic_c_fhir_user_permanent_delete.password
+  db_dic_c_bpe_user.password:
+    file: ./secrets/db_dic_c_bpe_user.password
+  db_dic_c_bpe_user_camunda.password:
+    file: ./secrets/db_dic_c_bpe_user_camunda.password
+
+  db_dic_b_fhir_user.password:
+    file: ./secrets/db_dic_b_fhir_user.password
+  db_dic_b_fhir_user_permanent_delete.password:
+    file: ./secrets/db_dic_b_fhir_user_permanent_delete.password
+  db_dic_b_bpe_user.password:
+    file: ./secrets/db_dic_b_bpe_user.password
+  db_dic_b_bpe_user_camunda.password:
+    file: ./secrets/db_dic_b_bpe_user_camunda.password
+
+  db_dic_d_fhir_user.password:
+    file: ./secrets/db_dic_d_fhir_user.password
+  db_dic_d_fhir_user_permanent_delete.password:
+    file: ./secrets/db_dic_d_fhir_user_permanent_delete.password
+  db_dic_d_bpe_user.password:
+    file: ./secrets/db_dic_d_bpe_user.password
+  db_dic_d_bpe_user_camunda.password:
+    file: ./secrets/db_dic_d_bpe_user_camunda.password
+
+  app_server_trust_certificates.pem:
+    file: ./secrets/app_client_trust_certificates.pem
+  app_client_trust_certificates.pem:
+    file: ./secrets/app_client_trust_certificates.pem
+
+  app_dic_a_client_certificate.pem:
+    file: ./secrets/app_dic_a_client_certificate.pem
+  app_dic_a_client_certificate_private_key.pem:
+    file: ./secrets/app_dic_a_client_certificate_private_key.pem
+  app_dic_a_client_certificate_private_key.pem.password:
+    file: ./secrets/app_client_certificate_private_key.pem.password
+
+  app_dic_c_client_certificate.pem:
+    file: ./secrets/app_dic_c_client_certificate.pem
+  app_dic_c_client_certificate_private_key.pem:
+    file: ./secrets/app_dic_c_client_certificate_private_key.pem
+  app_dic_c_client_certificate_private_key.pem.password:
+    file: ./secrets/app_client_certificate_private_key.pem.password
+
+  app_dic_b_client_certificate.pem:
+    file: ./secrets/app_dic_b_client_certificate.pem
+  app_dic_b_client_certificate_private_key.pem:
+    file: ./secrets/app_dic_b_client_certificate_private_key.pem
+  app_dic_b_client_certificate_private_key.pem.password:
+    file: ./secrets/app_client_certificate_private_key.pem.password
+
+  app_dic_d_client_certificate.pem:
+    file: ./secrets/app_dic_d_client_certificate.pem
+  app_dic_d_client_certificate_private_key.pem:
+    file: ./secrets/app_dic_d_client_certificate_private_key.pem
+  app_dic_d_client_certificate_private_key.pem.password:
+    file: ./secrets/app_client_certificate_private_key.pem.password
+
+  dic_a_private_key.pem:
+    file: ./secrets/dic_a_private_key.pem
+  dic_a_public_key.pem:
+    file: ./secrets/dic_a_public_key.pem
+  dic_b_private_key.pem:
+    file: ./secrets/dic_b_private_key.pem
+  dic_b_public_key.pem:
+    file: ./secrets/dic_b_public_key.pem
+  dic_c_private_key.pem:
+    file: ./secrets/dic_c_private_key.pem
+  dic_c_public_key.pem:
+    file: ./secrets/dic_c_public_key.pem
+  dic_d_private_key.pem:
+    file: ./secrets/dic_d_private_key.pem
+  dic_d_public_key.pem:
+    file: ./secrets/dic_d_public_key.pem
+
+
+networks:
+  internet:
+  dic-a-fhir-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.64/28
+  dic-a-fhir-backend:
+  dic-a-bpe-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.112/28
+  dic-a-bpe-backend:
+  dic-c-fhir-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.80/28
+  dic-c-fhir-backend:
+  dic-c-bpe-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.128/28
+  dic-c-bpe-backend:
+  dic-b-fhir-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.96/28
+  dic-b-fhir-backend:
+  dic-b-bpe-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.144/28
+  dic-b-bpe-backend:
+  dic-d-fhir-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.176/28
+  dic-d-fhir-backend:
+  dic-d-bpe-frontend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.224/28
+  dic-d-bpe-backend:
+  db:
+
+volumes:
+  db-data:
+    name: eyematics-dsf-process-plugin-test-db
+  dic-a-fhir-local-data-repository-data:
+  dic-a-fhir-aggregated-data-repository-data:
+  dic-b-fhir-local-data-repository-data:
+  dic-b-fhir-aggregated-data-repository-data:
+  dic-c-fhir-local-data-repository-data:
+  dic-c-fhir-aggregated-data-repository-data:
+  dic-d-fhir-local-data-repository-data:
+  dic-d-fhir-aggregated-data-repository-data:

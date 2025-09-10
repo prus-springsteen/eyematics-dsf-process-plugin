@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1jqli1y" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.31.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
+  <bpmn:process id="Process_039ra1x" isExecutable="true">
+    <bpmn:endEvent id="Event_03kv13x" name="End Event" />
+    <bpmn:serviceTask id="Activity_06vp8lu" name="Service Task" />
+    <bpmn:userTask id="Activity_0el1tsx" name="User Task" />
+    <bpmn:subProcess id="Activity_0rf7aqv" name="Sub Process" />
+    <bpmn:exclusiveGateway id="Gateway_03s5pho" name="Exclusive Gateway" />
+    <bpmn:eventBasedGateway id="Gateway_0vzyuc6" name="Event Based Gateway" />
+    <bpmn:parallelGateway id="Gateway_08odc6b" name="Parallel Gateway" />
+    <bpmn:startEvent id="Event_1ib2s7j" name="Message Start Event">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1uboajq" />
+    </bpmn:startEvent>
+    <bpmn:boundaryEvent id="Event_0xwu48w" name="Error Boundary Event" attachedToRef="Activity_06vp8lu">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0c69iiz" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="Event_031xq0d" name="Message End Event">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_00lea70" />
+    </bpmn:endEvent>
+    <bpmn:receiveTask id="Activity_0gpxgnj" name="Receive Task" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_039ra1x">
+      <bpmndi:BPMNShape id="Gateway_08odc6b_di" bpmnElement="Gateway_08odc6b">
+        <dc:Bounds x="165" y="455" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="151" y="512" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06vp8lu_di" bpmnElement="Activity_06vp8lu">
+        <dc:Bounds x="420" y="130" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_031xq0d_di" bpmnElement="Event_031xq0d">
+        <dc:Bounds x="732" y="462" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="717" y="505" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0el1tsx_di" bpmnElement="Activity_0el1tsx">
+        <dc:Bounds x="420" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gpxgnj_di" bpmnElement="Activity_0gpxgnj">
+        <dc:Bounds x="420" y="440" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03kv13x_di" bpmnElement="Event_03kv13x">
+        <dc:Bounds x="732" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="724" y="195" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ib2s7j_di" bpmnElement="Event_1ib2s7j">
+        <dc:Bounds x="732" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="716" y="345" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0vzyuc6_di" bpmnElement="Gateway_0vzyuc6">
+        <dc:Bounds x="165" y="295" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="161" y="352" width="63" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_03s5pho_di" bpmnElement="Gateway_03s5pho" isMarkerVisible="true">
+        <dc:Bounds x="165" y="145" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="169" y="202" width="47" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0rf7aqv_di" bpmnElement="Activity_0rf7aqv">
+        <dc:Bounds x="420" y="660" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xwu48w_di" bpmnElement="Event_0xwu48w">
+        <dc:Bounds x="502" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="484" y="82" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1wtds7i">
+    <bpmndi:BPMNPlane id="BPMNPlane_1v7o296" bpmnElement="Activity_0rf7aqv" />
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

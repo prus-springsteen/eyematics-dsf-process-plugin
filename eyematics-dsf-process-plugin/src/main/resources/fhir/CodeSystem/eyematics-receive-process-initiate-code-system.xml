@@ -1,0 +1,34 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+    <meta>
+        <tag>
+            <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag"/>
+            <code value="ALL"/>
+        </tag>
+    </meta>
+    <url value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system" />
+    <!-- version managed by bpe -->
+    <version value="#{version}"/>
+    <name value="EyeMatics Receive Initiate Process CodeSystem"/>
+    <title value="EyeMatics Receive Initiate Process CodeSystem"/>
+    <!-- status managed by bpe -->
+    <status value="unknown"/>
+    <experimental value="false"/>
+    <!-- date managed by bpe -->
+    <date value="#{date}"/>
+    <publisher value="EyeMatics"/>
+    <description value="CodeSystem with standard values for the EyeMatics Receive Initiate Process"/>
+    <caseSensitive value="true"/>
+    <hierarchyMeaning value="grouped-by"/>
+    <versionNeeded value="false"/>
+    <content value="complete"/>
+    <concept>
+        <code value="dic-correlation-key"/>
+        <display value="DIC Correlation Key"/>
+        <definition value="Key to correlate messages from participating DICs within the EyeMatics project"/>
+    </concept>
+    <concept>
+        <code value="dic-identifier"/>
+        <display value="DIC Identifier"/>
+        <definition value="Reference with identifier of a DIC participating in an approved data sharing project"/>
+    </concept>
+</CodeSystem>
