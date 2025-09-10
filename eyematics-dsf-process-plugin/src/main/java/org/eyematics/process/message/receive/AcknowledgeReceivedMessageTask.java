@@ -30,7 +30,7 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
 
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
-        logger.info("-> something to send");
+        logger.info("-> Preparing the output as part of acknowledgment");
         Task task = variables.getLatestTask();
 
         if (task.getOutput().isEmpty()) {

@@ -15,7 +15,7 @@
     <experimental value="false" />
     <!-- date managed by bpe -->
     <date value="#{date}" />
-    <publisher value="EyeMatics.org" />
+    <publisher value="EyeMatics" />
     <description value="CodeSystem with standard values for the status of transferring datasets within EyeMatics-Process" />
     <caseSensitive value="true" />
     <hierarchyMeaning value="grouped-by" />

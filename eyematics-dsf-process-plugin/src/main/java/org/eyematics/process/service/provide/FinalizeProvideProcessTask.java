@@ -31,8 +31,7 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("Adding data status to output of task.");
-
+        logger.info("-> Finalizing the provision process");
         Task startTask = variables.getStartTask();
         Task currentTask = variables.getLatestTask();
 

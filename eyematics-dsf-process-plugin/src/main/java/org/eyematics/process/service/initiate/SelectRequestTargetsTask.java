@@ -1,6 +1,3 @@
-/**
- * @see    https://github.com/medizininformatik-initiative/mii-process-feasibility/blob/develop/mii-process-feasibility/src/main/java/de/medizininformatik_initiative/process/feasibility/service/SelectRequestTargets.java
- */
 package org.eyematics.process.service.initiate;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -30,7 +27,7 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Selecting the Participating Organization(s)");
+        logger.info("-> Selecting the participating organization(s).");
         Identifier parentIdentifier = new Identifier().setSystem(Identity.ORGANIZATION_IDENTIFIER_SYSTEM)
                                                       .setValue(EyeMaticsConstants.NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS);
         Coding memberOrganizationRole = new Coding().setSystem(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE).setCode(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
@@ -48,7 +45,6 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                                                   endpoint.getAddress(),
                                                   UUID.randomUUID().toString());
                 }).toList();
-        logger.info("-> Targets:\n{}", targets);
         variables.setTargets(variables.createTargets(targets));
     }
 }

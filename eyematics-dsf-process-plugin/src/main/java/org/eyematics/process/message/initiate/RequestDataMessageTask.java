@@ -12,9 +12,9 @@ import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Objects;
 import java.util.stream.Stream;
+
 
 public class RequestDataMessageTask extends AbstractTaskMessageSend {
 
@@ -34,7 +34,7 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
 
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
-        logger.info("-> Initiating Providing Process(es) in accordance with Participating Organization(s)");
+        logger.info("-> Initiating providing process(es) in accordance with participating organization(s)");
         return Stream.empty();
     }
 

@@ -26,7 +26,7 @@ public class LogReceiveFailedTask extends AbstractServiceDelegate {
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         String providingOrganization = variables.getTarget().getOrganizationIdentifierValue();
-        logger.error("The data-set from {} is missing for data receiving.", providingOrganization);
+        logger.error("-> The data-set from {} is missing for data receiving.", providingOrganization);
         Task task = new Task();
         task.setStatus(Task.TaskStatus.FAILED);
         task.addOutput(

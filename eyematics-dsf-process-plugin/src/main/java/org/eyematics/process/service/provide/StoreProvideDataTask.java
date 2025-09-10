@@ -26,7 +26,7 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to store");
+        logger.info("-> Storing the encrypted local data on FHIR server");
         MediaType mediaType = MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM);
         byte[] content = {};
         String targetOrganizationIdentifier = variables.getTarget().getOrganizationIdentifierValue();

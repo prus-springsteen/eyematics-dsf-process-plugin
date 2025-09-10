@@ -1,8 +1,3 @@
-/**
- * @author Hauke Hund (https://github.com/hhund)
- * @see    https://github.com/num-codex/codex-processes-ap1/blob/main/codex-process-data-transfer/src/main/java/de/netzwerk_universitaetsmedizin/codex/processes/data_transfer/client/FttpClientImpl.java
- */
-
 package org.eyematics.process.utils.client;
 
 import java.net.MalformedURLException;

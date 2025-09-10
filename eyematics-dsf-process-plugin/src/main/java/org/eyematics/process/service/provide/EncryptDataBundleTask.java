@@ -44,12 +44,11 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> try to get public-key ....");
+        logger.info("-> Encrypting the local data for provision");
         String reqOrg = variables.getStartTask().getRequester().getIdentifier().getValue();
         String recOrg = variables.getStartTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
         try {
             PublicKey pubKey = this.readPublicKey(reqOrg);
-            logger.info("-> something to encrypt");
             Bundle bundle = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
             byte[] bundleEncrypted = this.encrypt(pubKey, bundle, recOrg, reqOrg);
             variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, bundleEncrypted);

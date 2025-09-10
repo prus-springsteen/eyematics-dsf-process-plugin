@@ -1,11 +1,8 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- */
-
 package org.eyematics.process.utils.client.logging;
 
 import org.slf4j.Logger;
 import org.slf4j.Marker;
+
 
 public class HapiClientLogger implements Logger
 {

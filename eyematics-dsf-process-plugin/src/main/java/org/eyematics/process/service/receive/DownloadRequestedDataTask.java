@@ -30,9 +30,8 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something not to download 14");
+        logger.info("-> Downloading the provided data");
         String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
-        logger.info("-> Correlation Key: {}", correlationKey);
         Task latestTask = variables.getLatestTask();
 
         Reference reference = api.getTaskHelper()
@@ -43,11 +42,9 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
                 .orElseThrow(() -> super.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
                                                             variables,
                                                 "Could not find Reference-Input for downloading Data"));
-        logger.info("Reference-Input extracted -> {}", reference.getReference());
 
         try {
             Binary referenceBinary = this.downloadData(reference.getReference());
-            logger.info("Data downloaded...");
             delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey, referenceBinary);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();

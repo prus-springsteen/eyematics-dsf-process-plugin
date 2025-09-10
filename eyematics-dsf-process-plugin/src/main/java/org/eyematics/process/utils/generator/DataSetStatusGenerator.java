@@ -1,8 +1,3 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- * @see    https://github.com/medizininformatik-initiative/mii-processes-common/blob/main/src/main/java/de/medizininformatik_initiative/processes/common/util/DataSetStatusGenerator.java
- */
-
 package org.eyematics.process.utils.generator;
 
 import java.util.Objects;

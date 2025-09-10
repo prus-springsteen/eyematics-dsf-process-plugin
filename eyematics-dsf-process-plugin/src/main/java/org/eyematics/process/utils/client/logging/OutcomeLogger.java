@@ -1,16 +1,12 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- */
-
 package org.eyematics.process.utils.client.logging;
 
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.hl7.fhir.r4.model.OperationOutcome;
 import org.hl7.fhir.r4.model.OperationOutcome.IssueSeverity;
 import org.slf4j.Logger;
+
 
 public class OutcomeLogger
 {

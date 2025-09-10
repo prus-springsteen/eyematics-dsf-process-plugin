@@ -23,10 +23,9 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to bundle");
+        logger.info("-> Bundling the local data");
         try {
             Bundle b = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
-            logger.info("-> Amount of Items: {}", b.getEntry().size());
             Bundle toStore = new Bundle();
             if (b.hasEntry()) toStore.addEntry(b.getEntry().get(0));
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, toStore);

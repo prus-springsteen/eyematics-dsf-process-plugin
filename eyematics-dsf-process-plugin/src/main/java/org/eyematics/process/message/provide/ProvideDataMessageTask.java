@@ -37,7 +37,7 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
 
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
-        logger.info("-> something to send");
+        logger.info("-> Preparing to send the URL of provided data");
         return Stream.of(api.getTaskHelper()
                             .createInput(new Reference().setReference(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
                                     ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,

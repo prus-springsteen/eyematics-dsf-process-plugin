@@ -21,9 +21,8 @@ public class SelectReceiveTargetTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to select");
+        logger.info("-> Selecting the target for the receive process");
         Target target = SelectTarget.getRequestTarget(this.api, variables);
         variables.setTarget(target);
-        logger.info("-> {}", target);
     }
 }

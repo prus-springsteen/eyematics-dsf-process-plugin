@@ -38,6 +38,7 @@ public class DecryptRequestedDataTask extends AbstractExtendedSubProcessServiceD
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
+        logger.info("-> Decrypting the provided data");
         try {
             String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
             Binary bundleEncryptedBinary = (Binary) delegateExecution.getVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey);

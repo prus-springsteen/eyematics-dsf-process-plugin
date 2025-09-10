@@ -11,6 +11,8 @@
 **/*.log.gz
 **/*.jar
 
+/eyematics-dsf-process-plugin/src/resources/bpe/_img
+
 /eyematics-dsf-process-plugin-test-data-generator/bundle/*.xml
 /eyematics-dsf-process-plugin-test-data-generator/cert/*/*
 /eyematics-dsf-process-plugin-test-data-generator/cert/thumbprints.txt

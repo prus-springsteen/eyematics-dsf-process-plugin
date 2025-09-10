@@ -32,6 +32,7 @@ public class FinalizeInitiateProcessTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
+        logger.info("-> Finalizing the initiation process");
         Task startTask = variables.getStartTask();
         if (Task.TaskStatus.FAILED.equals(startTask.getStatus())) {
             this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()

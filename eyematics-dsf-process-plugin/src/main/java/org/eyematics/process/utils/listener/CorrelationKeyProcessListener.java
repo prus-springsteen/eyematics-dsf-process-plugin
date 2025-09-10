@@ -1,8 +1,3 @@
-/**
- * @author Hauke Hund (https://github.com/hhund)
- * @see    https://github.com/datasharingframework/dsf-process-ping-pong/blob/main/src/main/java/dev/dsf/bpe/listener/SetCorrelationKeyListener.java
- */
-
 package org.eyematics.process.utils.listener;
 
 import java.util.Objects;

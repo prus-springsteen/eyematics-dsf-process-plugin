@@ -1,7 +1,3 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- * @see    https://github.com/medizininformatik-initiative/mii-processes-common/blob/main/src/main/java/de/medizininformatik_initiative/processes/common/crypto/KeyProvider.java
- */
 package org.eyematics.process.utils.crypto;
 
 import java.security.KeyFactory;

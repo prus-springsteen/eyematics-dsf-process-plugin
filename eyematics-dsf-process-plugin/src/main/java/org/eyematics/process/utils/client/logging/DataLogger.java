@@ -1,15 +1,11 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- */
-
 package org.eyematics.process.utils.client.logging;
 
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.MethodOutcome;
+
 
 public class DataLogger
 {

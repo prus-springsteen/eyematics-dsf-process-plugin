@@ -29,7 +29,7 @@ public class PrepareReceiveDataTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> something to prepare");
+        logger.info("-> Preparing targets as amount of subprocesses for receiving");
         Task task = variables.getStartTask();
         List<Target> targetsList = this.getTargets(task, variables);
         Targets targets = variables.createTargets(targetsList);

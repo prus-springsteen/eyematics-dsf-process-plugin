@@ -1,7 +1,3 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- */
-
 package org.eyematics.process.utils.client.token;
 
 import java.util.Objects;

@@ -158,7 +158,7 @@
   <bpmn:message id="Message_2vm6cli" name="receiveProcessInitiateEventMessage" />
   <bpmn:signal id="Signal_1aqc3mq" name="stop_dsfdev_sendProcess_#{version}" />
   <bpmn:error id="Error_0hy5l1u" name="dataDownloadFailure" errorCode="dataDownloadFailure" />
-  <bpmn:error id="Error_0t30ggk" name="dataDecryptFailure" errorCode="dataDecryptionFailure" />
+  <bpmn:error id="Error_0t30ggk" name="dataDecryptFailure" errorCode="dataDecryptFailure" />
   <bpmn:error id="Error_1rfvbt2" name="dataAcknowledgeFailure" errorCode="dataAcknowledgeFailure" />
   <bpmn:error id="Error_01diosc" name="dataInsertFailure" errorCode="dataInsertFailure" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">

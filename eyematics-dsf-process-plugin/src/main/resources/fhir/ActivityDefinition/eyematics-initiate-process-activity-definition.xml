@@ -12,227 +12,68 @@
         <extension url="task-profile">
             <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-initiate-process-structure-definition|#{version}" />
         </extension>
-
         <extension url="requester">
             <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.a.test" />
-                    </valueIdentifier>
+                <extension
+                        url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-parent-organization-role">
+                    <extension url="parent-organization">
+                        <valueIdentifier>
+                            <system value="http://dsf.dev/sid/organization-identifier"/>
+                            <value value="eyematics.org"/>
+                        </valueIdentifier>
+                    </extension>
+                    <extension url="organization-role">
+                        <valueCoding>
+                            <system value="http://dsf.dev/fhir/CodeSystem/organization-role"/>
+                            <code value="DIC"/>
+                        </valueCoding>
+                    </extension>
                 </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization"/>
+                <code value="LOCAL_ROLE"/>
             </valueCoding>
         </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.a.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.b.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.b.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.c.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.c.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.d.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.d.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-        <!---->
         <extension url="recipient">
             <valueCoding>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ALL" />
+                <extension
+                        url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-parent-organization-role">
+                    <extension url="parent-organization">
+                        <valueIdentifier>
+                            <system value="http://dsf.dev/sid/organization-identifier"/>
+                            <value value="eyematics.org"/>
+                        </valueIdentifier>
+                    </extension>
+                    <extension url="organization-role">
+                        <valueCoding>
+                            <system value="http://dsf.dev/fhir/CodeSystem/organization-role"/>
+                            <code value="DIC"/>
+                        </valueCoding>
+                    </extension>
+                </extension>
+                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization"/>
+                <code value="LOCAL_ROLE"/>
             </valueCoding>
         </extension>
     </extension>
-<!-- SUB-PROCESS
-    <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
-        <extension url="message-name">
-            <valueString value="receiveProcessStartEventMessage" />
-        </extension>
-        <extension url="task-profile">
-            <valueCanonical value="http://dsf.dev/fhir/StructureDefinition/eyematics-receive-process-structure-definition|#{version}" />
-        </extension>
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="hrp.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="hrp.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="cos.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="cos.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-        <extension url="requester">
-            <valueCoding>
-                <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization-organization">
-                    <valueIdentifier>
-                        <system value="http://dsf.dev/sid/organization-identifier" />
-                        <value value="dic.dsf.test" />
-                    </valueIdentifier>
-                </extension>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="REMOTE_ORGANIZATION" />
-            </valueCoding>
-        </extension>
-
-
-        <extension url="recipient">
-            <valueCoding>
-                <system value="http://dsf.dev/fhir/CodeSystem/process-authorization" />
-                <code value="LOCAL_ALL" />
-            </valueCoding>
-        </extension>
-    </extension> -->
     <url value="http://eyematics.org/bpe/Process/eyematicsInitiateProcess" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMatics Initiate Process" />
-    <title value="DIC, COS, HRP Process" />
-    <subtitle value="DIC, COS, HRP process for the EyeMatics-DSF process implementation" />
+    <title value="EyeMatics Initiate Process" />
+    <subtitle value="Process to initiate the EyeMatics data exchange" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
     <!-- date managed by bpe -->
     <date value="#{date}" />
-    <publisher value="DSF" />
+    <publisher value="EyeMatics" />
     <contact>
-        <name value="DSF" />
+        <name value="EyeMatics DSF Process Plugin" />
         <telecom>
             <system value="email" />
-            <value value="pmo@dsf.dev" />
+            <value value="sascha.prus@ukmuenster.de" />
         </telecom>
     </contact>
-    <description value="This implementation contains the basic elements that a minimal process must contain in order to be executable." />
+    <description value="Process to initiate the EyeMatics data exchange." />
     <kind value="Task" />
 </ActivityDefinition>

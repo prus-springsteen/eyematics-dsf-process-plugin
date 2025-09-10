@@ -36,20 +36,19 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("Reading Data from FHIR-Repository is initiated.");
+        logger.info("-> Reading local data from FHIR repository is initiated");
         EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         IdType idType = new IdType(fhirClient.getFhirBaseUrl(),  "StructureDefinition", "", "");
         try {
             FhirContext fhirContext = FhirContext.forR4();
             Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, fhirClient.read(idType, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON));
             if (!bundle.hasEntry()) {
-                throw new Exception("Bundle contains no data. Please check the FHIR-Repository.");
+                throw new Exception("Bundle contains no data. Please check the FHIR Repository.");
             }
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
-            logger.info("Data is stored for further processing.");
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
-            logger.error("Could not read data from FHIR-Repository: {}", errorMessage);
+            logger.error("Could not read data from FHIR repository: {}", errorMessage);
             this.handleTaskError(EyeMaticsGenericStatus.DATA_READ_FAILURE, variables, errorMessage);
         }
     }

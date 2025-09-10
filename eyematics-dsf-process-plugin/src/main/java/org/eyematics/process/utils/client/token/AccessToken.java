@@ -1,14 +1,11 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- */
 
 package org.eyematics.process.utils.client.token;
 
 import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AccessToken

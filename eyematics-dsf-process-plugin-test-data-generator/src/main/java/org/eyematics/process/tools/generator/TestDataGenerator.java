@@ -16,6 +16,7 @@ public class TestDataGenerator
 	private static final CertificateGenerator certificateGenerator = new CertificateGenerator();
 	private static final BundleGenerator bundleGenerator = new BundleGenerator();
 	private static final EnvGenerator envGenerator = new EnvGenerator();
+	private static final RSAKeyPairGenerator rsaKeyPairGenerator = new RSAKeyPairGenerator();
 
 	static
 	{
@@ -67,5 +68,8 @@ public class TestDataGenerator
 		bundleGenerator.copyDockerTestBundles();
 
 		envGenerator.generateAndWriteDockerTestFhirEnvFiles(clientCertificateFilesByCommonName);
+
+		rsaKeyPairGenerator.generateRSAKeyPairs();
+		logger.warn("Key pairs for data decryption created for all DICs successfully.");
 	}
 }

@@ -38,7 +38,7 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("Inserting data from ...");
+        logger.info("-> Insertion of the provided data into FHIR repository");
         String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
         EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         IdType idType = new IdType(fhirClient.getFhirBaseUrl(),  "Bundle", "", "");

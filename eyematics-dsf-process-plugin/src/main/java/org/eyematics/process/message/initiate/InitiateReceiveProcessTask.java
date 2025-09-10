@@ -1,7 +1,3 @@
-/**
- * @see    https://github.com/medizininformatik-initiative/mii-process-data-sharing/blob/main/src/main/java/de/medizininformatik_initiative/process/data_sharing/message/SendMergeDataSharing.java
- */
-
 package org.eyematics.process.message.initiate;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
@@ -44,7 +40,7 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
 
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
-        logger.info("-> Initiating Receive Process with Participating Organization(s)");
+        logger.info("-> Initiating receive process with participating organization(s)");
         Targets targets = variables.getTargets();
         List<Task.ParameterComponent> targetInputs = targets.getEntries().stream().map(this::transformToTargetInput).toList();
         return targetInputs.stream();

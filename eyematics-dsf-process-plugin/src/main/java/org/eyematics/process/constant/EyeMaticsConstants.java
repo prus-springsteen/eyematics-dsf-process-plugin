@@ -1,7 +1,3 @@
-/**
- * @see    https://github.com/medizininformatik-initiative/mii-processes-common/blob/main/src/main/java/de/medizininformatik_initiative/processes/common/util/ConstantsBase.java
- */
-
 package org.eyematics.process.constant;
 
 import static org.eyematics.process.EyeMaticsProcessPluginDefinition.VERSION;

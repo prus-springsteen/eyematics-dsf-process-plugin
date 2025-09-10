@@ -1,8 +1,3 @@
-/**
- * @author Reto Wettstein (https://github.com/wetret)
- * @see    https://https://github.com/medizininformatik-initiative/mii-process-data-sharing/blob/main/src/main/java/de/medizininformatik_initiative/process/data_sharing/DataSharingProcessPluginDeploymentStateListener.java
- */
-
 package org.eyematics.process.utils.listener;
 
 import org.eyematics.process.constant.InitiateConstants;
@@ -34,7 +29,6 @@ public class EyeMaticsProcessPluginDeploymentStateListener implements ProcessPlu
 
     @Override
     public void onProcessesDeployed(List<String> activeProcesses) {
-        logger.info("Providing Public Key, If Not Exists.");
         if (activeProcesses.contains(InitiateConstants.PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS)) {
             keyProvider.createPublicKeyIfNotExists();
         }
