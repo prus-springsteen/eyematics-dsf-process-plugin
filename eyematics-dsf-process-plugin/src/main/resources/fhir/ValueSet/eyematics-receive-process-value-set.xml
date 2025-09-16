@@ -8,8 +8,8 @@
     <url value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set"/>
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Receive Process ValueSet"/>
-    <title value="EyeMatics Receive Process ValueSet"/>
+    <name value="EyeMaticsReceiveProcessValueSet"/>
+    <title value="EyeMatics Receive Process Value Set"/>
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false"/>

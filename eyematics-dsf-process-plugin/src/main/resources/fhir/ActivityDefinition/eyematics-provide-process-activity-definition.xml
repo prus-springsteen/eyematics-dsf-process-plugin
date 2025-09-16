@@ -152,8 +152,8 @@
     <url value="http://eyematics.org/bpe/Process/eyematicsProvideProcess" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Provide Process" />
-    <title value="EyeMatics Provide Process" />
+    <name value="EyeMaticsProvideProcessActivityDefinition" />
+    <title value="EyeMatics Provide Process Activity Definition" />
     <subtitle value="Process to provide the EyeMatics data" />
     <!-- status managed by bpe -->
     <status value="unknown" />

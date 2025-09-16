@@ -38,7 +38,7 @@ public class FinalizeInitiateProcessTask extends AbstractServiceDelegate {
             this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
                     .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(startTask);
-            //this.sendMail(startTask, "Test", "testError");
+            this.sendMail(startTask, "Test", "testError");
         } else {
             startTask.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_REQUEST_SUCCESS.getStatusCode(),
                                                                                       EyeMaticsGenericStatus.getTypeSystem(),

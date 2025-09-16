@@ -58,8 +58,8 @@
     <url value="http://eyematics.org/bpe/Process/eyematicsInitiateProcess" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Initiate Process" />
-    <title value="EyeMatics Initiate Process" />
+    <name value="EyeMaticsInitiateProcessActivityDefinition" />
+    <title value="EyeMatics Initiate Process Activity Definition" />
     <subtitle value="Process to initiate the EyeMatics data exchange" />
     <!-- status managed by bpe -->
     <status value="unknown" />

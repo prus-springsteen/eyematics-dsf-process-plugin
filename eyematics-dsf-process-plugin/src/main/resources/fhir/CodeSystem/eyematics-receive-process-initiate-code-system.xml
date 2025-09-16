@@ -8,8 +8,8 @@
     <url value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system" />
     <!-- version managed by bpe -->
     <version value="#{version}"/>
-    <name value="EyeMatics Receive Initiate Process CodeSystem"/>
-    <title value="EyeMatics Receive Initiate Process CodeSystem"/>
+    <name value="EyeMaticsReceiveInitiateProcessCodeSystem"/>
+    <title value="EyeMatics Receive Initiate Process Code System"/>
     <!-- status managed by bpe -->
     <status value="unknown"/>
     <experimental value="false"/>

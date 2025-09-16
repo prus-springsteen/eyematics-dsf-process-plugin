@@ -8,7 +8,7 @@
     <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMatics Initiate Process Structure Definition" />
+    <name value="EyeMaticsInitiateProcessStructureDefinition" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
