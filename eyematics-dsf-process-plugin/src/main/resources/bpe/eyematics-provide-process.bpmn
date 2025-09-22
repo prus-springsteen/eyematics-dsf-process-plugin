@@ -74,13 +74,13 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_1yo5amk" sourceRef="Gateway_0d5hn6e" targetRef="WaitForRetrieval" />
     <bpmn:sequenceFlow id="Flow_1s6vhsk" sourceRef="WaitForRetrieval" targetRef="HandleMissingReceiptTask" />
-    <bpmn:intermediateCatchEvent id="EyematicsProvideProcessReceiveReceiptEvent" name="receive acknowledgement">
+    <bpmn:intermediateCatchEvent id="EyematicsProvideProcessAcknowledgementEvent" name="receive acknowledgement">
       <bpmn:incoming>Flow_0nixdsa</bpmn:incoming>
       <bpmn:outgoing>Flow_1aq1svv</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0nllou2" messageRef="Message_27pktrl" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_0nixdsa" sourceRef="Gateway_0d5hn6e" targetRef="EyematicsProvideProcessReceiveReceiptEvent" />
-    <bpmn:sequenceFlow id="Flow_1aq1svv" sourceRef="EyematicsProvideProcessReceiveReceiptEvent" targetRef="Gateway_056j4wv" />
+    <bpmn:sequenceFlow id="Flow_0nixdsa" sourceRef="Gateway_0d5hn6e" targetRef="EyematicsProvideProcessAcknowledgementEvent" />
+    <bpmn:sequenceFlow id="Flow_1aq1svv" sourceRef="EyematicsProvideProcessAcknowledgementEvent" targetRef="Gateway_056j4wv" />
     <bpmn:serviceTask id="FinalizeProvideProcessTask" name="finalize provide process" camunda:class="org.eyematics.process.service.provide.FinalizeProvideProcessTask">
       <bpmn:incoming>Flow_0w5nwvs</bpmn:incoming>
       <bpmn:outgoing>Flow_06mptsp</bpmn:outgoing>
@@ -138,7 +138,7 @@
     <bpmn:sequenceFlow id="Flow_1xhn50w" sourceRef="Event_1gxwslu" targetRef="Gateway_0s8ihz3" />
   </bpmn:process>
   <bpmn:message id="Message_3ph9paj" name="provideProcessStartEventMessage" />
-  <bpmn:message id="Message_27pktrl" name="provideProcessReceiveReceiptEventMessage" />
+  <bpmn:message id="Message_27pktrl" name="provideProcessAcknowledgementEventMessage" />
   <bpmn:error id="Error_1drpd7l" name="dataProvideFailure" errorCode="dataProvideFailure" />
   <bpmn:error id="Error_0sl9w3e" name="dataReadFailure" errorCode="dataReadFailure" />
   <bpmn:error id="Error_1p5vhit" name="dataBundleFailure" errorCode="dataBundleFailure" />
@@ -151,6 +151,12 @@
         <dc:Bounds x="172" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="163" y="205" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dqh5q3_di" bpmnElement="EyematicsProvideProcessEndEvent">
+        <dc:Bounds x="1922" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1914" y="205" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0l3p2ud_di" bpmnElement="EncryptDataBundleTask">
@@ -189,11 +195,15 @@
       <bpmndi:BPMNShape id="Gateway_056j4wv_di" bpmnElement="Gateway_056j4wv" isMarkerVisible="true">
         <dc:Bounds x="1405" y="155" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0g58j5z_di" bpmnElement="EyematicsProvideProcessReceiveReceiptEvent">
+      <bpmndi:BPMNShape id="Event_0g58j5z_di" bpmnElement="EyematicsProvideProcessAcknowledgementEvent">
         <dc:Bounds x="1212" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1189" y="205" width="90" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0t19sv9_di" bpmnElement="FinalizeProvideProcessTask">
+        <dc:Bounds x="1760" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1odhi08_di" bpmnElement="DeleteProvideDataTask">
         <dc:Bounds x="1490" y="140" width="100" height="80" />
@@ -203,18 +213,11 @@
         <dc:Bounds x="1300" y="270" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0dqh5q3_di" bpmnElement="EyematicsProvideProcessEndEvent">
-        <dc:Bounds x="1922" y="162" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1914" y="205" width="58" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0t19sv9_di" bpmnElement="FinalizeProvideProcessTask">
-        <dc:Bounds x="1760" y="140" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0s8ihz3_di" bpmnElement="Gateway_0s8ihz3" isMarkerVisible="true">
         <dc:Bounds x="1645" y="155" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gxwslu_di" bpmnElement="Event_1gxwslu">
+        <dc:Bounds x="1572" y="122" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1xyzuib_di" bpmnElement="DataStoreErrorEvent">
         <dc:Bounds x="922" y="122" width="36" height="36" />
@@ -233,9 +236,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1038" y="206" width="64" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1gxwslu_di" bpmnElement="Event_1gxwslu">
-        <dc:Bounds x="1572" y="122" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1ah56wr_di" bpmnElement="Flow_1ah56wr">
         <di:waypoint x="208" y="180" />

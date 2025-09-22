@@ -29,7 +29,7 @@ public class EyeMaticsProcessPluginDefinitionTest {
 
         var receive = resourcesByProcessId.get(ReceiveConstants.PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS);
         assertNotNull(receive);
-        assertEquals(13, receive.stream().filter(this::exists).count());
+        assertEquals(15, receive.stream().filter(this::exists).count());
     }
 
     private boolean exists(String file) {

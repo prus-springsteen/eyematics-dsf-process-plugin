@@ -47,6 +47,10 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 
 		// EYEMATICS PROCESS (v1.0)
 
+		// CRYPTOGRAPHY
+		String cCrypto = "fhir/CodeSystem/mii-cryptography.xml";
+		String vCrypto = "fhir/ValueSet/mii-cryptography.xml";
+
 		// GENERIC
 		String cGenericProcess = "fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system.xml";
 		String cGenericProcessCodes = "fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system.xml";
@@ -62,7 +66,7 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		// PROVIDE
 		String aProvideProcess = "fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml";
 		String sProvideProcess = "fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml";
-		String sProvideProcessReceiveReceipt = "fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition.xml";
+		String sProvideProcessAcknowledgement = "fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition.xml";
 
 		// RECEIVE
 		String aReceiveProcess = "fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml";
@@ -77,9 +81,9 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
 				List.of(aInitiateProcess, sInitiateProcess, sGenericProcess, tInitiateProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
-				List.of(aProvideProcess, sProvideProcess, sProvideProcessReceiveReceipt, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
+				List.of(aProvideProcess, sProvideProcess, sProvideProcessAcknowledgement, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
-				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, cReceiveProcess, cReceiveInitiateProcess, vReceiveProcess, vReceiveInitiateProcess, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes));
+				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, sGenericProcess, cReceiveProcess, cReceiveInitiateProcess, cGenericProcess, cGenericProcessCodes, cCrypto, vReceiveProcess, vReceiveInitiateProcess, vGenericProcess, vGenericProcessCodes, vCrypto));
 	}
 
 	@Override

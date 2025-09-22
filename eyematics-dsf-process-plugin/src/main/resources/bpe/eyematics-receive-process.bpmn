@@ -32,10 +32,10 @@
       <bpmn:sendTask id="AcknowledgeReceivedMessageTask" name="send acknowledgement" camunda:class="org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask">
         <bpmn:extensionElements>
           <camunda:field name="profile">
-            <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}</camunda:string>
+            <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition|#{version}</camunda:string>
           </camunda:field>
           <camunda:field name="messageName">
-            <camunda:string>provideProcessReceiveReceiptEventMessage</camunda:string>
+            <camunda:string>provideProcessAcknowledgementEventMessage</camunda:string>
           </camunda:field>
           <camunda:field name="instantiatesCanonical">
             <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>

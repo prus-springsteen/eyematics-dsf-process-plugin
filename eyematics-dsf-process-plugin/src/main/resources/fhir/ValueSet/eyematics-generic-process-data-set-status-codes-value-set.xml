@@ -23,6 +23,7 @@
             <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
             <version value="#{version}" />
             <!-- EyeMaticsGenericStatus: Start -->
+            <!--
             <concept>
                 <code value="data-initiate-failure" />
                 <display value="Data Initiate Failure" />
@@ -103,6 +104,11 @@
                 <code value="data-provide-missing" />
                 <display value="Data Provide Missing" />
             </concept>
+            -->
+
+                <system value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system"/>
+                <version value="#{version}" />
+
             <!-- EyeMaticsGenericStatus: End -->
         </include>
     </compose>

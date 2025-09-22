@@ -80,10 +80,10 @@
     <!-- ACKNOWLEDGE PROCESS -->
     <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
         <extension url="message-name">
-            <valueString value="provideProcessReceiveReceiptEventMessage" />
+            <valueString value="provideProcessAcknowledgementEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition|#{version}" />
+            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>

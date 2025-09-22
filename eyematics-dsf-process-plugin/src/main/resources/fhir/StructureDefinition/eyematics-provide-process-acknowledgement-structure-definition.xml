@@ -5,10 +5,10 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-receive-receipt-structure-definition" />
+    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition" />
     <!-- version managed by bpe -->
     <version value="#{version}" />
-    <name value="EyeMaticsInitiateProcessStructureDefinition" />
+    <name value="EyeMaticsProvideProcessAcknowledgeStructureDefinition" />
     <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
@@ -42,7 +42,7 @@
         </element>
         <element id="Task.input:message-name.value[x]">
             <path value="Task.input.value[x]" />
-            <fixedString value="provideProcessReceiveReceiptEventMessage" />
+            <fixedString value="provideProcessAcknowledgementEventMessage" />
         </element>
         <element id="Task.input:business-key">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -113,11 +113,10 @@
                 <code value="Coding"/>
             </type>
         </element>
-    <!--
         <element id="Task.input:data-set-status.value[x].system">
             <path value="Task.input.value[x].system"/>
             <min value="1"/>
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
+            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system"/>
         </element>
         <element id="Task.input:data-set-status.value[x].code">
             <path value="Task.input.value[x].code"/>
@@ -127,6 +126,5 @@
                 <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
-    -->
     </differential>
 </StructureDefinition>

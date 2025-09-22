@@ -4,7 +4,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import org.eyematics.process.constant.InitiateConstants;
+
+import org.eyematics.process.constant.*;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.Task.TaskIntent;
@@ -32,8 +33,8 @@ public class TaskProfileTest {
 	@ClassRule
 	public static final ValidationSupportRule validationRule = new ValidationSupportRule(def.getResourceVersion(),
 			def.getResourceReleaseDate(),
-			List.of("dsf-task-base-1.0.0.xml", "eyematics-generic-process-data-set-status-error-extension", "eyematics-initiate-process-structure-definition.xml",
-					"eyematics-provide-process-receive-receipt-structure-definition.xml", "eyematics-provide-process-structure-definition.xml",
+			List.of("dsf-task-base-1.0.0.xml", "eyematics-generic-process-data-set-status-error-extension.xml", "eyematics-initiate-process-structure-definition.xml",
+					"eyematics-provide-process-acknowledgement-structure-definition.xml", "eyematics-provide-process-structure-definition.xml",
 					"eyematics-receive-process-initiate-dic-identifier-extension.xml", "eyematics-receive-process-initiate-structure-definition.xml",
 					"eyematics-receive-process-structure-definition.xml"),
 			List.of("dsf-read-access-tag-1.0.0.xml", "dsf-bpmn-message-1.0.0.xml", "eyematics-generic-process-data-set-status-code-system.xml",
@@ -46,42 +47,45 @@ public class TaskProfileTest {
 	private final ResourceValidator resourceValidator = new ResourceValidatorImpl(validationRule.getFhirContext(),
 			validationRule.getValidationSupport());
 
-/*
+
 	@Test
-	public void testTaskStartDataInitiateValid() {
+	public void testValidTaskInitiateProcessOutput() {
 
-		Task task = createValidTaskDataSendStart();
+		Task task = createValidTaskInitiateProcess();
 
-		ValidationResult result = resourceValidator.validate(task);
-		ValidationSupportRule.logValidationMessages(logger, result);
-
-		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
-				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
-	}
-*/
-
-	/*
-	@Test
-	public void testTaskStartDataSendValidWithReportStatusErrorOutput()
-	{
-		Task task = createValidTaskDataSendStart();
 		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
-				ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_NOT_REACHABLE,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
+				EyeMaticsGenericStatus.DATA_REQUEST_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
 
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
 
 		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
+
 	}
 
-	 */
+	@Test
+	public void testValidTaskInitiateProcessOutputError() {
 
-	private Task createValidTaskDataSendStart() {
+		Task task = createValidTaskInitiateProcess();
+		/*
+		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+				EyeMaticsGenericStatus.DATA_REQUEST_FAILURE.getStatusCode(),
+				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
+		*/
+		ValidationResult result = resourceValidator.validate(task);
+		ValidationSupportRule.logValidationMessages(logger, result);
+
+		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
+				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
+
+	}
+
+	private Task createValidTaskInitiateProcess() {
 		Task task = new Task();
-		//task.setIdElement(new IdType("urn:uuid:" + UUID.randomUUID().toString()));
+		task.setIdElement(new IdType("urn:uuid:" + UUID.randomUUID().toString()));
 		task.getMeta().addProfile(InitiateConstants.PROFILE_TASK_INITIATE_EYEMATICS_PROCESS_START + "|" + def.getResourceVersion());
 		task.setInstantiatesCanonical(
 				InitiateConstants.PROFILE_TASK_INITIATE_EYEMATICS_PROCESS_START_URI + "|" + def.getResourceVersion());
@@ -96,27 +100,15 @@ public class TaskProfileTest {
 				.addCoding(CodeSystems.BpmnMessage.messageName());
 		return task;
 	}
+
 	/*
 	@Test
-	public void testTaskDataSendValid()
-	{
-		Task task = createValidTaskDataSend();
+	public void testValidTaskInitiateReceiveProcess() {
+		Task task = createValidTaskInitiateReceiveProcess();
 
-		ValidationResult result = resourceValidator.validate(task);
-		ValidationSupportRule.logValidationMessages(logger, result);
-
-		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
-				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
-	}
-
-	@Test
-	public void testTaskDataSendValidWithReportStatusOutput()
-	{
-		Task task = createValidTaskDataSend();
 		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
-				ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIVE_OK,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
+				EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
 
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
@@ -124,60 +116,104 @@ public class TaskProfileTest {
 		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
+	 */
 
-	@Test
-	public void testTaskDataSendValidWithReportStatusErrorOutput()
-	{
-		Task task = createValidTaskDataSend();
-		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
-				ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIVE_ERROR,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
-
-		ValidationResult result = resourceValidator.validate(task);
-		ValidationSupportRule.logValidationMessages(logger, result);
-
-		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
-				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
-	}
-
-	private Task createValidTaskDataSend()
-	{
+	private Task createValidTaskInitiateReceiveProcess() {
 		Task task = new Task();
-		task.getMeta().addProfile(ConstantsDataTransfer.PROFILE_TASK_DATA_SEND + "|" + def.getResourceVersion());
+		task.setIdElement(new IdType("urn:uuid:" + UUID.randomUUID().toString()));
+		task.getMeta().addProfile(ReceiveConstants.PROFILE_TASK_INITIATE_EYEMATICS_RECEIVE_PROCESS);
 		task.setInstantiatesCanonical(
-				ConstantsDataTransfer.PROFILE_TASK_DATA_SEND_PROCESS_URI + "|" + def.getResourceVersion());
+				ReceiveConstants.PROFILE_TASK_EYEMATICS_RECEIVE_PROCESS_URI + "|" + def.getResourceVersion());
 		task.setStatus(TaskStatus.REQUESTED);
 		task.setIntent(TaskIntent.ORDER);
 		task.setAuthoredOn(new Date());
 		task.getRequester().setType(ResourceType.Organization.name())
-				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue("Test_DIC"));
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
 		task.getRestriction().addRecipient().setType(ResourceType.Organization.name())
-				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue("Test_DIC"));
-		task.addInput().setValue(new StringType(ConstantsDataTransfer.PROFILE_TASK_DATA_SEND_MESSAGE_NAME)).getType()
-				.addCoding(CodeSystems.BpmnMessage.messageName());
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
+		task.addInput().setValue(new StringType(ReceiveConstants.PROFILE_TASK_INITIATE_EYEMATICS_RECEIVE_PROCESS_MESSAGE_NAME))
+				.getType().addCoding(CodeSystems.BpmnMessage.messageName());
+		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
+				.addCoding(CodeSystems.BpmnMessage.businessKey());
+		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
+				.addCoding(CodeSystems.BpmnMessage.correlationKey());
 
 		task.addInput()
-				.setValue(new Reference().setReference("https://dsf-dic.de/fhir/Binary/" + UUID.randomUUID().toString())
-						.setType(ResourceType.Binary.name()))
-				.getType().addCoding().setSystem(ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER)
-				.setCode(ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_REFERENCE);
-		task.addInput()
-				.setValue(new Identifier().setSystem(ConstantsBase.NAMINGSYSTEM_MII_PROJECT_IDENTIFIER)
-						.setValue("Test_PROJECT"))
-				.getType().addCoding().setSystem(ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER)
-				.setCode(ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_PROJECT_IDENTIFIER);
+				.setValue(new StringType(UUID.randomUUID().toString()))
+				.getType().addCoding().setSystem(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE)
+				.setCode(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE_PROCESS_CORRELATION_KEY)
+				.addExtension().setUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER)
+				.setValue(new Reference().setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER))
+						.setType(ResourceType.Organization.name()));
+
 		return task;
 	}
 
 	@Test
-	public void testTaskDataStatusValidWithResponseInput()
-	{
-		Task task = createValidTaskDataStatus();
-		task.addInput(new DataSetStatusGenerator().createDataSetStatusInput(
-				ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_OK,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
+	public void testValidTaskReceiveProcessOutput() {
+		Task task = createValidTaskReceiveProcessResponse();
+		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+				EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
+
+		ValidationResult result = resourceValidator.validate(task);
+		ValidationSupportRule.logValidationMessages(logger, result);
+
+		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
+				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
+	}
+
+	/*
+	@Test
+	public void testValidTaskReceiveProcessOutputError() {
+		Task task = createValidTaskReceiveProcessResponse();
+		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+				EyeMaticsGenericStatus.DATA_DECRYPT_FAILURE.getStatusCode(),
+				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
+
+		ValidationResult result = resourceValidator.validate(task);
+		ValidationSupportRule.logValidationMessages(logger, result);
+
+		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
+				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
+	}
+	*/
+
+	private Task createValidTaskReceiveProcessResponse() {
+		Task task = new Task();
+		task.getMeta().addProfile(ReceiveConstants.PROFILE_TASK_EYEMATICS_RECEIVE_PROCESS);
+		task.setInstantiatesCanonical(
+				ReceiveConstants.PROFILE_TASK_EYEMATICS_RECEIVE_PROCESS_URI + "|" + def.getResourceVersion());
+		task.setStatus(TaskStatus.REQUESTED);
+		task.setIntent(TaskIntent.ORDER);
+		task.setAuthoredOn(new Date());
+		task.getRequester().setType(ResourceType.Organization.name())
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
+		task.getRestriction().addRecipient().setType(ResourceType.Organization.name())
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
+		task.addInput().setValue(new StringType(ReceiveConstants.PROFILE_TASK_EYEMATICS_RECEIVE_PROCESS_MESSAGE_NAME)).getType()
+				.addCoding(CodeSystems.BpmnMessage.messageName());
+		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
+				.addCoding(CodeSystems.BpmnMessage.businessKey());
+		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
+				.addCoding(CodeSystems.BpmnMessage.correlationKey());
+
+		task.addInput()
+				.setValue(new Reference().setReference("https://dic-a/fhir/Binary/" + UUID.randomUUID().toString()))
+				.getType().addCoding().setSystem(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS)
+				.setCode(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE);
+
+		return task;
+	}
+
+	@Test
+	public void testValidTaskInitiateProvideProcessOutput() {
+		Task task = createValidTaskInitiateProvideProcess();
+
+		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+				EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
 
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
@@ -187,14 +223,14 @@ public class TaskProfileTest {
 	}
 
 	@Test
-	public void testTaskDataStatusValidWithResponseInputError()
-	{
-		Task task = createValidTaskDataStatus();
-		task.addInput(new DataSetStatusGenerator().createDataSetStatusInput(
-				ConstantsBase.CODESYSTEM_DATA_SET_STATUS_VALUE_RECEIPT_ERROR,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER,
-				ConstantsDataTransfer.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
-
+	public void testValidTaskInitiateProvideProcessOutputError() {
+		Task task = createValidTaskInitiateProvideProcess();
+		/*
+		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+				EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE.getStatusCode(),
+				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
+		*/
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
 
@@ -202,27 +238,77 @@ public class TaskProfileTest {
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
 
-	private Task createValidTaskDataStatus()
-	{
+	private Task createValidTaskInitiateProvideProcess() {
 		Task task = new Task();
-		task.getMeta().addProfile(ConstantsDataTransfer.PROFILE_TASK_DATA_STATUS + "|" + def.getResourceVersion());
+		task.getMeta().addProfile(ProvideConstants.PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS + "|" + def.getResourceVersion());
 		task.setInstantiatesCanonical(
-				ConstantsDataTransfer.PROFILE_TASK_DATA_STATUS_PROCESS_URI + "|" + def.getResourceVersion());
+				ProvideConstants.PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_URI + "|" + def.getResourceVersion());
 		task.setStatus(TaskStatus.REQUESTED);
 		task.setIntent(TaskIntent.ORDER);
 		task.setAuthoredOn(new Date());
 		task.getRequester().setType(ResourceType.Organization.name())
-				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue("DIC"));
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
 		task.getRestriction().addRecipient().setType(ResourceType.Organization.name())
-				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue("DIC"));
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
 
-		task.addInput().setValue(new StringType(ConstantsDataTransfer.PROFILE_TASK_DATA_STATUS_MESSAGE_NAME)).getType()
-				.addCoding(CodeSystems.BpmnMessage.messageName());
+		task.addInput().setValue(new StringType(ProvideConstants.PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_MESSAGE_NAME))
+				.getType().addCoding(CodeSystems.BpmnMessage.messageName());
 		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
 				.addCoding(CodeSystems.BpmnMessage.businessKey());
 
 		return task;
 	}
 
-	 */
+	@Test
+	public void testValidTaskProvideProcessResponseInputOutput() {
+		Task task = createValidTaskProvideProcessResponse();
+
+		task.addInput(new DataSetStatusGenerator().createDataSetStatusInput(
+				EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
+
+		ValidationResult result = resourceValidator.validate(task);
+		ValidationSupportRule.logValidationMessages(logger, result);
+
+		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
+				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
+	}
+
+	@Test
+	public void testValidTaskProvideProcessResponseInputError() {
+		Task task = createValidTaskProvideProcessResponse();
+
+		task.addInput(new DataSetStatusGenerator().createDataSetStatusInput(
+				EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE.getStatusCode(),
+				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
+
+		ValidationResult result = resourceValidator.validate(task);
+		ValidationSupportRule.logValidationMessages(logger, result);
+
+		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
+				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
+	}
+
+	private Task createValidTaskProvideProcessResponse() {
+		Task task = new Task();
+		task.getMeta().addProfile(ProvideConstants.PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT + "|" + def.getResourceVersion());
+		task.setInstantiatesCanonical(
+				ProvideConstants.PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_URI + "|" + def.getResourceVersion());
+		task.setStatus(TaskStatus.REQUESTED);
+		task.setIntent(TaskIntent.ORDER);
+		task.setAuthoredOn(new Date());
+		task.getRequester().setType(ResourceType.Organization.name())
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
+		task.getRestriction().addRecipient().setType(ResourceType.Organization.name())
+				.setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER));
+
+		task.addInput().setValue(new StringType(ProvideConstants.PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT_MESSAGE_NAME))
+				.getType().addCoding(CodeSystems.BpmnMessage.messageName());
+		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
+				.addCoding(CodeSystems.BpmnMessage.businessKey());
+
+		return task;
+	}
+
 }
