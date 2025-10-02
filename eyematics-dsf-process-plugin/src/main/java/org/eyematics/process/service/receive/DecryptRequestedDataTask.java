@@ -60,10 +60,10 @@ public class DecryptRequestedDataTask extends AbstractExtendedSubProcessServiceD
                     receivingOrganization);
             String bundleString = new String(bundleDecrypted, StandardCharsets.UTF_8);
             return (Bundle) FhirContext.forR4().newXmlParser().parseResource(bundleString);
-        }
-        catch (Exception exception) {
-            logger.warn("Could not decrypt data-set - {}", exception.getMessage());
-            throw new RuntimeException("Could not decrypt received data-set", exception);
+        } catch (Exception exception) {
+            String errorMessage = "Could not decrypt data: " + exception.getMessage();
+            logger.warn(errorMessage);
+            throw new RuntimeException(errorMessage, exception);
         }
     }
 }

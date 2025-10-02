@@ -1,5 +1,6 @@
 package org.eyematics.process.tools.generator;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -17,14 +18,14 @@ public class TestDataGenerator
 	private static final BundleGenerator bundleGenerator = new BundleGenerator();
 	private static final EnvGenerator envGenerator = new EnvGenerator();
 	private static final RSAKeyPairGenerator rsaKeyPairGenerator = new RSAKeyPairGenerator();
+	private static final FHIRResourceGenerator fhirResourceGenerator = new FHIRResourceGenerator();
 
 	static
 	{
 		CertificateAuthority.registerBouncyCastleProvider();
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		certificateGenerator.generateCertificates();
 
 		certificateGenerator.copyDockerTestClientCerts();
@@ -71,5 +72,8 @@ public class TestDataGenerator
 
 		rsaKeyPairGenerator.generateRSAKeyPairs();
 		logger.warn("Key pairs for data decryption created for all DICs successfully.");
+
+		fhirResourceGenerator.generateFHIRResources();
+		logger.warn("FHIR resources created for all DICs successfully.");
 	}
 }

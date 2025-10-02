@@ -6,6 +6,7 @@ import dev.dsf.bpe.v1.variables.Targets;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import dev.dsf.bpe.v1.constants.NamingSystems;
+import dev.dsf.fhir.client.FhirWebserviceClient;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -31,6 +32,16 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
         super(api);
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
+
+    // Wie der Task ausschaut...
+    @Override
+    protected IdType doSend(FhirWebserviceClient client, Task task) {
+        logger.info(api.getFhirContext().newJsonParser().encodeResourceToString(task));
+        return super.doSend(client, task);
+    }
+
+
+
 
     @Override
     public void afterPropertiesSet() throws Exception {

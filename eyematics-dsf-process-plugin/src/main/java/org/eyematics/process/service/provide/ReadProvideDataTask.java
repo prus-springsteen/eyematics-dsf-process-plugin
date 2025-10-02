@@ -7,6 +7,7 @@ import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
+import org.eyematics.process.utils.bpe.MailSender;
 import org.eyematics.process.utils.client.*;
 import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
@@ -37,6 +38,7 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Reading local data from FHIR repository is initiated");
+        MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-", "Data requested", "there is a new data request which is processed.");
         EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         IdType idType = new IdType(fhirClient.getFhirBaseUrl(),  "StructureDefinition", "", "");
         try {

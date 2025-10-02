@@ -25,6 +25,7 @@
 /eyematics-dsf-process-plugin-test-setup/dic-a/fhir/conf/config.properties
 /eyematics-dsf-process-plugin-test-setup/dic-a/fhir/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-a/fhir/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-a/repository/
 
 /eyematics-dsf-process-plugin-test-setup/dic-b/bpe/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-b/bpe/log/*.log.gz
@@ -34,6 +35,7 @@
 /eyematics-dsf-process-plugin-test-setup/dic-b/fhir/conf/config.properties
 /eyematics-dsf-process-plugin-test-setup/dic-b/fhir/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-b/fhir/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-b/repository/
 
 /eyematics-dsf-process-plugin-test-setup/dic-c/bpe/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-c/bpe/log/*.log.gz
@@ -43,6 +45,7 @@
 /eyematics-dsf-process-plugin-test-setup/dic-c/fhir/conf/config.properties
 /eyematics-dsf-process-plugin-test-setup/dic-c/fhir/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-c/fhir/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-c/repository/
 
 /eyematics-dsf-process-plugin-test-setup/dic-d/bpe/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-d/bpe/log/*.log.gz
@@ -52,6 +55,7 @@
 /eyematics-dsf-process-plugin-test-setup/dic-d/fhir/conf/config.properties
 /eyematics-dsf-process-plugin-test-setup/dic-d/fhir/log/*.log
 /eyematics-dsf-process-plugin-test-setup/dic-d/fhir/log/*.log.gz
+/eyematics-dsf-process-plugin-test-setup/dic-d/repository/
 
 /eyematics-dsf-process-plugin-test-setup/keycloak/data
 /eyematics-dsf-process-plugin-test-setup/secrets/keycloak_trust_store.jks

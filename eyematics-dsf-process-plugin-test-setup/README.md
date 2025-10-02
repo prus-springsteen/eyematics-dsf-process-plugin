@@ -32,60 +32,60 @@ The minimum hardware requirements to run all simulated organizations and [Blaze 
 
 ### DIC-A
 
-| Component                                      | IP and Port                |
-|------------------------------------------------|----------------------------|
-| FHIR (NGINX-FHIR-FRONTEND)                     | 172.20.0.66                |
-| BPE (NGINX-BPE-FRONTEND)                       | 172.20.0.114               |
-| FHIR (PORTS)                                   | 127.0.0.1:5000:5000        |
-| FHIR (FRONTEND)                                | 172.20.0.67                |
-| BPE (PORTS)                                    | 127.0.0.1:5003:5003        |
-| BPE (FRONTEND)                                 | 172.20.0.115               |
-| FHIR (NETWORK-FHIR-FRONTEND)                   | 172.20.0.64/28             |
-| BPE (NETWORK-BPE-FRONTEND)                     | 172.20.0.112/28            |
-| DIC-A-FHIR-LOCAL-DATA-REPOSITORY               | 172.0.0.1:8070:8070        |
-| DIC-A-FHIR-AGGREGATED-DATA-REPOSITORY          | 172.0.0.1:8071:8071        |
+| Component                                        | IP and Port                |
+|--------------------------------------------------|----------------------------|
+| FHIR (NGINX-FHIR-FRONTEND)                       | 172.20.0.66                |
+| BPE (NGINX-BPE-FRONTEND)                         | 172.20.0.114               |
+| FHIR (PORTS)                                     | 127.0.0.1:5000:5000        |
+| FHIR (FRONTEND)                                  | 172.20.0.67                |
+| BPE (PORTS)                                      | 127.0.0.1:5003:5003        |
+| BPE (FRONTEND)                                   | 172.20.0.115               |
+| FHIR (NETWORK-FHIR-FRONTEND)                     | 172.20.0.64/28             |
+| BPE (NETWORK-BPE-FRONTEND)                       | 172.20.0.112/28            |
+| DIC-A-FHIR-LOCAL-DATA-REPOSITORY                 | 172.0.0.1:8070:8070        |
+| DIC-A-FHIR-DEMONSTRATOR-DATA-REPOSITORY          | 172.0.0.1:8071:8071        |
 
 ### DIC-B
 
-| Component                                      | IP and Port                |
-|------------------------------------------------|----------------------------|
-| FHIR (NGINX-FHIR-FRONTEND)                     | 172.20.0.98                |
-| BPE (NGINX-BPE-FRONTEND)                       | 172.20.0.146               |
-| FHIR (PORTS)                                   | 127.0.0.1:5002:5002        |
-| FHIR (FRONTEND)                                | 172.20.0.99                |
-| BPE (PORTS)                                    | 127.0.0.1:5005:5005        |
-| BPE (FRONTEND)                                 | 172.20.0.147               |
-| FHIR (NETWORK-FHIR-FRONTEND)                   | 172.20.0.96/28             |
-| BPE (NETWORK-BPE-FRONTEND)                     | 172.20.0.144/28            |
-| DIC-B-FHIR-LOCAL-DATA-REPOSITORY               | 172.0.0.1:8072:8072        |
-| DIC-B-FHIR-AGGREGATED-DATA-REPOSITORY          | 172.0.0.1:8073:8073        |
+| Component                                        | IP and Port                |
+|--------------------------------------------------|----------------------------|
+| FHIR (NGINX-FHIR-FRONTEND)                       | 172.20.0.98                |
+| BPE (NGINX-BPE-FRONTEND)                         | 172.20.0.146               |
+| FHIR (PORTS)                                     | 127.0.0.1:5002:5002        |
+| FHIR (FRONTEND)                                  | 172.20.0.99                |
+| BPE (PORTS)                                      | 127.0.0.1:5005:5005        |
+| BPE (FRONTEND)                                   | 172.20.0.147               |
+| FHIR (NETWORK-FHIR-FRONTEND)                     | 172.20.0.96/28             |
+| BPE (NETWORK-BPE-FRONTEND)                       | 172.20.0.144/28            |
+| DIC-B-FHIR-LOCAL-DATA-REPOSITORY                 | 172.0.0.1:8072:8072        |
+| DIC-B-FHIR-DEMONSTRATOR-DATA-REPOSITORY          | 172.0.0.1:8073:8073        |
 
 ### DIC-C
 
-| Component                                      | IP and Port                |
-|------------------------------------------------|----------------------------|
-| FHIR (NGINX-FHIR-FRONTEND)                     | 172.20.0.82                |
-| BPE (NGINX-BPE-FRONTEND)                       | 172.20.0.130               |
-| FHIR (PORTS)                                   | 127.0.0.1:5001:5001        |
-| FHIR (FRONTEND)                                | 172.20.0.83                |
-| BPE (PORTS)                                    | 127.0.0.1:5004:5004        |
-| BPE (FRONTEND)                                 | 172.20.0.131               |
-| FHIR (NETWORK-FHIR-FRONTEND)                   | 172.20.0.80/28             |
-| BPE (NETWORK-BPE-FRONTEND)                     | 172.20.0.128/28            |
-| DIC-C-FHIR-LOCAL-DATA-REPOSITORY               | 172.0.0.1:8074:8074        |
-| DIC-C-FHIR-AGGREGATED-DATA-REPOSITORY          | 172.0.0.1:8075:8075        |
+| Component                                        | IP and Port                |
+|--------------------------------------------------|----------------------------|
+| FHIR (NGINX-FHIR-FRONTEND)                       | 172.20.0.82                |
+| BPE (NGINX-BPE-FRONTEND)                         | 172.20.0.130               |
+| FHIR (PORTS)                                     | 127.0.0.1:5001:5001        |
+| FHIR (FRONTEND)                                  | 172.20.0.83                |
+| BPE (PORTS)                                      | 127.0.0.1:5004:5004        |
+| BPE (FRONTEND)                                   | 172.20.0.131               |
+| FHIR (NETWORK-FHIR-FRONTEND)                     | 172.20.0.80/28             |
+| BPE (NETWORK-BPE-FRONTEND)                       | 172.20.0.128/28            |
+| DIC-C-FHIR-LOCAL-DATA-REPOSITORY                 | 172.0.0.1:8074:8074        |
+| DIC-C-FHIR-DEMONSTRATOR-DATA-REPOSITORY          | 172.0.0.1:8075:8075        |
 
 ### DIC-D
 
-| Component                                      | IP and Port                |
-|------------------------------------------------|----------------------------|
-| FHIR (NGINX-FHIR-FRONTEND)                     | 172.20.0.188               |
-| BPE (NGINX-BPE-FRONTEND)                       | 172.20.0.236               |
-| FHIR (PORTS)                                   | 127.0.0.1:5006:5006        |
-| FHIR (FRONTEND)                                | 172.20.0.189               |
-| BPE (PORTS)                                    | 127.0.0.1:5009:5009        |
-| BPE (FRONTEND)                                 | 172.20.0.237               |
-| FHIR (NETWORK-FHIR-FRONTEND)                   | 172.20.0.176/28            |
-| BPE (NETWORK-BPE-FRONTEND)                     | 172.20.0.224/28            |
-| DIC-D-FHIR-LOCAL-DATA-REPOSITORY               | 172.0.0.1:8076:8076        |
-| DIC-D-FHIR-AGGREGATED-DATA-REPOSITORY          | 172.0.0.1:8077:8077        |
+| Component                                        | IP and Port                |
+|--------------------------------------------------|----------------------------|
+| FHIR (NGINX-FHIR-FRONTEND)                       | 172.20.0.188               |
+| BPE (NGINX-BPE-FRONTEND)                         | 172.20.0.236               |
+| FHIR (PORTS)                                     | 127.0.0.1:5006:5006        |
+| FHIR (FRONTEND)                                  | 172.20.0.189               |
+| BPE (PORTS)                                      | 127.0.0.1:5009:5009        |
+| BPE (FRONTEND)                                   | 172.20.0.237               |
+| FHIR (NETWORK-FHIR-FRONTEND)                     | 172.20.0.176/28            |
+| BPE (NETWORK-BPE-FRONTEND)                       | 172.20.0.224/28            |
+| DIC-D-FHIR-LOCAL-DATA-REPOSITORY                 | 172.0.0.1:8076:8076        |
+| DIC-D-FHIR-DEMONSTRATOR-DATA-REPOSITORY          | 172.0.0.1:8077:8077        |

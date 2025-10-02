@@ -33,16 +33,14 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
         logger.info("-> Downloading the provided data");
         String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
         Task latestTask = variables.getLatestTask();
-
         Reference reference = api.getTaskHelper()
                 .getFirstInputParameterValue(latestTask,
                         ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
                         ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
                         Reference.class)
-                .orElseThrow(() -> super.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
-                                                            variables,
-                                                "Could not find Reference-Input for downloading Data"));
-
+                .orElseThrow(() -> this.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
+                                                           variables,
+                                               "Could not find Reference-Input for downloading Data"));
         try {
             Binary referenceBinary = this.downloadData(reference.getReference());
             delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey, referenceBinary);
@@ -58,7 +56,6 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
         BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider()
                 .getWebserviceClient(dataReference.getBaseUrl()).withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES,
                         EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN);
-
         return dataReference.hasVersionIdPart()
                 ? client.read(Binary.class, dataReference.getIdPart(), dataReference.getVersionIdPart())
                 : client.read(Binary.class, dataReference.getIdPart());

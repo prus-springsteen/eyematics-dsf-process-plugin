@@ -133,7 +133,7 @@ services:
     depends_on:
       - dic-a-bpe
 
-  dic-a-fhir-aggregated-data-repository:
+  dic-a-fhir-demonstrator-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -152,10 +152,31 @@ services:
       - "127.0.0.1:8071:8071"
     volumes:
       - type: volume
-        source: dic-a-fhir-aggregated-data-repository-data
+        source: dic-a-fhir-demonstrator-data-repository-data
         target: /app/data
     depends_on:
       - dic-a-bpe
+
+  dic-a-server-init:
+    image: curlimages/curl:8.15.0
+    entrypoint:
+      - /bin/sh
+    command:
+      - /tmp/fhir_server_init.sh
+    volumes:
+      - type: bind
+        source: ./dic-a/repository/fhir_server_init.sh
+        target: /tmp/fhir_server_init.sh
+      - type: bind
+        source: ./dic-a/repository/eyematics_cds.json
+        target: /tmp/eyematics_cds.json
+    networks:
+      - dic-a-bpe-frontend
+      - dic-a-bpe-backend
+      - internet
+    depends_on:
+      - dic-a-fhir-local-data-repository
+      - dic-a-fhir-demonstrator-data-repository
 
   dic-a-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -285,9 +306,15 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-a-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: ytqFCErw9GfhVUrrM8xc0Grbu4r7qGig
       ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-local-data-repository:8070/fhir
-      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-aggregated-data-repository:8071/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-demonstrator-data-repository:8071/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_a_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_a_public_key.pem
+      DEV_DSF_BPE_MAIL_FROMADDRESS: dsf-eyematics@dic-a.org
+      DEV_DSF_BPE_MAIL_HOST: host.docker.internal
+      DEV_DSF_BPE_MAIL_USERNAME: dsf-dic-a
+      DEV_DSF_BPE_MAIL_PASSWORD: password
+      DEV_DSF_BPE_MAIL_PORT: 1025
+      DEV_DSF_BPE_MAIL_TOADDRESSES: admin@dic-a.org
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
         - webbrowser_test_user:
             thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
@@ -328,7 +355,7 @@ services:
     depends_on:
       - dic-b-bpe
 
-  dic-b-fhir-aggregated-data-repository:
+  dic-b-fhir-demonstrator-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -347,10 +374,31 @@ services:
       - "127.0.0.1:8073:8073"
     volumes:
       - type: volume
-        source: dic-b-fhir-aggregated-data-repository-data
+        source: dic-b-fhir-demonstrator-data-repository-data
         target: /app/data
     depends_on:
       - dic-b-bpe
+
+  dic-b-server-init:
+    image: curlimages/curl:8.15.0
+    entrypoint:
+      - /bin/sh
+    command:
+      - /tmp/fhir_server_init.sh
+    volumes:
+      - type: bind
+        source: ./dic-b/repository/fhir_server_init.sh
+        target: /tmp/fhir_server_init.sh
+      - type: bind
+        source: ./dic-b/repository/eyematics_cds.json
+        target: /tmp/eyematics_cds.json
+    networks:
+      - dic-a-bpe-frontend
+      - dic-a-bpe-backend
+      - internet
+    depends_on:
+      - dic-a-fhir-local-data-repository
+      - dic-a-fhir-demonstrator-data-repository
 
   dic-b-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -482,7 +530,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-b-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 5GtUIUfoXnQVcsRfd0Hg4EGv14iAknGq
       ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-local-data-repository:8072/fhir
-      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-aggregated-data-repository:8073/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-demonstrator-data-repository:8073/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_b_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_b_public_key.pem
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
@@ -525,7 +573,7 @@ services:
     depends_on:
       - dic-c-bpe
 
-  dic-c-fhir-aggregated-data-repository:
+  dic-c-fhir-demonstrator-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -544,10 +592,31 @@ services:
       - "127.0.0.1:8075:8075"
     volumes:
       - type: volume
-        source: dic-c-fhir-aggregated-data-repository-data
+        source: dic-c-fhir-demonstrator-data-repository-data
         target: /app/data
     depends_on:
       - dic-c-bpe
+
+  dic-c-server-init:
+    image: curlimages/curl:8.15.0
+    entrypoint:
+      - /bin/sh
+    command:
+      - /tmp/fhir_server_init.sh
+    volumes:
+      - type: bind
+        source: ./dic-c/repository/fhir_server_init.sh
+        target: /tmp/fhir_server_init.sh
+      - type: bind
+        source: ./dic-c/repository/eyematics_cds.json
+        target: /tmp/eyematics_cds.json
+    networks:
+      - dic-a-bpe-frontend
+      - dic-a-bpe-backend
+      - internet
+    depends_on:
+      - dic-a-fhir-local-data-repository
+      - dic-a-fhir-demonstrator-data-repository
 
   dic-c-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -678,7 +747,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-c-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: VGTQD3WWH4uGUMz408NWNzcHF1MsfV0l
       ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-local-data-repository:8074/fhir
-      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-aggregated-data-repository:8075/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-demonstrator-data-repository:8075/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_c_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_c_public_key.pem
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
@@ -721,7 +790,7 @@ services:
     depends_on:
       - dic-d-bpe
 
-  dic-d-fhir-aggregated-data-repository:
+  dic-d-fhir-demonstrator-data-repository:
     image: samply/blaze:1.0.4
     restart: on-failure
     healthcheck:
@@ -740,10 +809,31 @@ services:
       - "127.0.0.1:8077:8077"
     volumes:
       - type: volume
-        source: dic-d-fhir-aggregated-data-repository-data
+        source: dic-d-fhir-demonstrator-data-repository-data
         target: /app/data
     depends_on:
       - dic-d-bpe
+
+  dic-d-server-init:
+    image: curlimages/curl:8.15.0
+    entrypoint:
+      - /bin/sh
+    command:
+      - /tmp/fhir_server_init.sh
+    volumes:
+      - type: bind
+        source: ./dic-d/repository/fhir_server_init.sh
+        target: /tmp/fhir_server_init.sh
+      - type: bind
+        source: ./dic-d/repository/eyematics_cds.json
+        target: /tmp/eyematics_cds.json
+    networks:
+      - dic-a-bpe-frontend
+      - dic-a-bpe-backend
+      - internet
+    depends_on:
+      - dic-a-fhir-local-data-repository
+      - dic-a-fhir-demonstrator-data-repository
 
   dic-d-fhir:
     image: ghcr.io/datasharingframework/fhir:1.7.1
@@ -807,7 +897,6 @@ services:
               - PERMANENT_DELETE
             practitioner-role:
               - http://dsf.dev/fhir/CodeSystem/practitioner-role|DSF_ADMIN
-
     networks:
       dic-d-fhir-frontend:
         ipv4_address: 172.20.0.189
@@ -876,7 +965,7 @@ services:
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_ID: dic-d-bpe
       DEV_DSF_SERVER_AUTH_OIDC_CLIENT_SECRET: 5GtUIUfoXnQVcsRfd0Hg4EGv14iAknGq
       ORG_EYEMATICS_PROVIDE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-local-data-repository:8076/fhir
-      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-aggregated-data-repository:8077/fhir
+      ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-demonstrator-data-repository:8077/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_d_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_d_public_key.pem
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
@@ -1064,10 +1153,10 @@ volumes:
   db-data:
     name: eyematics-dsf-process-plugin-test-db
   dic-a-fhir-local-data-repository-data:
-  dic-a-fhir-aggregated-data-repository-data:
+  dic-a-fhir-demonstrator-data-repository-data:
   dic-b-fhir-local-data-repository-data:
-  dic-b-fhir-aggregated-data-repository-data:
+  dic-b-fhir-demonstrator-data-repository-data:
   dic-c-fhir-local-data-repository-data:
-  dic-c-fhir-aggregated-data-repository-data:
+  dic-c-fhir-demonstrator-data-repository-data:
   dic-d-fhir-local-data-repository-data:
-  dic-d-fhir-aggregated-data-repository-data:
+  dic-d-fhir-demonstrator-data-repository-data:

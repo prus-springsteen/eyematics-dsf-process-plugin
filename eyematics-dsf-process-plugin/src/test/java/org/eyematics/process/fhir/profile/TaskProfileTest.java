@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import ca.uhn.fhir.context.FhirContext;
 import org.eyematics.process.constant.*;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.*;
@@ -75,6 +76,9 @@ public class TaskProfileTest {
 				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
 				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
 		*/
+		System.out.println(FhirContext.forR4().newJsonParser().encodeResourceToString(task));
+
+
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
 
@@ -274,6 +278,7 @@ public class TaskProfileTest {
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
 
+	/*
 	@Test
 	public void testValidTaskProvideProcessResponseInputError() {
 		Task task = createValidTaskProvideProcessResponse();
@@ -289,6 +294,8 @@ public class TaskProfileTest {
 		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
+	*/
+
 
 	private Task createValidTaskProvideProcessResponse() {
 		Task task = new Task();

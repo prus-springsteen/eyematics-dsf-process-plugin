@@ -29,6 +29,8 @@ public class LogReceiveFailedTask extends AbstractServiceDelegate {
         logger.error("-> The data-set from {} is missing for data receiving.", providingOrganization);
         Task task = new Task();
         task.setStatus(Task.TaskStatus.FAILED);
+        task.setId("-");
+        task.getRequester().getIdentifier().setValue(providingOrganization);
         task.addOutput(
                 this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_PROVIDE_MISSING.getStatusCode(), EyeMaticsGenericStatus.getTypeSystem(),
                         EyeMaticsGenericStatus.getTypeCode(), "Could not receive Data from " + providingOrganization + "."));
