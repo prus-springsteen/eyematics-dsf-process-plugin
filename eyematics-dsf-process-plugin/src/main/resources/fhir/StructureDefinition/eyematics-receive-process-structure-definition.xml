@@ -6,13 +6,13 @@
         </tag>
     </meta>
     <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
-    <!-- version managed by bpe -->
+
     <version value="#{version}" />
     <name value="EyeMaticsReceiveProcessStructureDefinition" />
-    <!-- status managed by bpe -->
+
     <status value="unknown" />
     <experimental value="false" />
-    <!-- date managed by bpe -->
+
     <date value="#{date}" />
     <fhirVersion value="4.0.1" />
     <kind value="resource" />
@@ -25,7 +25,7 @@
             <path value="Task.instantiatesCanonical" />
             <fixedCanonical value="http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}" />
         </element>
-        <!-- requester / recipient -->
+
         <element id="Task.input">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
                 <valueString value="Parameter" />
@@ -61,12 +61,12 @@
             <sliceName value="correlation-key" />
             <max value="1" />
         </element>
-        <!-- INPUT-DATA: Dataset Reference Input. START -->
+
         <element id="Task.input:data-set-reference-input">
             <path value="Task.input" />
             <sliceName value="data-set-reference-input" />
             <min value="1" />
-            <!-- <max value="99" /> -->
+
         </element>
         <element id="Task.input:data-set-reference-input.type">
             <path value="Task.input.type" />
@@ -96,8 +96,7 @@
                 <code value="Reference" />
             </type>
         </element>
-        <!-- INPUT-DATA: Dataset Reference Input. END -->
-        <!-- DATA-SET STATUS: START -->
+
         <element id="Task.output:data-set-status">
             <path value="Task.output"/>
             <sliceName value="data-set-status"/>
@@ -112,9 +111,9 @@
                 <rules value="open" />
             </slicing>
         </element>
-        <element id="Task.output:data-set-status.extension:data-set-status-error-extension">
+        <element id="Task.output:data-set-status.extension:eyematics-generic-process-data-set-status-error-extension">
             <path value="Task.output.extension" />
-            <sliceName value="data-set-status-error-extension" />
+            <sliceName value="eyematics-generic-process-data-set-status-error-extension" />
             <min value="0" />
             <max value="1" />
             <type>
@@ -163,6 +162,6 @@
                 <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
-        <!-- DATA-SET STATUS: END -->
+
     </differential>
 </StructureDefinition>

@@ -21,7 +21,7 @@
     <compose>
         <include>
             <system value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system"/>
-            <!-- <version value="#{version}" /> -->
+            <version value="#{version}" />
         </include>
     </compose>
 </ValueSet>

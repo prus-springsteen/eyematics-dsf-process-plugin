@@ -5,14 +5,14 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-defintion" />
-    <!-- version managed by bpe -->
+    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition" />
+
     <version value="#{version}" />
     <name value="EyeMaticsReceiveProcessInitiateStructureDefinition" />
-    <!-- status managed by bpe -->
+
     <status value="unknown" />
     <experimental value="false" />
-    <!-- date managed by bpe -->
+
     <date value="#{date}" />
     <fhirVersion value="4.0.1" />
     <kind value="resource" />
@@ -25,13 +25,13 @@
             <path value="Task.instantiatesCanonical" />
             <fixedCanonical value="http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}" />
         </element>
-        <!-- requester / recipient -->
+
         <element id="Task.input">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
                 <valueString value="Parameter" />
             </extension>
             <path value="Task.input" />
-            <min value="4" />
+            <min value="3" />
             <max value="*" />
         </element>
         <element id="Task.input:message-name">
@@ -61,7 +61,7 @@
             <sliceName value="correlation-key" />
             <max value="0" />
         </element>
-        <!-- INPUT-DATA: Correlation Key and DIC Identifier. START -->
+
         <element id="Task.input:dic-correlation-key">
             <path value="Task.input" />
             <sliceName value="dic-correlation-key" />
@@ -77,9 +77,9 @@
                 <rules value="open" />
             </slicing>
         </element>
-        <element id="Task.input:dic-correlation-key.extension:dic-identifier">
+        <element id="Task.input:dic-correlation-key.extension:eyematics-receive-process-initiate-dic-identifier-extension">
             <path value="Task.input.extension" />
-            <sliceName value="dic-identifier" />
+            <sliceName value="eyematics-receive-process-initiate-dic-identifier-extension" />
             <min value="1" />
             <max value="1" />
             <type>
@@ -115,8 +115,7 @@
                 <code value="string" />
             </type>
         </element>
-        <!-- INPUT-DATA: Correlation Key and DIC Identifier. END -->
-        <!-- DATA-SET STATUS: START -->
+
         <element id="Task.output:data-set-status">
             <path value="Task.output"/>
             <sliceName value="data-set-status"/>
@@ -131,9 +130,9 @@
                 <rules value="open" />
             </slicing>
         </element>
-        <element id="Task.output:data-set-status.extension:data-set-status-error-extension">
+        <element id="Task.output:data-set-status.extension:eyematics-generic-process-data-set-status-error-extension">
             <path value="Task.output.extension" />
-            <sliceName value="data-set-status-error-extension" />
+            <sliceName value="eyematics-generic-process-data-set-status-error-extension" />
             <min value="0" />
             <max value="1" />
             <type>
@@ -182,6 +181,6 @@
                 <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
-        <!-- DATA-SET STATUS: END -->
+
     </differential>
 </StructureDefinition>

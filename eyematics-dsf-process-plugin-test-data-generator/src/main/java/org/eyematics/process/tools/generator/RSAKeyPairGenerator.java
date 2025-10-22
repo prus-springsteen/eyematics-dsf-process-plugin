@@ -59,9 +59,9 @@ public class RSAKeyPairGenerator {
         }
     }
 
-    private String toPem(String type, byte[] derBytes) {
+    private String toPem(String type, byte[] key) {
         String publicKeyFormatted = "-----BEGIN " + type + "-----" + System.lineSeparator();
-        publicKeyFormatted += Base64.getMimeEncoder(64, new byte[] {'\n'}).encodeToString(derBytes) + System.lineSeparator();
+        publicKeyFormatted += Base64.getMimeEncoder(64, new byte[] {'\n'}).encodeToString(key) + System.lineSeparator();
         publicKeyFormatted += "-----END " + type + "-----" + System.lineSeparator();
         return publicKeyFormatted;
     }

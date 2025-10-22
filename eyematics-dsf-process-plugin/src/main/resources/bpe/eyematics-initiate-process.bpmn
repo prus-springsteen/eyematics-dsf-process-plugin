@@ -37,7 +37,7 @@
     <bpmn:sendTask id="InitiateReceiveProcessTask" name="send initiate receive data" camunda:class="org.eyematics.process.message.initiate.InitiateReceiveProcessTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
-          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-defintion|#{version}</camunda:string>
+          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition|#{version}</camunda:string>
         </camunda:field>
         <camunda:field name="messageName">
           <camunda:string>receiveProcessInitiateEventMessage</camunda:string>

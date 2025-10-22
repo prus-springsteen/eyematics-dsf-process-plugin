@@ -22,7 +22,7 @@ public interface EyeMaticsConstants {
 	String CODESYSTEM_GENERIC_DATA_SET_STATUS = "http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system";
 	String CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS  = "data-set-status";
 	String CODESYSTEM_DATA_SET_STATUS = "http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system";
-	String EXTENSION_DATA_SET_STATUS_ERROR_URL = "http://eyematics.org/fhir/StructureDefinition/eyematics-generic-data-set-status-error-extension";
+	String EXTENSION_DATA_SET_STATUS_ERROR_URL = "http://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension";
 
 	int DSF_CLIENT_RETRY_6_TIMES = 6;
 	long DSF_CLIENT_RETRY_INTERVAL_10SEC = 10000;

@@ -70,14 +70,11 @@ public class TaskProfileTest {
 	public void testValidTaskInitiateProcessOutputError() {
 
 		Task task = createValidTaskInitiateProcess();
-		/*
+
 		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
 				EyeMaticsGenericStatus.DATA_REQUEST_FAILURE.getStatusCode(),
 				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
 				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
-		*/
-		System.out.println(FhirContext.forR4().newJsonParser().encodeResourceToString(task));
-
 
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
@@ -105,14 +102,14 @@ public class TaskProfileTest {
 		return task;
 	}
 
-	/*
-	@Test
-	public void testValidTaskInitiateReceiveProcess() {
-		Task task = createValidTaskInitiateReceiveProcess();
 
-		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
-				EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
-				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
+    @Test
+    public void testValidTaskInitiateReceiveProcess() {
+        Task task = createValidTaskInitiateReceiveProcess();
+
+        task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+                    EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                    EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
 
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
@@ -120,7 +117,6 @@ public class TaskProfileTest {
 		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
-	 */
 
 	private Task createValidTaskInitiateReceiveProcess() {
 		Task task = new Task();
@@ -139,16 +135,13 @@ public class TaskProfileTest {
 				.getType().addCoding(CodeSystems.BpmnMessage.messageName());
 		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
 				.addCoding(CodeSystems.BpmnMessage.businessKey());
-		task.addInput().setValue(new StringType(UUID.randomUUID().toString())).getType()
-				.addCoding(CodeSystems.BpmnMessage.correlationKey());
 
-		task.addInput()
-				.setValue(new StringType(UUID.randomUUID().toString()))
-				.getType().addCoding().setSystem(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE)
-				.setCode(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE_PROCESS_CORRELATION_KEY)
-				.addExtension().setUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER)
-				.setValue(new Reference().setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER))
-						.setType(ResourceType.Organization.name()));
+        Task.ParameterComponent dic = task.addInput().setValue(new StringType(UUID.randomUUID().toString()));
+        dic.getType().addCoding().setSystem(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE)
+                .setCode(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE_PROCESS_CORRELATION_KEY);
+        dic.addExtension().setUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER)
+                .setValue(new Reference().setIdentifier(NamingSystems.OrganizationIdentifier.withValue(DIC_IDENTIFIER))
+                        .setType(ResourceType.Organization.name()));
 
 		return task;
 	}
@@ -156,7 +149,8 @@ public class TaskProfileTest {
 	@Test
 	public void testValidTaskReceiveProcessOutput() {
 		Task task = createValidTaskReceiveProcessResponse();
-		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+
+        task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
 				EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
 				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS));
 
@@ -167,10 +161,10 @@ public class TaskProfileTest {
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
 
-	/*
 	@Test
 	public void testValidTaskReceiveProcessOutputError() {
 		Task task = createValidTaskReceiveProcessResponse();
+
 		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
 				EyeMaticsGenericStatus.DATA_DECRYPT_FAILURE.getStatusCode(),
 				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
@@ -182,7 +176,6 @@ public class TaskProfileTest {
 		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
-	*/
 
 	private Task createValidTaskReceiveProcessResponse() {
 		Task task = new Task();
@@ -229,12 +222,12 @@ public class TaskProfileTest {
 	@Test
 	public void testValidTaskInitiateProvideProcessOutputError() {
 		Task task = createValidTaskInitiateProvideProcess();
-		/*
-		task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
+
+        task.addOutput(new DataSetStatusGenerator().createDataSetStatusOutput(
 				EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE.getStatusCode(),
 				EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
 				EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, "some error message"));
-		*/
+
 		ValidationResult result = resourceValidator.validate(task);
 		ValidationSupportRule.logValidationMessages(logger, result);
 
@@ -278,7 +271,7 @@ public class TaskProfileTest {
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
 
-	/*
+
 	@Test
 	public void testValidTaskProvideProcessResponseInputError() {
 		Task task = createValidTaskProvideProcessResponse();
@@ -294,7 +287,6 @@ public class TaskProfileTest {
 		assertEquals(0, result.getMessages().stream().filter(m -> ResultSeverityEnum.ERROR.equals(m.getSeverity())
 				|| ResultSeverityEnum.FATAL.equals(m.getSeverity())).count());
 	}
-	*/
 
 
 	private Task createValidTaskProvideProcessResponse() {

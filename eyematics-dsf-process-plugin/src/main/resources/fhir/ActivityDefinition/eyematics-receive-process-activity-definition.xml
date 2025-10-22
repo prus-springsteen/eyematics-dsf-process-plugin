@@ -11,7 +11,7 @@
             <valueString value="receiveProcessInitiateEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-defintion|#{version}" />
+            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>

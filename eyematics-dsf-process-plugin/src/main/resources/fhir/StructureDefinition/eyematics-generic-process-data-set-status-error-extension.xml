@@ -5,14 +5,11 @@
             <code value="ALL"/>
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-generic-data-set-status-error-extension"/>
-    <!-- version managed by bpe -->
+    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension"/>
     <version value="#{version}" />
     <name value="DataSetStatusErrorExtension"/>
-    <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
-    <!-- date managed by bpe -->
     <date value="#{date}" />
     <fhirVersion value="4.0.1"/>
     <kind value="complex-type"/>
@@ -32,7 +29,7 @@
         </element>
         <element id="Extension.url">
             <path value="Extension.url"/>
-            <fixedUri value="http://eyematics.org/fhir/StructureDefinition/eyematics-generic-data-set-status-error-extension"/>
+            <fixedUri value="http://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension"/>
         </element>
         <element id="Extension.value[x]">
             <path value="Extension.value[x]"/>

@@ -40,6 +40,7 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
                         startTask.addOutput(
                                 this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
                                         EyeMaticsGenericStatus.getTypeSystem(),
+                                        EyeMaticsGenericStatus.getTypeCode(),
                                         null));
                     } else {
                         if (Task.TaskStatus.FAILED.equals(subTask.getStatus())) {
