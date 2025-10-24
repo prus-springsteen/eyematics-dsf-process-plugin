@@ -5,7 +5,6 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <!-- INITIATE RECEIVE PROCESS -->
     <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
         <extension url="message-name">
             <valueString value="receiveProcessInitiateEventMessage" />
@@ -56,7 +55,6 @@
             </valueCoding>
         </extension>
     </extension>
-    <!-- START RECEIVE PROCESS -->
     <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
         <extension url="message-name">
             <valueString value="receiveProcessStartEventMessage" />
@@ -129,15 +127,12 @@
         </extension>
     </extension>
     <url value="http://eyematics.org/bpe/Process/eyematicsReceiveProcess" />
-    <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMaticsReceiveProcessActivityDefinition" />
     <title value="EyeMatics Receive Process Activity Definition" />
     <subtitle value="Process to receive the EyeMatics data" />
-    <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
-    <!-- date managed by bpe -->
     <date value="#{date}" />
     <publisher value="EyeMatics" />
     <contact>

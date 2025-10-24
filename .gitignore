@@ -6,7 +6,6 @@
 **/*.iml
 
 **/*.ps1
-!start_eyematics_dev_process.ps1
 **/*.log
 **/*.log.gz
 **/*.jar

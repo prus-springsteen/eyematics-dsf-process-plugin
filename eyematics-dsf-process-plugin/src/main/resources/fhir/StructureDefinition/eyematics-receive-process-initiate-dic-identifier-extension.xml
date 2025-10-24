@@ -6,13 +6,10 @@
         </tag>
     </meta>
     <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-dic-identifier-extension" />
-
     <version value="#{version}" />
     <name value="ReceiveProcessDicIdentifierExtension" />
-
     <status value="unknown" />
     <experimental value="false" />
-
     <date value="#{date}" />
     <fhirVersion value="4.0.1" />
     <mapping>

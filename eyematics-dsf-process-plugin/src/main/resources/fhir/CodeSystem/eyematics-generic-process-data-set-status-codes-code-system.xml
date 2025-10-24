@@ -6,14 +6,11 @@
         </tag>
     </meta>
     <url value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
-    <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMaticsGenericDatasetStatusCodeSystem" />
     <title value="EyeMatics Generic Dataset Status Code System" />
-    <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
-    <!-- date managed by bpe -->
     <date value="#{date}" />
     <publisher value="EyeMatics" />
     <description value="CodeSystem with standard values for the status of transferring datasets within EyeMatics-Process" />
@@ -21,7 +18,6 @@
     <hierarchyMeaning value="grouped-by" />
     <versionNeeded value="false" />
     <content value="complete" />
-    <!-- EyeMaticsGenericStatus: Start -->
     <concept>
         <code value="data-initiate-failure" />
         <display value="Data Initiate Failure" />
@@ -122,5 +118,4 @@
         <display value="Data Provide Missing" />
         <definition value="Provision of dataset is missing." />
     </concept>
-    <!-- EyeMaticsGenericStatus: End -->
 </CodeSystem>

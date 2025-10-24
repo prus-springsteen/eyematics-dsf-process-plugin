@@ -6,13 +6,10 @@
         </tag>
     </meta>
     <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
-
     <version value="#{version}" />
     <name value="EyeMaticsReceiveProcessStructureDefinition" />
-
     <status value="unknown" />
     <experimental value="false" />
-
     <date value="#{date}" />
     <fhirVersion value="4.0.1" />
     <kind value="resource" />
@@ -25,7 +22,6 @@
             <path value="Task.instantiatesCanonical" />
             <fixedCanonical value="http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}" />
         </element>
-
         <element id="Task.input">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
                 <valueString value="Parameter" />
@@ -61,12 +57,10 @@
             <sliceName value="correlation-key" />
             <max value="1" />
         </element>
-
         <element id="Task.input:data-set-reference-input">
             <path value="Task.input" />
             <sliceName value="data-set-reference-input" />
             <min value="1" />
-
         </element>
         <element id="Task.input:data-set-reference-input.type">
             <path value="Task.input.type" />
@@ -96,7 +90,6 @@
                 <code value="Reference" />
             </type>
         </element>
-
         <element id="Task.output:data-set-status">
             <path value="Task.output"/>
             <sliceName value="data-set-status"/>
@@ -162,6 +155,5 @@
                 <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
-
     </differential>
 </StructureDefinition>

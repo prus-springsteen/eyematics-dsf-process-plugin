@@ -48,8 +48,8 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		// EYEMATICS PROCESS (v1.0)
 
 		// CRYPTOGRAPHY
-		String cCrypto = "fhir/CodeSystem/mii-cryptography.xml";
-		String vCrypto = "fhir/ValueSet/mii-cryptography.xml";
+		//String cCrypto = "fhir/CodeSystem/mii-cryptography.xml";
+		//String vCrypto = "fhir/ValueSet/mii-cryptography.xml";
 
 		// GENERIC
 		String cGenericProcess = "fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system.xml";
@@ -83,7 +83,7 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
 				List.of(aProvideProcess, sProvideProcess, sProvideProcessAcknowledgement, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
-				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, sGenericProcess, cReceiveProcess, cReceiveInitiateProcess, cGenericProcess, cGenericProcessCodes, cCrypto, vReceiveProcess, vReceiveInitiateProcess, vGenericProcess, vGenericProcessCodes, vCrypto));
+				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, sGenericProcess, cReceiveProcess, cReceiveInitiateProcess, cGenericProcess, cGenericProcessCodes, vReceiveProcess, vReceiveInitiateProcess, vGenericProcess, vGenericProcessCodes));
 	}
 
 	@Override

@@ -5,7 +5,6 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <!-- PROVIDE PROCESS -->
     <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
         <extension url="message-name">
             <valueString value="provideProcessStartEventMessage" />
@@ -77,7 +76,6 @@
         </valueCoding>
         </extension>
     </extension>
-    <!-- ACKNOWLEDGE PROCESS -->
     <extension url="http://dsf.dev/fhir/StructureDefinition/extension-process-authorization">
         <extension url="message-name">
             <valueString value="provideProcessAcknowledgementEventMessage" />
@@ -150,15 +148,12 @@
         </extension>
     </extension>
     <url value="http://eyematics.org/bpe/Process/eyematicsProvideProcess" />
-    <!-- version managed by bpe -->
     <version value="#{version}" />
     <name value="EyeMaticsProvideProcessActivityDefinition" />
     <title value="EyeMatics Provide Process Activity Definition" />
     <subtitle value="Process to provide the EyeMatics data" />
-    <!-- status managed by bpe -->
     <status value="unknown" />
     <experimental value="false" />
-    <!-- date managed by bpe -->
     <date value="#{date}" />
     <publisher value="EyeMatics" />
     <contact>

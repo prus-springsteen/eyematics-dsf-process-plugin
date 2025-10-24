@@ -14,13 +14,7 @@ The following entries are required in the `hosts` file of your computer so that 
 127.0.0.1	keycloak
 ```
 
-You may start every container - in terms of logging - manually or just use the PowerShell file 'start_eyematics_dev_process.ps1' file if you are using windows.
-All process can be started by the execution of the file:
-```sh
-.\start_eyematics_dev_process.ps1
-```
-
-Otherwise, start the development setup by using following command:
+Start the development setup by using following command:
 ```sh
 docker compose up -d && docker compose logs -f
 ```
