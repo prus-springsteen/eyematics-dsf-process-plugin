@@ -5,7 +5,6 @@ import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.eyematics.process.constant.ReceiveConstants;
-import org.eyematics.process.utils.bpe.CopyTask;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.Task;
@@ -49,6 +48,6 @@ public abstract class AbstractExtendedSubProcessServiceDelegate extends Abstract
         variables.updateTask(task);
 
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, CopyTask.getTaskCopy(task));
+        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task.copy());
     }
 }

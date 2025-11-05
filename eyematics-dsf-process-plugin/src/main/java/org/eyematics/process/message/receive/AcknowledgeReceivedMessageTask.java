@@ -9,7 +9,6 @@ import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.ReceiveConstants;
-import org.eyematics.process.utils.bpe.CopyTask;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.Task;
 import org.slf4j.Logger;
@@ -70,7 +69,7 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
         variables.updateTask(task);
 
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, CopyTask.getTaskCopy(task));
+        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task.copy());
 
         logger.warn(message);
         throw new BpmnError(status.getErrorCode());

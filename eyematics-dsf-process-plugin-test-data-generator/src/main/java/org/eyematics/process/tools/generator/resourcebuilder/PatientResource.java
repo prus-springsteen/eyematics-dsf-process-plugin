@@ -2,7 +2,9 @@ package org.eyematics.process.tools.generator.resourcebuilder;
 
 import org.hl7.fhir.r4.model.*;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class PatientResource extends AbstractFHIRResourceBuilder<Patient, PatientResource> {
@@ -80,12 +82,17 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
         name.setUse(HumanName.NameUse.OFFICIAL);
         name.getExtension().add(e);
         name.getFamilyElement().addExtension(e);
-        name.addGivenElement().addExtension(e);
+        StringType given = new StringType("");
+        given.addExtension(e);
+        name.setGiven(List.of(given));
         this.getResource().addName(name);
         this.getResource().setGender(this.getRandomGender());
         this.getResource().getBirthDateElement().addExtension(e);
         Address address = new Address();
         address.setType(Address.AddressType.PHYSICAL);
+        StringType line = new StringType("");
+        line.addExtension(e);
+        address.getLine().add(line);
         address.addLineElement().addExtension(e);
         address.getCityElement().addExtension(e);
         address.getPostalCodeElement().addExtension(e);
@@ -94,6 +101,6 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
     }
 
     private Enumerations.AdministrativeGender getRandomGender() {
-        return Enumerations.AdministrativeGender.values()[this.getRandomInteger(0, Enumerations.AdministrativeGender.values().length)];
+        return Enumerations.AdministrativeGender.values()[this.getRandomInteger(0, Enumerations.AdministrativeGender.values().length - 1)];
     }
 }

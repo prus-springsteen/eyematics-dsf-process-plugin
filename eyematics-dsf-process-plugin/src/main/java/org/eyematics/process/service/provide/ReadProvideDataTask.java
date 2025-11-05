@@ -1,7 +1,8 @@
 package org.eyematics.process.service.provide;
 
+import java.util.HashSet;
 import java.util.Objects;
-import ca.uhn.fhir.context.FhirContext;
+import java.util.stream.Collectors;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
@@ -13,8 +14,7 @@ import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelega
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.IdType;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,18 +40,54 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
         logger.info("-> Reading local data from FHIR repository is initiated");
         MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-", "Data requested", "there is a new data request which is processed.");
         EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
-        IdType idType = new IdType(fhirClient.getFhirBaseUrl(),  "StructureDefinition", "", "");
         try {
-            FhirContext fhirContext = FhirContext.forR4();
-            Bundle bundle = fhirContext.newJsonParser().parseResource(Bundle.class, fhirClient.read(idType, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON));
-            if (!bundle.hasEntry()) {
-                throw new Exception("Bundle contains no data. Please check the FHIR Repository.");
-            }
-            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundle);
+            HashSet<String> patientIds = new HashSet<>();
+
+            String observationQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE.stream().map(s -> EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + s).collect(Collectors.joining(","));
+            Bundle observations = this.getEyeMaticsDataBundle(fhirClient, "Observation", observationQuery);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET, observations);
+
+            String medicationQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_PROFILE;
+            Bundle medications = this.getEyeMaticsDataBundle(fhirClient, "Medication", medicationQuery);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_DATA_SET, medications);
+
+            String medicationAdministrationQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE;
+            Bundle medicationAdministrations = this.getEyeMaticsDataBundle(fhirClient, "MedicationAdministration", medicationAdministrationQuery);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET, medicationAdministrations);
+
+            String medicationRequestQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE;
+            Bundle medicationRequests = this.getEyeMaticsDataBundle(fhirClient, "MedicationRequest", medicationRequestQuery);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, medicationRequests);
+
+            observations.getEntry().forEach((e -> { Observation o = (Observation) e.getResource();
+                patientIds.add(extractPatientId(o.getSubject().getReference()));
+            }));
+
+            medicationAdministrations.getEntry().forEach((e -> { MedicationAdministration o = (MedicationAdministration) e.getResource();
+                patientIds.add(extractPatientId(o.getSubject().getReference()));
+            }));
+
+            medicationRequests.getEntry().forEach((e -> { MedicationRequest o = (MedicationRequest) e.getResource();
+                patientIds.add(extractPatientId(o.getSubject().getReference()));
+            }));
+
+            String patientsQuery = "_id=" + String.join(",", patientIds);
+            Bundle patients = this.getEyeMaticsDataBundle(fhirClient, "Patient", patientsQuery);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not read data from FHIR repository: {}", errorMessage);
             this.handleTaskError(EyeMaticsGenericStatus.DATA_READ_FAILURE, variables, errorMessage);
         }
+    }
+
+    private Bundle getEyeMaticsDataBundle(EyeMaticsFhirClient fhirClient, String resource, String searchQuery) throws Exception {
+        String data = fhirClient.read(resource, searchQuery, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
+        return this.api.getFhirContext().newJsonParser().parseResource(Bundle.class, data);
+    }
+
+    private String extractPatientId(String reference) {
+        if (reference.contains("Patient/")) return reference.substring(reference.lastIndexOf("/") + 1);
+        return null;
     }
 }

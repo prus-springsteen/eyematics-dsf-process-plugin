@@ -21,6 +21,7 @@ public class ObservationResource extends AbstractFHIRResourceBuilder<Observation
 
     public ObservationResource() {
         super(new Observation());
+        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/observation-visual-acuity"));
     }
 
     @Override
@@ -40,7 +41,6 @@ public class ObservationResource extends AbstractFHIRResourceBuilder<Observation
 
     @Override
     public Observation build() {
-        Observation o = new Observation();
         this.getResource().setId(UUID.randomUUID().toString());
         this.getResource().setStatus(Observation.ObservationStatus.FINAL);
         this.getResource().addCategory().addCoding().setSystem("http://terminology.hl7.org/CodeSystem/observation-category").setCode("exam");

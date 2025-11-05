@@ -167,7 +167,7 @@ public class ProvideFhirClientConfig
 				fhirStoreOAuth2DiscoveryPath, fhirStoreOAuth2ClientId, fhirStoreOAuth2ClientSecret, fhirStoreOAuth2ConnectTimeout,fhirStoreOAuth2SocketTimeout, fhirStoreOAuth2DiscoveryValidationLenient,
 				fhirDataLoggingEnabled, fhirStoreTrustStore, fhirStoreCertificate, fhirStorePrivateKey, fhirStoreProxyUrl, fhirStoreProxyUsername, fhirStoreProxyPassword, fhirStorePrivateKeyPassword,
 				fhirStoreConnectTimeout, fhirStoreSocketTimeout, fhirStoreConnectionRequestTimeout, fhirStoreBaseUrl, fhirStoreUsername,fhirStorePassword, fhirStoreBearerToken, fhirStoreHapiClientVerbose,
-				localIdentifierValue, false).create();
+				localIdentifierValue, fhirProvideClientConnectionTestEnabled).create();
 	}
 
 }

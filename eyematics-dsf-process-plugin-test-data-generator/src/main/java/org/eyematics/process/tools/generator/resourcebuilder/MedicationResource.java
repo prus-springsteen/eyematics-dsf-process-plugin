@@ -20,6 +20,7 @@ public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, 
 
     public MedicationResource() {
         super(new Medication());
+        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivom-medication"));
     }
 
     @Override
@@ -60,7 +61,7 @@ public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, 
         m.setIngredient(ingredients);
         Meta meta = new Meta();
         meta.setSource("https://pharma-idx-data-service");
-        meta.getProfile().add(new CanonicalType("https://pharma-idx-data-service"));
+        meta.getProfile().add(new CanonicalType("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivom-medication"));
         m.setMeta(meta);
         this.setResource(m);
         return this.getResource();

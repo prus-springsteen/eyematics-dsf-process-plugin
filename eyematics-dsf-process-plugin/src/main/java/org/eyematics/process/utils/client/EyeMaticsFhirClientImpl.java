@@ -26,36 +26,64 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
     @Override
     public String read(IdType idType, String mimeType) throws Exception {
         String url = idType.toUnqualified().getValue();
+        return readImplementation(url, mimeType);
+    }
+
+    @Override
+    public String read(String resourceType, String searchQuery, String mimeType) throws Exception {
+        if (searchQuery == null || searchQuery.isEmpty()) {
+            return readImplementation(resourceType, mimeType);
+        }
+        String url = resourceType + "?" + searchQuery;
+        return readImplementation(url, mimeType);
+    }
+
+    private String readImplementation(String url, String mimeType) throws Exception {
         try {
             HttpClient client = this.createClient();
-            HttpRequest request = this.createBaseRequest(url, Map.of("Accept", mimeType)).GET().build();
+            HttpRequest request = this.createBaseRequest(url, Map.of("Accept", mimeType))
+                    .GET()
+                    .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == HttpURLConnection.HTTP_OK) {
+            int status = response.statusCode();
+            if (status == HttpURLConnection.HTTP_OK) {
                 return response.body();
-            } else {
-                throw new Exception("Reading  from '" + url + "' failed - status code: " + response.statusCode());
             }
-        } catch (Exception exception) {
-            throw new Exception("Reading from '" + url + "' failed - " + exception.getMessage(), exception);
+            throw new Exception("Reading from '" + url + "' failed - status code: " + status);
+        } catch (Exception e) {
+            throw new Exception("Reading from '" + url + "' failed - " + e.getMessage(), e);
         }
     }
 
     @Override
-    public MethodOutcome create(IdType idType, String fhirResource, String mimeType) throws Exception {
-        String url = idType.toUnqualified().getValue();
-        HttpClient client = this.createClient();
-        HttpRequest request = this.createBaseRequest(url, Map.of("Content-Type", mimeType))
-                                  .POST(HttpRequest.BodyPublishers.ofString(fhirResource))
-                                  .build();
+    public String create(String fhirResource, String mimeType) throws Exception {
+        return createImplementation(null, fhirResource, mimeType);
+    }
+
+    @Override
+    public String create(String resourceType, String fhirResource, String mimeType) throws Exception {
+        return createImplementation(resourceType, fhirResource, mimeType);
+    }
+
+    private String createImplementation(String resourceType, String fhirResource, String mimeType) throws Exception {
         try {
+            HttpClient client = this.createClient();
+            HttpRequest.Builder reqBuilder = (resourceType == null)
+                    ? this.createBaseRequest(Map.of("Content-Type", mimeType))
+                    : this.createBaseRequest(resourceType, Map.of("Content-Type", mimeType));
+
+            HttpRequest request = reqBuilder
+                    .POST(HttpRequest.BodyPublishers.ofString(fhirResource))
+                    .build();
+
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == HttpURLConnection.HTTP_CREATED) {
-                Optional<String> location = response.headers().firstValue("Location");
-                return new MethodOutcome(new IdType(location.orElseThrow(() -> new Exception("FHIR-Resource could be created, the location has not been provided."))), true);
+            int status = response.statusCode();
+            if (status == HttpURLConnection.HTTP_CREATED || status == HttpURLConnection.HTTP_OK) {
+                return response.body();
             }
-            throw new Exception("Creating FHIR-Resource failed - " + response.body() + "(Status Code: " + response.statusCode() + ")");
-        } catch (Exception exception) {
-            throw new Exception("Saving FHIR-Resource failed", exception);
+            throw new Exception("Creating FHIR-Resource failed - " + response.body() + " (Status Code: " + status + ")");
+        } catch (Exception e) {
+            throw new Exception("Saving FHIR-Resource failed", e);
         }
     }
 }

@@ -27,7 +27,7 @@ import org.eyematics.process.utils.client.token.TokenProvider;
 import org.hl7.fhir.r4.model.CapabilityStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.apache.commons.lang3.StringUtils;
 import ca.uhn.fhir.context.FhirContext;
 
 
@@ -149,10 +149,8 @@ public abstract class AbstractHttpFhirClient implements FhirClient
 	{
 		HttpClient.Builder builder = HttpClient.newBuilder();
 		builder.connectTimeout(Duration.ofMillis(connectTimeout));
-
 		configureProxy(builder);
 		configureTrustStoreAndKeyStore(builder);
-
 		return builder.build();
 	}
 
@@ -164,24 +162,31 @@ public abstract class AbstractHttpFhirClient implements FhirClient
 	protected HttpRequest.Builder createBaseRequest(String path, Map<String, String> headers)
 	{
 		HttpRequest.Builder builder = HttpRequest.newBuilder();
-		//builder.timeout(Duration.ofMillis(socketTimeout));
-
+		builder.timeout(Duration.ofMillis(socketTimeout));
 		path = path.startsWith("/") ? path.substring(1) : path;
-
 		// URI throws exception if | not escaped
 		path = path.replace("|", "%7C");
-		URI uri = URI.create(fhirServerBase + path);
+        URI uri = URI.create(fhirServerBase + path);
 		builder.uri(uri);
-
-		// will be overwritten if headers-map contains accept header
-		//builder.setHeader("Accept", "application/fhir+json");
-		headers.forEach(builder::setHeader);
-
-		configureAuthentication(builder);
-		configureProxyAuthentication(builder);
-
-		return builder;
+        return this.setHeadersAndConfigure(builder, headers);
 	}
+
+    protected HttpRequest.Builder createBaseRequest(Map<String, String> headers) {
+        HttpRequest.Builder builder = HttpRequest.newBuilder();
+        builder.timeout(Duration.ofMillis(socketTimeout));
+        URI uri = URI.create(StringUtils.removeEnd(this.fhirServerBase, "/"));
+        builder.uri(uri);
+        return this.setHeadersAndConfigure(builder, headers);
+    }
+
+    private HttpRequest.Builder setHeadersAndConfigure(HttpRequest.Builder builder, Map<String, String> headers) {
+        // will be overwritten if headers-map contains accept header
+        builder.setHeader("Accept", "application/fhir+json");
+        headers.forEach(builder::setHeader);
+        configureAuthentication(builder);
+        configureProxyAuthentication(builder);
+        return builder;
+    }
 
 	private void configureProxy(HttpClient.Builder builder)
 	{

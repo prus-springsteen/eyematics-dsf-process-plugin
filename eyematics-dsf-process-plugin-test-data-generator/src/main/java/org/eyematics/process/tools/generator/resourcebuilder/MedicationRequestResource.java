@@ -15,6 +15,7 @@ public class MedicationRequestResource extends AbstractFHIRResourceBuilder<Medic
 
     public MedicationRequestResource() {
         super(new MedicationRequest());
+        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivi-medicationrequest"));
     }
 
     @Override
@@ -67,10 +68,10 @@ public class MedicationRequestResource extends AbstractFHIRResourceBuilder<Medic
     }
 
     private MedicationRequest.MedicationRequestStatus getRandomMedicationRequestStatus() {
-        return MedicationRequest.MedicationRequestStatus.values()[this.getRandomInteger(0, MedicationRequest.MedicationRequestStatus.values().length)];
+        return MedicationRequest.MedicationRequestStatus.values()[this.getRandomInteger(0, MedicationRequest.MedicationRequestStatus.values().length - 1)];
     }
 
     private MedicationRequest.MedicationRequestIntent getRandomMedicationRequestIntent() {
-        return MedicationRequest.MedicationRequestIntent.values()[this.getRandomInteger(0, MedicationRequest.MedicationRequestIntent.values().length)];
+        return MedicationRequest.MedicationRequestIntent.values()[this.getRandomInteger(0, MedicationRequest.MedicationRequestIntent.values().length - 1)];
     }
 }

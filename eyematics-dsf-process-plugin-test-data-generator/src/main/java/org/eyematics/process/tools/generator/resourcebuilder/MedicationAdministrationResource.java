@@ -13,6 +13,7 @@ public class MedicationAdministrationResource extends AbstractFHIRResourceBuilde
 
     public MedicationAdministrationResource() {
         super(new MedicationAdministration());
+        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivom-medicationadministration"));
     }
 
     @Override
@@ -28,8 +29,6 @@ public class MedicationAdministrationResource extends AbstractFHIRResourceBuilde
         this.getResource().setId(UUID.randomUUID().toString());
         this.getResource().getMeta().setLastUpdated(new Date(this.dateMillis));
         this.getResource().getMeta().setVersionId(Integer.toString(this.versionId));
-        this.getResource().getMeta().getProfile().clear();
-        this.getResource().getMeta().getProfile().add(new CanonicalType("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivom-medicationadministration"));
         this.getResource().setStatus(this.medicationAdministrationStatus);
         return this.getResource().copy();
     }
@@ -47,6 +46,6 @@ public class MedicationAdministrationResource extends AbstractFHIRResourceBuilde
     }
 
     private MedicationAdministration.MedicationAdministrationStatus getRandomMedicationAdministrationStatus() {
-        return MedicationAdministration.MedicationAdministrationStatus.values()[this.getRandomInteger(0, MedicationAdministration.MedicationAdministrationStatus.values().length)];
+        return MedicationAdministration.MedicationAdministrationStatus.values()[this.getRandomInteger(0, MedicationAdministration.MedicationAdministrationStatus.values().length - 1)];
     }
 }
