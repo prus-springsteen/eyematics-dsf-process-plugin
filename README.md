@@ -8,7 +8,7 @@ The main documentation for the DSF can be found under [dsf.dev](https://dsf.dev)
 ## Build
 Prerequisite: Java 17, Maven >= 3.6
 
-Build the project from the root directory of this repository by executing the following command.
+Build the project from the root directory of this repository by executing the following command. 
 
 ```sh
 mvn clean package
