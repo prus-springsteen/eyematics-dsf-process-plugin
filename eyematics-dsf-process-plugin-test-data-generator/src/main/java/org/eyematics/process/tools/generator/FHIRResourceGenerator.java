@@ -93,7 +93,7 @@ public class FHIRResourceGenerator {
         Map<String, String> fhirServer = Map.of("dic", dic, "port", port, "resource", resourceJSON);
         StringSubstitutor SubStr = new StringSubstitutor(fhirServer);
         try (FileOutputStream os = new FileOutputStream(path.toFile())) {
-            String bashScript = SubStr.replace(bashScriptTemplate);
+            String bashScript = SubStr.replace(bashScriptTemplate).replaceAll("\r\n", "\n");;
             os.write(bashScript.getBytes(java.nio.charset.StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
