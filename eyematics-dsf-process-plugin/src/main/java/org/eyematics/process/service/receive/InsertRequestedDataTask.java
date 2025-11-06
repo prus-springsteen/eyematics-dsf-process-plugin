@@ -70,10 +70,12 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
         } catch (Exception exception) {
             logger.info("Could not parse method outcome: {}", exception.getMessage());
         }
-        return providingOrganization + " submitted " + patients + " patients, " +
-                observations + " observations, " +
-                medications + " medications, " +
-                medicationAdministrations + " medication administrations, " +
-                medicationRequest + " medication requests.";
+        return String.format("%s submitted %s patients, %s observations, %s medications, %s medication administrations and %s medication requests.",
+                providingOrganization,
+                patients,
+                observations,
+                medications,
+                medicationAdministrations,
+                medicationRequest);
     }
 }

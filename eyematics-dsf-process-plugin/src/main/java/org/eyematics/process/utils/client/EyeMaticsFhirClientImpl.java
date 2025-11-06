@@ -24,6 +24,11 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
     }
 
     @Override
+    public String read(String url, String mimeType) throws Exception {
+        return readImplementation(url, mimeType);
+    }
+
+    @Override
     public String read(IdType idType, String mimeType) throws Exception {
         String url = idType.toUnqualified().getValue();
         return readImplementation(url, mimeType);

@@ -33,15 +33,10 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
 
-    // Wie der Task ausschaut...
     @Override
     protected IdType doSend(FhirWebserviceClient client, Task task) {
-        logger.info(api.getFhirContext().newJsonParser().encodeResourceToString(task));
         return super.doSend(client, task);
     }
-
-
-
 
     @Override
     public void afterPropertiesSet() throws Exception {

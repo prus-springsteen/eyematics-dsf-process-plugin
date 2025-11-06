@@ -52,8 +52,7 @@ public class FinalizeInitiateProcessTask extends AbstractServiceDelegate {
         } else {
             startTask.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_REQUEST_SUCCESS.getStatusCode(),
                                                                                       EyeMaticsGenericStatus.getTypeSystem(),
-                                                                                      EyeMaticsGenericStatus.getTypeCode(),
-                                                                          null));
+                                                                                      EyeMaticsGenericStatus.getTypeCode()));
             variables.updateTask(startTask);
         }
     }

@@ -43,35 +43,47 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
         try {
             HashSet<String> patientIds = new HashSet<>();
 
-            String observationQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE.stream().map(s -> EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + s).collect(Collectors.joining(","));
+            String observationQuery = String.format("_profile=%s",
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE.stream()
+                    .map(s -> EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + s)
+                    .collect(Collectors.joining(",")));
             Bundle observations = this.getEyeMaticsDataBundle(fhirClient, "Observation", observationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET, observations);
 
-            String medicationQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_PROFILE;
+            String medicationQuery = String.format("_profile=%s%s",
+                    EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_PROFILE);
             Bundle medications = this.getEyeMaticsDataBundle(fhirClient, "Medication", medicationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_DATA_SET, medications);
 
-            String medicationAdministrationQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE;
+            String medicationAdministrationQuery = String.format("_profile=%s%s",
+                    EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE);
             Bundle medicationAdministrations = this.getEyeMaticsDataBundle(fhirClient, "MedicationAdministration", medicationAdministrationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET, medicationAdministrations);
 
-            String medicationRequestQuery = "_profile=" + EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE;
+            String medicationRequestQuery = String.format("_profile=%s%s",
+                    EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE);
             Bundle medicationRequests = this.getEyeMaticsDataBundle(fhirClient, "MedicationRequest", medicationRequestQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, medicationRequests);
 
-            observations.getEntry().forEach((e -> { Observation o = (Observation) e.getResource();
-                patientIds.add(extractPatientId(o.getSubject().getReference()));
+            observations.getEntry()
+                    .forEach((e -> { Observation o = (Observation) e.getResource();
+                        patientIds.add(extractPatientId(o.getSubject().getReference()));
             }));
 
-            medicationAdministrations.getEntry().forEach((e -> { MedicationAdministration o = (MedicationAdministration) e.getResource();
-                patientIds.add(extractPatientId(o.getSubject().getReference()));
+            medicationAdministrations.getEntry()
+                    .forEach((e -> { MedicationAdministration o = (MedicationAdministration) e.getResource();
+                        patientIds.add(extractPatientId(o.getSubject().getReference()));
             }));
 
-            medicationRequests.getEntry().forEach((e -> { MedicationRequest o = (MedicationRequest) e.getResource();
-                patientIds.add(extractPatientId(o.getSubject().getReference()));
+            medicationRequests.getEntry()
+                    .forEach((e -> { MedicationRequest o = (MedicationRequest) e.getResource();
+                        patientIds.add(extractPatientId(o.getSubject().getReference()));
             }));
 
-            String patientsQuery = "_id=" + String.join(",", patientIds);
+            String patientsQuery = String.format("_id=%s", String.join(",", patientIds));
             Bundle patients = this.getEyeMaticsDataBundle(fhirClient, "Patient", patientsQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
         } catch (Exception exception) {
@@ -83,7 +95,19 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
 
     private Bundle getEyeMaticsDataBundle(EyeMaticsFhirClient fhirClient, String resource, String searchQuery) throws Exception {
         String data = fhirClient.read(resource, searchQuery, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
+        Bundle dataBundle = this.api.getFhirContext().newJsonParser().parseResource(Bundle.class, data);
+        String nextLink = this.getNextLink(dataBundle);
+        while (nextLink != null) {
+            String nextData = fhirClient.read(resource, searchQuery, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
+            Bundle nextBundle = this.api.getFhirContext().newJsonParser().parseResource(Bundle.class, nextData);
+            dataBundle.getEntry().addAll(nextBundle.getEntry());
+            nextLink = this.getNextLink(nextBundle);
+        }
         return this.api.getFhirContext().newJsonParser().parseResource(Bundle.class, data);
+    }
+
+    private String getNextLink(Bundle bundle) {
+        return bundle.getLink(Bundle.LINK_NEXT) != null ? bundle.getLink(Bundle.LINK_NEXT).getUrl() : null;
     }
 
     private String extractPatientId(String reference) {

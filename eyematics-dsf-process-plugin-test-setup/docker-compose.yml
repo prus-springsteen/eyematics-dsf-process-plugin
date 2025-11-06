@@ -309,12 +309,6 @@ services:
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-demonstrator-data-repository:8071/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_a_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_a_public_key.pem
-      DEV_DSF_BPE_MAIL_FROMADDRESS: dsf-eyematics@dic-a.org
-      DEV_DSF_BPE_MAIL_HOST: host.docker.internal
-      DEV_DSF_BPE_MAIL_USERNAME: dsf-dic-a
-      DEV_DSF_BPE_MAIL_PASSWORD: password
-      DEV_DSF_BPE_MAIL_PORT: 1025
-      DEV_DSF_BPE_MAIL_TOADDRESSES: admin@dic-a.org
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
         - webbrowser_test_user:
             thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
