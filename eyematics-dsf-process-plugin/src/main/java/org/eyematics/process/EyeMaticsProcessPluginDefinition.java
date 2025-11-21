@@ -46,10 +46,6 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 
 		// EYEMATICS PROCESS (v1.0)
 
-		// CRYPTOGRAPHY
-		//String cCrypto = "fhir/CodeSystem/mii-cryptography.xml";
-		//String vCrypto = "fhir/ValueSet/mii-cryptography.xml";
-
 		// GENERIC
 		String cGenericProcess = "fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system.xml";
 		String cGenericProcessCodes = "fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system.xml";

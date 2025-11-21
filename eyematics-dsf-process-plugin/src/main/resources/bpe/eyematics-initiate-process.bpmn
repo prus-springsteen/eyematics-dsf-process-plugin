@@ -63,11 +63,11 @@
       <bpmn:outgoing>Flow_0agrgps</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0agrgps" sourceRef="Gateway_1jmsz9v" targetRef="FinalizeInitiateProcessTask" />
-    <bpmn:boundaryEvent id="Event_0htnu80" attachedToRef="InitiateReceiveProcessTask">
+    <bpmn:boundaryEvent id="DataInitiateFailure" attachedToRef="InitiateReceiveProcessTask">
       <bpmn:outgoing>Flow_1eatck5</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0ynfjdo" errorRef="Error_1i9g7uo" />
     </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1eatck5" sourceRef="Event_0htnu80" targetRef="Gateway_1jmsz9v" />
+    <bpmn:sequenceFlow id="Flow_1eatck5" sourceRef="DataInitiateFailure" targetRef="Gateway_1jmsz9v" />
   </bpmn:process>
   <bpmn:message id="Message_2pg57ek" name="initiateProcessStartEventMessage" />
   <bpmn:message id="Message_0mv4rmf" name="receiveProcessStartEventMessage" />
@@ -111,7 +111,7 @@
       <bpmndi:BPMNShape id="Gateway_1jmsz9v_di" bpmnElement="Gateway_1jmsz9v" isMarkerVisible="true">
         <dc:Bounds x="855" y="135" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0htnu80_di" bpmnElement="Event_0htnu80">
+      <bpmndi:BPMNShape id="Event_0htnu80_di" bpmnElement="DataInitiateFailure">
         <dc:Bounds x="632" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1sbo85s_di" bpmnElement="Flow_1sbo85s">
