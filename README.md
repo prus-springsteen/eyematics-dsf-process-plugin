@@ -2,7 +2,7 @@
 This repository contains the plugin for transferring data between DICs participating in the EyeMatics project for the [Data Sharing Framework](https://github.com/datasharingframework/dsf) (DSF).
 
 ## Documentation
-The documentation of the process including the description, the deployment and configuration guides as well as instructions on how to start a process instance can be found in the [wiki](https://imigitlab.uni-muenster.de/MeDIC/eyematics/eyematics-dsf-process-plugin/-/wikis/home).
+The documentation of the process including the description, the deployment and configuration guides as well as instructions on how to start a process instance can be found in the [wiki](https://github.com/prus-springsteen/eyematics-dsf-process-plugin/wiki).
 The main documentation for the DSF can be found under [dsf.dev](https://dsf.dev).
 
 ## Build
