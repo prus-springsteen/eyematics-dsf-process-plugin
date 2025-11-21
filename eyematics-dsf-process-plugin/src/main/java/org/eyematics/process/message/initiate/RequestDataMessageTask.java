@@ -33,7 +33,8 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
     }
 
     @Override
-    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
+    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
+                                                                           Variables variables) {
         logger.info("-> Initiating providing process(es) in accordance with participating organization(s)");
         return Stream.empty();
     }
@@ -57,7 +58,8 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
                 exception.getMessage());
 
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+                        EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, message));
         variables.updateTask(task);
         logger.warn(message);

@@ -2,15 +2,14 @@ package org.eyematics.process.tools.generator.resourcebuilder;
 
 import org.hl7.fhir.r4.model.*;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 public class PatientResource extends AbstractFHIRResourceBuilder<Patient, PatientResource> {
 
     private String randomPID;
     private int id;
+    private String bloomFilter;
     private int maxPatients;
     private long dateMillis;
     private int versionId;
@@ -22,8 +21,12 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
 
     @Override
     protected void init() {
+        this.randomPID = "";
         this.id = 1;
+        this.bloomFilter = "";
         this.maxPatients = 1;
+        this.dateMillis = 0;
+        this.versionId = 1;
         this.setSource("clinic");
     }
 
@@ -35,6 +38,7 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
     public PatientResource randomize() {
         this.randomPID = UUID.randomUUID().toString();
         this.randomizeID();
+        this.bloomFilter = this.getRandomBloomfilter();
         this.dateMillis = this.getRandomDateTimeLong();
         this.versionId = this.getRandomInteger(1, 999);
         return this;
@@ -42,9 +46,14 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
 
     public PatientResource setPatientID(int id) {
         if (id > 0) {
-            if (id > this.maxPatients) this.maxPatients = id;
+            if (id >= this.maxPatients) this.maxPatients = id;
             this.id = id;
         }
+        return this;
+    }
+
+    public PatientResource setBloomFilter(String bloomFilter) {
+        this.bloomFilter = bloomFilter;
         return this;
     }
 
@@ -67,6 +76,8 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
     public Patient build() {
         Extension e = new Extension("http://hl7.org/fhir/StructureDefinition/data-absent-reason", new CodeType("masked"));
         this.getResource().setId(this.generatePatientId());
+        this.getResource().getIdentifier().add(new Identifier().setSystem("https://eyematics.org/sid/dic-pseudonym").setValue(this.generatePatientId()));
+        this.getResource().getIdentifier().add(new Identifier().setSystem("https://eyematics.org/sid/bloom-filter").setValue(this.bloomFilter));
         this.getResource().getMeta().setLastUpdated(new Date(this.dateMillis));
         this.getResource().getMeta().setVersionId(Integer.toString(this.versionId));
         this.getResource().getMeta().setSource(this.source);
@@ -82,17 +93,12 @@ public class PatientResource extends AbstractFHIRResourceBuilder<Patient, Patien
         name.setUse(HumanName.NameUse.OFFICIAL);
         name.getExtension().add(e);
         name.getFamilyElement().addExtension(e);
-        StringType given = new StringType("");
-        given.addExtension(e);
-        name.setGiven(List.of(given));
+        name.addGivenElement().addExtension(e);
         this.getResource().addName(name);
         this.getResource().setGender(this.getRandomGender());
         this.getResource().getBirthDateElement().addExtension(e);
         Address address = new Address();
         address.setType(Address.AddressType.PHYSICAL);
-        StringType line = new StringType("");
-        line.addExtension(e);
-        address.getLine().add(line);
         address.addLineElement().addExtension(e);
         address.getCityElement().addExtension(e);
         address.getPostalCodeElement().addExtension(e);

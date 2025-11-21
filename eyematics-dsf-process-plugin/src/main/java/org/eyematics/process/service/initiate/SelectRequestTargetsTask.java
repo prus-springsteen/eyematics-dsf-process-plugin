@@ -29,8 +29,9 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Selecting the participating organization(s).");
         Identifier parentIdentifier = new Identifier().setSystem(Identity.ORGANIZATION_IDENTIFIER_SYSTEM)
-                                                      .setValue(EyeMaticsConstants.NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS);
-        Coding memberOrganizationRole = new Coding().setSystem(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE).setCode(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
+                .setValue(EyeMaticsConstants.NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS);
+        Coding memberOrganizationRole = new Coding().setSystem(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE)
+                .setCode(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
         FhirWebserviceClient client = api.getFhirWebserviceClientProvider().getLocalWebserviceClient();
         List<Target> targets = api.getOrganizationProvider().getOrganizations(parentIdentifier, memberOrganizationRole)
                 .stream()
@@ -39,7 +40,8 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                 .map(organization -> {
                     Identifier organizationIdentifier = organization.getIdentifierFirstRep();
                     String path = URI.create(organization.getEndpointFirstRep().getReference()).getPath();
-                    Endpoint endpoint = client.read(Endpoint.class, path.substring(path.lastIndexOf("/") + 1));
+                    Endpoint endpoint = client.read(Endpoint.class,
+                            path.substring(path.lastIndexOf("/") + 1));
                     return variables.createTarget(organizationIdentifier.getValue(),
                                                   endpoint.getIdentifierFirstRep().getValue(),
                                                   endpoint.getAddress(),

@@ -47,7 +47,9 @@ public class PrepareReceiveDataTask extends AbstractServiceDelegate {
     private Target transformDicCorrelationKeyInputToTarget(Task.ParameterComponent input, Variables variables) {
 
         String organizationIdentifier = ((Reference) input
-                .getExtensionByUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER).getValue()).getIdentifier()
+                .getExtensionByUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER)
+                .getValue())
+                .getIdentifier()
                 .getValue();
         String correlationKey = ((StringType) input.getValue()).asStringValue();
 

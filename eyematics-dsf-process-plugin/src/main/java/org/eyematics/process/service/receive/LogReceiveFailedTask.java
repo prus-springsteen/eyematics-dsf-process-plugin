@@ -32,8 +32,11 @@ public class LogReceiveFailedTask extends AbstractServiceDelegate {
         task.setId("-");
         task.getRequester().getIdentifier().setValue(providingOrganization);
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_PROVIDE_MISSING.getStatusCode(), EyeMaticsGenericStatus.getTypeSystem(),
-                        EyeMaticsGenericStatus.getTypeCode(), "Could not receive Data from " + providingOrganization + "."));
+                this.dataSetStatusGenerator
+                        .createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_PROVIDE_MISSING.getStatusCode(),
+                                EyeMaticsGenericStatus.getTypeSystem(),
+                                EyeMaticsGenericStatus.getTypeCode(),
+                                "Could not receive Data from " + providingOrganization + "."));
         String correlationKey = variables.getTarget().getCorrelationKey();
         variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task);
     }

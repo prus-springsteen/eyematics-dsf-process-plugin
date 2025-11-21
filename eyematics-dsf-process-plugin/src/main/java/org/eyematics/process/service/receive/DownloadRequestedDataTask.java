@@ -31,7 +31,6 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Downloading the provided data");
-        String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
         Task latestTask = variables.getLatestTask();
         Reference reference = api.getTaskHelper()
                 .getFirstInputParameterValue(latestTask,
@@ -43,7 +42,9 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
                                                "Could not find Reference-Input for downloading Data"));
         try {
             Binary referenceBinary = this.downloadData(reference.getReference());
-            delegateExecution.setVariable(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED + correlationKey, referenceBinary);
+            this.setVariable(delegateExecution,
+                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED,
+                    referenceBinary);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not download data from DIC: {}", errorMessage);

@@ -36,10 +36,12 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
     }
 
     @Override
-    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
+    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
+                                                                           Variables variables) {
         logger.info("-> Preparing to send the URL of provided data");
         return Stream.of(api.getTaskHelper()
-                            .createInput(new Reference().setReference(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
+                .createInput(new Reference().setReference(variables
+                                .getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
                                     ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
                                     ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE));
     }
@@ -63,7 +65,8 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
                                        task.getId(),
                                        exception.getMessage());
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+                        EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, message));
         variables.updateTask(task);
 

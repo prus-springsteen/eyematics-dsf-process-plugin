@@ -17,6 +17,13 @@ public class MedicationAdministrationResource extends AbstractFHIRResourceBuilde
     }
 
     @Override
+    protected void init() {
+        this.dateMillis = new Date().getTime();
+        this.versionId = 1;
+        this.medicationAdministrationStatus = MedicationAdministration.MedicationAdministrationStatus.COMPLETED;
+    }
+
+    @Override
     public MedicationAdministrationResource randomize() {
         this.dateMillis = this.getRandomDateTimeLong();
         this.versionId = this.getRandomInteger(1, 999);
@@ -46,6 +53,7 @@ public class MedicationAdministrationResource extends AbstractFHIRResourceBuilde
     }
 
     private MedicationAdministration.MedicationAdministrationStatus getRandomMedicationAdministrationStatus() {
-        return MedicationAdministration.MedicationAdministrationStatus.values()[this.getRandomInteger(0, MedicationAdministration.MedicationAdministrationStatus.values().length - 1)];
+        return MedicationAdministration.MedicationAdministrationStatus.values()[this.getRandomInteger(0,
+                MedicationAdministration.MedicationAdministrationStatus.values().length - 1)];
     }
 }

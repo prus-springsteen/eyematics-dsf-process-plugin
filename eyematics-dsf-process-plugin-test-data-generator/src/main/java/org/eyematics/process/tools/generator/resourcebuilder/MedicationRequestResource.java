@@ -19,6 +19,14 @@ public class MedicationRequestResource extends AbstractFHIRResourceBuilder<Medic
     }
 
     @Override
+    protected void init() {
+        this.dateMillis = new Date().getTime();
+        this.versionId = 1;
+        this.medicationRequestStatus = MedicationRequest.MedicationRequestStatus.ACTIVE;
+        this.medicationRequestIntent = MedicationRequest.MedicationRequestIntent.ORDER;
+    }
+
+    @Override
     public MedicationRequestResource randomize() {
         this.dateMillis = this.getRandomDateTimeLong();
         this.versionId = this.getRandomInteger(1, 999);

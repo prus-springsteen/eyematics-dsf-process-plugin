@@ -25,6 +25,11 @@ public class ObservationResource extends AbstractFHIRResourceBuilder<Observation
     }
 
     @Override
+    protected void init() {
+        this.randomize();
+    }
+
+    @Override
     public ObservationResource randomize() {
         this.dateTimeStr = this.getRandomDateTimeString();
         this.vas = this.getRandomDouble(0.1d, 1.6d);

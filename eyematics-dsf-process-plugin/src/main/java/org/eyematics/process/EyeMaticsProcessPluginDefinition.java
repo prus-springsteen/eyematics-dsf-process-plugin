@@ -7,8 +7,7 @@ import dev.dsf.bpe.v1.ProcessPluginDefinition;
 import org.eyematics.process.spring.config.CryptoConfig;
 import org.eyematics.process.spring.config.EyeMaticsConfig;
 import org.eyematics.process.spring.config.initiate.InitiateConfig;
-import org.eyematics.process.spring.config.provide.ProvideFhirClientConfig;
-import org.eyematics.process.spring.config.provide.ProvideConfig;
+import org.eyematics.process.spring.config.provide.*;
 import org.eyematics.process.spring.config.receive.ReceiveConfig;
 import org.eyematics.process.spring.config.receive.ReceiveFhirClientConfig;
 import static org.eyematics.process.constant.InitiateConstants.PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS;
@@ -67,6 +66,8 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		String aProvideProcess = "fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml";
 		String sProvideProcess = "fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml";
 		String sProvideProcessAcknowledgement = "fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition.xml";
+        String qProvideProcessAdminApproval = "fhir/Questionnaire/eyematics-provide-process-admin-approval-questionnaire.xml";
+
 
 		// RECEIVE
 		String aReceiveProcess = "fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml";
@@ -79,16 +80,23 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		String vReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
 
 		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
-				List.of(aInitiateProcess, sInitiateProcess, sGenericProcess, tInitiateProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
+				List.of(aInitiateProcess, sInitiateProcess, sGenericProcess, tInitiateProcess, cGenericProcess,
+                        cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
 				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
-				List.of(aProvideProcess, sProvideProcess, sProvideProcessAcknowledgement, sGenericProcess, cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
+				List.of(aProvideProcess, sProvideProcess, sProvideProcessAcknowledgement, sGenericProcess,
+                        cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes,
+                        qProvideProcessAdminApproval),
 					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
-				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension, sStartReceiveProcess, sGenericProcess, cReceiveProcess, cReceiveInitiateProcess, cGenericProcess, cGenericProcessCodes, vReceiveProcess, vReceiveInitiateProcess, vGenericProcess, vGenericProcessCodes));
+				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension,
+                        sStartReceiveProcess, sGenericProcess, cReceiveProcess, cReceiveInitiateProcess,
+                        cGenericProcess, cGenericProcessCodes, vReceiveProcess, vReceiveInitiateProcess,
+                        vGenericProcess, vGenericProcessCodes));
 	}
 
 	@Override
 	public List<Class<?>> getSpringConfigurations() {
-		return List.of(EyeMaticsConfig.class, CryptoConfig.class, ProvideFhirClientConfig.class, InitiateConfig.class,
-				ProvideConfig.class, ReceiveConfig.class, ReceiveFhirClientConfig.class);
+		return List.of(EyeMaticsConfig.class, CryptoConfig.class, ProvideAdminApprovalConfig.class,
+                ProvideFhirClientConfig.class, ProvideFTTPClientConfig.class, ProvideMailConfig.class,
+                InitiateConfig.class, ProvideConfig.class, ReceiveConfig.class, ReceiveFhirClientConfig.class);
 	}
 }

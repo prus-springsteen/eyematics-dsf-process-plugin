@@ -49,6 +49,21 @@
         <definition value="An error occurred during reading of dataset." />
     </concept>
     <concept>
+        <code value="consent-check-failure" />
+        <display value="Consent Check Failure" />
+        <definition value="An error occurred during processing of the broad consents." />
+    </concept>
+    <concept>
+        <code value="patient-read-failure" />
+        <display value="Patient Read Failure" />
+        <definition value="An error occurred during reading of patients." />
+    </concept>
+    <concept>
+        <code value="pseudonym-process-failure" />
+        <display value="Patient Read Failure" />
+        <definition value="An error occurred during reading of patients." />
+    </concept>
+    <concept>
         <code value="data-bundle-failure" />
         <display value="Data Bundle Failure" />
         <definition value="An error occurred during bundling of dataset." />

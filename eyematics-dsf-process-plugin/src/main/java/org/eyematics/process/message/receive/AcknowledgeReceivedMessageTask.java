@@ -28,7 +28,8 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
     }
 
     @Override
-    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
+    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
+                                                                           Variables variables) {
         logger.info("-> Preparing the output as part of acknowledgment");
         Task task = variables.getLatestTask();
 
@@ -40,7 +41,8 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
             variables.updateTask(task);
         }
 
-       return this.dataSetStatusGenerator.transformOutputToInputComponent(task, EyeMaticsGenericStatus.getTypeSystem(), EyeMaticsGenericStatus.getTypeCode());
+       return this.dataSetStatusGenerator.transformOutputToInputComponent(task, EyeMaticsGenericStatus.getTypeSystem(),
+               EyeMaticsGenericStatus.getTypeCode());
     }
 
     @Override
@@ -63,13 +65,15 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
                                        task.getId(),
                                        exception.getMessage());
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+                        EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, message));
 
         variables.updateTask(task);
 
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task.copy());
+        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey,
+                task.copy());
 
         logger.warn(message);
         throw new BpmnError(status.getErrorCode());

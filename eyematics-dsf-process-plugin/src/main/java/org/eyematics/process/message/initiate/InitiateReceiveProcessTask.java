@@ -45,10 +45,14 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
     }
 
     @Override
-    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution, Variables variables) {
+    protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
+                                                                           Variables variables) {
         logger.info("-> Initiating receive process with participating organization(s)");
         Targets targets = variables.getTargets();
-        List<Task.ParameterComponent> targetInputs = targets.getEntries().stream().map(this::transformToTargetInput).toList();
+        List<Task.ParameterComponent> targetInputs = targets.getEntries()
+                .stream()
+                .map(this::transformToTargetInput)
+                .toList();
         return targetInputs.stream();
     }
 
@@ -57,7 +61,9 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
                 ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE,
                 ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE_PROCESS_CORRELATION_KEY);
         input.addExtension().setUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER)
-                .setValue(new Reference().setIdentifier(NamingSystems.OrganizationIdentifier.withValue(target.getOrganizationIdentifierValue()))
+                .setValue(new Reference()
+                        .setIdentifier(NamingSystems.OrganizationIdentifier
+                                .withValue(target.getOrganizationIdentifierValue()))
                         .setType(ResourceType.Organization.name()));
         return input;
     }
@@ -80,7 +86,8 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
                                        task.getId(),
                                        exception.getMessage());
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(), EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+                        EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, message));
         variables.updateTask(task);
 

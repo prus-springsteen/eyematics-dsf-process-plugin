@@ -7,9 +7,7 @@ import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.constant.InitiateConstants;
 import org.eyematics.process.constant.ReceiveConstants;
-import org.eyematics.process.utils.bpe.MailSender;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
@@ -35,10 +33,12 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
         List<Target> targetsList = variables.getTargets().getEntries();
         targetsList.forEach(target -> {
                     String correlationKey = target.getCorrelationKey();
-                    Task subTask = variables.getResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
+                    Task subTask = variables
+                            .getResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
                     if (subTask == null) {
                         startTask.addOutput(
-                                this.dataSetStatusGenerator.createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
+                                this.dataSetStatusGenerator.createDataSetStatusOutput(
+                                        EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
                                         EyeMaticsGenericStatus.getTypeSystem(),
                                         EyeMaticsGenericStatus.getTypeCode(),
                                         null));
@@ -53,7 +53,8 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
 
         if (Task.TaskStatus.FAILED.equals(startTask.getStatus())) {
             this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
-                    .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
+                    .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES,
+                            EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(startTask);
         }
     }

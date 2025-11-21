@@ -1,7 +1,6 @@
 package org.eyematics.process.utils.client;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.eyematics.process.utils.client.logging.DataLogger;
 import org.eyematics.process.utils.client.token.TokenProvider;
 import org.hl7.fhir.r4.model.IdType;
@@ -13,7 +12,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.KeyStore;
 import java.util.Map;
-import java.util.Optional;
+
 
 public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements EyeMaticsFhirClient {
 

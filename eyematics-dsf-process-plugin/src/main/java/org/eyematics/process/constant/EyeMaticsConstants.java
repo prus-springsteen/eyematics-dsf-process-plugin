@@ -37,9 +37,10 @@ public interface EyeMaticsConstants {
 
 
     /**
-     * Constants for EyeMatics process definitions and FHIR resource configurations.
+     * Constants for EyeMatics FHIR resource configurations.
      *
      * @see <a href="https://imi-ms.github.io/eyematics-kds/artifacts.html">EyeMatics KDS Artifacts Documentation</a>
+     * @see <a href="https://simplifier.net/guide/mii-ig-modul-consent-2025/MII-IG-Modul-Consent?version=2025.0.4">Kerndatensatz Modul Consent</a>
      */
     String EYEMATICS_CORE_DATA_SET_URI = "https://eyematics.org/fhir/eyematics-kds/StructureDefinition/";
     ArrayList<String> EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE = new ArrayList<>(Arrays.asList("Angiography",
@@ -59,4 +60,17 @@ public interface EyeMaticsConstants {
     String EYEMATICS_CORE_DATASET_MEDICATION_PROFILE = "mii-eyematics-ivom-medication";
     String EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE = "mii-eyematics-ivom-medicationadministration";
     String EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE = "mii-eyematics-ivi-medicationrequest";
+
+    String MII_IG_MODUL_CONSENT_PROFILE = "https://www.medizininformatik-initiative.de/fhir/modul-consent/StructureDefinition/mii-pr-consent-einwilligung";
+    String MII_IG_MODUL_CONSENT_CATEGORY_LOINC_SYSTEM = "http://loinc.org";
+    String MII_IG_MODUL_CONSENT_CATEGORY_LOINC_CODE = "57016-8";
+    String MII_IG_MODUL_CONSENT_CATEGORY_MII_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/modul-consent/CodeSystem/mii-cs-consent-consent_category";
+    String MII_IG_MODUL_CONSENT_CATEGORY_MII_CODE = "2.16.840.1.113883.3.1937.777.24.2.184";
+    String MII_IG_MODUL_CONSENT_POLICY_URI = "2.16.840.1.113883.3.1937.777.24.2.1791";
+    String MII_IG_MODUL_CONSENT_PROVISION_SYSTEM = "urn:oid:2.16.840.1.113883.3.1937.777.24.5.3";
+    String MII_IG_MODUL_CONSENT_PROVISION_CODE = "2.16.840.1.113883.3.1937.777.24.5.3.9";
+
+    String NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM = "https://eyematics.org/sid/dic-pseudonym";
+    String NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER = "https://eyematics.org/sid/bloom-filter";
+    String NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM = "https://ths-greifswald.de/gpas";
 }

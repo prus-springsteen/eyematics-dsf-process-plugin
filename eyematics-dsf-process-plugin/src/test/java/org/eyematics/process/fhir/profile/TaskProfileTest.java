@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import ca.uhn.fhir.context.FhirContext;
 import org.eyematics.process.constant.*;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.*;
@@ -47,7 +46,6 @@ public class TaskProfileTest {
 
 	private final ResourceValidator resourceValidator = new ResourceValidatorImpl(validationRule.getFhirContext(),
 			validationRule.getValidationSupport());
-
 
 	@Test
 	public void testValidTaskInitiateProcessOutput() {
@@ -101,7 +99,6 @@ public class TaskProfileTest {
 				.addCoding(CodeSystems.BpmnMessage.messageName());
 		return task;
 	}
-
 
     @Test
     public void testValidTaskInitiateReceiveProcess() {

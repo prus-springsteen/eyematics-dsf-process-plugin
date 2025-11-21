@@ -1,7 +1,6 @@
 package org.eyematics.process.tools.generator.resourcebuilder;
 
-import ca.uhn.fhir.context.FhirContext;
-import org.hl7.fhir.r4.model.Resource;
+import org.apache.commons.codec.binary.Base64;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -38,8 +37,10 @@ public abstract class AbstractFHIRResourceBuilder<R, B> {
     }
 
     protected long getRandomDateTimeLong() {
-        long startMillis = LocalDateTime.of(2000, 1, 1, 0, 0).atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
-        long endMillis =  LocalDateTime.of(2023, 12, 31, 23, 59).atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+        long startMillis = LocalDateTime.of(2000, 1, 1, 0, 0)
+                .atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+        long endMillis =  LocalDateTime.of(2023, 12, 31, 23, 59)
+                .atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
         return ThreadLocalRandom.current().nextLong(startMillis, endMillis);
     }
 
@@ -56,12 +57,18 @@ public abstract class AbstractFHIRResourceBuilder<R, B> {
         return ThreadLocalRandom.current().nextInt(minimum, maximum);
     }
 
+    protected String getRandomBloomfilter() {
+        Random random = ThreadLocalRandom.current();
+        byte[] r = new byte[252];
+        random.nextBytes(r);
+        return Base64.encodeBase64String(r);
+    }
+
+    protected boolean getRandomBoolean() {
+        return ThreadLocalRandom.current().nextBoolean();
+    }
+
     public abstract B randomize();
 
     public abstract R build();
-
-    public String toJSON() {
-        return FhirContext.forR4().newJsonParser().encodeResourceToString((Resource) this.resource);
-    }
-
 }

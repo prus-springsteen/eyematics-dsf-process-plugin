@@ -151,7 +151,8 @@ public class CertificateGenerator
 			logger.info("Initializing CA with new cert file: {}, private key {}", caCertFile.toString(),
 					caPrivateKeyFile.toString());
 
-			CertificateAuthority ca = CertificateAuthorityBuilder.create("DE", null, null, null, null, "eyematics-test")
+			CertificateAuthority ca = CertificateAuthorityBuilder.create("DE",
+                            null, null, null, null, "eyematics-test")
 					.initialize();
 
 			writeCertificate(caCertFile, ca.getCertificate());

@@ -25,7 +25,7 @@ public class EyeMaticsProcessPluginDefinitionTest {
 
         var provide = resourcesByProcessId.get(ProvideConstants.PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS);
         assertNotNull(provide);
-        assertEquals(8, provide.stream().filter(this::exists).count());
+        assertEquals(9, provide.stream().filter(this::exists).count());
 
         var receive = resourcesByProcessId.get(ReceiveConstants.PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS);
         assertNotNull(receive);

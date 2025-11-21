@@ -21,7 +21,10 @@ public class HandleMissingReceiptTask extends AbstractExtendedProcessServiceDele
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.warn("-> The receipt from {} is missing for data provided.", variables.getTarget().getOrganizationIdentifierValue());
-        this.processTaskError(EyeMaticsGenericStatus.DATA_ACKNOWLEDGE_MISSING, variables, "Data Receipt Missing");
+        logger.warn("-> The receipt from {} is missing for data provided.",
+                variables.getTarget().getOrganizationIdentifierValue());
+        this.processTaskError(EyeMaticsGenericStatus.DATA_ACKNOWLEDGE_MISSING,
+                variables,
+                "Data Acknowledge Missing");
     }
 }

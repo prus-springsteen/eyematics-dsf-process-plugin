@@ -1,0 +1,35 @@
+<ValueSet xmlns="http://hl7.org/fhir">
+    <meta>
+        <tag>
+            <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag" />
+            <code value="ALL" />
+        </tag>
+    </meta>
+    <url value="http://eyematics.org/fhir/ValueSet/eyematics-provide-process-admin-approval-results-value-set"/>
+    <version value="#{version}" />
+    <name value="EyeMaticsProvideProcessAdminApprovalResultsValueSet"/>
+    <title value="EyeMatics Provide Process Admin Approval Results Value Set"/>
+    <status value="unknown" />
+    <experimental value="false"/>
+    <date value="#{date}"/>
+    <publisher value="EyeMatics"/>
+    <description value="ValueSet with values for admin approval results."/>
+    <immutable value="true"/>
+    <compose>
+        <include>
+            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-provide-process-admin-approval-code-system"/>
+            <concept>
+                <code value="yes"/>
+            </concept>
+            <concept>
+                <code value="no"/>
+            </concept>
+            <concept>
+                <code value="timeout"/>
+            </concept>
+            <concept>
+                <code value="result-bundle"/>
+            </concept>
+        </include>
+    </compose>
+</ValueSet>

@@ -7,6 +7,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ReceiveConstants;
+import org.eyematics.process.utils.bpe.MailSender;
 import org.eyematics.process.utils.client.EyeMaticsFhirClient;
 import org.eyematics.process.utils.client.FhirClientFactory;
 import org.eyematics.process.utils.delegate.AbstractExtendedSubProcessServiceDelegate;
@@ -23,7 +24,8 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
     private static final Logger logger = LoggerFactory.getLogger(InsertRequestedDataTask.class);
     private final FhirClientFactory fhirClientFactory;
 
-    public InsertRequestedDataTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator, FhirClientFactory fhirClientFactory) {
+    public InsertRequestedDataTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator,
+                                   FhirClientFactory fhirClientFactory) {
         super(api, dataSetStatusGenerator);
         this.fhirClientFactory = fhirClientFactory;
     }
@@ -37,14 +39,20 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Insertion of the provided data into FHIR repository");
-        String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
         EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         try {
-            Bundle bundle = variables.getResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET + correlationKey);
+            Bundle bundle = (Bundle) this.getVariable(delegateExecution,
+                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET);
             String bundleString = this.api.getFhirContext().newJsonParser().encodeResourceToString(bundle);
             String methodOutcome = fhirClient.create(bundleString, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
             String providingOrganization = variables.getLatestTask().getRequester().getIdentifier().getValue();
-            logger.info("Data is inserted for further processing. {}", this.countResources(providingOrganization, methodOutcome));
+            String countedResources = this.countResources(providingOrganization, methodOutcome);
+            logger.info("Data is inserted for further processing. {}", countedResources);
+            MailSender.sendInfo(this.api.getMailService(),
+                    variables.getLatestTask(),
+                    EyeMaticsGenericStatus.DATA_REQUEST_SUCCESS.getStatusCode(),
+                    "Data inserted",
+                    countedResources);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not insert data to FHIR-Repository: {}", errorMessage);

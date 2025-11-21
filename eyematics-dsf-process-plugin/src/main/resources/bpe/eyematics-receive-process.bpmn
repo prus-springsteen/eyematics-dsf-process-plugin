@@ -56,7 +56,7 @@
         <bpmn:incoming>Flow_01zfu68</bpmn:incoming>
         <bpmn:outgoing>Flow_1dvhc66</bpmn:outgoing>
         <bpmn:timerEventDefinition id="TimerEventDefinition_0tnz7y9">
-          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT30S</bpmn:timeDuration>
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15M</bpmn:timeDuration>
         </bpmn:timerEventDefinition>
       </bpmn:intermediateCatchEvent>
       <bpmn:sequenceFlow id="Flow_1dvhc66" sourceRef="WaitForRetrieval" targetRef="LogReceiveFailedTask" />

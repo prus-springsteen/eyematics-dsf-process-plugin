@@ -57,7 +57,7 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeReceiveSubprocessTask finalizeReceiveSubprocessTask() { return  new FinalizeReceiveSubprocessTask(api); }
+    public FinalizeReceiveSubprocessTask finalizeReceiveSubprocessTask() { return  new FinalizeReceiveSubprocessTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

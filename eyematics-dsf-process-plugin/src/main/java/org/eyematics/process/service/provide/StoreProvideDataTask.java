@@ -34,7 +34,9 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
 
         try {
             content = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
-            localOrganizationIdentifier = this.api.getOrganizationProvider().getLocalOrganizationIdentifierValue().orElseThrow();
+            localOrganizationIdentifier = this.api.getOrganizationProvider()
+                    .getLocalOrganizationIdentifierValue()
+                    .orElseThrow();
         } catch (Exception exception) {
             this.handleStoreError(exception, variables);
         }

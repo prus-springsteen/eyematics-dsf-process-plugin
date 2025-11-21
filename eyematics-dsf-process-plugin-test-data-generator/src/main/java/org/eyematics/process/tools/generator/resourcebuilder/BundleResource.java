@@ -3,6 +3,8 @@ package org.eyematics.process.tools.generator.resourcebuilder;
 import org.hl7.fhir.r4.model.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class BundleResource extends AbstractFHIRResourceBuilder<Bundle, BundleResource>{
@@ -91,6 +93,48 @@ public class BundleResource extends AbstractFHIRResourceBuilder<Bundle, BundleRe
             String obsName = this.getResourceNameURL(medicationAdministration);
             b.addEntry().setResource(medicationAdministration).setRequest(brc.copy().setUrl(obsName)).setFullUrl(obsName);
         }
+        // 6.) Consent
+        ConsentResource cr = new ConsentResource();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 5);
+        Date start = calendar.getTime();
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 10);
+        Date end = calendar.getTime();
+
+        Consent validConsent = cr.setConsentState(Consent.ConsentState.ACTIVE)
+                .setDateIntervalls(start, end)
+                .setConcept(ConsentCodeSystem.MDAT_ZUSAMMENFUEHREN_DRITTE)
+                .setPatient(patient)
+                .setId(1)
+                .build();
+
+        Consent inactiveConsent = cr.setConsentState(Consent.ConsentState.INACTIVE)
+                .setDateIntervalls(start, end)
+                .setConcept(ConsentCodeSystem.PROMDAT_PATIENTENBEFRAGUNG_ERHEBEN)
+                .setPatient(patient)
+                .setId(2)
+                .build();
+
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - 20);
+        start = calendar.getTime();
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 5);
+        end = calendar.getTime();
+
+        Consent invalidConsent = cr.setConsentState(Consent.ConsentState.ACTIVE)
+                .setDateIntervalls(start, end)
+                .setConcept(ConsentCodeSystem.MDAT_ZUSAMMENFUEHREN_DRITTE)
+                .setPatient(patient)
+                .setId(3)
+                .build();
+
+        Consent randomConsent = cr.randomize().setPatient(patient).setId(4).build();
+
+        List<Consent> consentList = List.of(validConsent, inactiveConsent, invalidConsent, randomConsent);
+        for (Consent consent : consentList) {
+            String obsName = this.getResourceNameURL(consent);
+            b.addEntry().setResource(consent).setRequest(brc.copy().setUrl(obsName)).setFullUrl(obsName);
+        }
+
         this.setResource(b);
         return this.getResource();
     }

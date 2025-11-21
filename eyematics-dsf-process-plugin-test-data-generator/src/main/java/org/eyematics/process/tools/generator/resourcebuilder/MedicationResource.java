@@ -24,6 +24,11 @@ public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, 
     }
 
     @Override
+    protected void init() {
+        this.randomize();
+    }
+
+    @Override
     public MedicationResource randomize() {
         this.id = UUID.randomUUID().toString();
         this.version = this.getRandomDateTimeString();

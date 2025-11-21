@@ -46,7 +46,8 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
 
         if (Task.TaskStatus.FAILED.equals(startTask.getStatus())) {
             this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient()
-                    .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES, EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
+                    .withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES,
+                            EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN)
                     .update(startTask);
             Coding output = (Coding) startTask.getOutput().get(0).getValue();
             MailSender.sendError(this.api.getMailService(),
@@ -59,7 +60,9 @@ public class FinalizeProvideProcessTask extends AbstractServiceDelegate {
     }
 
     private void handleReceivedResponse(Task startTask, Task currentTask) {
-        this.dataSetStatusGenerator.transformInputToOutput(currentTask, startTask, EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
+        this.dataSetStatusGenerator.transformInputToOutput(currentTask,
+                startTask,
+                EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                 EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS);
         if (startTask.getOutput().stream().filter(Task.TaskOutputComponent::hasExtension)
                 .flatMap(o -> o.getExtension().stream())
