@@ -20,13 +20,13 @@
     <bpmn:sendTask id="RequestDataMessageTask" name="send request provide data" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
-          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
+          <camunda:string>https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
         </camunda:field>
         <camunda:field name="messageName">
           <camunda:string>provideProcessStartEventMessage</camunda:string>
         </camunda:field>
         <camunda:field name="instantiatesCanonical">
-          <camunda:string>http://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
+          <camunda:string>https://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1yk585e</bpmn:incoming>
@@ -37,13 +37,13 @@
     <bpmn:sendTask id="InitiateReceiveProcessTask" name="send initiate receive data" camunda:class="org.eyematics.process.message.initiate.InitiateReceiveProcessTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
-          <camunda:string>http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition|#{version}</camunda:string>
+          <camunda:string>https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition|#{version}</camunda:string>
         </camunda:field>
         <camunda:field name="messageName">
           <camunda:string>receiveProcessInitiateEventMessage</camunda:string>
         </camunda:field>
         <camunda:field name="instantiatesCanonical">
-          <camunda:string>http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}</camunda:string>
+          <camunda:string>https://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}</camunda:string>
         </camunda:field>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0d5fww4</bpmn:incoming>

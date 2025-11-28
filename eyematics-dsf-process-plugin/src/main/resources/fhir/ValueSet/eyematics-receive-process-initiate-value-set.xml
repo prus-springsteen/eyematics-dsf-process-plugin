@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-initiate-value-set"/>
+    <url value="https://eyematics.org/fhir/ValueSet/eyematics-receive-process-initiate-value-set"/>
     <version value="#{version}" />
     <name value="EyeMaticsReceiveInitiateProcessValueSet"/>
     <title value="EyeMatics Receive Initiate Process Value Set"/>
@@ -17,7 +17,7 @@
     <immutable value="true"/>
     <compose>
         <include>
-            <system value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system"/>
+            <system value="https://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system"/>
             <version value="#{version}" />
         </include>
     </compose>

@@ -31,7 +31,7 @@ public class ReceiveFhirClientConfig
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_receiveProcess"},
-            description = "PEM encoded file with one or more trusted root certificate to validate the DIC FHIR server certificate when connecting via https",
+            description = "PEM encoded file with one or more trusted root certificates to validate the DIC FHIR server certificate when connecting via https",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/hospital_ca.pem"
     )
@@ -49,7 +49,7 @@ public class ReceiveFhirClientConfig
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_receiveProcess"},
-            description = "Private key corresponding to the DIC FHIR server client-certificate as PEM encoded file. Use *${env_variable}_PASSWORD* or *${env_variable}_PASSWORD_FILE* if private key is encrypted",
+            description = "Private key corresponding to the RECEIVE FHIR server client-certificate as a PEM encoded file. Use *${env_variable}_PASSWORD* or *${env_variable}_PASSWORD_FILE*_FILE if the private key is encrypted",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/fhir_server_private_key.pem"
     )
@@ -151,7 +151,7 @@ public class ReceiveFhirClientConfig
     @ProcessDocumentation(
             processNames = {"eyematicsorg_receiveProcess"},
             description = "The path for oidc discovery protocol",
-            recommendation = "Change default value only if path differs from the oidc specification"
+            recommendation = "Change default value only if a path differs from the oidc specification"
     )
     @Value("${org.eyematics.receive.fhir.server.oauth2.discovery.path:/.well-known/openid-configuration}")
     private String fhirStoreOAuth2DiscoveryPath;
@@ -189,7 +189,7 @@ public class ReceiveFhirClientConfig
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_receiveProcess"},
-            description = "PEM encoded file with one or more trusted root certificate to validate the oidc receiver server certificate when connecting via https",
+            description = "PEM encoded file with one or more trusted root certificates to validate the oidc receiver server certificate when connecting via https",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/hospital_ca.pem"
     )

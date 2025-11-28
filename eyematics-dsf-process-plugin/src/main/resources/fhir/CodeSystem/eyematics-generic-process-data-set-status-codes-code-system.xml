@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
+    <url value="https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system" />
     <version value="#{version}" />
     <name value="EyeMaticsGenericDatasetStatusCodeSystem" />
     <title value="EyeMatics Generic Dataset Status Code System" />

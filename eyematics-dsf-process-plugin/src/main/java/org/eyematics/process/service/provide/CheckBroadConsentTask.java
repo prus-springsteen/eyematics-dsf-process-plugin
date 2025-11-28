@@ -58,6 +58,9 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
                     .toList();
             patients.getEntry().clear();
             patients.getEntry().addAll(filteredPatients);
+            if (patients.getEntry().isEmpty()) {
+                throw new Exception("No valid Broad Consent(s) found");
+            }
             delegateExecution.setVariable(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
@@ -79,7 +82,6 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
         if (consent.getMeta().getProfile().size() != 1) return false;
         if (!hasValidScope(consent)) return false;
         if (!hasValidCategory(consent)) return false;
-        if (!hasValidPolicy(consent)) return false;
         return hasValidProvision(consent);
     }
 
@@ -105,12 +107,6 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
             }
         }
         return hasPrivacyAcknowledgementDocument && hasMIIBroadConsent;
-    }
-
-    private boolean hasValidPolicy(Consent consent) {
-        if (consent.getPolicy() == null) return false;
-        if (consent.getPolicy().size() != 1) return false;
-        return consent.getPolicy().get(0).getUri().equals(EyeMaticsConstants.MII_IG_MODUL_CONSENT_POLICY_URI);
     }
 
     private boolean hasValidProvision(Consent consent) {

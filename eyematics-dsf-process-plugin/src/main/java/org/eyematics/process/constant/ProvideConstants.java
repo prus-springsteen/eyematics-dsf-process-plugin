@@ -19,8 +19,8 @@ public interface ProvideConstants {
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE = "data-reference";
 
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_URI = EyeMaticsConstants.PROCESS_EYEMATICS_URI_BASE + PROCESS_NAME_EXECUTE_PROVIDE_EYEMATICS_PROCESS;
-    String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS = "http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition";
+    String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS = "https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition";
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_MESSAGE_NAME = "provideProcessStartEventMessage";
-    String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT = "http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition";
+    String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT = "https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition";
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT_MESSAGE_NAME = "provideProcessAcknowledgementEventMessage";
 }

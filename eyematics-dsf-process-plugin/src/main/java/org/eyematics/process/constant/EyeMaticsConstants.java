@@ -11,7 +11,7 @@ public interface EyeMaticsConstants {
     String RESOURCE_VERSION = VERSION.substring(0, 3);
 
     String PROCESS_EYEMATICS_NAME_BASE = "eyematicsorg_";
-    String PROCESS_EYEMATICS_URI_BASE = "http://eyematics.org/bpe/Process/";
+    String PROCESS_EYEMATICS_URI_BASE = "https://eyematics.org/bpe/Process/";
     String NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS = "eyematics.org";
 
     String CODESYSTEM_DSF_ORGANIZATION_ROLE = "http://dsf.dev/fhir/CodeSystem/organization-role";
@@ -22,10 +22,10 @@ public interface EyeMaticsConstants {
     String CODESYSTEM_MII_CRYPTOGRAPHY = "http://medizininformatik-initiative.de/fhir/CodeSystem/cryptography";
     String CODESYSTEM_MII_CRYPTOGRAPHY_VALUE_PUBLIC_KEY = "public-key";
 
-    String CODESYSTEM_GENERIC_DATA_SET_STATUS = "http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system";
+    String CODESYSTEM_GENERIC_DATA_SET_STATUS = "https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system";
     String CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS = "data-set-status";
-    String CODESYSTEM_DATA_SET_STATUS = "http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system";
-    String EXTENSION_DATA_SET_STATUS_ERROR_URL = "http://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension";
+    String CODESYSTEM_DATA_SET_STATUS = "https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system";
+    String EXTENSION_DATA_SET_STATUS_ERROR_URL = "https://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension";
 
     int DSF_CLIENT_RETRY_6_TIMES = 6;
     long DSF_CLIENT_RETRY_INTERVAL_10SEC = 10000;
@@ -66,7 +66,6 @@ public interface EyeMaticsConstants {
     String MII_IG_MODUL_CONSENT_CATEGORY_LOINC_CODE = "57016-8";
     String MII_IG_MODUL_CONSENT_CATEGORY_MII_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/modul-consent/CodeSystem/mii-cs-consent-consent_category";
     String MII_IG_MODUL_CONSENT_CATEGORY_MII_CODE = "2.16.840.1.113883.3.1937.777.24.2.184";
-    String MII_IG_MODUL_CONSENT_POLICY_URI = "2.16.840.1.113883.3.1937.777.24.2.1791";
     String MII_IG_MODUL_CONSENT_PROVISION_SYSTEM = "urn:oid:2.16.840.1.113883.3.1937.777.24.5.3";
     String MII_IG_MODUL_CONSENT_PROVISION_CODE = "2.16.840.1.113883.3.1937.777.24.5.3.9";
 

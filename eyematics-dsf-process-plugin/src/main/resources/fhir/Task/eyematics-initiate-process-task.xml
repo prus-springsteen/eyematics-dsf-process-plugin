@@ -1,12 +1,12 @@
 <Task xmlns="http://hl7.org/fhir">
     <meta>
-        <profile value="http://eyematics.org/fhir/StructureDefinition/eyematics-initiate-process-structure-definition|#{version}"/>
+        <profile value="https://eyematics.org/fhir/StructureDefinition/eyematics-initiate-process-structure-definition|#{version}"/>
     </meta>
     <identifier>
         <system value="http://dsf.dev/sid/task-identifier" />
-        <value value="http://eyematics.org/bpe/Process/eyematicsInitiateProcess/#{version}/eyematics-initiate-process-task" />
+        <value value="https://eyematics.org/bpe/Process/eyematicsInitiateProcess/#{version}/eyematics-initiate-process-task" />
     </identifier>
-    <instantiatesCanonical value="http://eyematics.org/bpe/Process/eyematicsInitiateProcess|#{version}" />
+    <instantiatesCanonical value="https://eyematics.org/bpe/Process/eyematicsInitiateProcess|#{version}" />
     <status value="draft"/>
     <intent value="order"/>
     <authoredOn value="#{date}" />

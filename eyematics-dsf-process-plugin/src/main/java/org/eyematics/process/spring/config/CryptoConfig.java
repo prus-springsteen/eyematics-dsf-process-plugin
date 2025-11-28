@@ -19,7 +19,7 @@ public class CryptoConfig {
     @ProcessDocumentation(
             required = true,
             processNames = "eyematicsorg_receiveProcess",
-            description = "Location of the DIC private-key as 4096 Bit RSA PEM encoded, not encrypted file",
+            description = "Location of the DIC private-key as 4096-Bit RSA PEM encoded, not encrypted file",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/dic_private_key.pem")
     @Value("${org.eyematics.dic.receive.private.key.file:#{null}}")
@@ -28,7 +28,7 @@ public class CryptoConfig {
     @ProcessDocumentation(
             required = true,
             processNames = "eyematicsorg_receiveProcess",
-            description = "Location of the DIC public-key as 4096 Bit RSA PEM encoded file",
+            description = "Location of the DIC public-key as 4096-Bit RSA PEM encoded file",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/dic_public_key.pem")
     @Value("${org.eyematics.dic.receive.public.key.file:#{null}}")

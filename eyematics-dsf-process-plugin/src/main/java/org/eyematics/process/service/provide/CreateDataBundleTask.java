@@ -38,7 +38,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
         try {
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
             HashMap<String, String> globalPseudonymMap = new HashMap<>();
-            HashSet<String> bloomFilterSet = new HashSet<>();
+            HashSet<String> globalPseudonymSet = new HashSet<>();
 
             Bundle observations = variables
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET);
@@ -59,12 +59,11 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                 String globalPseudonym = this.getGlobalPseudonym(p);
                 if (dicPseudonym != null && bloomFilter != null && globalPseudonym != null) {
                     globalPseudonymMap.put(dicPseudonym, globalPseudonym);
-                    bloomFilterSet.add(bloomFilter);
+                    globalPseudonymSet.add(globalPseudonym);
                     if (this.replaceIdentifierPatientResource(p, dicPseudonym, globalPseudonym)) {
                         eyeMaticsBundle.addEntry().setResource(p).setRequest(this.getBundleRequest(brc, p));
                     }
                 }
-
             });
 
             observations.getEntry().forEach(e ->
@@ -78,7 +77,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                     this.processResource(e.getResource(), brc, globalPseudonymMap, eyeMaticsBundle));
 
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, eyeMaticsBundle);
-            this.sendBloomfilterMail(bloomFilterSet, variables.getStartTask());
+            this.sendGlobalPseudonymMail(globalPseudonymSet, variables.getStartTask());
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not bundle data: {}", errorMessage);
@@ -193,7 +192,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
         return false;
     }
 
-    private void sendBloomfilterMail(HashSet<String> bloomfilterSet, Task task) {
+    private void sendGlobalPseudonymMail(HashSet<String> globalPseudonymSet, Task task) {
         if (!this.provideMailConfigAdresses.isEmpty()) {
             StringBuilder message = new StringBuilder();
             message.append("Dear Admin, \n\n");
@@ -204,12 +203,12 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
             message.append("Requester: ");
             message.append(task.getRequester().getIdentifier().getValue());
             message.append("\n");
-            message.append("Recipient: ");
+            message.append("Provider: ");
             message.append(task.getRestriction().getRecipientFirstRep().getIdentifier().getValue());
             message.append("\n\n");
-            message.append("Following bloom filters where exchanged:\n\n");
-            message.append(bloomfilterSet);
-            this.api.getMailService().send("EyeMatics Data Exchange: Bloomfilter",
+            message.append("Data from following global pseudonyms where exchanged:\n\n");
+            message.append(globalPseudonymSet);
+            this.api.getMailService().send("EyeMatics Data Exchange: Global pseudonyms",
                     message.toString(),
                     this.provideMailConfigAdresses);
         }

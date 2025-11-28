@@ -59,8 +59,8 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
         }
     }
 
-    private PublicKey readPublicKey(String dmsIdentifier) {
-        String url = getEndpointUrl(dmsIdentifier);
+    private PublicKey readPublicKey(String dicIdentifier) {
+        String url = this.getEndpointUrl(dicIdentifier);
         Optional<Bundle> publicKeyBundleOptional = this.keyProvider.readPublicKeyIfExists(url);
         if (publicKeyBundleOptional.isEmpty())
             throw new IllegalStateException(
@@ -68,9 +68,9 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
         logger.debug("Downloaded PublicKey Bundle from organization with identifier '{}'", url);
         Bundle publicKeyBundle = publicKeyBundleOptional.get();
         DocumentReference documentReference = this.getDocumentReference(publicKeyBundle);
-        Binary binary = getBinary(publicKeyBundle);
-        PublicKey publicKey = getPublicKey(binary, publicKeyBundle.getId());
-        checkHash(documentReference, publicKey);
+        Binary binary = this.getBinary(publicKeyBundle);
+        PublicKey publicKey = this.getPublicKey(binary, publicKeyBundle.getId());
+        this.checkHash(documentReference, publicKey);
         return publicKey;
     }
 

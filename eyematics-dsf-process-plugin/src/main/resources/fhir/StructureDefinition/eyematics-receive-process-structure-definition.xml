@@ -5,7 +5,7 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
+    <url value="https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
     <version value="#{version}" />
     <name value="EyeMaticsReceiveProcessStructureDefinition" />
     <status value="unknown" />
@@ -20,7 +20,7 @@
     <differential>
         <element id="Task.instantiatesCanonical">
             <path value="Task.instantiatesCanonical" />
-            <fixedCanonical value="http://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}" />
+            <fixedCanonical value="https://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}" />
         </element>
         <element id="Task.input">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -66,7 +66,7 @@
             <path value="Task.input.type" />
             <binding>
                 <strength value="required" />
-                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set" />
+                <valueSet value="https://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set" />
             </binding>
         </element>
         <element id="Task.input:data-set-reference-input.type.coding">
@@ -77,7 +77,7 @@
         <element id="Task.input:data-set-reference-input.type.coding.system">
             <path value="Task.input.type.coding.system" />
             <min value="1" />
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system" />
+            <fixedUri value="https://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system" />
         </element>
         <element id="Task.input:data-set-reference-input.type.coding.code">
             <path value="Task.input.type.coding.code" />
@@ -111,14 +111,14 @@
             <max value="1" />
             <type>
                 <code value="Extension" />
-                <profile value="http://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension" />
+                <profile value="https://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension" />
             </type>
         </element>
         <element id="Task.output:data-set-status.type">
             <path value="Task.output.type"/>
             <binding>
                 <strength value="required"/>
-                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-value-set|#{version}"/>
+                <valueSet value="https://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-value-set|#{version}"/>
             </binding>
         </element>
         <element id="Task.output:data-set-status.type.coding">
@@ -129,7 +129,7 @@
         <element id="Task.output:data-set-status.type.coding.system">
             <path value="Task.output.type.coding.system"/>
             <min value="1"/>
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
+            <fixedUri value="https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
         </element>
         <element id="Task.output:data-set-status.type.coding.code">
             <path value="Task.output.type.coding.code"/>
@@ -145,14 +145,14 @@
         <element id="Task.output:data-set-status.value[x].system">
             <path value="Task.output.value[x].system"/>
             <min value="1"/>
-            <fixedUri value="http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system"/>
+            <fixedUri value="https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system"/>
         </element>
         <element id="Task.output:data-set-status.value[x].code">
             <path value="Task.output.value[x].code"/>
             <min value="1"/>
             <binding>
                 <strength value="required"/>
-                <valueSet value="http://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
+                <valueSet value="https://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
             </binding>
         </element>
     </differential>

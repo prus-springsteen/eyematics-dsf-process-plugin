@@ -15,7 +15,7 @@ public class ProvideFTTPClientConfig {
     @ProcessDocumentation(
             processNames = {"eyematicsorg_provideProcess"},
             description = "The base address of the fTTP server",
-            recommendation = "Specify if you are using the send process to request pseudonyms from the fTTP. Caution: The fTTP client is unable to follow redirects, specify the final url if the server redirects requests",
+            recommendation = "Specify if you are using the process to request pseudonyms from the fTTP. Caution: The fTTP client is unable to follow redirects, specify the final url if the server redirects requests",
             example = "http://foo.bar"
     )
     @Value("${org.eyematics.provide.fttp.server.base.url:#{null}}")
@@ -23,7 +23,7 @@ public class ProvideFTTPClientConfig {
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_provideProcess"},
-            description = "P12 encoded file with client-certificate used to authenticated against fTTP server",
+            description = "P12 encoded file with client-certificate used to authenticate against fTTP server",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/fttp_server_client_certificate.p12"
     )
@@ -57,8 +57,8 @@ public class ProvideFTTPClientConfig {
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_provideProcess"},
-            description = "Your organizations API key provided by the fTTP, the fTTP API key can not be defined via docker secret file and needs to be defined directly via the environment variable",
-            recommendation = "Specify if you are using the send process to request pseudonyms from the fTTP"
+            description = "Your organization API key provided by the fTTP, the fTTP API key cannot be defined via docker secret file and needs to be defined directly via the environment variable",
+            recommendation = "Specify if you are using the process to request pseudonyms from the fTTP"
     )
     @Value("${org.eyematics.provide.fttp.api.key:#{null}}")
     private String fttpApiKey;
@@ -74,7 +74,7 @@ public class ProvideFTTPClientConfig {
             processNames = {"eyematicsorg_provideProcess"},
             description = "Pseudonymization domain target identifier specified by the fTTP",
             example = "dic_muenster",
-            recommendation = "Specify if you are using the send process to request pseudonyms from the fTTP"
+            recommendation = "Specify if you are using the process to request pseudonyms from the fTTP"
     )
     @Value("${org.eyematics.provide.fttp.target:eyematics}")
     private String fttpTarget;

@@ -43,7 +43,7 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
                 .createInput(new Reference().setReference(variables
                                 .getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
                                     ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE));
+                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE));
     }
 
     @Override

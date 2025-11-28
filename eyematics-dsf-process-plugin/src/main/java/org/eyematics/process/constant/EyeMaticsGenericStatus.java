@@ -28,7 +28,7 @@ public enum EyeMaticsGenericStatus {
     DATA_ACKNOWLEDGE_FORBIDDEN,
     DATA_PROVIDE_MISSING;
 
-    private static final String TYPE_SYSTEM = "http://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system";
+    private static final String TYPE_SYSTEM = "https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system";
     private static final String TYPE_CODE = "data-set-status";
 
     public static String getTypeSystem() {

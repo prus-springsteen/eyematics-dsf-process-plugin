@@ -35,7 +35,7 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
         Reference reference = api.getTaskHelper()
                 .getFirstInputParameterValue(latestTask,
                         ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                        ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE,
+                        ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE,
                         Reference.class)
                 .orElseThrow(() -> this.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
                                                            variables,

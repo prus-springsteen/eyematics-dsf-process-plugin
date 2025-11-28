@@ -1,5 +1,6 @@
 <ActivityDefinition xmlns="http://hl7.org/fhir">
     <meta>
+        <profile value="http://dsf.dev/fhir/StructureDefinition/activity-definition"></profile>
         <tag>
             <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag" />
             <code value="ALL" />
@@ -10,7 +11,7 @@
             <valueString value="provideProcessStartEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}" />
+            <valueCanonical value="https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>
@@ -81,7 +82,7 @@
             <valueString value="provideProcessAcknowledgementEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition|#{version}" />
+            <valueCanonical value="https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>
@@ -147,7 +148,7 @@
             </valueCoding>
         </extension>
     </extension>
-    <url value="http://eyematics.org/bpe/Process/eyematicsProvideProcess" />
+    <url value="https://eyematics.org/bpe/Process/eyematicsProvideProcess" />
     <version value="#{version}" />
     <name value="EyeMaticsProvideProcessActivityDefinition" />
     <title value="EyeMatics Provide Process Activity Definition" />

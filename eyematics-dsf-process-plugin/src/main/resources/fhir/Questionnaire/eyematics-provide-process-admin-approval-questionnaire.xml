@@ -6,7 +6,7 @@
             <code value="ALL"/>
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/Questionnaire/eyematics-provide-process-admin-approval-questionnaire"/>
+    <url value="https://eyematics.org/fhir/Questionnaire/eyematics-provide-process-admin-approval-questionnaire"/>
     <version value="#{version}"/>
     <date value="#{date}"/>
     <status value="unknown"/>
@@ -24,11 +24,13 @@
     </item>
     <item>
         <linkId value="binary-question"/>
+        <text value="The binary-question which will be displayed"/>
         <type value="display"/>
     </item>
     <item>
         <linkId value="answer"/>
         <type value="boolean"/>
+        <text value="The answer binary-question: 'true': 'yes' or 'false': 'no'"/>
         <required value="true"/>
     </item>
 </Questionnaire>

@@ -1,5 +1,6 @@
 <ActivityDefinition xmlns="http://hl7.org/fhir">
     <meta>
+        <profile value="http://dsf.dev/fhir/StructureDefinition/activity-definition"></profile>
         <tag>
             <system value="http://dsf.dev/fhir/CodeSystem/read-access-tag" />
             <code value="ALL" />
@@ -10,7 +11,7 @@
             <valueString value="initiateProcessStartEventMessage" />
         </extension>
         <extension url="task-profile">
-            <valueCanonical value="http://eyematics.org/fhir/StructureDefinition/eyematics-initiate-process-structure-definition|#{version}" />
+            <valueCanonical value="https://eyematics.org/fhir/StructureDefinition/eyematics-initiate-process-structure-definition|#{version}" />
         </extension>
         <extension url="requester">
             <valueCoding>
@@ -55,7 +56,7 @@
             </valueCoding>
         </extension>
     </extension>
-    <url value="http://eyematics.org/bpe/Process/eyematicsInitiateProcess" />
+    <url value="https://eyematics.org/bpe/Process/eyematicsInitiateProcess" />
     <version value="#{version}" />
     <name value="EyeMaticsInitiateProcessActivityDefinition" />
     <title value="EyeMatics Initiate Process Activity Definition" />

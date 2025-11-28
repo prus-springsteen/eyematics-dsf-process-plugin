@@ -46,7 +46,11 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
                         if (Task.TaskStatus.FAILED.equals(subTask.getStatus())) {
                             startTask.setStatus(subTask.getStatus());
                         }
-                        subTask.getOutput().forEach(startTask::addOutput);
+                        if (!subTask.getOutput().isEmpty()) {
+                            Task.TaskOutputComponent errorOutput = subTask.getOutput().get(0);
+                            errorOutput.getExtension().clear();
+                            startTask.addOutput(errorOutput);
+                        }
                     }
                 });
         variables.updateTask(startTask);

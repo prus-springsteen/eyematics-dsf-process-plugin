@@ -196,7 +196,7 @@ public class TaskProfileTest {
 		task.addInput()
 				.setValue(new Reference().setReference("https://dic-a/fhir/Binary/" + UUID.randomUUID().toString()))
 				.getType().addCoding().setSystem(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS)
-				.setCode(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATASET_REFERENCE);
+				.setCode(ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE);
 
 		return task;
 	}

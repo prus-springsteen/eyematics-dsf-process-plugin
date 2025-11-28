@@ -5,7 +5,7 @@
             <code value="ALL"/>
         </tag>
     </meta>
-    <url value="http://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system" />
+    <url value="https://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system" />
     <version value="#{version}"/>
     <name value="EyeMaticsReceiveInitiateProcessCodeSystem"/>
     <title value="EyeMatics Receive Initiate Process Code System"/>
