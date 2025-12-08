@@ -44,7 +44,6 @@ public class FHIRResourceGenerator {
             } catch (Exception e) {
                 logger.error("Generation of FHIR resources failed for {}: {}", fhirServer.getDic(), e.getMessage());
             }
-
         }
     }
 

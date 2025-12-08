@@ -19,7 +19,7 @@ You can test the processes by following the [README](eyematics-dsf-process-plugi
 the `eyematics-dsf-process-plugin-test-setup` directory.
 
 ## Acknowledgements
-The EyeMatics DSF process plugin is developed based on the DSF Community. Here the periodical support by Simon ([@schwzr](https://github.com/schwzr)) needs to be highlighted. 
+The EyeMatics DSF process plugin is developed based on the DSF Community. Here the periodical technical support by Simon ([@schwzr](https://github.com/schwzr)) and the organizational support by Maximilian ([@MadMax93](https://github.com/MadMax93)) need to be highlighted. 
 
 Furthermore, existing processes and code is obtained from following repositories:
 - [MII Process Data Transfer](https://github.com/medizininformatik-initiative/mii-process-data-transfer) — Partially the data transferring processes as starting point for the EyeMatics process. Many thanks to [@wetret](https://github.com/wetret) and [@hhund](https://github.com/hhund) for the work.

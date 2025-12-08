@@ -31,28 +31,34 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
         logger.info("-> Finalizing the receipt process");
         Task startTask = variables.getLatestTask();
         List<Target> targetsList = variables.getTargets().getEntries();
-        targetsList.forEach(target -> {
-                    String correlationKey = target.getCorrelationKey();
-                    Task subTask = variables
-                            .getResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
-                    if (subTask == null) {
-                        startTask.addOutput(
-                                this.dataSetStatusGenerator.createDataSetStatusOutput(
-                                        EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
-                                        EyeMaticsGenericStatus.getTypeSystem(),
-                                        EyeMaticsGenericStatus.getTypeCode(),
-                                        null));
-                    } else {
-                        if (Task.TaskStatus.FAILED.equals(subTask.getStatus())) {
-                            startTask.setStatus(subTask.getStatus());
-                        }
-                        if (!subTask.getOutput().isEmpty()) {
-                            Task.TaskOutputComponent errorOutput = subTask.getOutput().get(0);
-                            errorOutput.getExtension().clear();
-                            startTask.addOutput(errorOutput);
-                        }
-                    }
-                });
+        int failedTaskCount = 0;
+        for (Target target : targetsList) {
+            String correlationKey = target.getCorrelationKey();
+            Task subTask = variables
+                    .getResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
+            if (subTask == null) {
+                startTask.addOutput(
+                        this.dataSetStatusGenerator.createDataSetStatusOutput(
+                                EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
+                                EyeMaticsGenericStatus.getTypeSystem(),
+                                EyeMaticsGenericStatus.getTypeCode(),
+                                null));
+            } else {
+                if (Task.TaskStatus.FAILED.equals(subTask.getStatus())) {
+                    failedTaskCount++;
+                }
+                if (!subTask.getOutput().isEmpty()) {
+                    Task.TaskOutputComponent errorOutput = subTask.getOutput().get(0);
+                    errorOutput.getExtension().clear();
+                    startTask.addOutput(errorOutput);
+                }
+            }
+        }
+
+        if (failedTaskCount == targetsList.size()) {
+            startTask.setStatus(Task.TaskStatus.FAILED);
+        }
+
         variables.updateTask(startTask);
 
         if (Task.TaskStatus.FAILED.equals(startTask.getStatus())) {

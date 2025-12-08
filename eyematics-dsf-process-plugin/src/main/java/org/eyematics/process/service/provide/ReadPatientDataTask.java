@@ -69,7 +69,6 @@ public class ReadPatientDataTask extends AbstractExtendedProcessServiceDelegate 
                     .forEach((e -> { MedicationRequest o = (MedicationRequest) e.getResource();
                         patientIdSet.add(PatientId.extract(o.getSubject().getReference()));
                     }));
-
             String patientsQuery = String.format("_id=%s", String.join(",", patientIdSet));
             Bundle patients = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
                     "Patient",

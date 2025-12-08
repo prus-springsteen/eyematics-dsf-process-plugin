@@ -61,29 +61,16 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
     }
 
     private String countResources(String providingOrganization, String methodOutcome) {
-        int patients = 0;
-        int observations = 0;
-        int medications = 0;
-        int medicationAdministrations = 0;
-        int medicationRequest = 0;
         try {
-            Bundle methodOutcomeBundle = (Bundle) this.api.getFhirContext().newJsonParser().parseResource(methodOutcome);
-            for (Bundle.BundleEntryComponent entry : methodOutcomeBundle.getEntry()) {
-                if (entry.getResponse().getLocation().contains("Patient")) patients++;
-                if (entry.getResponse().getLocation().contains("Observation")) observations++;
-                if (entry.getResponse().getLocation().contains("Medication")) medications++;
-                if (entry.getResponse().getLocation().contains("MedicationAdministration")) medicationAdministrations++;
-                if (entry.getResponse().getLocation().contains("MedicationRequest")) medicationRequest++;
-            }
+            Bundle methodOutcomeBundle = (Bundle) this.api.getFhirContext()
+                    .newJsonParser().parseResource(methodOutcome);
+            return String.format("%s submitted %d FHIR resources.",
+                    providingOrganization, methodOutcomeBundle.getEntry().size());
         } catch (Exception exception) {
-            logger.info("Could not parse method outcome: {}", exception.getMessage());
+            String message = exception.getMessage();
+            logger.info("Could not parse method outcome: {}", message);
+            return String.format("%s submitted an unknown amount of FHIR resources, reason: %s",
+                    providingOrganization, message);
         }
-        return String.format("%s submitted %s patients, %s observations, %s medications, %s medication administrations and %s medication requests.",
-                providingOrganization,
-                patients,
-                observations,
-                medications,
-                medicationAdministrations,
-                medicationRequest);
     }
 }

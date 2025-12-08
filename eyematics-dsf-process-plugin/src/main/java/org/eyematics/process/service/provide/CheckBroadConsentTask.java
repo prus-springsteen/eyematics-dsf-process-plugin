@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegate {
@@ -55,6 +56,8 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
                     .map(this::transformToConsent)
                     .filter(this::isValidBroadConsent)
                     .map(c -> this.getPatient(c, patients))
+                    .flatMap(Optional::stream)
+                    .filter(Objects::nonNull)
                     .toList();
             patients.getEntry().clear();
             patients.getEntry().addAll(filteredPatients);
@@ -141,17 +144,19 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
                 EyeMaticsConstants.MII_IG_MODUL_CONSENT_PROVISION_CODE);
     }
 
-    private Bundle.BundleEntryComponent getPatient(Consent consent, Bundle patients) {
-        if (consent == null) return null;
-        if (!consent.getPatient().hasReference()) return null;
+    private Optional<Bundle.BundleEntryComponent> getPatient(Consent consent, Bundle patients) {
+        if (consent == null) return Optional.empty();
+        if (!consent.getPatient().hasReference()) return Optional.empty();
         String patientId = this.extractPatientId(consent);
-        Bundle.BundleEntryComponent patient = patients.getEntry()
+        if (patientId == null) return Optional.empty();
+        List<Bundle.BundleEntryComponent> patientsConsent = patients.getEntry()
                 .stream()
                 .filter(be -> be.getResource().getIdElement().getIdPart().equals(patientId))
-                .toList()
-                .get(0);
+                .toList();
+        if (patientsConsent.isEmpty()) return Optional.empty();
+        Bundle.BundleEntryComponent patient = patientsConsent.get(0);
         patients.getEntry().remove(patient);
-        return patient;
+        return Optional.of(patient);
     }
 
     private String extractPatientId(Consent consent) {
