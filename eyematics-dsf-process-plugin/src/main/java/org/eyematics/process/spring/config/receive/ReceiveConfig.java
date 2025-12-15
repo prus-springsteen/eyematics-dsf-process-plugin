@@ -3,7 +3,6 @@ package org.eyematics.process.spring.config.receive;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask;
 import org.eyematics.process.service.receive.*;
-import org.eyematics.process.spring.config.CryptoConfig;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

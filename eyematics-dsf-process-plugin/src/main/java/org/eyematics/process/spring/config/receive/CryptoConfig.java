@@ -1,4 +1,4 @@
-package org.eyematics.process.spring.config;
+package org.eyematics.process.spring.config.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
@@ -18,7 +18,7 @@ public class CryptoConfig {
 
     @ProcessDocumentation(
             required = true,
-            processNames = "eyematicsorg_receiveProcess",
+            processNames = "eyematicsorg_eyematicsReceiveProcess",
             description = "Location of the DIC private-key as 4096-Bit RSA PEM encoded, not encrypted file",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/dic_private_key.pem")
@@ -27,7 +27,7 @@ public class CryptoConfig {
 
     @ProcessDocumentation(
             required = true,
-            processNames = "eyematicsorg_receiveProcess",
+            processNames = "eyematicsorg_eyematicsReceiveProcess",
             description = "Location of the DIC public-key as 4096-Bit RSA PEM encoded file",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/dic_public_key.pem")

@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class ProvideFTTPClientConfig {
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "The base address of the fTTP server",
             recommendation = "Specify if you are using the process to request pseudonyms from the fTTP. Caution: The fTTP client is unable to follow redirects, specify the final url if the server redirects requests",
             example = "http://foo.bar"
@@ -22,7 +22,7 @@ public class ProvideFTTPClientConfig {
     private String fttpServerBase;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "P12 encoded file with client-certificate used to authenticate against fTTP server",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/fttp_server_client_certificate.p12"
@@ -31,7 +31,7 @@ public class ProvideFTTPClientConfig {
     private String fttpCertificate;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Password for the client-certificate defined via `org.eyematics.provide.fttp.certificate`",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/fttp_client_server.password"
@@ -40,14 +40,14 @@ public class ProvideFTTPClientConfig {
     private String fttpCertificatePassword;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Basic authentication username to authenticate against the fTTP server, set if the server requests authentication using basic authentication"
     )
     @Value("${org.eyematics.provide.fttp.client.basicauth.username:#{null}}")
     private String fttpBasicAuthUsername;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Basic authentication password to authenticate against the fTTP server, set if the server requests authentication using basic authentication",
             recommendation = "Use docker secret file to configure by using `${env_variable}_FILE`",
             example = "/run/secrets/fttp_server_basicauth.password"
@@ -56,7 +56,7 @@ public class ProvideFTTPClientConfig {
     private String fttpBasicAuthPassword;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Your organization API key provided by the fTTP, the fTTP API key cannot be defined via docker secret file and needs to be defined directly via the environment variable",
             recommendation = "Specify if you are using the process to request pseudonyms from the fTTP"
     )
@@ -64,14 +64,14 @@ public class ProvideFTTPClientConfig {
     private String fttpApiKey;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Study identifier specified by the fTTP"
     )
     @Value("${org.eyematics.provide.fttp.study:eyematics}")
     private String fttpStudy;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Pseudonymization domain target identifier specified by the fTTP",
             example = "dic_muenster",
             recommendation = "Specify if you are using the process to request pseudonyms from the fTTP"
@@ -80,7 +80,7 @@ public class ProvideFTTPClientConfig {
     private String fttpTarget;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Connection timeout in milliseconds used when accessing the fTTP server, time until a connection needs to be established before aborting"
     )
     @Value("${org.eyematics.provide.fttp.client.timeout.connect:10000}")

@@ -45,6 +45,8 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
             List<String> bloomfilterList = patients.getEntry()
                     .stream()
                     .map(this::getBloomfilterFromBundleEntry)
+                    .flatMap(Optional::stream)
+                    .filter(Objects::nonNull)
                     .toList();
             HashSet<String> bloomfilter = new HashSet<>(bloomfilterList);
             Optional<HashMap<String, String>> globalPseudonyms = fttpClient.getGlobalPseudonym(bloomfilter);
@@ -52,6 +54,8 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
             List<Bundle.BundleEntryComponent> pseudonymizedPatients = patients.getEntry()
                     .stream()
                     .map(p -> this.setGlobalPseudonymToBundleEntry(p, globalPseudonymMap))
+                    .flatMap(Optional::stream)
+                    .filter(Objects::nonNull)
                     .toList();
             patients.getEntry().clear();
             patients.getEntry().addAll(pseudonymizedPatients);
@@ -63,29 +67,15 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
         }
     }
 
-    private Patient transformToPatient(Bundle.BundleEntryComponent patient) {
+    private Optional<Patient> transformToPatient(Bundle.BundleEntryComponent patient) {
         if (patient.hasResource() && patient.getResource() instanceof Patient) {
-            return (Patient) patient.getResource();
+            return Optional.ofNullable((Patient) patient.getResource());
         }
-        return null;
+        return Optional.empty();
     }
 
-    private String getBloomfilterFromBundleEntry(Bundle.BundleEntryComponent patient) {
-        Patient p = this.transformToPatient(patient);
-        if (p != null && p.hasIdentifier()) {
-            return p.getIdentifier()
-                    .stream()
-                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER))
-                    .map(Identifier::getValue)
-                    .toList()
-                    .get(0);
-        }
-        return null;
-    }
-
-    private Bundle.BundleEntryComponent setGlobalPseudonymToBundleEntry(Bundle.BundleEntryComponent patient,
-                                                                        HashMap<String, String> globalPseudonymMap) {
-        Patient p = this.transformToPatient(patient);
+    private Optional<String> getBloomfilterFromBundleEntry(Bundle.BundleEntryComponent patient) {
+        Patient p = this.transformToPatient(patient).orElse(null);
         if (p != null && p.hasIdentifier()) {
             String bloomfilter = p.getIdentifier()
                     .stream()
@@ -93,14 +83,30 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
                     .map(Identifier::getValue)
                     .toList()
                     .get(0);
-            if (bloomfilter == null) return null;
+            return Optional.ofNullable(bloomfilter);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<Bundle.BundleEntryComponent> setGlobalPseudonymToBundleEntry(Bundle.BundleEntryComponent patient,
+                                                                        HashMap<String, String> globalPseudonymMap) {
+        Patient p = this.transformToPatient(patient).orElse(null);
+        if (p != null && p.hasIdentifier()) {
+            String bloomfilter = p.getIdentifier()
+                    .stream()
+                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER))
+                    .map(Identifier::getValue)
+                    .filter(Objects::nonNull)
+                    .toList()
+                    .get(0);
+            if (bloomfilter == null) return Optional.empty();
             String globalPseudonym = globalPseudonymMap.get(bloomfilter);
-            if (globalPseudonym == null) return null;
+            if (globalPseudonym == null) return Optional.empty();
             p.getIdentifier().add(new Identifier()
                     .setSystem(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM)
                     .setValue(globalPseudonym));
-            return patient;
+            return Optional.of(patient);
         }
-        return null;
+        return Optional.empty();
     }
 }

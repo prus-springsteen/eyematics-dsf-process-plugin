@@ -2,6 +2,7 @@ package org.eyematics.process.spring.config;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import dev.dsf.bpe.v1.ProcessPluginDeploymentStateListener;
+import org.eyematics.process.spring.config.receive.CryptoConfig;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.eyematics.process.utils.listener.CorrelationKeyProcessListener;
 import org.eyematics.process.utils.listener.EyeMaticsProcessPluginDeploymentStateListener;

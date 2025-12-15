@@ -4,7 +4,7 @@ import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.interaction.EyeMaticsAdminApprovalTask;
 import org.eyematics.process.message.provide.ProvideDataMessageTask;
 import org.eyematics.process.service.provide.*;
-import org.eyematics.process.spring.config.CryptoConfig;
+import org.eyematics.process.spring.config.receive.CryptoConfig;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

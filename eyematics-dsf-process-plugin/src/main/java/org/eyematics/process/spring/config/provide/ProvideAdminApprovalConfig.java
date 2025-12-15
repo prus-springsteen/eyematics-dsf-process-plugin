@@ -9,7 +9,7 @@ public class ProvideAdminApprovalConfig {
 
     @ProcessDocumentation(
             required = true,
-            processNames = {"eyematicsorg_provideProcess" },
+            processNames = {"eyematicsorg_eyematicsProvideProcess" },
             description = "Whether an admin is needed to approve the requested EyeMatics data transfer `true` or not `false`."
     )
     @Value("${org.eyematics.provide.admin.approval:true}")

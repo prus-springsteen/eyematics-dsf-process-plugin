@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import dev.dsf.bpe.v1.ProcessPluginDefinition;
-import org.eyematics.process.spring.config.CryptoConfig;
+import org.eyematics.process.spring.config.receive.CryptoConfig;
 import org.eyematics.process.spring.config.EyeMaticsConfig;
 import org.eyematics.process.spring.config.initiate.InitiateConfig;
 import org.eyematics.process.spring.config.provide.*;

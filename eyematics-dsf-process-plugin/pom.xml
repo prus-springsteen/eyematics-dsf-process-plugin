@@ -204,7 +204,7 @@
 				</executions>
 				<configuration>
 					<workingPackages>
-						<workingPackage>org.eyematics.process.eyematics</workingPackage>
+						<workingPackage>org.eyematics.process</workingPackage>
 					</workingPackages>
 				</configuration>
 			</plugin>

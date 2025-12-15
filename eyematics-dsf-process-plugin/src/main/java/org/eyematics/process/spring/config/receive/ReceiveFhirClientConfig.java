@@ -22,7 +22,7 @@ public class ReceiveFhirClientConfig
 
     @ProcessDocumentation(
             required = true,
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The base address of the DIC FHIR server to store FHIR resources",
             example = "http://foo.bar/fhir"
     )
@@ -30,7 +30,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreBaseUrl;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "PEM encoded file with one or more trusted root certificates to validate the DIC FHIR server certificate when connecting via https",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/hospital_ca.pem"
@@ -39,7 +39,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreTrustStore;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "PEM encoded file with client-certificate, if DIC FHIR server requires mutual TLS authentication",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/fhir_server_client_certificate.pem"
@@ -48,7 +48,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreCertificate;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Private key corresponding to the RECEIVE FHIR server client-certificate as a PEM encoded file. Use *${env_variable}_PASSWORD* or *${env_variable}_PASSWORD_FILE*_FILE if the private key is encrypted",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/fhir_server_private_key.pem"
@@ -57,7 +57,7 @@ public class ReceiveFhirClientConfig
     private String fhirStorePrivateKey;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Password to decrypt the DIC FHIR server client-certificate encrypted private key",
             recommendation = "Use docker secret file to configure by using *${env_variable}_FILE*",
             example = "/run/secrets/fhir_server_private_key.pem.password"
@@ -66,14 +66,14 @@ public class ReceiveFhirClientConfig
     private char[] fhirStorePrivateKeyPassword;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Basic authentication username, set if the server containing the FHIR data requests authentication using basic auth"
     )
     @Value("${org.eyematics.receive.fhir.server.basicauth.username:#{null}}")
     private String fhirStoreUsername;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Basic authentication password, set if the server containing the FHIR data requests authentication using basic auth",
             recommendation = "Use docker secret file to configure by using *${env_variable}_FILE*",
             example = "/run/secrets/fhir_server_basicauth.password"
@@ -82,14 +82,14 @@ public class ReceiveFhirClientConfig
     private String fhirStorePassword;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Bearer token for authentication, set if the server containing the FHIR data requests authentication using a bearer token, cannot be set using docker secrets"
     )
     @Value("${org.eyematics.receive.fhir.server.bearer.token:#{null}}")
     private String fhirStoreBearerToken;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The timeout in milliseconds until a connection is established between the client and the DIC FHIR server",
             recommendation = "Change default value only if timeout exceptions occur"
     )
@@ -97,7 +97,7 @@ public class ReceiveFhirClientConfig
     private int fhirStoreConnectTimeout;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The timeout in milliseconds used when requesting a connection from the connection manager between the client and the DIC FHIR server",
             recommendation = "Change default value only if timeout exceptions occur"
     )
@@ -105,7 +105,7 @@ public class ReceiveFhirClientConfig
     private int fhirStoreConnectionRequestTimeout;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Maximum period of inactivity in milliseconds between two consecutive data packets of the client and the DIC FHIR server",
             recommendation = "Change default value only if timeout exceptions occur"
     )
@@ -113,7 +113,7 @@ public class ReceiveFhirClientConfig
     private int fhirStoreSocketTimeout;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The client will log additional debug output",
             recommendation = "Change default value only if exceptions occur"
     )
@@ -121,19 +121,19 @@ public class ReceiveFhirClientConfig
     private boolean fhirStoreHapiClientVerbose;
 
     @ProcessDocumentation(processNames = {
-            "eyematicsorg_receiveProcess" }, description = "Proxy location, set if the server containing the FHIR data can only be reached through a proxy, uses value from DEV_DSF_PROXY_URL if not set", example = "http://proxy.foo:8080")
+            "eyematicsorg_eyematicsReceiveProcess" }, description = "Proxy location, set if the server containing the FHIR data can only be reached through a proxy, uses value from DEV_DSF_PROXY_URL if not set", example = "http://proxy.foo:8080")
     @Value("${org.eyematics.receive.fhir.server.proxy.url:#{null}}")
     private String fhirStoreProxyUrl;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Proxy username, set if the server containing the FHIR data can only be reached through a proxy which requests authentication, uses value from DEV_DSF_PROXY_USERNAME if not set"
     )
     @Value("${org.eyematics.receive.fhir.server.proxy.username:#{null}}")
     private String fhirStoreProxyUsername;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Proxy password, set if the server containing the FHIR data can only be reached through a proxy which requests authentication, uses value from DEV_DSF_PROXY_PASSWORD if not set",
             recommendation = "Use docker secret file to configure by using *${env_variable}_FILE*"
     )
@@ -141,7 +141,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreProxyPassword;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The url of the oidc receiver to request access tokens (token endpoint)",
             example = "http://foo.baz/realms/fhir-realm/protocol/openid-connect/token"
     )
@@ -149,7 +149,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreOAuth2IssuerUrl;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The path for oidc discovery protocol",
             recommendation = "Change default value only if a path differs from the oidc specification"
     )
@@ -157,14 +157,14 @@ public class ReceiveFhirClientConfig
     private String fhirStoreOAuth2DiscoveryPath;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Identifier of the client (username) used for authentication when accessing the oidc receiver token endpoint"
     )
     @Value("${org.eyematics.receive.fhir.server.oauth2.client.id:#{null}}")
     private String fhirStoreOAuth2ClientId;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Secret of the client (password) used for authentication when accessing the oidc receiver token endpoint",
             recommendation = "Use docker secret file to configure by using *${env_variable}_FILE*"
     )
@@ -172,7 +172,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreOAuth2ClientSecret;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "The timeout in milliseconds until a connection is established between the client and the oidc receiver",
             recommendation = "Change default value only if timeout exceptions occur"
     )
@@ -180,7 +180,7 @@ public class ReceiveFhirClientConfig
     private int fhirStoreOAuth2ConnectTimeout;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Maximum period of inactivity in milliseconds between two consecutive data packets of the client and the oidc receiver",
             recommendation = "Change default value only if timeout exceptions occur"
     )
@@ -188,7 +188,7 @@ public class ReceiveFhirClientConfig
     private int fhirStoreOAuth2SocketTimeout;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "PEM encoded file with one or more trusted root certificates to validate the oidc receiver server certificate when connecting via https",
             recommendation = "Use docker secret file to configure",
             example = "/run/secrets/hospital_ca.pem"
@@ -197,7 +197,7 @@ public class ReceiveFhirClientConfig
     private String fhirStoreOAuth2TrustStore;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Proxy location, set if the oidc receiver can only be reached through a proxy, uses value from DEV_DSF_PROXY_URL if not set",
             example = "http://proxy.foo:8080"
     )
@@ -205,14 +205,14 @@ public class ReceiveFhirClientConfig
     private String fhirStoreOAuth2ProxyUrl;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Proxy username, set if the oidc receiver can only be reached through a proxy which requests authentication, uses value from DEV_DSF_PROXY_USERNAME if not set"
     )
     @Value("${org.eyematics.receive.fhir.server.oauth2.proxy.username:#{null}}")
     private String fhirStoreOAuth2ProxyUsername;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "Proxy password, set if the oidc receiver can only be reached through a proxy which requests authentication, uses value from DEV_DSF_PROXY_PASSWORD if not set",
             recommendation = "Use docker secret file to configure by using *${env_variable}_FILE*"
     )
@@ -220,21 +220,21 @@ public class ReceiveFhirClientConfig
     private String fhirStoreOAuth2ProxyPassword;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "If set to true, OIDC validation will only log a warning and not throw an illegal state exception"
     )
     @Value("${org.eyematics.receive.fhir.server.oauth2.discovery.validation.lenient:false}")
     private boolean fhirStoreOAuth2DiscoveryValidationLenient;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "To enable debug logging of FHIR resources set to `true`"
     )
     @Value("${org.eyematics.receive.fhir.dataLoggingEnabled:false}")
     private boolean fhirDataLoggingEnabled;
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_receiveProcess"},
+            processNames = {"eyematicsorg_eyematicsReceiveProcess"},
             description = "To enable an additional connection test on startup of the client reading Binary resources as stream, set to `true`"
     )
     @Value("${org.eyematics.receive.fhir.server.binary.stream.client.connection.test.enabled:false}")

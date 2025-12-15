@@ -11,7 +11,7 @@ import java.util.List;
 public class ProvideMailConfig {
 
     @ProcessDocumentation(
-            processNames = {"eyematicsorg_provideProcess"},
+            processNames = {"eyematicsorg_eyematicsProvideProcess"},
             description = "Mail service recipient addresses for retrieval of Bloomfilter; comma separated list",
             example = "recipient@localhost"
     )
