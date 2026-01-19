@@ -2,6 +2,7 @@ package org.eyematics.process.spring.config.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.receive.AcknowledgeReceivedMessageTask;
+import org.eyematics.process.message.receive.InitiateProvideDataMessageTask;
 import org.eyematics.process.service.receive.*;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,23 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public LogReceiveFailedTask logReceiveFailedTask() { return new LogReceiveFailedTask(api, dataSetStatusGenerator); }
+    public SelectInitiateTargetTask selectInitiateTargetTask() { return new SelectInitiateTargetTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public InitiateProvideDataMessageTask initiateProvideDataMessageTask() { return new InitiateProvideDataMessageTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public HandleMissingDataTask handleMissingDataTask() { return new HandleMissingDataTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public CloseReceiveSubProcessTask closeReceiveSubprocessTask() { return new CloseReceiveSubProcessTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public InformAdminTask informAdminTask() { return new InformAdminTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -44,7 +61,7 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InsertRequestedDataTask depositRequestedDataTask() { return new InsertRequestedDataTask(api, dataSetStatusGenerator, receiveFhirClientConfig.getFhirClientFactory()); }
+    public InsertRequestedDataTask insertRequestedDataTask() { return new InsertRequestedDataTask(api, dataSetStatusGenerator, receiveFhirClientConfig.getFhirClientFactory()); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -56,7 +73,7 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeReceiveSubprocessTask finalizeReceiveSubprocessTask() { return  new FinalizeReceiveSubprocessTask(api, dataSetStatusGenerator); }
+    public FinalizeReceiveSubProcessTask finalizeReceiveSubprocessTask() { return  new FinalizeReceiveSubProcessTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

@@ -30,7 +30,7 @@
     <item>
         <linkId value="answer"/>
         <type value="boolean"/>
-        <text value="The answer binary-question: 'true': 'yes' or 'false': 'no'"/>
+        <text value="The answer for the question:"/>
         <required value="true"/>
     </item>
 </Questionnaire>

@@ -10,6 +10,8 @@ public interface ReceiveConstants {
     String PROFILE_TASK_INITIATE_EYEMATICS_RECEIVE_PROCESS_MESSAGE_NAME = "receiveProcessInitiateEventMessage";
     String PROFILE_TASK_EYEMATICS_RECEIVE_PROCESS = "https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition";
     String PROFILE_TASK_EYEMATICS_RECEIVE_PROCESS_MESSAGE_NAME = "receiveProcessStartEventMessage";
+    String PROFILE_TASK_EYEMATICS_CLOSE_RECEIVE_PROCESS = "https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-close-structure-definition";
+    String PROFILE_TASK_EYEMATICS_CLOSE_RECEIVE_PROCESS_MESSAGE_NAME = "receiveProcessCloseEventMessage";
 
     String CODE_SYSTEM_RECEIVE_PROCESS_INITIATE = "https://eyematics.org/fhir/CodeSystem/eyematics-receive-process-initiate-code-system";
     String CODE_SYSTEM_RECEIVE_PROCESS_INITIATE_PROCESS_CORRELATION_KEY= "dic-correlation-key";
@@ -18,5 +20,6 @@ public interface ReceiveConstants {
     String CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE = "data-set-reference-input";
     String BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED = "dataSetEncrypted";
     String BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
-    String BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE = "errorResource";
+
+    String BPMN_EXECUTION_VARIABLE_TARGET_RESOURCE = "targetResource";
 }

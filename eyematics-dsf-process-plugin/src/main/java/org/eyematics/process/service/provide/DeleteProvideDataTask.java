@@ -20,7 +20,8 @@ public class DeleteProvideDataTask extends AbstractExtendedProcessServiceDelegat
 
     private static final Logger logger = LoggerFactory.getLogger(DeleteProvideDataTask.class);
 
-    public DeleteProvideDataTask(ProcessPluginApi api,  DataSetStatusGenerator dataSetStatusGenerator) {
+    public DeleteProvideDataTask(ProcessPluginApi api,
+                                 DataSetStatusGenerator dataSetStatusGenerator) {
         super(api, dataSetStatusGenerator);
     }
 
@@ -29,7 +30,10 @@ public class DeleteProvideDataTask extends AbstractExtendedProcessServiceDelegat
         logger.info("-> Deleting the provided data");
         IdType binaryId = new IdType(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
         try {
-            if (!binaryId.isEmpty()) this.deletePermanently(binaryId);
+            if (!binaryId.isEmpty()) {
+                this.deletePermanently(binaryId);
+            }
+
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Permanently deleting encrypted transferable data-set failed - {}", exception.getMessage());

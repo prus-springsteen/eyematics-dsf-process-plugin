@@ -15,7 +15,6 @@ import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Objects;
 
 
@@ -44,7 +43,8 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
             Bundle bundle = (Bundle) this.getVariable(delegateExecution,
                     ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET);
             String bundleString = this.api.getFhirContext().newJsonParser().encodeResourceToString(bundle);
-            String methodOutcome = fhirClient.create(bundleString, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
+            String methodOutcome = fhirClient.create(bundleString,
+                    EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
             String providingOrganization = variables.getLatestTask().getRequester().getIdentifier().getValue();
             String countedResources = this.countResources(providingOrganization, methodOutcome);
             logger.info("Data is inserted for further processing. {}", countedResources);

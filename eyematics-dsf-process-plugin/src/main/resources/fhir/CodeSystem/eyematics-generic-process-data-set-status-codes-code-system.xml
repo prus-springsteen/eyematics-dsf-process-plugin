@@ -29,6 +29,21 @@
         <definition value="Initiation of data sharing process is forbidden." />
     </concept>
     <concept>
+        <code value="provide-initiate-failure" />
+        <display value="Provide Initiate Failure" />
+        <definition value="An error occurred during initiation of the provide process." />
+    </concept>
+    <concept>
+        <code value="provide-initiate-forbidden" />
+        <display value="Provide Initiate Forbidden" />
+        <definition value="Initiation of provide process is forbidden." />
+    </concept>
+    <concept>
+        <code value="provide-initiate-missing" />
+        <display value="Provide Initiate Missing" />
+        <definition value="Initiation of provide data request is missing." />
+    </concept>
+    <concept>
         <code value="data-request-success" />
         <display value="Data Request Success" />
         <definition value="The request of the data was successful." />
@@ -42,6 +57,26 @@
         <code value="data-request-forbidden" />
         <display value="Data Request Forbidden" />
         <definition value="The request for data is forbidden." />
+    </concept>
+    <concept>
+        <code value="receive-close-failure" />
+        <display value="Receive Close Failure" />
+        <definition value="An error occurred during a request for closing a receive subprocess." />
+    </concept>
+    <concept>
+        <code value="receive-close-forbidden" />
+        <display value="Receive Close Forbidden" />
+        <definition value="The request for closing receive a subprocess is forbidden." />
+    </concept>
+    <concept>
+        <code value="admin-approval-missing" />
+        <display value="Admin Approval Missing" />
+        <definition value="The time for admin approval for data provision is missing." />
+    </concept>
+    <concept>
+        <code value="data-provide-denied" />
+        <display value="Data Provide Denied" />
+        <definition value="The admin denied the data provision for this request." />
     </concept>
     <concept>
         <code value="data-read-failure" />
@@ -89,7 +124,7 @@
         <definition value="Provision of dataset is forbidden." />
     </concept>
     <concept>
-        <code value="data-acknowledged-missing" />
+        <code value="data-acknowledge-missing" />
         <display value="Data Acknowledge Missing" />
         <definition value="Acknowledgement of dataset is missing." />
     </concept>

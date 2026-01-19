@@ -5,9 +5,9 @@
             <code value="ALL" />
         </tag>
     </meta>
-    <url value="https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-structure-definition" />
+    <url value="https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-close-structure-definition" />
     <version value="#{version}" />
-    <name value="EyeMaticsReceiveProcessStructureDefinition" />
+    <name value="EyeMaticsReceiveProcessCloseStructureDefinition" />
     <status value="unknown" />
     <experimental value="false" />
     <date value="#{date}" />
@@ -27,8 +27,8 @@
                 <valueString value="Parameter" />
             </extension>
             <path value="Task.input" />
-            <min value="4" />
-            <max value="4" />
+            <min value="4"/>
+            <max value="4"/>
         </element>
         <element id="Task.input:message-name">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -39,7 +39,7 @@
         </element>
         <element id="Task.input:message-name.value[x]">
             <path value="Task.input.value[x]" />
-            <fixedString value="receiveProcessStartEventMessage" />
+            <fixedString value="receiveProcessCloseEventMessage" />
         </element>
         <element id="Task.input:business-key">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -59,38 +59,70 @@
             <min value="1"/>
             <max value="1"/>
         </element>
-        <element id="Task.input:data-set-reference-input">
-            <path value="Task.input" />
-            <sliceName value="data-set-reference-input" />
-            <min value="1" />
+        <element id="Task.input:data-set-status">
+            <path value="Task.input"/>
+            <sliceName value="data-set-status"/>
         </element>
-        <element id="Task.input:data-set-reference-input.type">
-            <path value="Task.input.type" />
+        <element id="Task.input:data-set-status.extension">
+            <path value="Task.input.extension" />
+            <slicing>
+                <discriminator>
+                    <type value="value" />
+                    <path value="url" />
+                </discriminator>
+                <rules value="open" />
+            </slicing>
+        </element>
+        <element id="Task.input:data-set-status.extension:eyematics-generic-process-data-set-status-error-extension">
+            <path value="Task.input.extension" />
+            <sliceName value="eyematics-generic-process-data-set-status-error-extension" />
+            <min value="0" />
+            <max value="1" />
+            <type>
+                <code value="Extension" />
+                <profile value="https://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension" />
+            </type>
+        </element>
+        <element id="Task.input:data-set-status.type">
+            <path value="Task.input.type"/>
             <binding>
-                <strength value="required" />
-                <valueSet value="https://eyematics.org/fhir/ValueSet/eyematics-receive-process-value-set" />
+                <strength value="required"/>
+                <valueSet value="https://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-value-set|#{version}"/>
             </binding>
         </element>
-        <element id="Task.input:data-set-reference-input.type.coding">
-            <path value="Task.input.type.coding" />
-                <min value="1" />
-                <max value="1" />
+        <element id="Task.input:data-set-status.type.coding">
+            <path value="Task.input.type.coding"/>
+            <min value="1"/>
+            <max value="1"/>
         </element>
-        <element id="Task.input:data-set-reference-input.type.coding.system">
-            <path value="Task.input.type.coding.system" />
-            <min value="1" />
-            <fixedUri value="https://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system" />
+        <element id="Task.input:data-set-status.type.coding.system">
+            <path value="Task.input.type.coding.system"/>
+            <min value="1"/>
+            <fixedUri value="https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system"/>
         </element>
-        <element id="Task.input:data-set-reference-input.type.coding.code">
-            <path value="Task.input.type.coding.code" />
-            <min value="1" />
-            <fixedCode value="data-set-reference-input" />
+        <element id="Task.input:data-set-status.type.coding.code">
+            <path value="Task.input.type.coding.code"/>
+            <min value="1"/>
+            <fixedCode value="data-set-status"/>
         </element>
-        <element id="Task.input:data-set-reference-input.value[x]">
-            <path value="Task.input.value[x]" />
+        <element id="Task.input:data-set-status.value[x]">
+            <path value="Task.input.value[x]"/>
             <type>
-                <code value="Reference" />
+                <code value="Coding"/>
             </type>
+        </element>
+        <element id="Task.input:data-set-status.value[x].system">
+            <path value="Task.input.value[x].system"/>
+            <min value="1"/>
+            <fixedUri value="https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system"/>
+        </element>
+        <element id="Task.input:data-set-status.value[x].code">
+            <path value="Task.input.value[x].code"/>
+            <min value="1"/>
+            <binding>
+                <strength value="required"/>
+                <valueSet value="https://eyematics.org/fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set|#{version}"/>
+            </binding>
         </element>
         <element id="Task.output:data-set-status">
             <path value="Task.output"/>
@@ -126,7 +158,7 @@
         <element id="Task.output:data-set-status.type.coding">
             <path value="Task.output.type.coding"/>
             <min value="1"/>
-            <max value="*"/>
+            <max value="1"/>
         </element>
         <element id="Task.output:data-set-status.type.coding.system">
             <path value="Task.output.type.coding.system"/>

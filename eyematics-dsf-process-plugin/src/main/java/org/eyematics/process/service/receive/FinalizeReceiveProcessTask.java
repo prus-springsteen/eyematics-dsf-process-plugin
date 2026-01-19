@@ -1,13 +1,12 @@
 package org.eyematics.process.service.receive;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
-import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Target;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
-import org.eyematics.process.constant.ReceiveConstants;
+import org.eyematics.process.utils.delegate.FinalizeProcessServiceDelegate;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
@@ -16,14 +15,12 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 
-public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
+public class FinalizeReceiveProcessTask extends FinalizeProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(FinalizeReceiveProcessTask.class);
-    private final DataSetStatusGenerator dataSetStatusGenerator;
 
     public FinalizeReceiveProcessTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
-        super(api);
-        this.dataSetStatusGenerator = dataSetStatusGenerator;
+        super(api, dataSetStatusGenerator);
     }
 
     @Override
@@ -34,17 +31,15 @@ public class FinalizeReceiveProcessTask extends AbstractServiceDelegate {
         int failedTaskCount = 0;
         for (Target target : targetsList) {
             String correlationKey = target.getCorrelationKey();
-            Task subTask = variables
-                    .getResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
+            Task subTask = this.getErrorTask(variables, correlationKey);
             if (subTask == null) {
                 startTask.addOutput(
                         this.dataSetStatusGenerator.createDataSetStatusOutput(
                                 EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
                                 EyeMaticsGenericStatus.getTypeSystem(),
-                                EyeMaticsGenericStatus.getTypeCode(),
-                                null));
+                                EyeMaticsGenericStatus.getTypeCode()));
             } else {
-                if (Task.TaskStatus.FAILED.equals(subTask.getStatus())) {
+                if (this.getErrorMessage(subTask) != null) {
                     failedTaskCount++;
                 }
                 if (!subTask.getOutput().isEmpty()) {

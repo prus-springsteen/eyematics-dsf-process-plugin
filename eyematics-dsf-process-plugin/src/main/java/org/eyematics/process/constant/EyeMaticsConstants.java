@@ -1,7 +1,6 @@
 package org.eyematics.process.constant;
 
 import java.util.*;
-
 import static org.eyematics.process.EyeMaticsProcessPluginDefinition.VERSION;
 
 
@@ -26,6 +25,8 @@ public interface EyeMaticsConstants {
     String CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS = "data-set-status";
     String CODESYSTEM_DATA_SET_STATUS = "https://eyematics.org/fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system";
     String EXTENSION_DATA_SET_STATUS_ERROR_URL = "https://eyematics.org/fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension";
+
+    String BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE = "errorResource";
 
     int DSF_CLIENT_RETRY_6_TIMES = 6;
     long DSF_CLIENT_RETRY_INTERVAL_10SEC = 10000;

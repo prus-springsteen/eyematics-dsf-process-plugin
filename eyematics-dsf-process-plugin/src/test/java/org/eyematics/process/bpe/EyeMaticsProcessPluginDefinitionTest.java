@@ -21,7 +21,7 @@ public class EyeMaticsProcessPluginDefinitionTest {
 
         var initiate = resourcesByProcessId.get(InitiateConstants.PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS);
         assertNotNull(initiate);
-        assertEquals(8, initiate.stream().filter(this::exists).count());
+        assertEquals(9, initiate.stream().filter(this::exists).count());
 
         var provide = resourcesByProcessId.get(ProvideConstants.PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS);
         assertNotNull(provide);
@@ -29,7 +29,7 @@ public class EyeMaticsProcessPluginDefinitionTest {
 
         var receive = resourcesByProcessId.get(ReceiveConstants.PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS);
         assertNotNull(receive);
-        assertEquals(13, receive.stream().filter(this::exists).count());
+        assertEquals(14, receive.stream().filter(this::exists).count());
     }
 
     private boolean exists(String file) {

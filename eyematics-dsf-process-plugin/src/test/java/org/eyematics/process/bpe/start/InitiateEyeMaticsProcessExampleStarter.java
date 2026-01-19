@@ -31,7 +31,7 @@ public class InitiateEyeMaticsProcessExampleStarter {
 
         task.getMeta().addProfile(InitiateConstants.PROFILE_TASK_INITIATE_EYEMATICS_PROCESS_START + "|" + def.getResourceVersion());
         task.setInstantiatesCanonical(
-                InitiateConstants.PROFILE_TASK_INITIATE_EYEMATICS_PROCESS_START_URI + "|" + def.getResourceVersion());
+                InitiateConstants.PROFILE_TASK_EYEMATICS_INITIATE_PROCESS_URI + "|" + def.getResourceVersion());
         task.setStatus(Task.TaskStatus.REQUESTED);
         task.setIntent(Task.TaskIntent.ORDER);
         task.setAuthoredOn(new Date());

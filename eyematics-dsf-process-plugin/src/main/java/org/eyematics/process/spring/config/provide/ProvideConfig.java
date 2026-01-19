@@ -2,6 +2,7 @@ package org.eyematics.process.spring.config.provide;
 
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.interaction.EyeMaticsAdminApprovalTask;
+import org.eyematics.process.message.provide.CloseReceiveSubProcessProvideMessageTask;
 import org.eyematics.process.message.provide.ProvideDataMessageTask;
 import org.eyematics.process.service.provide.*;
 import org.eyematics.process.spring.config.receive.CryptoConfig;
@@ -44,11 +45,23 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public SelectReceiveTargetTask selectReceiveTargetTask() { return new SelectReceiveTargetTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public EyeMaticsAdminApprovalTask adminApprovalTask() { return new EyeMaticsAdminApprovalTask(api); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public HandleMissingApprovalTask handleMissingApprovalTask() { return new HandleMissingApprovalTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public EvaluateAdminApprovalTask evaluateAdminApprovalTask() { return new EvaluateAdminApprovalTask(api); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public HandleDeniedProvisionTask handleDeniedProvisionTask() { return new HandleDeniedProvisionTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -68,7 +81,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CreateDataBundleTask createDataBundleTask() { return new CreateDataBundleTask(api, dataSetStatusGenerator, provideMailConfig.getProvideInformationEmailAddresses()); }
+    public CreateDataBundleTask createDataBundleTask() { return new CreateDataBundleTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -80,7 +93,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SelectReceiveTargetTask selectReceiveTargetTask() { return new SelectReceiveTargetTask(api); }
+    public CloseReceiveSubProcessProvideMessageTask closeReceiveProcessProvideMessageTask() { return new CloseReceiveSubProcessProvideMessageTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -88,7 +101,7 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleMissingReceiptTask handleMissingReceiptTask() { return  new HandleMissingReceiptTask(api, dataSetStatusGenerator); }
+    public HandleMissingAcknowledgementTask handleMissingReceiptTask() { return  new HandleMissingAcknowledgementTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -96,6 +109,6 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeProvideProcessTask storeDataReceiptTask() { return  new FinalizeProvideProcessTask(api, dataSetStatusGenerator); }
+    public FinalizeProvideProcessTask storeDataReceiptTask() { return  new FinalizeProvideProcessTask(api, dataSetStatusGenerator, provideMailConfig.getProvideInformationEmailAddresses()); }
 
 }

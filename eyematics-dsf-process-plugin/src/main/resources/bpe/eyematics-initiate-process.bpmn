@@ -1,40 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1srzmx1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.31.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
   <bpmn:process id="eyematicsorg_eyematicsInitiateProcess" name="EyeMatics Initiate Process" isExecutable="true" camunda:versionTag="#{version}">
-    <bpmn:startEvent id="EyematicsInitiateProcessStartEvent" name="start initiate process">
+    <bpmn:startEvent id="InitiateProcessStartEvent" name="start initiate process">
       <bpmn:outgoing>Flow_1aiyums</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0h5x0xa" messageRef="Message_2pg57ek" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0h5x0xa" messageRef="Message_2i3gapu" />
     </bpmn:startEvent>
     <bpmn:serviceTask id="SelectRequestTargetsTask" name="select request targets" camunda:class="org.eyematics.process.service.initiate.SelectRequestTargetsTask">
       <bpmn:incoming>Flow_0sj9kw1</bpmn:incoming>
       <bpmn:outgoing>Flow_0d5fww4</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:endEvent id="EyematicsInitiateProcessEndEvent" name="end initiate process">
+    <bpmn:endEvent id="InitiateProcessEndEvent" name="end initiate process">
       <bpmn:incoming>Flow_1sbo85s</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:serviceTask id="FinalizeInitiateProcessTask" name="finalize initiate process" camunda:class="org.eyematics.process.service.initiate.FinalizeInitiateProcessTask">
       <bpmn:incoming>Flow_0agrgps</bpmn:incoming>
       <bpmn:outgoing>Flow_1sbo85s</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1sbo85s" sourceRef="FinalizeInitiateProcessTask" targetRef="EyematicsInitiateProcessEndEvent" />
-    <bpmn:sendTask id="RequestDataMessageTask" name="send request provide data" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
-      <bpmn:extensionElements>
-        <camunda:field name="profile">
-          <camunda:string>https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
-        </camunda:field>
-        <camunda:field name="messageName">
-          <camunda:string>provideProcessStartEventMessage</camunda:string>
-        </camunda:field>
-        <camunda:field name="instantiatesCanonical">
-          <camunda:string>https://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
-        </camunda:field>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1yk585e</bpmn:incoming>
-      <bpmn:outgoing>Flow_1eoul3o</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${targets.entries}" camunda:elementVariable="target" />
-    </bpmn:sendTask>
-    <bpmn:sequenceFlow id="Flow_1eoul3o" sourceRef="RequestDataMessageTask" targetRef="Gateway_1jmsz9v" />
-    <bpmn:sendTask id="InitiateReceiveProcessTask" name="send initiate receive data" camunda:class="org.eyematics.process.message.initiate.InitiateReceiveProcessTask">
+    <bpmn:sequenceFlow id="Flow_1sbo85s" sourceRef="FinalizeInitiateProcessTask" targetRef="InitiateProcessEndEvent" />
+    <bpmn:sendTask id="InitiateReceiveProcessMessageTask" name="send initiate receive data" camunda:class="org.eyematics.process.message.initiate.InitiateReceiveProcessMessageTask">
       <bpmn:extensionElements>
         <camunda:field name="profile">
           <camunda:string>https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition|#{version}</camunda:string>
@@ -47,36 +30,150 @@
         </camunda:field>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0d5fww4</bpmn:incoming>
-      <bpmn:outgoing>Flow_1yk585e</bpmn:outgoing>
+      <bpmn:outgoing>Flow_13rgc9a</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:serviceTask id="SelectReceiveTargetTask" name="select receive target" camunda:class="org.eyematics.process.service.initiate.SelectReceiveTargetTask">
       <bpmn:incoming>Flow_1aiyums</bpmn:incoming>
       <bpmn:outgoing>Flow_0sj9kw1</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1aiyums" sourceRef="EyematicsInitiateProcessStartEvent" targetRef="SelectReceiveTargetTask" />
+    <bpmn:sequenceFlow id="Flow_1aiyums" sourceRef="InitiateProcessStartEvent" targetRef="SelectReceiveTargetTask" />
     <bpmn:sequenceFlow id="Flow_0sj9kw1" sourceRef="SelectReceiveTargetTask" targetRef="SelectRequestTargetsTask" />
-    <bpmn:sequenceFlow id="Flow_0d5fww4" sourceRef="SelectRequestTargetsTask" targetRef="InitiateReceiveProcessTask" />
-    <bpmn:sequenceFlow id="Flow_1yk585e" sourceRef="InitiateReceiveProcessTask" targetRef="RequestDataMessageTask" />
-    <bpmn:exclusiveGateway id="Gateway_1jmsz9v">
-      <bpmn:incoming>Flow_1eoul3o</bpmn:incoming>
+    <bpmn:sequenceFlow id="Flow_0d5fww4" sourceRef="SelectRequestTargetsTask" targetRef="InitiateReceiveProcessMessageTask" />
+    <bpmn:exclusiveGateway id="Gateway_StandardOrErrorInitiateProcessFlow">
       <bpmn:incoming>Flow_1eatck5</bpmn:incoming>
+      <bpmn:incoming>Flow_0ut16o8</bpmn:incoming>
       <bpmn:outgoing>Flow_0agrgps</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0agrgps" sourceRef="Gateway_1jmsz9v" targetRef="FinalizeInitiateProcessTask" />
-    <bpmn:boundaryEvent id="DataInitiateFailure" attachedToRef="InitiateReceiveProcessTask">
+    <bpmn:sequenceFlow id="Flow_0agrgps" sourceRef="Gateway_StandardOrErrorInitiateProcessFlow" targetRef="FinalizeInitiateProcessTask" />
+    <bpmn:boundaryEvent id="DataInitiateFailure" attachedToRef="InitiateReceiveProcessMessageTask">
       <bpmn:outgoing>Flow_1eatck5</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0ynfjdo" errorRef="Error_1i9g7uo" />
     </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1eatck5" sourceRef="DataInitiateFailure" targetRef="Gateway_1jmsz9v" />
+    <bpmn:sequenceFlow id="Flow_1eatck5" sourceRef="DataInitiateFailure" targetRef="Gateway_StandardOrErrorInitiateProcessFlow" />
+    <bpmn:subProcess id="InitiateSubProcess" name="Initiate Subprocess">
+      <bpmn:incoming>Flow_13rgc9a</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ut16o8</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:asyncBefore="true" camunda:exclusive="false" camunda:collection="${targets.entries}" camunda:elementVariable="target">
+        <bpmn:extensionElements>
+          <camunda:failedJobRetryTimeCycle>R0/PT5S</camunda:failedJobRetryTimeCycle>
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
+      <bpmn:startEvent id="InitiateSubprocessStartEvent" name="start initiate subprocess">
+        <bpmn:outgoing>Flow_1njtv77</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="InitiateSubprocessEndEvent" name="end initiate subprocess" camunda:asyncAfter="true">
+        <bpmn:extensionElements>
+          <camunda:failedJobRetryTimeCycle>R0/PT5S</camunda:failedJobRetryTimeCycle>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_1lrjl4n</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sendTask id="RequestDataMessageTask" name="send request provide data" camunda:class="org.eyematics.process.message.initiate.RequestDataMessageTask">
+        <bpmn:extensionElements>
+          <camunda:field name="profile">
+            <camunda:string>https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-structure-definition|#{version}</camunda:string>
+          </camunda:field>
+          <camunda:field name="messageName">
+            <camunda:string>provideProcessStartEventMessage</camunda:string>
+          </camunda:field>
+          <camunda:field name="instantiatesCanonical">
+            <camunda:string>https://eyematics.org/bpe/Process/eyematicsProvideProcess|#{version}</camunda:string>
+          </camunda:field>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0s8itkv</bpmn:incoming>
+        <bpmn:outgoing>Flow_0oihmqj</bpmn:outgoing>
+      </bpmn:sendTask>
+      <bpmn:sequenceFlow id="Flow_1njtv77" sourceRef="InitiateSubprocessStartEvent" targetRef="Gateway_SendRequestProvideOrTimeExpiredFlow" />
+      <bpmn:sequenceFlow id="Flow_0oihmqj" sourceRef="RequestDataMessageTask" targetRef="Gateway_ProvideRequestSuccessOrFailureFlow" />
+      <bpmn:serviceTask id="PrepareCloseReceiveTargetTask" name="prepare close receive target" camunda:class="org.eyematics.process.service.initiate.PrepareCloseReceiveTarget">
+        <bpmn:incoming>Flow_1opkfs6</bpmn:incoming>
+        <bpmn:outgoing>Flow_0zvspc2</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:boundaryEvent id="DataRequestFailure" attachedToRef="RequestDataMessageTask">
+        <bpmn:outgoing>Flow_1opkfs6</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0tdmz5b" errorRef="Error_1xydft2" />
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_1opkfs6" sourceRef="DataRequestFailure" targetRef="PrepareCloseReceiveTargetTask" />
+      <bpmn:exclusiveGateway id="Gateway_ProvideRequestSuccessOrFailureFlow">
+        <bpmn:incoming>Flow_0oihmqj</bpmn:incoming>
+        <bpmn:incoming>Flow_1haz2l9</bpmn:incoming>
+        <bpmn:incoming>Flow_10rc96s</bpmn:incoming>
+        <bpmn:outgoing>Flow_11a5nar</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:sequenceFlow id="Flow_11a5nar" sourceRef="Gateway_ProvideRequestSuccessOrFailureFlow" targetRef="FinalizeInitiateSubProcessTask" />
+      <bpmn:sequenceFlow id="Flow_0zvspc2" sourceRef="PrepareCloseReceiveTargetTask" targetRef="CloseReceiveSubProcessInitiateMessageTask" />
+      <bpmn:sendTask id="CloseReceiveSubProcessInitiateMessageTask" name="send close receive subprocess" camunda:class="org.eyematics.process.message.initiate.CloseReceiveSubProcessInitiateMessageTask">
+        <bpmn:extensionElements>
+          <camunda:field name="profile">
+            <camunda:string>https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-close-structure-definition|#{version}</camunda:string>
+          </camunda:field>
+          <camunda:field name="messageName">
+            <camunda:string>receiveProcessCloseEventMessage</camunda:string>
+          </camunda:field>
+          <camunda:field name="instantiatesCanonical">
+            <camunda:string>https://eyematics.org/bpe/Process/eyematicsReceiveProcess|#{version}</camunda:string>
+          </camunda:field>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0zvspc2</bpmn:incoming>
+        <bpmn:outgoing>Flow_1haz2l9</bpmn:outgoing>
+      </bpmn:sendTask>
+      <bpmn:sequenceFlow id="Flow_1haz2l9" sourceRef="CloseReceiveSubProcessInitiateMessageTask" targetRef="Gateway_ProvideRequestSuccessOrFailureFlow" />
+      <bpmn:eventBasedGateway id="Gateway_SendRequestProvideOrTimeExpiredFlow">
+        <bpmn:extensionElements>
+          <camunda:executionListener class="org.eyematics.process.utils.listener.CorrelationKeyProcessListener" event="start" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_1njtv77</bpmn:incoming>
+        <bpmn:outgoing>Flow_1ddmgza</bpmn:outgoing>
+        <bpmn:outgoing>Flow_1684nid</bpmn:outgoing>
+      </bpmn:eventBasedGateway>
+      <bpmn:intermediateCatchEvent id="InitiateProvideProcessEvent" name="initiate provide process">
+        <bpmn:incoming>Flow_1ddmgza</bpmn:incoming>
+        <bpmn:outgoing>Flow_0s8itkv</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_0fgfy7m" messageRef="Message_2pg57ek" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="Flow_1ddmgza" sourceRef="Gateway_SendRequestProvideOrTimeExpiredFlow" targetRef="InitiateProvideProcessEvent" />
+      <bpmn:sequenceFlow id="Flow_0s8itkv" sourceRef="InitiateProvideProcessEvent" targetRef="RequestDataMessageTask" />
+      <bpmn:intermediateCatchEvent id="Event_WaitForInitiation" name="wait for initiate">
+        <bpmn:incoming>Flow_1684nid</bpmn:incoming>
+        <bpmn:outgoing>Flow_0p88zch</bpmn:outgoing>
+        <bpmn:timerEventDefinition id="TimerEventDefinition_0ht3u6o">
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+        </bpmn:timerEventDefinition>
+      </bpmn:intermediateCatchEvent>
+      <bpmn:sequenceFlow id="Flow_1684nid" sourceRef="Gateway_SendRequestProvideOrTimeExpiredFlow" targetRef="Event_WaitForInitiation" />
+      <bpmn:serviceTask id="HandleMissingInitiationTask" name="handle missing initiation" camunda:class="org.eyematics.process.service.initiate.HandleMissingInitiationTask">
+        <bpmn:incoming>Flow_0p88zch</bpmn:incoming>
+        <bpmn:outgoing>Flow_017jtcs</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sequenceFlow id="Flow_0p88zch" sourceRef="Event_WaitForInitiation" targetRef="HandleMissingInitiationTask" />
+      <bpmn:serviceTask id="FinalizeInitiateSubProcessTask" name="finalize initiate subprocess" camunda:class="org.eyematics.process.service.initiate.FinalizeInitiateSubProcessTask">
+        <bpmn:incoming>Flow_11a5nar</bpmn:incoming>
+        <bpmn:outgoing>Flow_1cmbomy</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sequenceFlow id="Flow_1cmbomy" sourceRef="FinalizeInitiateSubProcessTask" targetRef="Gateway_StandardOrErrorInitiateSubProcessFlow" />
+      <bpmn:exclusiveGateway id="Gateway_StandardOrErrorInitiateSubProcessFlow">
+        <bpmn:incoming>Flow_1cmbomy</bpmn:incoming>
+        <bpmn:incoming>Flow_017jtcs</bpmn:incoming>
+        <bpmn:outgoing>Flow_1lrjl4n</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:sequenceFlow id="Flow_1lrjl4n" sourceRef="Gateway_StandardOrErrorInitiateSubProcessFlow" targetRef="InitiateSubprocessEndEvent" />
+      <bpmn:sequenceFlow id="Flow_017jtcs" sourceRef="HandleMissingInitiationTask" targetRef="Gateway_StandardOrErrorInitiateSubProcessFlow" />
+      <bpmn:boundaryEvent id="Event_0dpj1rh" attachedToRef="CloseReceiveSubProcessInitiateMessageTask">
+        <bpmn:outgoing>Flow_10rc96s</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0i2ee5j" errorRef="Error_1ca7b0z" />
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_10rc96s" sourceRef="Event_0dpj1rh" targetRef="Gateway_ProvideRequestSuccessOrFailureFlow" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_13rgc9a" sourceRef="InitiateReceiveProcessMessageTask" targetRef="InitiateSubProcess" />
+    <bpmn:sequenceFlow id="Flow_0ut16o8" sourceRef="InitiateSubProcess" targetRef="Gateway_StandardOrErrorInitiateProcessFlow" />
   </bpmn:process>
-  <bpmn:message id="Message_2pg57ek" name="initiateProcessStartEventMessage" />
-  <bpmn:message id="Message_0mv4rmf" name="receiveProcessStartEventMessage" />
-  <bpmn:message id="Message_18ld88c" name="feasibilitySingleDicResultMessage" />
+  <bpmn:message id="Message_2pg57ek" name="initiateSubProcessStartEventMessage" />
   <bpmn:error id="Error_1i9g7uo" name="dataInitiateFailure" errorCode="dataInitiateFailure" />
   <bpmn:error id="Error_1xydft2" name="dataRequestFailure" errorCode="dataRequestFailure" />
+  <bpmn:message id="Message_2i3gapu" name="initiateProcessStartEventMessage" />
+  <bpmn:error id="Error_1ca7b0z" name="receiveCloseFailure" errorCode="receiveCloseFailure" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="eyematicsorg_eyematicsInitiateProcess">
-      <bpmndi:BPMNShape id="Event_1ir0eoy_di" bpmnElement="EyematicsInitiateProcessStartEvent">
+      <bpmndi:BPMNShape id="Event_1ir0eoy_di" bpmnElement="InitiateProcessStartEvent">
         <dc:Bounds x="182" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="173" y="188" width="57" height="27" />
@@ -86,21 +183,17 @@
         <dc:Bounds x="410" y="120" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1n5kvw1_di" bpmnElement="EyematicsInitiateProcessEndEvent">
-        <dc:Bounds x="1112" y="142" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_1n5kvw1_di" bpmnElement="InitiateProcessEndEvent">
+        <dc:Bounds x="1952" y="142" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1106" y="185" width="54" height="27" />
+          <dc:Bounds x="1946" y="185" width="54" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0dziaqm" bpmnElement="FinalizeInitiateProcessTask">
-        <dc:Bounds x="960" y="120" width="100" height="80" />
+        <dc:Bounds x="1820" y="120" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_02byvvc" bpmnElement="RequestDataMessageTask">
-        <dc:Bounds x="710" y="120" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_01x7x2r_di" bpmnElement="InitiateReceiveProcessTask">
+      <bpmndi:BPMNShape id="Activity_01x7x2r_di" bpmnElement="InitiateReceiveProcessMessageTask">
         <dc:Bounds x="550" y="120" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
@@ -108,19 +201,140 @@
         <dc:Bounds x="270" y="120" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1jmsz9v_di" bpmnElement="Gateway_1jmsz9v" isMarkerVisible="true">
-        <dc:Bounds x="855" y="135" width="50" height="50" />
+      <bpmndi:BPMNShape id="Gateway_1jmsz9v_di" bpmnElement="Gateway_StandardOrErrorInitiateProcessFlow" isMarkerVisible="true">
+        <dc:Bounds x="1735" y="135" width="50" height="50" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h2vwsh_di" bpmnElement="InitiateSubProcess" isExpanded="true">
+        <dc:Bounds x="690" y="102" width="1000" height="428" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0l7w6t6_di" bpmnElement="InitiateSubprocessStartEvent">
+        <dc:Bounds x="712" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="705" y="320" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0w3yiyu_di" bpmnElement="InitiateSubprocessEndEvent">
+        <dc:Bounds x="1622" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1614" y="315" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1h7y8gh_di" bpmnElement="RequestDataMessageTask">
+        <dc:Bounds x="930" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1q2ug8d_di" bpmnElement="PrepareCloseReceiveTargetTask">
+        <dc:Bounds x="1070" y="360" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_079vaqg_di" bpmnElement="Gateway_ProvideRequestSuccessOrFailureFlow" isMarkerVisible="true">
+        <dc:Bounds x="1325" y="265" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vtido7_di" bpmnElement="CloseReceiveSubProcessInitiateMessageTask">
+        <dc:Bounds x="1210" y="360" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_006tse0_di" bpmnElement="Gateway_SendRequestProvideOrTimeExpiredFlow">
+        <dc:Bounds x="785" y="265" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vgt9a9_di" bpmnElement="InitiateProvideProcessEvent">
+        <dc:Bounds x="862" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="845" y="315" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xmxw1m_di" bpmnElement="Event_WaitForInitiation">
+        <dc:Bounds x="862" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="847" y="195" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_08qqftn_di" bpmnElement="HandleMissingInitiationTask">
+        <dc:Bounds x="930" y="130" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_104gx9n_di" bpmnElement="FinalizeInitiateSubProcessTask">
+        <dc:Bounds x="1410" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1mspkaw_di" bpmnElement="Gateway_StandardOrErrorInitiateSubProcessFlow" isMarkerVisible="true">
+        <dc:Bounds x="1545" y="265" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1scxeld_di" bpmnElement="DataRequestFailure">
+        <dc:Bounds x="1012" y="312" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dpj1rh_di" bpmnElement="Event_0dpj1rh">
+        <dc:Bounds x="1292" y="422" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1njtv77_di" bpmnElement="Flow_1njtv77">
+        <di:waypoint x="748" y="290" />
+        <di:waypoint x="785" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oihmqj_di" bpmnElement="Flow_0oihmqj">
+        <di:waypoint x="1030" y="290" />
+        <di:waypoint x="1325" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1opkfs6_di" bpmnElement="Flow_1opkfs6">
+        <di:waypoint x="1030" y="348" />
+        <di:waypoint x="1030" y="400" />
+        <di:waypoint x="1070" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11a5nar_di" bpmnElement="Flow_11a5nar">
+        <di:waypoint x="1375" y="290" />
+        <di:waypoint x="1410" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zvspc2_di" bpmnElement="Flow_0zvspc2">
+        <di:waypoint x="1170" y="400" />
+        <di:waypoint x="1210" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1haz2l9_di" bpmnElement="Flow_1haz2l9">
+        <di:waypoint x="1310" y="400" />
+        <di:waypoint x="1350" y="400" />
+        <di:waypoint x="1350" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ddmgza_di" bpmnElement="Flow_1ddmgza">
+        <di:waypoint x="835" y="290" />
+        <di:waypoint x="862" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0s8itkv_di" bpmnElement="Flow_0s8itkv">
+        <di:waypoint x="898" y="290" />
+        <di:waypoint x="930" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1684nid_di" bpmnElement="Flow_1684nid">
+        <di:waypoint x="810" y="265" />
+        <di:waypoint x="810" y="170" />
+        <di:waypoint x="862" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p88zch_di" bpmnElement="Flow_0p88zch">
+        <di:waypoint x="898" y="170" />
+        <di:waypoint x="930" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cmbomy_di" bpmnElement="Flow_1cmbomy">
+        <di:waypoint x="1510" y="290" />
+        <di:waypoint x="1545" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lrjl4n_di" bpmnElement="Flow_1lrjl4n">
+        <di:waypoint x="1595" y="290" />
+        <di:waypoint x="1622" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_017jtcs_di" bpmnElement="Flow_017jtcs">
+        <di:waypoint x="1030" y="170" />
+        <di:waypoint x="1570" y="170" />
+        <di:waypoint x="1570" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10rc96s_di" bpmnElement="Flow_10rc96s">
+        <di:waypoint x="1310" y="458" />
+        <di:waypoint x="1310" y="500" />
+        <di:waypoint x="1350" y="500" />
+        <di:waypoint x="1350" y="315" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0htnu80_di" bpmnElement="DataInitiateFailure">
         <dc:Bounds x="632" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1sbo85s_di" bpmnElement="Flow_1sbo85s">
-        <di:waypoint x="1060" y="160" />
-        <di:waypoint x="1112" y="160" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1eoul3o_di" bpmnElement="Flow_1eoul3o">
-        <di:waypoint x="810" y="160" />
-        <di:waypoint x="855" y="160" />
+        <di:waypoint x="1920" y="160" />
+        <di:waypoint x="1952" y="160" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1aiyums_di" bpmnElement="Flow_1aiyums">
         <di:waypoint x="218" y="160" />
@@ -134,19 +348,23 @@
         <di:waypoint x="510" y="160" />
         <di:waypoint x="550" y="160" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1yk585e_di" bpmnElement="Flow_1yk585e">
-        <di:waypoint x="650" y="160" />
-        <di:waypoint x="710" y="160" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0agrgps_di" bpmnElement="Flow_0agrgps">
-        <di:waypoint x="905" y="160" />
-        <di:waypoint x="960" y="160" />
+        <di:waypoint x="1785" y="160" />
+        <di:waypoint x="1820" y="160" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1eatck5_di" bpmnElement="Flow_1eatck5">
         <di:waypoint x="650" y="102" />
-        <di:waypoint x="650" y="60" />
-        <di:waypoint x="880" y="60" />
-        <di:waypoint x="880" y="135" />
+        <di:waypoint x="650" y="40" />
+        <di:waypoint x="1760" y="40" />
+        <di:waypoint x="1760" y="135" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13rgc9a_di" bpmnElement="Flow_13rgc9a">
+        <di:waypoint x="650" y="160" />
+        <di:waypoint x="690" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ut16o8_di" bpmnElement="Flow_0ut16o8">
+        <di:waypoint x="1690" y="160" />
+        <di:waypoint x="1735" y="160" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

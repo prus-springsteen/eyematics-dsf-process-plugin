@@ -5,7 +5,7 @@ import dev.dsf.bpe.v1.activity.AbstractServiceDelegate;
 import dev.dsf.bpe.v1.variables.Variables;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.eyematics.process.constant.ReceiveConstants;
+import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.Task;
@@ -19,7 +19,8 @@ public abstract class AbstractExtendedSubProcessServiceDelegate extends Abstract
     private static final Logger logger = LoggerFactory.getLogger(AbstractExtendedSubProcessServiceDelegate.class);
     protected final DataSetStatusGenerator dataSetStatusGenerator;
 
-    public AbstractExtendedSubProcessServiceDelegate(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+    public AbstractExtendedSubProcessServiceDelegate(ProcessPluginApi api,
+                                                     DataSetStatusGenerator dataSetStatusGenerator) {
         super(api);
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
@@ -30,26 +31,34 @@ public abstract class AbstractExtendedSubProcessServiceDelegate extends Abstract
         Objects.requireNonNull(this.dataSetStatusGenerator, "dataSetStatusGenerator");
     }
 
-    protected void handleTaskError(EyeMaticsGenericStatus eyeMaticsGenericErrors, Variables variables, String errorMessage) {
+    protected void handleTaskError(EyeMaticsGenericStatus eyeMaticsGenericErrors,
+                                   Variables variables,
+                                   String errorMessage) {
         this.processTaskError(eyeMaticsGenericErrors, variables, errorMessage);
         throw new BpmnError(eyeMaticsGenericErrors.getErrorCode());
     }
 
-    protected BpmnError getHandleTaskError(EyeMaticsGenericStatus eyeMaticsGenericErrors, Variables variables, String errorMessage)  {
+    protected BpmnError getHandleTaskError(EyeMaticsGenericStatus eyeMaticsGenericErrors,
+                                           Variables variables,
+                                           String errorMessage)  {
         this.processTaskError(eyeMaticsGenericErrors, variables, errorMessage);
         return new BpmnError(eyeMaticsGenericErrors.getErrorCode());
     }
 
-    protected void processTaskError(EyeMaticsGenericStatus eyeMaticsGenericStatus, Variables variables, String errorMessage) {
+    protected void processTaskError(EyeMaticsGenericStatus eyeMaticsGenericStatus,
+                                    Variables variables,
+                                    String errorMessage) {
         Task task = variables.getLatestTask();
         task.setStatus(Task.TaskStatus.FAILED);
         task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(eyeMaticsGenericStatus.getStatusCode(), EyeMaticsGenericStatus.getTypeSystem(),
-                        EyeMaticsGenericStatus.getTypeCode(), errorMessage));
-        variables.updateTask(task);
-
+                this.dataSetStatusGenerator.createDataSetStatusOutput(eyeMaticsGenericStatus.getStatusCode(),
+                        EyeMaticsGenericStatus.getTypeSystem(),
+                        EyeMaticsGenericStatus.getTypeCode(),
+                        errorMessage));
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task.copy());
+        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey,
+                task.copy());
+        variables.updateTask(task);
     }
 
     protected void setVariable(DelegateExecution delegateExecution, String s, Object o) {

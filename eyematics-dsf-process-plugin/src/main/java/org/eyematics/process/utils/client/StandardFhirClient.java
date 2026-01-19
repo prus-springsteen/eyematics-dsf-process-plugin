@@ -10,7 +10,7 @@ import ca.uhn.fhir.rest.client.api.IGenericClient;
 public interface StandardFhirClient extends FhirClient
 {
 	/**
-	 * The {@link ca.uhn.fhir.rest.client.api.IGenericClient to access the FHIR server with base Url defined by
+	 * The {@link IGenericClient to access the FHIR server with base Url defined by
 	 * {@link #getFhirBaseUrl()}}.
 	 *
 	 * @return not <code>null</code>
@@ -18,14 +18,14 @@ public interface StandardFhirClient extends FhirClient
 	IGenericClient getGenericFhirClient();
 
 	/**
-	 * Reading a resource based on {@link org.hl7.fhir.r4.model.IdType#getResourceType()} and
-	 * {@link org.hl7.fhir.r4.model.IdType#getIdPart()} and an optional
-	 * {@link org.hl7.fhir.r4.model.IdType#getVersionIdPart()}.
+	 * Reading a resource based on {@link IdType#getResourceType()} and
+	 * {@link IdType#getIdPart()} and an optional
+	 * {@link IdType#getVersionIdPart()}.
 	 *
 	 * @param idType
-	 *            not <code>null</code>, {@link org.hl7.fhir.r4.model.IdType#getResourceType()} not <code>null</code> or
-	 *            empty, {@link org.hl7.fhir.r4.model.IdType#getIdPart()}, not <code>null</code> or empty,
-	 *            {@link org.hl7.fhir.r4.model.IdType#getVersionIdPart()} may be <code>null</code> or empty
+	 *            not <code>null</code>, {@link IdType#getResourceType()} not <code>null</code> or
+	 *            empty, {@link IdType#getIdPart()}, not <code>null</code> or empty,
+	 *            {@link IdType#getVersionIdPart()} may be <code>null</code> or empty
 	 * @return not <code>null</code>
 	 */
 	Resource read(IdType idType);
@@ -57,7 +57,7 @@ public interface StandardFhirClient extends FhirClient
 	 *            not <code>null</code> or empty
 	 * @param code
 	 *            not <code>null</code> or empty
-	 * @return {@link org.hl7.fhir.r4.model.Bundle} of type {@link org.hl7.fhir.r4.model.Bundle.BundleType#SEARCHSET}
+	 * @return {@link Bundle} of type {@link Bundle.BundleType#SEARCHSET}
 	 *         containing the matching {@link org.hl7.fhir.r4.model.DocumentReference}, not <code>null</code>
 	 */
 	Bundle searchDocumentReferences(String system, String code);

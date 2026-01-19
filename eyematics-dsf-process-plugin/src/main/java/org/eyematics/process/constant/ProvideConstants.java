@@ -15,6 +15,7 @@ public interface ProvideConstants {
     String BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET = "medicationRequestDataSet";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED = "dataSetEncrypted";
+    String BPMN_PROVIDE_EXECUTION_VARIABLE_GLOBAL_PSEUDONYMS = "globalPseudonyms";
 
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE = "data-reference";
 

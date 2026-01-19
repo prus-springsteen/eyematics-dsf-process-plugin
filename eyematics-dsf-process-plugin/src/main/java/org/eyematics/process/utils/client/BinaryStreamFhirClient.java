@@ -9,14 +9,14 @@ import ca.uhn.fhir.rest.api.MethodOutcome;
 public interface BinaryStreamFhirClient extends FhirClient
 {
 	/**
-	 * Reading a Binary resource content based on {@link org.hl7.fhir.r4.model.IdType#getResourceType()} and
-	 * {@link org.hl7.fhir.r4.model.IdType#getIdPart()} and an optional
-	 * {@link org.hl7.fhir.r4.model.IdType#getVersionIdPart()}.
+	 * Reading a Binary resource content based on {@link IdType#getResourceType()} and
+	 * {@link IdType#getIdPart()} and an optional
+	 * {@link IdType#getVersionIdPart()}.
 	 *
 	 * @param idType
-	 *            not <code>null</code>, {@link org.hl7.fhir.r4.model.IdType#getResourceType()} not <code>null</code> or
-	 *            empty, and must be of type 'Binary', {@link org.hl7.fhir.r4.model.IdType#getIdPart()}, not
-	 *            <code>null</code> or empty, {@link org.hl7.fhir.r4.model.IdType#getVersionIdPart()} may be
+	 *            not <code>null</code>, {@link IdType#getResourceType()} not <code>null</code> or
+	 *            empty, and must be of type 'Binary', {@link IdType#getIdPart()}, not
+	 *            <code>null</code> or empty, {@link IdType#getVersionIdPart()} may be
 	 *            <code>null</code> or empty
 	 * @param mimeType
 	 *            not <code>null</code>

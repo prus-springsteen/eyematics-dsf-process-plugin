@@ -6,12 +6,19 @@ import org.apache.commons.text.CaseUtils;
 public enum EyeMaticsGenericStatus {
     DATA_INITIATE_FAILURE,
     DATA_INITIATE_FORBIDDEN,
+    PROVIDE_INITIATE_FAILURE,
+    PROVIDE_INITIATE_FORBIDDEN,
+    PROVIDE_INITIATE_MISSING,
     DATA_REQUEST_SUCCESS,
     DATA_REQUEST_FAILURE,
     DATA_REQUEST_FORBIDDEN,
+    RECEIVE_CLOSE_FAILURE,
+    RECEIVE_CLOSE_FORBIDDEN,
+    ADMIN_APPROVAL_MISSING,
+    DATA_PROVIDE_DENIED,
     DATA_READ_FAILURE,
-    CONSENT_CHECK_FAILURE,
     PATIENT_READ_FAILURE,
+    CONSENT_CHECK_FAILURE,
     PSEUDONYM_PROCESS_FAILURE,
     DATA_BUNDLE_FAILURE,
     DATA_ENCRYPT_FAILURE,
@@ -46,7 +53,9 @@ public enum EyeMaticsGenericStatus {
     public String getErrorCode() {
         return switch (this) {
             case DATA_INITIATE_FAILURE, DATA_INITIATE_FORBIDDEN -> "dataInitiateFailure";
+            case PROVIDE_INITIATE_FAILURE, PROVIDE_INITIATE_FORBIDDEN -> "provideInitiateFailure";
             case DATA_REQUEST_FAILURE, DATA_REQUEST_FORBIDDEN -> "dataRequestFailure";
+            case RECEIVE_CLOSE_FAILURE, RECEIVE_CLOSE_FORBIDDEN -> "receiveCloseFailure";
             case DATA_PROVIDE_FAILURE, DATA_PROVIDE_FORBIDDEN -> "dataProvideFailure";
             case DATA_ACKNOWLEDGE_FAILURE, DATA_ACKNOWLEDGE_FORBIDDEN -> "dataAcknowledgeFailure";
             default -> CaseUtils.toCamelCase(this.name(), false, '_');

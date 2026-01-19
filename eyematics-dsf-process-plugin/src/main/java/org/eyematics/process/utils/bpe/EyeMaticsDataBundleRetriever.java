@@ -9,15 +9,15 @@ public class EyeMaticsDataBundleRetriever {
 
     public static Bundle getEyeMaticsDataBundle(EyeMaticsFhirClient fhirClient, String resource, String searchQuery) throws Exception {
         String data = fhirClient.read(resource, searchQuery, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
-        Bundle dataBundle = FhirContext.forR4().newJsonParser().parseResource(org.hl7.fhir.r4.model.Bundle.class, data);
+        Bundle dataBundle = FhirContext.forR4().newJsonParser().parseResource(Bundle.class, data);
         String nextLink = getNextLink(dataBundle);
         while (nextLink != null) {
             String nextData = fhirClient.read(resource, searchQuery, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
-            org.hl7.fhir.r4.model.Bundle nextBundle = FhirContext.forR4().newJsonParser().parseResource(Bundle.class, nextData);
+            Bundle nextBundle = FhirContext.forR4().newJsonParser().parseResource(Bundle.class, nextData);
             dataBundle.getEntry().addAll(nextBundle.getEntry());
             nextLink = getNextLink(nextBundle);
         }
-        return FhirContext.forR4().newJsonParser().parseResource(org.hl7.fhir.r4.model.Bundle.class, data);
+        return FhirContext.forR4().newJsonParser().parseResource(Bundle.class, data);
     }
 
     private static String getNextLink(Bundle bundle) {

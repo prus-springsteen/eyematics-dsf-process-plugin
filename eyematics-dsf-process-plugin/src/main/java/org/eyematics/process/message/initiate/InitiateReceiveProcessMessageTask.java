@@ -23,12 +23,12 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 
-public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
+public class InitiateReceiveProcessMessageTask extends AbstractTaskMessageSend {
 
-    private static final Logger logger = LoggerFactory.getLogger(InitiateReceiveProcessTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(InitiateReceiveProcessMessageTask.class);
     private final DataSetStatusGenerator dataSetStatusGenerator;
 
-    public InitiateReceiveProcessTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+    public InitiateReceiveProcessMessageTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api);
         this.dataSetStatusGenerator = dataSetStatusGenerator;
     }
@@ -88,7 +88,9 @@ public class InitiateReceiveProcessTask extends AbstractTaskMessageSend {
         task.addOutput(
                 this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
                         EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
-                        EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS, message));
+                        EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
+                        message));
+
         variables.updateTask(task);
 
         logger.warn(message);

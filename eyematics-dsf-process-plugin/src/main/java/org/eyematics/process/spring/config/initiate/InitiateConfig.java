@@ -1,9 +1,8 @@
 package org.eyematics.process.spring.config.initiate;
 
-import org.eyematics.process.message.initiate.InitiateReceiveProcessTask;
-import org.eyematics.process.service.initiate.FinalizeInitiateProcessTask;
-import org.eyematics.process.service.initiate.SelectReceiveTargetTask;
-import org.eyematics.process.service.initiate.SelectRequestTargetsTask;
+import org.eyematics.process.message.initiate.CloseReceiveSubProcessInitiateMessageTask;
+import org.eyematics.process.message.initiate.InitiateReceiveProcessMessageTask;
+import org.eyematics.process.service.initiate.*;
 import dev.dsf.bpe.v1.ProcessPluginApi;
 import org.eyematics.process.message.initiate.RequestDataMessageTask;
 import org.eyematics.process.spring.config.receive.CryptoConfig;
@@ -37,11 +36,27 @@ public class InitiateConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateReceiveProcessTask initiateReceiveProcessTask() { return new InitiateReceiveProcessTask(api, dataSetStatusGenerator); }
+    public InitiateReceiveProcessMessageTask initiateReceiveProcessTask() { return new InitiateReceiveProcessMessageTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public RequestDataMessageTask requestDataMessageTask() { return new RequestDataMessageTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public PrepareCloseReceiveTarget prepareCloseReceiveTarget() { return new PrepareCloseReceiveTarget(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public CloseReceiveSubProcessInitiateMessageTask closeReceiveProcessInitiateMessageTask() { return new CloseReceiveSubProcessInitiateMessageTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public HandleMissingInitiationTask handleMissingInitiationTask() { return new HandleMissingInitiationTask(api, dataSetStatusGenerator); }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public FinalizeInitiateSubProcessTask finalizeInitiateSubProcessTask() { return new FinalizeInitiateSubProcessTask(api, dataSetStatusGenerator); }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

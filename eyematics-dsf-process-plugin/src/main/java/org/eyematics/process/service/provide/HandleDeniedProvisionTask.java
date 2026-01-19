@@ -11,20 +11,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class HandleMissingReceiptTask extends AbstractExtendedProcessServiceDelegate {
+public class HandleDeniedProvisionTask extends AbstractExtendedProcessServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(HandleMissingReceiptTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(HandleDeniedProvisionTask.class);
 
-    public HandleMissingReceiptTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+    public HandleDeniedProvisionTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api, dataSetStatusGenerator);
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.warn("-> The receipt from {} is missing for data provided.",
-                variables.getTarget().getOrganizationIdentifierValue());
-        this.processTaskError(EyeMaticsGenericStatus.DATA_ACKNOWLEDGE_MISSING,
-                variables,
-                "Data Acknowledge Missing");
+        String message = "The admin denied the provision request.";
+        logger.info("-> {}", message);
+        this.processTaskError(EyeMaticsGenericStatus.DATA_PROVIDE_DENIED, variables, message);
     }
 }

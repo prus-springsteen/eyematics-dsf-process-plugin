@@ -18,7 +18,6 @@ import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.codesystems.ConsentScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;

@@ -19,9 +19,9 @@ import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.HashSet;
 import java.util.Objects;
+
 
 public class ReadPatientDataTask extends AbstractExtendedProcessServiceDelegate {
 

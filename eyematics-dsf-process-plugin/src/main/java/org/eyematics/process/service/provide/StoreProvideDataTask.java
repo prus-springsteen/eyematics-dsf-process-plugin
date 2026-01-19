@@ -30,13 +30,9 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
         MediaType mediaType = MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM);
         byte[] content = {};
         String targetOrganizationIdentifier = variables.getTarget().getOrganizationIdentifierValue();
-        String localOrganizationIdentifier = null;
 
         try {
             content = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
-            localOrganizationIdentifier = this.api.getOrganizationProvider()
-                    .getLocalOrganizationIdentifierValue()
-                    .orElseThrow();
         } catch (Exception exception) {
             this.handleStoreError(exception, variables);
         }
@@ -44,12 +40,6 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
         try (InputStream in = new ByteArrayInputStream(content)) {
             IdType created = this.storeBinaryData(in, mediaType, targetOrganizationIdentifier);
             String idTypeVar = created.toString();
-
-            logger.info("Target-Organization-Value -> {}", targetOrganizationIdentifier);
-            logger.info("Local-Organization-Value -> {}", localOrganizationIdentifier);
-            logger.info("IdType -> {}", idTypeVar);
-            logger.info("Security Context -> {}", this.getSecurityContext(targetOrganizationIdentifier));
-
             variables.setString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE, idTypeVar);
         } catch (Exception exception) {
             this.handleStoreError(exception, variables);

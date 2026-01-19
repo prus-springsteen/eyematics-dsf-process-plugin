@@ -17,8 +17,8 @@ import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_
 
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
 
-	public static final String VERSION = "1.0.0.1";
-	public static final LocalDate RELEASE_DATE = LocalDate.of(2025, 8, 15);
+	public static final String VERSION = "1.1.0.0";
+	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 1, 16);
 
 	@Override
 	public String getName() {
@@ -37,56 +37,58 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 
 	@Override
 	public List<String> getProcessModels() {
-		return List.of("bpe/eyematics-initiate-process.bpmn", "bpe/eyematics-provide-process.bpmn",
+		return List.of("bpe/eyematics-initiate-process.bpmn",
+                "bpe/eyematics-provide-process.bpmn",
 				"bpe/eyematics-receive-process.bpmn");
 	}
 
 	@Override
 	public Map<String, List<String>> getFhirResourcesByProcessId() {
 
-		// EYEMATICS PROCESS (v1.0)
+        // EYEMATICS PROCESS (v1.1)
 
-		// GENERIC
-		String cGenericProcess = "fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system.xml";
-		String cGenericProcessCodes = "fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system.xml";
-		String sGenericProcess = "fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension.xml";
-		String vGenericProcess = "fhir/ValueSet/eyematics-generic-process-data-set-status-value-set.xml";
-		String vGenericProcessCodes = "fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set.xml";
+        // GENERIC
+        String cGenericProcess = "fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system.xml";
+        String cGenericProcessCodes = "fhir/CodeSystem/eyematics-generic-process-data-set-status-codes-code-system.xml";
+        String sGenericProcess = "fhir/StructureDefinition/eyematics-generic-process-data-set-status-error-extension.xml";
+        String vGenericProcess = "fhir/ValueSet/eyematics-generic-process-data-set-status-value-set.xml";
+        String vGenericProcessCodes = "fhir/ValueSet/eyematics-generic-process-data-set-status-codes-value-set.xml";
 
-		// INITIATE
-		String aInitiateProcess = "fhir/ActivityDefinition/eyematics-initiate-process-activity-definition.xml";
-		String sInitiateProcess = "fhir/StructureDefinition/eyematics-initiate-process-structure-definition.xml";
-		String tInitiateProcess = "fhir/Task/eyematics-initiate-process-task.xml";
+        // INITIATE
+        String aInitiateProcess = "fhir/ActivityDefinition/eyematics-initiate-process-activity-definition.xml";
+        String sInitiateProcess = "fhir/StructureDefinition/eyematics-initiate-process-structure-definition.xml";
+        String sInitiateSubProcess = "fhir/StructureDefinition/eyematics-initiate-sub-process-structure-definition.xml";
+        String tInitiateProcess = "fhir/Task/eyematics-initiate-process-task.xml";
 
-		// PROVIDE
-		String aProvideProcess = "fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml";
-		String sProvideProcess = "fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml";
-		String sProvideProcessAcknowledgement = "fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition.xml";
+        // PROVIDE
+        String aProvideProcess = "fhir/ActivityDefinition/eyematics-provide-process-activity-definition.xml";
+        String sProvideProcess = "fhir/StructureDefinition/eyematics-provide-process-structure-definition.xml";
+        String sProvideProcessAcknowledgement = "fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition.xml";
         String qProvideProcessAdminApproval = "fhir/Questionnaire/eyematics-provide-process-admin-approval-questionnaire.xml";
 
+        // RECEIVE
+        String aReceiveProcess = "fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml";
+        String sInitiateReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition.xml";
+        String sInitiateReceiveProcessExtension = "fhir/StructureDefinition/eyematics-receive-process-initiate-dic-identifier-extension.xml";
+        String sCloseReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-close-structure-definition.xml";
+        String sStartReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml";
+        String cReceiveInitiateProcess = "fhir/CodeSystem/eyematics-receive-process-initiate-code-system.xml";
+        String cReceiveProcess = "fhir/CodeSystem/eyematics-receive-process-code-system.xml";
+        String vReceiveInitiateProcess = "fhir/ValueSet/eyematics-receive-process-initiate-value-set.xml";
+        String vReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
 
-		// RECEIVE
-		String aReceiveProcess = "fhir/ActivityDefinition/eyematics-receive-process-activity-definition.xml";
-		String sInitiateReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-initiate-structure-definition.xml";
-		String sInitiateReceiveProcessExtension = "fhir/StructureDefinition/eyematics-receive-process-initiate-dic-identifier-extension.xml";
-		String sStartReceiveProcess = "fhir/StructureDefinition/eyematics-receive-process-structure-definition.xml";
-		String cReceiveInitiateProcess = "fhir/CodeSystem/eyematics-receive-process-initiate-code-system.xml";
-		String cReceiveProcess = "fhir/CodeSystem/eyematics-receive-process-code-system.xml";
-		String vReceiveInitiateProcess = "fhir/ValueSet/eyematics-receive-process-initiate-value-set.xml";
-		String vReceiveProcess = "fhir/ValueSet/eyematics-receive-process-value-set.xml";
-
-		return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
-				List.of(aInitiateProcess, sInitiateProcess, sGenericProcess, tInitiateProcess, cGenericProcess,
-                        cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
-				      PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
-				List.of(aProvideProcess, sProvideProcess, sProvideProcessAcknowledgement, sGenericProcess,
+        return Map.of(PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS,
+                List.of(aInitiateProcess, sInitiateProcess, sInitiateSubProcess, sGenericProcess, tInitiateProcess,
+                        cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes),
+                PROCESS_NAME_FULL_EXECUTE_PROVIDE_EYEMATICS_PROCESS,
+                List.of(aProvideProcess, sProvideProcess, sProvideProcessAcknowledgement, sGenericProcess,
                         cGenericProcess, cGenericProcessCodes, vGenericProcess, vGenericProcessCodes,
                         qProvideProcessAdminApproval),
-					  PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
-				List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension,
-                        sStartReceiveProcess, sGenericProcess, cReceiveProcess, cReceiveInitiateProcess,
-                        cGenericProcess, cGenericProcessCodes, vReceiveProcess, vReceiveInitiateProcess,
-                        vGenericProcess, vGenericProcessCodes));
+                PROCESS_NAME_FULL_EXECUTE_RECEIVE_EYEMATICS_PROCESS,
+                List.of(aReceiveProcess, sInitiateReceiveProcess, sInitiateReceiveProcessExtension,
+                        sCloseReceiveProcess, sStartReceiveProcess, sGenericProcess, cReceiveProcess,
+                        cReceiveInitiateProcess, cGenericProcess, cGenericProcessCodes, vReceiveProcess,
+                        vReceiveInitiateProcess, vGenericProcess, vGenericProcessCodes));
 	}
 
 	@Override

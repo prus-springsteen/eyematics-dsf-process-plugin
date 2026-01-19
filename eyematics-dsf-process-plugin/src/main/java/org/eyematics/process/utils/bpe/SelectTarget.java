@@ -13,14 +13,17 @@ import static java.lang.String.format;
 
 public class SelectTarget {
 
-    public static Target getRequestTarget(ProcessPluginApi api, Variables variables) {
-        Task task = variables.getStartTask();
-        String correlationKey = api.getTaskHelper().getFirstInputParameterStringValue(task, CodeSystems.BpmnMessage.URL, CodeSystems.BpmnMessage.Codes.CORRELATION_KEY).orElse(null);
-        return SelectTarget.getRequestTarget(api, variables, correlationKey);
+    public static Target getRequestTarget(ProcessPluginApi api, Variables variables, boolean isStartTask) {
+        Task task = isStartTask ? variables.getStartTask() : variables.getLatestTask();
+        String correlationKey = api.getTaskHelper().getFirstInputParameterStringValue(task,
+                CodeSystems.BpmnMessage.URL,
+                CodeSystems.BpmnMessage.Codes.CORRELATION_KEY)
+                .orElse(null);
+        return SelectTarget.getRequestTarget(api, variables, correlationKey, isStartTask);
     }
 
-    public static Target getRequestTarget(ProcessPluginApi api, Variables variables, String correlationKey) {
-        Task task = variables.getStartTask();
+    public static Target getRequestTarget(ProcessPluginApi api, Variables variables, String correlationKey, boolean isStartTask) {
+        Task task = isStartTask ? variables.getStartTask() : variables.getLatestTask();
         Identifier organizationIdentifier = task.getRequester().getIdentifier();
         Endpoint endpoint = api.getOrganizationProvider()
                 .getOrganization(organizationIdentifier)
@@ -34,7 +37,10 @@ public class SelectTarget {
                 .orElseThrow(() -> new IllegalArgumentException(
                         format("No endpoint found for organization with identifier '%s'",
                                 organizationIdentifier.getValue())));
-        return variables.createTarget(organizationIdentifier.getValue(), endpoint.getIdentifierFirstRep().getValue(), endpoint.getAddress(), correlationKey);
+        return variables.createTarget(organizationIdentifier.getValue(),
+                endpoint.getIdentifierFirstRep().getValue(),
+                endpoint.getAddress(),
+                correlationKey);
     }
 
     public static Target getRequestTargetExecution(ProcessPluginApi api, DelegateExecution delegateExecution) {

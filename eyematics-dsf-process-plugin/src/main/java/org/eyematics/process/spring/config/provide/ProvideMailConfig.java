@@ -3,9 +3,9 @@ package org.eyematics.process.spring.config.provide;
 import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.Arrays;
 import java.util.List;
+
 
 @Configuration
 public class ProvideMailConfig {

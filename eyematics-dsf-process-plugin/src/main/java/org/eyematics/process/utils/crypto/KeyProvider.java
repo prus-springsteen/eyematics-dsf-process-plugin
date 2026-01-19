@@ -24,8 +24,8 @@ public interface KeyProvider
     PublicKey getPublicKey();
 
     /**
-     * Creating a PublicKey based on a {@link org.hl7.fhir.r4.model.Bundle} with type
-     * {@link org.hl7.fhir.r4.model.Bundle.BundleType#COLLECTION} containing a
+     * Creating a PublicKey based on a {@link Bundle} with type
+     * {@link Bundle.BundleType#COLLECTION} containing a
      * {@link org.hl7.fhir.r4.model.DocumentReference} with an {@link org.hl7.fhir.r4.model.Identifier} matching system
      * {@link de.medizininformatik_initiative.processes.common.util.ConstantsBase#CODESYSTEM_MII_CRYPTOGRAPHY} and code
      * {@link de.medizininformatik_initiative.processes.common.util.ConstantsBase#CODESYSTEM_MII_CRYPTOGRAPHY_VALUE_PUBLIC_KEY}
@@ -35,8 +35,8 @@ public interface KeyProvider
     void createPublicKeyIfNotExists();
 
     /**
-     * Reading a PublicKey based on a {@link org.hl7.fhir.r4.model.Bundle} with type
-     * {@link org.hl7.fhir.r4.model.Bundle.BundleType#COLLECTION} containing a
+     * Reading a PublicKey based on a {@link Bundle} with type
+     * {@link Bundle.BundleType#COLLECTION} containing a
      * {@link org.hl7.fhir.r4.model.DocumentReference} with an {@link org.hl7.fhir.r4.model.Identifier} matching system
      * {@link de.medizininformatik_initiative.processes.common.util.ConstantsBase#CODESYSTEM_MII_CRYPTOGRAPHY} and code
      * {@link de.medizininformatik_initiative.processes.common.util.ConstantsBase#CODESYSTEM_MII_CRYPTOGRAPHY_VALUE_PUBLIC_KEY}
@@ -45,7 +45,7 @@ public interface KeyProvider
      *
      * @param webserviceUrl
      *            the base Url used to connect to the local or remote DSF FHIR server, note <code>null</code> or empty
-     * @return {@link Optional<org.hl7.fhir.r4.model.Bundle>} if a PublicKey exists, {@link Optional#empty()} otherwise
+     * @return {@link Optional< Bundle>} if a PublicKey exists, {@link Optional#empty()} otherwise
      */
     Optional<Bundle> readPublicKeyIfExists(String webserviceUrl);
 

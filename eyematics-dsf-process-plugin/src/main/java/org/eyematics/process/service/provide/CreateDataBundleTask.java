@@ -13,23 +13,17 @@ import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
-import static org.hl7.fhir.r4.model.Bundle.BundleType.TRANSACTION;
 
 
 public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(CreateDataBundleTask.class);
-    private final List<String> provideMailConfigAdresses;
 
-    public CreateDataBundleTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator,
-                                List<String> provideMailConfigAdresses) {
+    public CreateDataBundleTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
         super(api, dataSetStatusGenerator);
-        this.provideMailConfigAdresses = provideMailConfigAdresses;
     }
 
     @Override
@@ -49,9 +43,9 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
             Bundle medicationRequests = variables
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET);
 
-            Bundle eyeMaticsBundle = new Bundle().setType(TRANSACTION);
-            Bundle.BundleEntryRequestComponent brc = new Bundle.BundleEntryRequestComponent();
-            brc.setMethod(Bundle.HTTPVerb.PUT);
+            Bundle eyeMaticsBundle = new Bundle().setType(Bundle.BundleType.TRANSACTION);
+            Bundle.BundleEntryRequestComponent bundleEntryRequestComponent = new Bundle.BundleEntryRequestComponent();
+            bundleEntryRequestComponent.setMethod(Bundle.HTTPVerb.PUT);
             patients.getEntry().forEach(e -> {
                 Patient p = this.transformToPatient(e);
                 String dicPseudonym = this.getDICPseudonym(p);
@@ -61,23 +55,43 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                     globalPseudonymMap.put(dicPseudonym, globalPseudonym);
                     globalPseudonymSet.add(globalPseudonym);
                     if (this.replaceIdentifierPatientResource(p, dicPseudonym, globalPseudonym)) {
-                        eyeMaticsBundle.addEntry().setResource(p).setRequest(this.getBundleRequest(brc, p));
+                        eyeMaticsBundle.addEntry()
+                                .setResource(p)
+                                .setRequest(this.getBundleRequest(bundleEntryRequestComponent, p));
                     }
                 }
             });
 
             observations.getEntry().forEach(e ->
-                    this.processResource(e.getResource(), brc, globalPseudonymMap, eyeMaticsBundle));
+                    this.processResource(e.getResource(),
+                            bundleEntryRequestComponent,
+                            globalPseudonymMap,
+                            eyeMaticsBundle));
             medications.getEntry().forEach(e ->
                     eyeMaticsBundle.addEntry()
-                            .setResource(e.getResource()).setRequest(this.getBundleRequest(brc, e.getResource())));
+                            .setResource(e.getResource())
+                            .setRequest(this.getBundleRequest(bundleEntryRequestComponent, e.getResource())));
             medicationAdministrations.getEntry().forEach(e ->
-                    this.processResource(e.getResource(), brc, globalPseudonymMap, eyeMaticsBundle));
+                    this.processResource(e.getResource(),
+                            bundleEntryRequestComponent,
+                            globalPseudonymMap,
+                            eyeMaticsBundle));
             medicationRequests.getEntry().forEach(e ->
-                    this.processResource(e.getResource(), brc, globalPseudonymMap, eyeMaticsBundle));
+                    this.processResource(e.getResource(),
+                            bundleEntryRequestComponent,
+                            globalPseudonymMap,
+                            eyeMaticsBundle));
 
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, eyeMaticsBundle);
-            this.sendGlobalPseudonymMail(globalPseudonymSet, variables.getStartTask());
+
+            List<Patient> globalPseudonymList = globalPseudonymSet.stream()
+                    .map(this::createPatientPseudonym)
+                    .toList();
+            Bundle globalPseudonymBundle = new Bundle().setType(Bundle.BundleType.COLLECTION);
+            globalPseudonymList.forEach(p -> globalPseudonymBundle.addEntry().setResource(p));
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_GLOBAL_PSEUDONYMS,
+                    globalPseudonymBundle);
+
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not bundle data: {}", errorMessage);
@@ -192,26 +206,10 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
         return false;
     }
 
-    private void sendGlobalPseudonymMail(HashSet<String> globalPseudonymSet, Task task) {
-        if (!this.provideMailConfigAdresses.isEmpty()) {
-            StringBuilder message = new StringBuilder();
-            message.append("Dear Admin, \n\n");
-            message.append("an EyeMatics data exchange has been conducted.\n\n");
-            message.append("Task Id: ");
-            message.append(task.getId());
-            message.append("\n");
-            message.append("Requester: ");
-            message.append(task.getRequester().getIdentifier().getValue());
-            message.append("\n");
-            message.append("Provider: ");
-            message.append(task.getRestriction().getRecipientFirstRep().getIdentifier().getValue());
-            message.append("\n\n");
-            message.append("Data from following global pseudonyms where exchanged:\n\n");
-            message.append(globalPseudonymSet);
-            this.api.getMailService().send("EyeMatics Data Exchange: Global pseudonyms",
-                    message.toString(),
-                    this.provideMailConfigAdresses);
-        }
+    private Patient createPatientPseudonym(String globalPseudonym) {
+        Identifier identifier = new Identifier();
+        identifier.setSystem(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM);
+        identifier.setValue(globalPseudonym);
+        return new Patient().addIdentifier(identifier);
     }
-
 }

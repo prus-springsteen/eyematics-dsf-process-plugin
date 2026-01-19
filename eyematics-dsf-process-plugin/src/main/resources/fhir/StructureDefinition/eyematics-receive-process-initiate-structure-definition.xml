@@ -47,7 +47,8 @@
             </extension>
             <path value="Task.input" />
             <sliceName value="business-key" />
-            <max value="1" />
+            <min value="1"/>
+            <max value="1"/>
         </element>
         <element id="Task.input:correlation-key">
             <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-explicit-type-name">
@@ -60,7 +61,7 @@
         <element id="Task.input:dic-correlation-key">
             <path value="Task.input" />
             <sliceName value="dic-correlation-key" />
-            <min value="1" />
+            <min value="1"/>
         </element>
         <element id="Task.input:dic-correlation-key.extension">
             <path value="Task.input.extension" />
