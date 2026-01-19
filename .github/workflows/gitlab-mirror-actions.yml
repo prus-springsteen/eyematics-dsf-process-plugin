@@ -27,7 +27,7 @@ jobs:
     - name: Mirror + trigger CICD
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
-        args: "https://imigitlab.uni-muenster.de/$NAMESPACE/$REPOSITORY"
+        args: "https://imigitlab.uni-muenster.de/$GROUP/$NAMESPACE/$REPOSITORY"
       env:
         FOLLOW_TAGS: "true"
         FORCE_PUSH: "false"
