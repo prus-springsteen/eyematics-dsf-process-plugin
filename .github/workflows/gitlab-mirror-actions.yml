@@ -4,8 +4,7 @@ env:
     GITLAB_USERNAME: ${{ secrets.GITLAB_USER }}
     #https://imigitlab.uni-muenster.de/<group>/<namespace>/<repository>/edit
     GITLAB_PROJECT_ID: "650"
-    GROUP: "MeDIC"
-    NAMESPACE: "eyematics"
+    NAMESPACE: "MeDIC/eyematics"
     REPOSITORY: "eyematics-dsf-process-plugin"
       
 on: 
@@ -27,7 +26,7 @@ jobs:
     - name: Mirror + trigger CICD
       uses: SvanBoxel/gitlab-mirror-and-ci-action@master
       with:
-        args: "https://imigitlab.uni-muenster.de/$GROUP/$NAMESPACE/$REPOSITORY"
+        args: "https://imigitlab.uni-muenster.de/$NAMESPACE/$REPOSITORY"
       env:
         FOLLOW_TAGS: "true"
         FORCE_PUSH: "false"
