@@ -17,8 +17,8 @@ import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_
 
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
 
-	public static final String VERSION = "1.1.0.0";
-	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 1, 16);
+	public static final String VERSION = "1.1.0.1";
+	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 1, 20);
 
 	@Override
 	public String getName() {

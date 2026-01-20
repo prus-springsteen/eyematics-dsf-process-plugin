@@ -24,7 +24,6 @@ public class EyeMaticsProcessPluginDeploymentStateListener implements ProcessPlu
     @Override
     public void afterPropertiesSet() throws Exception {
         Objects.requireNonNull(keyProvider, "keyProvider");
-        Configurator.setLevel("org.eyematics", Level.INFO);
     }
 
     @Override
