@@ -51,7 +51,7 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
             PublicKey pubKey = this.readPublicKey(reqOrg);
             Bundle bundle = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
             byte[] bundleEncrypted = this.encrypt(pubKey, bundle, recOrg, reqOrg);
-            variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED, bundleEncrypted);
+            variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundleEncrypted);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not encrypt data: {}", errorMessage);

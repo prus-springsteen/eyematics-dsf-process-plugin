@@ -39,8 +39,8 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Requesting and processing global pseudonyms for patient data");
-        FTTPClient fttpClient = this.fttpClientFactory.getFTTPClient();
         try {
+            FTTPClient fttpClient = this.fttpClientFactory.getFTTPClient();
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
             List<String> bloomfilterList = patients.getEntry()
                     .stream()
@@ -48,9 +48,16 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
                     .flatMap(Optional::stream)
                     .filter(Objects::nonNull)
                     .toList();
-            HashSet<String> bloomfilter = new HashSet<>(bloomfilterList);
-            Optional<HashMap<String, String>> globalPseudonyms = fttpClient.getGlobalPseudonym(bloomfilter);
-            HashMap<String, String> globalPseudonymMap = globalPseudonyms.orElseThrow();
+
+            List<String> bloomFilter = new ArrayList<>(bloomfilterList);
+            HashMap<String, String> globalPseudonymMap = new HashMap<>();
+            for (int i = 0; i < bloomFilter.size(); i += ProvideConstants.CHUNK_SIZE_FHIR_RESOURCES) {
+                int end = Math.min(i + ProvideConstants.CHUNK_SIZE_FHIR_RESOURCES, bloomFilter.size());
+                HashSet<String> bloomFilterSet = new HashSet<>(bloomFilter.subList(i, end));
+                Optional<HashMap<String, String>> globalPseudonyms = fttpClient.getGlobalPseudonym(bloomFilterSet);
+                globalPseudonyms.ifPresent(globalPseudonymMap::putAll);
+            }
+
             List<Bundle.BundleEntryComponent> pseudonymizedPatients = patients.getEntry()
                     .stream()
                     .map(p -> this.setGlobalPseudonymToBundleEntry(p, globalPseudonymMap))

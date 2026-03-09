@@ -22,7 +22,7 @@ public class EnvGenerator
 	private static final Logger logger = LoggerFactory.getLogger(EnvGenerator.class);
 
 	private static final String BUNDLE_USER_THUMBPRINT = "BUNDLE_USER_THUMBPRINT";
-	private static final String WEBBROSER_TEST_USER_THUMBPRINT = "WEBBROWSER_TEST_USER_THUMBPRINT";
+	private static final String WEBBROWSER_TEST_USER_THUMBPRINT = "WEBBROWSER_TEST_USER_THUMBPRINT";
 	private static final String PROCESS_VERSION = "PROCESS_VERSION";
 
 	private static final class EnvEntry
@@ -62,7 +62,7 @@ public class EnvGenerator
 		 * .findFirst().get();
 		 */
 
-		List<EnvEntry> entries = List.of(new EnvEntry(WEBBROSER_TEST_USER_THUMBPRINT, webbroserTestUserThumbprint),
+		List<EnvEntry> entries = List.of(new EnvEntry(WEBBROWSER_TEST_USER_THUMBPRINT, webbroserTestUserThumbprint),
 				new EnvEntry("DIC_B_" + BUNDLE_USER_THUMBPRINT, bundleDicBUserThumbprint),
 				new EnvEntry("DIC_A_" + BUNDLE_USER_THUMBPRINT, bundleDicAUserThumbprint),
 				new EnvEntry("DIC_C_" + BUNDLE_USER_THUMBPRINT, bundleDicCUserThumbprint),

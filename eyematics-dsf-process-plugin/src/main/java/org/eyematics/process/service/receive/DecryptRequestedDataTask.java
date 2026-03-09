@@ -41,7 +41,7 @@ public class DecryptRequestedDataTask extends AbstractExtendedSubProcessServiceD
         logger.info("-> Decrypting the provided data");
         try {
             Binary bundleEncryptedBinary = (Binary) this.getVariable(delegateExecution,
-                            ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED);
+                            ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET);
             String reqOrg = variables.getLatestTask().getRequester().getIdentifier().getValue();
             String recOrg = variables.getLatestTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
             Bundle bundleDecrypted = this.decryptBundle(this.keyProvider.getPrivateKey(),

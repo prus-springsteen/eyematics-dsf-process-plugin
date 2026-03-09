@@ -75,11 +75,9 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
             HttpRequest.Builder reqBuilder = (resourceType == null)
                     ? this.createBaseRequest(Map.of("Content-Type", mimeType))
                     : this.createBaseRequest(resourceType, Map.of("Content-Type", mimeType));
-
             HttpRequest request = reqBuilder
                     .POST(HttpRequest.BodyPublishers.ofString(fhirResource))
                     .build();
-
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             int status = response.statusCode();
             if (status == HttpURLConnection.HTTP_CREATED || status == HttpURLConnection.HTTP_OK) {
@@ -87,7 +85,7 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
             }
             throw new Exception("Creating FHIR-Resource failed - " + response.body() + " (Status Code: " + status + ")");
         } catch (Exception e) {
-            throw new Exception("Saving FHIR-Resource failed", e);
+            throw new Exception("Saving FHIR-Resource failed: " + e.getMessage(), e);
         }
     }
 }

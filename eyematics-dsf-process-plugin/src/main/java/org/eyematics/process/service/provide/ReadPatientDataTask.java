@@ -19,7 +19,9 @@ import org.hl7.fhir.r4.model.MedicationRequest;
 import org.hl7.fhir.r4.model.Observation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -42,42 +44,51 @@ public class ReadPatientDataTask extends AbstractExtendedProcessServiceDelegate 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Reading patient data from local FHIR repository is initiated");
-        MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-",
-                "Data requested",
-                "there is a new patient data request which is processed.");
-        EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         try {
-            HashSet<String> patientIdSet = new HashSet<String>();
+            EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
+            MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-",
+                    "Data requested",
+                    "there is a new patient data request which is processed.");
 
+            HashSet<String> patientIdSet = new HashSet<>();
             Bundle observations =  variables
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET);
             observations.getEntry()
                     .forEach((e -> { Observation o = (Observation) e.getResource();
                         patientIdSet.add(PatientId.extract(o.getSubject().getReference()));
                     }));
-
             Bundle medicationAdministrations =  variables
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET);
             medicationAdministrations.getEntry()
                     .forEach((e -> { MedicationAdministration o = (MedicationAdministration) e.getResource();
                         patientIdSet.add(PatientId.extract(o.getSubject().getReference()));
                     }));
-
             Bundle medicationRequests =  variables
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET);
             medicationRequests.getEntry()
                     .forEach((e -> { MedicationRequest o = (MedicationRequest) e.getResource();
                         patientIdSet.add(PatientId.extract(o.getSubject().getReference()));
                     }));
-            String patientsQuery = String.format("_id=%s", String.join(",", patientIdSet));
-            Bundle patients = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
-                    "Patient",
-                    patientsQuery);
+
+            List<String> patienIds = new ArrayList<>(patientIdSet);
+            Bundle patients = new Bundle();
+            for (int i = 0; i < patienIds.size(); i += ProvideConstants.CHUNK_SIZE_FHIR_RESOURCES) {
+                int end = Math.min(i + ProvideConstants.CHUNK_SIZE_FHIR_RESOURCES, patienIds.size());
+                Bundle patientsChunk = this.getEyeMaticsDataBundle(fhirClient,
+                        "Patient",
+                        String.format("_id=%s", String.join(",", patienIds.subList(i, end))));
+                patients.getEntry().addAll(patientsChunk.getEntry());
+            }
+
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not read Patient data from FHIR repository: {}", errorMessage);
             this.handleTaskError(EyeMaticsGenericStatus.PATIENT_READ_FAILURE, variables, errorMessage);
         }
+    }
+
+    private Bundle getEyeMaticsDataBundle(EyeMaticsFhirClient fhirClient, String resourceType, String query) throws Exception {
+        return EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient, resourceType, query);
     }
 }

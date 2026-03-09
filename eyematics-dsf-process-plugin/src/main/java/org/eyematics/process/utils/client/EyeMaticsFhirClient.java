@@ -1,6 +1,5 @@
 package org.eyematics.process.utils.client;
 
-import ca.uhn.fhir.rest.api.MethodOutcome;
 import org.hl7.fhir.r4.model.IdType;
 
 

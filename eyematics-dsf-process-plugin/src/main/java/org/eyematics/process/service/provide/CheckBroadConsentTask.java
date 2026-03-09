@@ -44,8 +44,8 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Reading Broad Consent data from local FHIR repository is initiated");
-        EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         try {
+            EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
             String consentsQuery = String.format("_profile=%s", EyeMaticsConstants.MII_IG_MODUL_CONSENT_PROFILE);
             Bundle consents = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,

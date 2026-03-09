@@ -39,10 +39,11 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Reading local data from FHIR repository is initiated");
-        MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-",
-                "Data requested", "there is a new data request which is processed.");
-        EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         try {
+            EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
+            MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-",
+                    "Data requested", "there is a new data request which is processed.");
+
             String observationQuery = String.format("_profile=%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE.stream()
                     .map(s -> EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + s)
@@ -51,7 +52,6 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
                     "Observation", observationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET,
                     observations);
-
             String medicationQuery = String.format("_profile=%s%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
                     EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_PROFILE);
@@ -59,7 +59,6 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
                     "Medication", medicationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_DATA_SET,
                     medications);
-
             String medicationAdministrationQuery = String.format("_profile=%s%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
                     EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE);
@@ -67,7 +66,6 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
                     "MedicationAdministration", medicationAdministrationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET,
                     medicationAdministrations);
-
             String medicationRequestQuery = String.format("_profile=%s%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
                     EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE);

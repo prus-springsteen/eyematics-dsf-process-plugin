@@ -38,16 +38,16 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Insertion of the provided data into FHIR repository");
-        EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
         try {
+            EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
+
             Bundle bundle = (Bundle) this.getVariable(delegateExecution,
                     ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET);
-            String bundleString = this.api.getFhirContext().newJsonParser().encodeResourceToString(bundle);
+            String bundleString = this.api.getFhirContext().newXmlParser().encodeResourceToString(bundle);
             String methodOutcome = fhirClient.create(bundleString,
-                    EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
+                    EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_XML);
             String providingOrganization = variables.getLatestTask().getRequester().getIdentifier().getValue();
             String countedResources = this.countResources(providingOrganization, methodOutcome);
-            logger.info("Data is inserted for further processing. {}", countedResources);
             MailSender.sendInfo(this.api.getMailService(),
                     variables.getLatestTask(),
                     EyeMaticsGenericStatus.DATA_REQUEST_SUCCESS.getStatusCode(),
@@ -68,7 +68,7 @@ public class InsertRequestedDataTask extends AbstractExtendedSubProcessServiceDe
                     providingOrganization, methodOutcomeBundle.getEntry().size());
         } catch (Exception exception) {
             String message = exception.getMessage();
-            logger.info("Could not parse method outcome: {}", message);
+            logger.warn("Could not parse method outcome: {}", message);
             return String.format("%s submitted an unknown amount of FHIR resources, reason: %s",
                     providingOrganization, message);
         }

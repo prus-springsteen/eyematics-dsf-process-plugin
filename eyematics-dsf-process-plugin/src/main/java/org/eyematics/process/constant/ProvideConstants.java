@@ -14,7 +14,6 @@ public interface ProvideConstants {
     String BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET = "medicationAdministrationDataSet";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET = "medicationRequestDataSet";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
-    String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED = "dataSetEncrypted";
     String BPMN_PROVIDE_EXECUTION_VARIABLE_GLOBAL_PSEUDONYMS = "globalPseudonyms";
 
     String BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE = "data-reference";
@@ -24,4 +23,6 @@ public interface ProvideConstants {
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_MESSAGE_NAME = "provideProcessStartEventMessage";
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT = "https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition";
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT_MESSAGE_NAME = "provideProcessAcknowledgementEventMessage";
+
+    int CHUNK_SIZE_FHIR_RESOURCES = 100;
 }
