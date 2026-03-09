@@ -12,15 +12,19 @@ public class EyeMaticsDataBundleRetriever {
         Bundle dataBundle = FhirContext.forR4().newJsonParser().parseResource(Bundle.class, data);
         String nextLink = getNextLink(dataBundle);
         while (nextLink != null) {
-            String nextData = fhirClient.read(resource, searchQuery, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
+            String nextData = fhirClient.read(nextLink, EyeMaticsConstants.MEDIA_TYPE_APPLICATION_FHIR_JSON);
             Bundle nextBundle = FhirContext.forR4().newJsonParser().parseResource(Bundle.class, nextData);
             dataBundle.getEntry().addAll(nextBundle.getEntry());
             nextLink = getNextLink(nextBundle);
         }
-        return FhirContext.forR4().newJsonParser().parseResource(Bundle.class, data);
+        return dataBundle;
     }
 
     private static String getNextLink(Bundle bundle) {
-        return bundle.getLink(Bundle.LINK_NEXT) != null ? bundle.getLink(Bundle.LINK_NEXT).getUrl() : null;
+        String fullUrl = bundle.getLink(Bundle.LINK_NEXT) != null ? bundle.getLink(Bundle.LINK_NEXT).getUrl() : null;
+        if (fullUrl == null) return fullUrl;
+        int start = fullUrl.indexOf("/fhir/") + 6;
+        int end =  fullUrl.length();
+        return fullUrl.substring(start, end);
     }
 }

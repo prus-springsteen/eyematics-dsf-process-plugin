@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class BundleResource extends AbstractFHIRResourceBuilder<Bundle, BundleResource>{
+public class BundleResource extends AbstractFHIRResourceBuilder<Bundle, BundleResource> {
 
     private int patientId;
     private int maxPatientId;
@@ -103,7 +103,7 @@ public class BundleResource extends AbstractFHIRResourceBuilder<Bundle, BundleRe
 
         Consent validConsent = cr.setConsentState(Consent.ConsentState.ACTIVE)
                 .setDateIntervalls(start, end)
-                .setConcept(ConsentCodeSystem.MDAT_ZUSAMMENFUEHREN_DRITTE)
+                .setConcept(ConsentCodeSystem.MDAT_WISSENSCHAFTLICH_NUTZEN)
                 .setPatient(patient)
                 .setId(1)
                 .build();
@@ -122,7 +122,7 @@ public class BundleResource extends AbstractFHIRResourceBuilder<Bundle, BundleRe
 
         Consent invalidConsent = cr.setConsentState(Consent.ConsentState.ACTIVE)
                 .setDateIntervalls(start, end)
-                .setConcept(ConsentCodeSystem.MDAT_ZUSAMMENFUEHREN_DRITTE)
+                .setConcept(ConsentCodeSystem.MDAT_WISSENSCHAFTLICH_NUTZEN)
                 .setPatient(patient)
                 .setId(3)
                 .build();

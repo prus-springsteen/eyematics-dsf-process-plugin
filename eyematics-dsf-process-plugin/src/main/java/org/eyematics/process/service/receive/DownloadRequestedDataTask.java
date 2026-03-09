@@ -31,19 +31,20 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Downloading the provided data");
-        Task latestTask = variables.getLatestTask();
-        Reference reference = api.getTaskHelper()
-                .getFirstInputParameterValue(latestTask,
-                        ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                        ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE,
-                        Reference.class)
-                .orElseThrow(() -> this.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
-                                                           variables,
-                                               "Could not find Reference-Input for downloading Data"));
         try {
+            Task latestTask = variables.getLatestTask();
+            Reference reference = api.getTaskHelper()
+                    .getFirstInputParameterValue(latestTask,
+                            ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                            ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE,
+                            Reference.class)
+                    .orElseThrow(() -> this.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
+                            variables,
+                            "Could not find Reference-Input for downloading Data"));
+
             Binary referenceBinary = this.downloadData(reference.getReference());
             this.setVariable(delegateExecution,
-                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED,
+                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET,
                     referenceBinary);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();

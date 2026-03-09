@@ -32,7 +32,6 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
         try {
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
             HashMap<String, String> globalPseudonymMap = new HashMap<>();
-            HashSet<String> globalPseudonymSet = new HashSet<>();
 
             Bundle observations = variables
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET);
@@ -44,6 +43,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                     .getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET);
 
             Bundle eyeMaticsBundle = new Bundle().setType(Bundle.BundleType.TRANSACTION);
+            Bundle globalPseudonymBundle = new Bundle().setType(Bundle.BundleType.COLLECTION);
             Bundle.BundleEntryRequestComponent bundleEntryRequestComponent = new Bundle.BundleEntryRequestComponent();
             bundleEntryRequestComponent.setMethod(Bundle.HTTPVerb.PUT);
             patients.getEntry().forEach(e -> {
@@ -53,11 +53,10 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                 String globalPseudonym = this.getGlobalPseudonym(p);
                 if (dicPseudonym != null && bloomFilter != null && globalPseudonym != null) {
                     globalPseudonymMap.put(dicPseudonym, globalPseudonym);
-                    globalPseudonymSet.add(globalPseudonym);
                     if (this.replaceIdentifierPatientResource(p, dicPseudonym, globalPseudonym)) {
-                        eyeMaticsBundle.addEntry()
-                                .setResource(p)
+                        eyeMaticsBundle.addEntry().setResource(p)
                                 .setRequest(this.getBundleRequest(bundleEntryRequestComponent, p));
+                        globalPseudonymBundle.addEntry().setResource(this.createPatientPseudonym(globalPseudonym));
                     }
                 }
             });
@@ -82,13 +81,9 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                             globalPseudonymMap,
                             eyeMaticsBundle));
 
-            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, eyeMaticsBundle);
+            if (eyeMaticsBundle.getEntry().isEmpty()) throw new BpmnError("No data to bundle.");
 
-            List<Patient> globalPseudonymList = globalPseudonymSet.stream()
-                    .map(this::createPatientPseudonym)
-                    .toList();
-            Bundle globalPseudonymBundle = new Bundle().setType(Bundle.BundleType.COLLECTION);
-            globalPseudonymList.forEach(p -> globalPseudonymBundle.addEntry().setResource(p));
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, eyeMaticsBundle);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_GLOBAL_PSEUDONYMS,
                     globalPseudonymBundle);
 
@@ -113,11 +108,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
 
     private String getDICPseudonym(Patient patient) {
         if  (patient == null) return null;
-        return patient.getIdentifier().stream().filter(pi ->
-                        pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM))
-                .map(Identifier::getValue)
-                .toList()
-                .get(0);
+        return patient.getIdElement().getIdPart();
     }
 
     private String getBloomFilter(Patient patient) {
@@ -140,13 +131,11 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
     }
 
     private boolean replaceIdentifierPatientResource(Patient patient, String dicPseudonym, String globalPseudonym) {
-        boolean dicPsnRemoved = patient.getIdentifier().removeIf(i ->
-                EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM.equals(i.getSystem()));
-        boolean bloomFilterRemoved = patient.getIdentifier().removeIf(i ->
-                EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER.equals(i.getSystem()));
         if (patient.getIdElement().getIdPart().equals(dicPseudonym)) {
             patient.setId(globalPseudonym);
-            return dicPsnRemoved && bloomFilterRemoved;
+            patient.getIdentifier().removeIf(identifier -> !identifier.getSystem()
+                    .equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM));
+            return true;
         }
         return false;
     }
@@ -208,7 +197,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
 
     private Patient createPatientPseudonym(String globalPseudonym) {
         Identifier identifier = new Identifier();
-        identifier.setSystem(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM);
+        identifier.setSystem(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM);
         identifier.setValue(globalPseudonym);
         return new Patient().addIdentifier(identifier);
     }

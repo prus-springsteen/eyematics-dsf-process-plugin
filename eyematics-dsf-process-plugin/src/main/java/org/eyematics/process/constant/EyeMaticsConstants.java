@@ -68,7 +68,7 @@ public interface EyeMaticsConstants {
     String MII_IG_MODUL_CONSENT_CATEGORY_MII_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/modul-consent/CodeSystem/mii-cs-consent-consent_category";
     String MII_IG_MODUL_CONSENT_CATEGORY_MII_CODE = "2.16.840.1.113883.3.1937.777.24.2.184";
     String MII_IG_MODUL_CONSENT_PROVISION_SYSTEM = "urn:oid:2.16.840.1.113883.3.1937.777.24.5.3";
-    String MII_IG_MODUL_CONSENT_PROVISION_CODE = "2.16.840.1.113883.3.1937.777.24.5.3.9";
+    String MII_IG_MODUL_CONSENT_PROVISION_CODE = "2.16.840.1.113883.3.1937.777.24.5.3.8";                               // MDAT wissenschaftlich nutzen EU DSGVO NIVEAU
 
     String NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM = "https://eyematics.org/sid/dic-pseudonym";
     String NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER = "https://eyematics.org/sid/bloom-filter";

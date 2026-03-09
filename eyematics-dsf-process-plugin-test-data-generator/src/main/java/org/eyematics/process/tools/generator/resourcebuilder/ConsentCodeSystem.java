@@ -5,7 +5,7 @@ import org.hl7.fhir.r4.model.Coding;
 
 public enum ConsentCodeSystem {
 
-    MDAT_ZUSAMMENFUEHREN_DRITTE("9", "MDAT zusammenfuehren Dritte"),
+    MDAT_WISSENSCHAFTLICH_NUTZEN("8", "MDAT wissenschaftlich nutzen EU DSGVO NIVEAU"),
     PROMDAT_PATIENTENBEFRAGUNG_ERHEBEN("64", "PROMDAT Patientenbefragung erheben");
 
     private final String code;

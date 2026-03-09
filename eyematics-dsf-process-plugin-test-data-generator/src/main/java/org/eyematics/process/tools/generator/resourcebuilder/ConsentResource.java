@@ -1,5 +1,6 @@
 package org.eyematics.process.tools.generator.resourcebuilder;
 
+
 import org.hl7.fhir.r4.model.*;
 import org.hl7.fhir.r4.model.codesystems.ConsentScope;
 
@@ -32,7 +33,7 @@ public class ConsentResource extends AbstractFHIRResourceBuilder<Consent, Consen
         this.setSource("clinic");
         this.consentState = Consent.ConsentState.ACTIVE;
         this.patientReference = new Reference(new IdType("Patient", UUID.randomUUID().toString()));
-        this.setConcept(ConsentCodeSystem.MDAT_ZUSAMMENFUEHREN_DRITTE);
+        this.setConcept(ConsentCodeSystem.MDAT_WISSENSCHAFTLICH_NUTZEN);
     }
 
     @Override
@@ -57,8 +58,8 @@ public class ConsentResource extends AbstractFHIRResourceBuilder<Consent, Consen
         c.setStatus(this.consentState);
         ConsentScope consentScope = ConsentScope.fromCode(ConsentScope.RESEARCH.toCode());
         c.setScope(new CodeableConcept().setCoding(List.of(new Coding(consentScope.getSystem(),
-                        consentScope.toCode(),
-                        consentScope.getDisplay()))));
+                consentScope.toCode(),
+                consentScope.getDisplay()))));
         List<CodeableConcept> category = List.of(
                 new CodeableConcept().addCoding(new Coding("http://loinc.org",
                         "57016-8",
@@ -132,8 +133,8 @@ public class ConsentResource extends AbstractFHIRResourceBuilder<Consent, Consen
     }
 
     public ConsentResource setPatient(Patient patient) {
-       this.patientReference = new Reference(new IdType("Patient", patient.getId()));
-       return this;
+        this.patientReference = new Reference(new IdType("Patient", patient.getId()));
+        return this;
     }
 
     public ConsentResource setRandomPatient() {

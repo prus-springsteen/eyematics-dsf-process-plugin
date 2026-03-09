@@ -24,10 +24,10 @@ public class FTTPClientSimulatedImpl implements FTTPClient {
                     .collect(Collectors.toMap(e -> e,
                             e -> {
                                 Optional<String> pseudonym = this.sha256(e);
-                                return pseudonym.isPresent() ? EyeMaticsConstants.PROCESS_EYEMATICS_NAME_BASE + pseudonym.get() : null;
+                                return pseudonym.isPresent() ? EyeMaticsConstants.PROCESS_EYEMATICS_NAME_BASE +
+                                        pseudonym.get() : null;
                             }));
-            logger.warn("Returning simulated DIC pseudonyms '{}' for bloom filter '{}', fTTP connection not configured.",
-                    pseudonyms, patientBloomFilter);
+            this.logMessage();
             return Optional.of(new HashMap<>(pseudonyms));
         } catch (Exception e) {
             logger.error("Error while getting simulated global pseudonyms: {}", e.getMessage());
@@ -38,9 +38,9 @@ public class FTTPClientSimulatedImpl implements FTTPClient {
     @Override
     public Optional<String> getGlobalPseudonym(String patientBloomFilter) throws Exception {
         try {
-            Optional<String> pseudonym = this.sha256(patientBloomFilter).map(p -> EyeMaticsConstants.PROCESS_EYEMATICS_NAME_BASE + p);
-            logger.warn("Returning simulated DIC pseudonym '{}' for bloom filter '{}', fTTP connection not configured.",
-                    pseudonym.orElseThrow(), patientBloomFilter);
+            Optional<String> pseudonym = this.sha256(patientBloomFilter)
+                    .map(p -> EyeMaticsConstants.PROCESS_EYEMATICS_NAME_BASE + p);
+            this.logMessage();
             return pseudonym;
         } catch (Exception e) {
             logger.error("Error while getting simulated global pseudonym: {}", e.getMessage());
@@ -57,5 +57,9 @@ public class FTTPClientSimulatedImpl implements FTTPClient {
             logger.error("Error while creating CRR pseudonym");
             throw new RuntimeException(e);
         }
+    }
+
+    private void logMessage() {
+        logger.warn("Returning simulated DIC pseudonym(s) as fTTP connection  is not configured.");
     }
 }

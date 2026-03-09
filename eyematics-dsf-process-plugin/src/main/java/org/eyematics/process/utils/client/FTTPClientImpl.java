@@ -1,9 +1,7 @@
 package org.eyematics.process.utils.client;
 
 import ca.uhn.fhir.context.FhirContext;
-import org.hl7.fhir.r4.model.Base64BinaryType;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Parameters;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -144,6 +142,14 @@ public class FTTPClientImpl implements FTTPClient {
         }
         try {
             Parameters parameters = this.fhirContext.newXmlParser().parseResource(Parameters.class, response.body());
+            if (parameters.getParameter().size() == 1 && parameters.getParameter().get(0).getPart().size() == 2) {
+                Parameters.ParametersParameterComponent parameter = parameters.getParameter().get(0);
+                if (parameter.getPart().get(0).getName().equals("all") &&
+                        parameter.getPart().get(1).getName().equals("error-code")) {
+                    Coding errorCoding = (Coding) parameter.getPart().get(1).getValue();
+                    throw new Exception("Error while getting response from fTTP server: " + errorCoding.getDisplay());
+                }
+            }
             return Optional.of(parameters);
         } catch (Exception e) {
             logger.error("Error while parsing response from FTTP server: {}", e.getMessage());

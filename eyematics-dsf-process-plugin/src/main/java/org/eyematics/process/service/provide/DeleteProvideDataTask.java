@@ -28,8 +28,8 @@ public class DeleteProvideDataTask extends AbstractExtendedProcessServiceDelegat
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Deleting the provided data");
-        IdType binaryId = new IdType(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
         try {
+            IdType binaryId = new IdType(variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE));
             if (!binaryId.isEmpty()) {
                 this.deletePermanently(binaryId);
             }

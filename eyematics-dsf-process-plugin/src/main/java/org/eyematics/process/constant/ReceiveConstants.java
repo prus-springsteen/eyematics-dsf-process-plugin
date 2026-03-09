@@ -18,7 +18,6 @@ public interface ReceiveConstants {
     String EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER = "https://eyematics.org/fhir/StructureDefinition/eyematics-receive-process-initiate-dic-identifier-extension";
     String CODE_SYSTEM_RECEIVE_PROCESS = "https://eyematics.org/fhir/CodeSystem/eyematics-receive-process-code-system";
     String CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE = "data-set-reference-input";
-    String BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_ENCRYPTED = "dataSetEncrypted";
     String BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET = "dataSet";
 
     String BPMN_EXECUTION_VARIABLE_TARGET_RESOURCE = "targetResource";
