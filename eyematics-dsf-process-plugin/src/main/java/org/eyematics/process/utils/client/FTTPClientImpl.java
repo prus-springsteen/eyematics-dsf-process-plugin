@@ -1,6 +1,7 @@
 package org.eyematics.process.utils.client;
 
 import ca.uhn.fhir.context.FhirContext;
+import org.eyematics.process.constant.EyeMaticsConstants;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +61,7 @@ public class FTTPClientImpl implements FTTPClient {
                             bf = bbt.getValueAsString();
                         }
                         if (pcc.getName().equals("pseudonym") && pcc.getValue() instanceof Identifier id
-                                && id.getSystem().equals("https://ths-greifswald.de/gpas")) {
+                                && id.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM)) {
                             psn = id.getValue();
                         }
                     }

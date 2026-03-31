@@ -35,7 +35,10 @@ public class CryptoConfig {
     private String dicReceivePublicKeyFile;
 
     public KeyProvider keyProviderDicReceive() {
-        return KeyProviderImpl.fromFiles(api, dicReceivePrivateKeyFile, dicReceivePublicKeyFile, new DataLogger(false, null));
+        return KeyProviderImpl.fromFiles(api,
+                dicReceivePrivateKeyFile,
+                dicReceivePublicKeyFile,
+                new DataLogger(false, null));
     }
 }
 

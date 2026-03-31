@@ -23,11 +23,15 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
 
     private static final Logger logger = LoggerFactory.getLogger(ProcessGlobalPseudonymTask.class);
     private final FTTPClientFactory fttpClientFactory;
+    private final int fttpClientRequestResourceSize;
 
-    public ProcessGlobalPseudonymTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator,
-                                      FTTPClientFactory fttpClientFactory) {
+    public ProcessGlobalPseudonymTask(ProcessPluginApi api,
+                                      DataSetStatusGenerator dataSetStatusGenerator,
+                                      FTTPClientFactory fttpClientFactory,
+                                      int fttpClientRequestResourceSize) {
         super(api, dataSetStatusGenerator);
         this.fttpClientFactory = fttpClientFactory;
+        this.fttpClientRequestResourceSize = fttpClientRequestResourceSize;
     }
 
     @Override
@@ -51,8 +55,8 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
 
             List<String> bloomFilter = new ArrayList<>(bloomfilterList);
             HashMap<String, String> globalPseudonymMap = new HashMap<>();
-            for (int i = 0; i < bloomFilter.size(); i += ProvideConstants.CHUNK_SIZE_FHIR_RESOURCES) {
-                int end = Math.min(i + ProvideConstants.CHUNK_SIZE_FHIR_RESOURCES, bloomFilter.size());
+            for (int i = 0; i < bloomFilter.size(); i += this.fttpClientRequestResourceSize) {
+                int end = Math.min(i + this.fttpClientRequestResourceSize, bloomFilter.size());
                 HashSet<String> bloomFilterSet = new HashSet<>(bloomFilter.subList(i, end));
                 Optional<HashMap<String, String>> globalPseudonyms = fttpClient.getGlobalPseudonym(bloomFilterSet);
                 globalPseudonyms.ifPresent(globalPseudonymMap::putAll);
@@ -86,7 +90,7 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
         if (p != null && p.hasIdentifier()) {
             String bloomfilter = p.getIdentifier()
                     .stream()
-                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER))
+                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
                     .map(Identifier::getValue)
                     .toList()
                     .get(0);
@@ -101,7 +105,7 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
         if (p != null && p.hasIdentifier()) {
             String bloomfilter = p.getIdentifier()
                     .stream()
-                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER))
+                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
                     .map(Identifier::getValue)
                     .filter(Objects::nonNull)
                     .toList()
@@ -110,7 +114,7 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
             String globalPseudonym = globalPseudonymMap.get(bloomfilter);
             if (globalPseudonym == null) return Optional.empty();
             p.getIdentifier().add(new Identifier()
-                    .setSystem(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM)
+                    .setSystem(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM)
                     .setValue(globalPseudonym));
             return Optional.of(patient);
         }

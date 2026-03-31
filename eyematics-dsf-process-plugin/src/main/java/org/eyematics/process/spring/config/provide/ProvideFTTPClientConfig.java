@@ -1,6 +1,7 @@
 package org.eyematics.process.spring.config.provide;
 
 import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
+import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.client.FTTPClientFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -86,6 +87,14 @@ public class ProvideFTTPClientConfig {
     @Value("${org.eyematics.provide.fttp.client.timeout.connect:10000}")
     private int fttpConnectTimeout;
 
+    @ProcessDocumentation(
+            processNames = {"eyematicsorg_eyematicsProvideProcess" },
+            description = "",
+            recommendation = ""
+    )
+    @Value("${org.eyematics.provide.fttp.client.request.resource.size:100}")
+    private int fttpClientRequestResourceSize;
+
 
     public FTTPClientFactory getFTTPClientFactory() {
         Path certificatePath = checkExists(fttpCertificate);
@@ -102,5 +111,15 @@ public class ProvideFTTPClientConfig {
             if (!Files.isReadable(path)) throw new RuntimeException(path.toString() + " not readable");
             return path;
         }
+    }
+
+    public int getFttpClientRequestResourceSize() {
+        if (fttpClientRequestResourceSize <= ProvideConstants.FTTP_REQUEST_MINIMUM_RESOURCE_SIZE) {
+            return ProvideConstants.FTTP_REQUEST_MINIMUM_RESOURCE_SIZE;
+        }
+        if (fttpClientRequestResourceSize >= ProvideConstants.FTTP_REQUEST_MAXIMUM_RESOURCE_SIZE) {
+            return ProvideConstants.FTTP_REQUEST_MAXIMUM_RESOURCE_SIZE;
+        }
+        return fttpClientRequestResourceSize;
     }
 }

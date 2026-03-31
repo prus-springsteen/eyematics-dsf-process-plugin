@@ -7,6 +7,7 @@ import org.eyematics.process.message.provide.ProvideDataMessageTask;
 import org.eyematics.process.service.provide.*;
 import org.eyematics.process.spring.config.receive.CryptoConfig;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
+import org.eyematics.process.utils.pseudonymize.EyeMaticsMdatPseudonymizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -38,77 +39,132 @@ public class ProvideConfig {
     @Autowired
     private ProvideMailConfig provideMailConfig;
 
+    @Autowired
+    private ProvidePseudonymizeConfig providePseudonymizeConfig;
+
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public PrepareProvideDataTask prepareProvideDataTask() { return new PrepareProvideDataTask(api, provideAdminApprovalConfig.isAdminApproval()); }
+    public PrepareProvideDataTask prepareProvideDataTask() {
+        return new PrepareProvideDataTask(api, provideAdminApprovalConfig.isAdminApproval());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SelectReceiveTargetTask selectReceiveTargetTask() { return new SelectReceiveTargetTask(api); }
+    public SelectReceiveTargetTask selectReceiveTargetTask() {
+        return new SelectReceiveTargetTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public EyeMaticsAdminApprovalTask adminApprovalTask() { return new EyeMaticsAdminApprovalTask(api); }
+    public EyeMaticsAdminApprovalTask adminApprovalTask() {
+        return new EyeMaticsAdminApprovalTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleMissingApprovalTask handleMissingApprovalTask() { return new HandleMissingApprovalTask(api, dataSetStatusGenerator); }
+    public HandleMissingApprovalTask handleMissingApprovalTask() {
+        return new HandleMissingApprovalTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public EvaluateAdminApprovalTask evaluateAdminApprovalTask() { return new EvaluateAdminApprovalTask(api); }
+    public EvaluateAdminApprovalTask evaluateAdminApprovalTask() {
+        return new EvaluateAdminApprovalTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleDeniedProvisionTask handleDeniedProvisionTask() { return new HandleDeniedProvisionTask(api, dataSetStatusGenerator); }
+    public HandleDeniedProvisionTask handleDeniedProvisionTask() {
+        return new HandleDeniedProvisionTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ReadProvideDataTask readProvideDataTask() { return new ReadProvideDataTask(api, dataSetStatusGenerator, provideFhirClientConfig.getFhirClientFactory()); }
+    public ReadPatientDataTask readPatientDataTask() {
+        return new ReadPatientDataTask(api,
+            dataSetStatusGenerator,
+            provideFhirClientConfig.getFhirClientFactory(),
+            provideFhirClientConfig.getFhirStoreResourcePageSize());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ReadPatientDataTask readPatientDataTask() { return new ReadPatientDataTask(api, dataSetStatusGenerator, provideFhirClientConfig.getFhirClientFactory()); }
+    public CheckBroadConsentTask checkBroadConsentTask() {
+        return new CheckBroadConsentTask(api,
+                dataSetStatusGenerator,
+                provideFhirClientConfig.getFhirClientFactory(),
+                provideFhirClientConfig.getFhirStoreResourcePageSize());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CheckBroadConsentTask checkBroadConsentTask() { return new CheckBroadConsentTask(api, dataSetStatusGenerator, provideFhirClientConfig.getFhirClientFactory()); }
+    public ProcessGlobalPseudonymTask processGlobalPseudonymTask() {
+        return new ProcessGlobalPseudonymTask(api,
+                dataSetStatusGenerator,
+                provideFTTPClientConfig.getFTTPClientFactory(),
+                provideFTTPClientConfig.getFttpClientRequestResourceSize());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ProcessGlobalPseudonymTask processGlobalPseudonymTask() { return new ProcessGlobalPseudonymTask(api, dataSetStatusGenerator, provideFTTPClientConfig.getFTTPClientFactory()); }
+    public ReadMedicinalDataTask readMedicinalDataTask() {
+        return new ReadMedicinalDataTask(api,
+                dataSetStatusGenerator,
+                provideFhirClientConfig.getFhirClientFactory(),
+                provideFhirClientConfig.getFhirStoreResourcePageSize());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CreateDataBundleTask createDataBundleTask() { return new CreateDataBundleTask(api, dataSetStatusGenerator); }
+    public CreateDataBundleTask createDataBundleTask() {
+        return new CreateDataBundleTask(api,
+                dataSetStatusGenerator,
+                providePseudonymizeConfig.getFhirResourcePseudonymizer());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public EncryptDataBundleTask encryptDataBundleTask() { return new EncryptDataBundleTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDicReceive()); }
+    public EncryptDataBundleTask encryptDataBundleTask() {
+        return new EncryptDataBundleTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDicReceive());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public StoreProvideDataTask storeProvideDataTask() { return new StoreProvideDataTask(api, dataSetStatusGenerator); }
+    public StoreProvideDataTask storeProvideDataTask() {
+        return new StoreProvideDataTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CloseReceiveSubProcessProvideMessageTask closeReceiveProcessProvideMessageTask() { return new CloseReceiveSubProcessProvideMessageTask(api, dataSetStatusGenerator); }
+    public CloseReceiveSubProcessProvideMessageTask closeReceiveProcessProvideMessageTask() {
+        return new CloseReceiveSubProcessProvideMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ProvideDataMessageTask provideDataMessageTask() { return new ProvideDataMessageTask(api, dataSetStatusGenerator); }
+    public ProvideDataMessageTask provideDataMessageTask() {
+        return new ProvideDataMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleMissingAcknowledgementTask handleMissingReceiptTask() { return  new HandleMissingAcknowledgementTask(api, dataSetStatusGenerator); }
+    public HandleMissingAcknowledgementTask handleMissingReceiptTask() {
+        return  new HandleMissingAcknowledgementTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DeleteProvideDataTask deleteProvideDataTask() { return  new DeleteProvideDataTask(api, dataSetStatusGenerator); }
+    public DeleteProvideDataTask deleteProvideDataTask() {
+        return new DeleteProvideDataTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeProvideProcessTask storeDataReceiptTask() { return  new FinalizeProvideProcessTask(api, dataSetStatusGenerator, provideMailConfig.getProvideInformationEmailAddresses()); }
+    public FinalizeProvideProcessTask storeDataReceiptTask() {
+        return new FinalizeProvideProcessTask(api,
+                dataSetStatusGenerator,
+                provideMailConfig.getProvideInformationEmailAddresses());
+    }
 
 }

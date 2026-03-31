@@ -17,8 +17,8 @@ import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_
 
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
 
-	public static final String VERSION = "1.1.0.2";
-	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 2, 18);
+	public static final String VERSION = "1.2.0.0";
+	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 3, 16);
 
 	@Override
 	public String getName() {
@@ -45,7 +45,7 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 	@Override
 	public Map<String, List<String>> getFhirResourcesByProcessId() {
 
-        // EYEMATICS PROCESS (v1.1)
+        // EYEMATICS PROCESS (v1.2)
 
         // GENERIC
         String cGenericProcess = "fhir/CodeSystem/eyematics-generic-process-data-set-status-code-system.xml";
@@ -93,8 +93,11 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 
 	@Override
 	public List<Class<?>> getSpringConfigurations() {
-		return List.of(EyeMaticsConfig.class, CryptoConfig.class, ProvideAdminApprovalConfig.class,
-                ProvideFhirClientConfig.class, ProvideFTTPClientConfig.class, ProvideMailConfig.class,
-                InitiateConfig.class, ProvideConfig.class, ReceiveConfig.class, ReceiveFhirClientConfig.class);
+		return List.of(
+                EyeMaticsConfig.class, CryptoConfig.class,
+                InitiateConfig.class,
+                ReceiveConfig.class, ReceiveFhirClientConfig.class,
+                ProvideAdminApprovalConfig.class, ProvideFhirClientConfig.class, ProvideFTTPClientConfig.class,
+                ProvideMailConfig.class, ProvidePseudonymizeConfig.class, ProvideConfig.class);
 	}
 }

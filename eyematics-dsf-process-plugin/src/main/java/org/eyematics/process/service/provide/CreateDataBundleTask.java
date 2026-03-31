@@ -7,28 +7,31 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
-import org.eyematics.process.utils.bpe.PatientId;
 import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
+import org.eyematics.process.utils.pseudonymize.EyeMaticsMdatPseudonymizer;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Optional;
 
 
 public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate {
 
     private static final Logger logger = LoggerFactory.getLogger(CreateDataBundleTask.class);
+    private final EyeMaticsMdatPseudonymizer eyeMaticsMdatPseudonymizer;
 
-    public CreateDataBundleTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator) {
+    public CreateDataBundleTask(ProcessPluginApi api,
+                                DataSetStatusGenerator dataSetStatusGenerator,
+                                EyeMaticsMdatPseudonymizer eyeMaticsMdatPseudonymizer) {
         super(api, dataSetStatusGenerator);
+        this.eyeMaticsMdatPseudonymizer = eyeMaticsMdatPseudonymizer;
     }
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Bundling the local data, also by replacing dic pseudonym by global pseudonym.");
+        logger.info("-> Bundling the local data, pseudonymizing FHIR resources, and replacing dic pseudonyms by global pseudonysm.");
         try {
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
             HashMap<String, String> globalPseudonymMap = new HashMap<>();
@@ -66,15 +69,24 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
                             bundleEntryRequestComponent,
                             globalPseudonymMap,
                             eyeMaticsBundle));
-            medications.getEntry().forEach(e ->
+
+            medications.getEntry().forEach(e -> {
+                Optional<String> pseudonymizedMedicationId =
+                        this.eyeMaticsMdatPseudonymizer.pseudonymize(e.getResource().getIdElement().getIdPart());
+                if (pseudonymizedMedicationId.isPresent()) {
+                    e.getResource().setId(pseudonymizedMedicationId.get());
                     eyeMaticsBundle.addEntry()
                             .setResource(e.getResource())
-                            .setRequest(this.getBundleRequest(bundleEntryRequestComponent, e.getResource())));
+                            .setRequest(this.getBundleRequest(bundleEntryRequestComponent, e.getResource()));
+                }
+            });
+
             medicationAdministrations.getEntry().forEach(e ->
                     this.processResource(e.getResource(),
                             bundleEntryRequestComponent,
                             globalPseudonymMap,
                             eyeMaticsBundle));
+
             medicationRequests.getEntry().forEach(e ->
                     this.processResource(e.getResource(),
                             bundleEntryRequestComponent,
@@ -114,7 +126,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
     private String getBloomFilter(Patient patient) {
         if  (patient == null) return null;
         return patient.getIdentifier().stream().filter(pi ->
-                        pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER))
+                        pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
                 .map(Identifier::getValue)
                 .toList()
                 .get(0);
@@ -123,7 +135,7 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
     private String getGlobalPseudonym(Patient patient) {
         if  (patient == null) return null;
         return patient.getIdentifier().stream().filter(pi ->
-                        pi.getSystem().equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM))
+                        pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM))
                 .map(Identifier::getValue)
                 .map(s -> s.replace('_', '-'))
                 .toList()
@@ -134,70 +146,80 @@ public class CreateDataBundleTask extends AbstractExtendedProcessServiceDelegate
         if (patient.getIdElement().getIdPart().equals(dicPseudonym)) {
             patient.setId(globalPseudonym);
             patient.getIdentifier().removeIf(identifier -> !identifier.getSystem()
-                    .equals(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM));
+                    .equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM));
             return true;
         }
         return false;
     }
 
-    private void processResource(Resource resource, Bundle.BundleEntryRequestComponent brc,
-                                 HashMap<String, String> globalPseudonymMap, Bundle eyeMaticsBundle) {
-        if (replaceIdentifierResource(resource, globalPseudonymMap)) {
+    private void processResource(Resource resource,
+                                 Bundle.BundleEntryRequestComponent brc,
+                                 HashMap<String, String> globalPseudonymMap,
+                                 Bundle eyeMaticsBundle) {
+        if (this.replaceIdentifierResource(resource, globalPseudonymMap) && this.replaceIdResource(resource)) {
             eyeMaticsBundle.addEntry().setResource(resource).setRequest(this.getBundleRequest(brc, resource));
         }
     }
 
+    private boolean replaceIdResource(Resource resource) {
+        Optional<String> id = this.eyeMaticsMdatPseudonymizer.pseudonymize(resource.getIdElement().getIdPart());
+        if (id.isPresent()) {
+            resource.setId(id.get());
+            return this.pseudonymizeMedicationReference(resource);
+        }
+        return false;
+    }
+
+    private boolean pseudonymizeMedicationReference(Resource resource) {
+        Reference medicationReference = this.getMedicationReference(resource);
+        if (medicationReference == null ||
+                !medicationReference.getReference().contains("Medication")) return true;
+        String dicMedicationReference = medicationReference.getReference();
+        String dicMedicationId = dicMedicationReference.substring(dicMedicationReference.lastIndexOf("/") + 1);
+        Optional<String> pseudonymizedMedicationId = this.eyeMaticsMdatPseudonymizer.pseudonymize(dicMedicationId);
+        if (pseudonymizedMedicationId.isPresent()) {
+            medicationReference.setReference("Medication/" + pseudonymizedMedicationId.get());
+            return true;
+        }
+        return false;
+    }
+
+    private Reference getMedicationReference(Resource resource) {
+        if (resource instanceof MedicationAdministration ma && ma.hasMedicationReference()) {
+            return ma.getMedicationReference();
+        }
+        if (resource instanceof MedicationRequest mr && mr.hasMedicationReference()) {
+            return mr.getMedicationReference();
+        }
+        return null;
+    }
+
     private boolean replaceIdentifierResource(Resource resource, HashMap<String, String> globalPseudonymMap) {
-        return switch (resource.getResourceType()) {
-            case Observation ->
-                    this.replaceIdentifierObservationResource(resource, globalPseudonymMap);
-            case MedicationRequest ->
-                    this.replaceIdentifierMedicationRequestResource(resource, globalPseudonymMap);
-            case MedicationAdministration ->
-                    this.replaceIdentifierMedicationAdministrationResource(resource, globalPseudonymMap);
-            default -> false;
-        };
-    }
-
-    private boolean replaceIdentifierObservationResource(Resource resource,
-                                                         HashMap<String, String> globalPseudonymMap) {
         if (resource instanceof Observation o && o.hasSubject()) {
-            String dicPseudonym = PatientId.extract(o.getSubject().getReference());
-            String globalPseudonym = globalPseudonymMap.get(dicPseudonym);
-            if (globalPseudonym == null) return false;
-            o.getSubject().setReference("Patient/" + globalPseudonym);
-            return true;
+            return replaceIdentifierOnReference(o.getSubject(), globalPseudonymMap);
         }
-        return false;
-    }
-
-    private boolean replaceIdentifierMedicationRequestResource(Resource resource,
-                                                               HashMap<String, String> globalPseudonymMap) {
         if (resource instanceof MedicationRequest mr && mr.hasSubject()) {
-            String dicPseudonym = PatientId.extract(mr.getSubject().getReference());
-            String globalPseudonym = globalPseudonymMap.get(dicPseudonym);
-            if (globalPseudonym == null) return false;
-            mr.getSubject().setReference("Patient/" + globalPseudonym);
-            return true;
+            return replaceIdentifierOnReference(mr.getSubject(), globalPseudonymMap);
+        }
+        if (resource instanceof MedicationAdministration ma && ma.hasSubject()) {
+            return replaceIdentifierOnReference(ma.getSubject(), globalPseudonymMap);
         }
         return false;
     }
 
-    private boolean replaceIdentifierMedicationAdministrationResource(Resource resource,
-                                                                      HashMap<String, String> globalPseudonymMap) {
-        if (resource instanceof MedicationAdministration ma && ma.hasSubject()) {
-            String dicPseudonym = PatientId.extract(ma.getSubject().getReference());
-            String globalPseudonym = globalPseudonymMap.get(dicPseudonym);
-            if (globalPseudonym == null) return false;
-            ma.getSubject().setReference("Patient/" + globalPseudonym);
-            return true;
-        }
-        return false;
+    private boolean replaceIdentifierOnReference(Reference subject, HashMap<String, String> globalPseudonymMap) {
+        if (!subject.getReference().contains("Patient")) return false;
+        String dicPatientReference = subject.getReference();
+        String dicPseudonym = dicPatientReference.substring(dicPatientReference.lastIndexOf("/") + 1);
+        String globalPseudonym = globalPseudonymMap.get(dicPseudonym);
+        if (globalPseudonym == null) return false;
+        subject.setReference("Patient/" + globalPseudonym);
+        return true;
     }
 
     private Patient createPatientPseudonym(String globalPseudonym) {
         Identifier identifier = new Identifier();
-        identifier.setSystem(EyeMaticsConstants.NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM);
+        identifier.setSystem(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM);
         identifier.setValue(globalPseudonym);
         return new Patient().addIdentifier(identifier);
     }

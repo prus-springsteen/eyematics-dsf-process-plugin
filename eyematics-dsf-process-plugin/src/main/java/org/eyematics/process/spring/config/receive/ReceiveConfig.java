@@ -29,53 +29,81 @@ public class ReceiveConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public PrepareReceiveDataTask prepareReceiveDataTask() { return new PrepareReceiveDataTask(api); }
+    public PrepareReceiveDataTask prepareReceiveDataTask() {
+        return new PrepareReceiveDataTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SelectInitiateTargetTask selectInitiateTargetTask() { return new SelectInitiateTargetTask(api); }
+    public SelectInitiateTargetTask selectInitiateTargetTask() {
+        return new SelectInitiateTargetTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateProvideDataMessageTask initiateProvideDataMessageTask() { return new InitiateProvideDataMessageTask(api, dataSetStatusGenerator); }
+    public InitiateProvideDataMessageTask initiateProvideDataMessageTask() {
+        return new InitiateProvideDataMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleMissingDataTask handleMissingDataTask() { return new HandleMissingDataTask(api, dataSetStatusGenerator); }
+    public HandleMissingDataTask handleMissingDataTask() {
+        return new HandleMissingDataTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CloseReceiveSubProcessTask closeReceiveSubprocessTask() { return new CloseReceiveSubProcessTask(api, dataSetStatusGenerator); }
+    public CloseReceiveSubProcessTask closeReceiveSubprocessTask() {
+        return new CloseReceiveSubProcessTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InformAdminTask informAdminTask() { return new InformAdminTask(api); }
+    public InformAdminTask informAdminTask() {
+        return new InformAdminTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DownloadRequestedDataTask downloadRequestedDataTask() { return new DownloadRequestedDataTask(api, dataSetStatusGenerator); }
+    public DownloadRequestedDataTask downloadRequestedDataTask() {
+        return new DownloadRequestedDataTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public DecryptRequestedDataTask decryptRequestedDataTask() { return new DecryptRequestedDataTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDicReceive()); }
+    public DecryptRequestedDataTask decryptRequestedDataTask() {
+        return new DecryptRequestedDataTask(api, dataSetStatusGenerator, cryptoConfig.keyProviderDicReceive());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InsertRequestedDataTask insertRequestedDataTask() { return new InsertRequestedDataTask(api, dataSetStatusGenerator, receiveFhirClientConfig.getFhirClientFactory()); }
+    public InsertRequestedDataTask insertRequestedDataTask() {
+        return new InsertRequestedDataTask(api,
+                dataSetStatusGenerator,
+                receiveFhirClientConfig.getFhirClientFactory());
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SelectProvideTargetTask selectProvideTargetTask() { return new SelectProvideTargetTask(api); }
+    public SelectProvideTargetTask selectProvideTargetTask() {
+        return new SelectProvideTargetTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public AcknowledgeReceivedMessageTask acknowledgeReceivedMessageTask() { return new AcknowledgeReceivedMessageTask(api, dataSetStatusGenerator); }
+    public AcknowledgeReceivedMessageTask acknowledgeReceivedMessageTask() {
+        return new AcknowledgeReceivedMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeReceiveSubProcessTask finalizeReceiveSubprocessTask() { return  new FinalizeReceiveSubProcessTask(api, dataSetStatusGenerator); }
+    public FinalizeReceiveSubProcessTask finalizeReceiveSubprocessTask() {
+        return  new FinalizeReceiveSubProcessTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeReceiveProcessTask finalizeReceiveProcessTask() { return new FinalizeReceiveProcessTask(api, dataSetStatusGenerator); }
+    public FinalizeReceiveProcessTask finalizeReceiveProcessTask() {
+        return new FinalizeReceiveProcessTask(api, dataSetStatusGenerator);
+    }
 }

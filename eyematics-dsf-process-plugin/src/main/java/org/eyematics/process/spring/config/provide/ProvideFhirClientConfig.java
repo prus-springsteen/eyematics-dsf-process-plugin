@@ -1,5 +1,6 @@
 package org.eyematics.process.spring.config.provide;
 
+import org.eyematics.process.constant.ProvideConstants;
 import org.eyematics.process.utils.client.FhirClientFactory;
 import org.eyematics.process.utils.client.FhirClientFactoryProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,9 @@ import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
 
 
 @Configuration
-public class ProvideFhirClientConfig
-{
-	@Autowired
+public class ProvideFhirClientConfig {
+
+    @Autowired
 	private FhirContext fhirContext;
 
 	@Autowired
@@ -242,6 +243,14 @@ public class ProvideFhirClientConfig
 	@Value("${org.eyematics.provide.fhir.server.organization.identifier.value}")
 	private String localIdentifierValue;
 
+    @ProcessDocumentation(
+            processNames = {"eyematicsorg_eyematicsProvideProcess" },
+            description = "",
+            recommendation = ""
+    )
+    @Value("${org.eyematics.provide.fhir.server.resource.page.size:100}")
+    private int fhirStoreResourcePageSize;
+
 
 	public FhirClientFactory getFhirClientFactory() {
 		return new FhirClientFactoryProviderImpl(fhirContext, api, fhirStoreOAuth2TrustStore, fhirStoreOAuth2ProxyUrl, fhirStoreOAuth2ProxyUsername, fhirStoreOAuth2ProxyPassword, fhirStoreOAuth2IssuerUrl,
@@ -250,4 +259,14 @@ public class ProvideFhirClientConfig
 				fhirStoreConnectTimeout, fhirStoreSocketTimeout, fhirStoreConnectionRequestTimeout, fhirStoreBaseUrl, fhirStoreUsername,fhirStorePassword, fhirStoreBearerToken, fhirStoreHapiClientVerbose,
 				localIdentifierValue, fhirProvideClientConnectionTestEnabled).create();
 	}
+
+    public int getFhirStoreResourcePageSize() {
+    	if (fhirStoreResourcePageSize <= ProvideConstants.FHIR_QUERY_MINIMUM_PAGE_SIZE) {
+            return ProvideConstants.FHIR_QUERY_MINIMUM_PAGE_SIZE;
+        }
+        if (fhirStoreResourcePageSize >= ProvideConstants.FHIR_QUERY_MAXIMUM_PAGE_SIZE) {
+            return ProvideConstants.FHIR_QUERY_MAXIMUM_PAGE_SIZE;
+        }
+        return fhirStoreResourcePageSize;
+    }
 }

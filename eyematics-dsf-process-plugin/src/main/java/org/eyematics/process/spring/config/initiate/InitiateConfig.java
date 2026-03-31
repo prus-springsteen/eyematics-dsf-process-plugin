@@ -28,37 +28,55 @@ public class InitiateConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SelectReceiveTargetTask initiateReceiveTargetTask() { return new SelectReceiveTargetTask(api); }
+    public SelectReceiveTargetTask initiateReceiveTargetTask() {
+        return new SelectReceiveTargetTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SelectRequestTargetsTask selectRequestTargetsTask() { return new SelectRequestTargetsTask(api); }
+    public SelectRequestTargetsTask selectRequestTargetsTask() {
+        return new SelectRequestTargetsTask(api);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public InitiateReceiveProcessMessageTask initiateReceiveProcessTask() { return new InitiateReceiveProcessMessageTask(api, dataSetStatusGenerator); }
+    public InitiateReceiveProcessMessageTask initiateReceiveProcessTask() {
+        return new InitiateReceiveProcessMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public RequestDataMessageTask requestDataMessageTask() { return new RequestDataMessageTask(api, dataSetStatusGenerator); }
+    public RequestDataMessageTask requestDataMessageTask() {
+        return new RequestDataMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public PrepareCloseReceiveTarget prepareCloseReceiveTarget() { return new PrepareCloseReceiveTarget(api, dataSetStatusGenerator); }
+    public PrepareCloseReceiveTarget prepareCloseReceiveTarget() {
+        return new PrepareCloseReceiveTarget(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CloseReceiveSubProcessInitiateMessageTask closeReceiveProcessInitiateMessageTask() { return new CloseReceiveSubProcessInitiateMessageTask(api, dataSetStatusGenerator); }
+    public CloseReceiveSubProcessInitiateMessageTask closeReceiveProcessInitiateMessageTask() {
+        return new CloseReceiveSubProcessInitiateMessageTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public HandleMissingInitiationTask handleMissingInitiationTask() { return new HandleMissingInitiationTask(api, dataSetStatusGenerator); }
+    public HandleMissingInitiationTask handleMissingInitiationTask() {
+        return new HandleMissingInitiationTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeInitiateSubProcessTask finalizeInitiateSubProcessTask() { return new FinalizeInitiateSubProcessTask(api, dataSetStatusGenerator); }
+    public FinalizeInitiateSubProcessTask finalizeInitiateSubProcessTask() {
+        return new FinalizeInitiateSubProcessTask(api, dataSetStatusGenerator);
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public FinalizeInitiateProcessTask finalizeInitiateProcessTask() { return new FinalizeInitiateProcessTask(api, dataSetStatusGenerator); }
+    public FinalizeInitiateProcessTask finalizeInitiateProcessTask() {
+        return new FinalizeInitiateProcessTask(api, dataSetStatusGenerator);
+    }
 }

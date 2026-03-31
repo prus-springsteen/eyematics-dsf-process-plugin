@@ -43,6 +43,11 @@ public interface EyeMaticsConstants {
      * @see <a href="https://imi-ms.github.io/eyematics-kds/artifacts.html">EyeMatics KDS Artifacts Documentation</a>
      * @see <a href="https://simplifier.net/guide/mii-ig-modul-consent-2025/MII-IG-Modul-Consent?version=2025.0.4">Kerndatensatz Modul Consent</a>
      */
+
+    String IDENTIFIER_CODE_SYSTEM_EYEMATICS_DIC_PSEUDONYM = "https://eyematics.org/sid/dic-pseudonym";
+    String IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER = "https://eyematics.org/sid/bloom-filter";
+    String IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM = "https://ths-greifswald.de/gpas";
+
     String EYEMATICS_CORE_DATA_SET_URI = "https://eyematics.org/fhir/eyematics-kds/StructureDefinition/";
     ArrayList<String> EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE = new ArrayList<>(Arrays.asList("Angiography",
                                                                                                 "AnteriorChamberCells",
@@ -69,8 +74,4 @@ public interface EyeMaticsConstants {
     String MII_IG_MODUL_CONSENT_CATEGORY_MII_CODE = "2.16.840.1.113883.3.1937.777.24.2.184";
     String MII_IG_MODUL_CONSENT_PROVISION_SYSTEM = "urn:oid:2.16.840.1.113883.3.1937.777.24.5.3";
     String MII_IG_MODUL_CONSENT_PROVISION_CODE = "2.16.840.1.113883.3.1937.777.24.5.3.8";                               // MDAT wissenschaftlich nutzen EU DSGVO NIVEAU
-
-    String NAMING_SYSTEM_EYEMATICS_DIC_PSEUDONYM = "https://eyematics.org/sid/dic-pseudonym";
-    String NAMING_SYSTEM_EYEMATICS_BLOOM_FILTER = "https://eyematics.org/sid/bloom-filter";
-    String NAMING_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM = "https://ths-greifswald.de/gpas";
 }

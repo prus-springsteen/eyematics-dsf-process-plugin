@@ -28,11 +28,15 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
 
     private static final Logger logger = LoggerFactory.getLogger(CheckBroadConsentTask.class);
     private final FhirClientFactory fhirClientFactory;
+    private final int fhirStoreResourcePageSize;
 
-    public CheckBroadConsentTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator,
-                                 FhirClientFactory fhirClientFactory) {
+    public CheckBroadConsentTask(ProcessPluginApi api,
+                                 DataSetStatusGenerator dataSetStatusGenerator,
+                                 FhirClientFactory fhirClientFactory,
+                                 int fhirStoreResourcePageSize) {
         super(api, dataSetStatusGenerator);
         this.fhirClientFactory = fhirClientFactory;
+        this.fhirStoreResourcePageSize = fhirStoreResourcePageSize;
     }
 
     @Override
@@ -47,7 +51,9 @@ public class CheckBroadConsentTask extends AbstractExtendedProcessServiceDelegat
         try {
             EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
-            String consentsQuery = String.format("_profile=%s", EyeMaticsConstants.MII_IG_MODUL_CONSENT_PROFILE);
+            String consentsQuery = String.format("_profile=%s&_count=%s",
+                    EyeMaticsConstants.MII_IG_MODUL_CONSENT_PROFILE,
+                    this.fhirStoreResourcePageSize);
             Bundle consents = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
                     "Consent", consentsQuery);
             List<Bundle.BundleEntryComponent> filteredPatients = consents.getEntry()

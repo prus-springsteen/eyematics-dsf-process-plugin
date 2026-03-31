@@ -19,15 +19,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate {
+public class ReadMedicinalDataTask extends AbstractExtendedProcessServiceDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(ReadProvideDataTask.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReadMedicinalDataTask.class);
     private final FhirClientFactory fhirClientFactory;
+    private final int fhirStoreResourcePageSize;
 
-    public ReadProvideDataTask(ProcessPluginApi api, DataSetStatusGenerator dataSetStatusGenerator,
-                               FhirClientFactory fhirClientFactory) {
+    public ReadMedicinalDataTask(ProcessPluginApi api,
+                                 DataSetStatusGenerator dataSetStatusGenerator,
+                                 FhirClientFactory fhirClientFactory,
+                                 int fhirStoreResourcePageSize) {
         super(api, dataSetStatusGenerator);
         this.fhirClientFactory = fhirClientFactory;
+        this.fhirStoreResourcePageSize = fhirStoreResourcePageSize;
     }
 
     @Override
@@ -41,34 +45,41 @@ public class ReadProvideDataTask extends AbstractExtendedProcessServiceDelegate 
         logger.info("-> Reading local data from FHIR repository is initiated");
         try {
             EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
-            MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-",
-                    "Data requested", "there is a new data request which is processed.");
+            MailSender.sendInfo(this.api.getMailService(),
+                    variables.getStartTask(),
+                    "-",
+                    "Data requested",
+                    "there is a new MDAT request which is processed.");
 
-            String observationQuery = String.format("_profile=%s",
+            String observationQuery = String.format("_profile=%s&_count=%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATASET_OBSERVATION_PROFILE.stream()
                     .map(s -> EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI + s)
-                    .collect(Collectors.joining(",")));
+                    .collect(Collectors.joining(",")),
+                    this.fhirStoreResourcePageSize);
             Bundle observations = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
                     "Observation", observationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET,
                     observations);
-            String medicationQuery = String.format("_profile=%s%s",
+            String medicationQuery = String.format("_profile=%s%s&_count=%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
-                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_PROFILE);
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_PROFILE,
+                    this.fhirStoreResourcePageSize);
             Bundle medications = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
                     "Medication", medicationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_DATA_SET,
                     medications);
-            String medicationAdministrationQuery = String.format("_profile=%s%s",
+            String medicationAdministrationQuery = String.format("_profile=%s%s&_count=%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
-                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE);
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE,
+                    this.fhirStoreResourcePageSize);
             Bundle medicationAdministrations = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
                     "MedicationAdministration", medicationAdministrationQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET,
                     medicationAdministrations);
-            String medicationRequestQuery = String.format("_profile=%s%s",
+            String medicationRequestQuery = String.format("_profile=%s%s&_count=%s",
                     EyeMaticsConstants.EYEMATICS_CORE_DATA_SET_URI,
-                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE);
+                    EyeMaticsConstants.EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE,
+                    this.fhirStoreResourcePageSize);
             Bundle medicationRequests = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
                     "MedicationRequest", medicationRequestQuery);
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET,

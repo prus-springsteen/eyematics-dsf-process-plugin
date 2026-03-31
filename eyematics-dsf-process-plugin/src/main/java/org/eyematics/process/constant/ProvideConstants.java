@@ -24,5 +24,9 @@ public interface ProvideConstants {
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT = "https://eyematics.org/fhir/StructureDefinition/eyematics-provide-process-acknowledgement-structure-definition";
     String PROFILE_TASK_EYEMATICS_PROVIDE_PROCESS_ACKNOWLEDGEMENT_MESSAGE_NAME = "provideProcessAcknowledgementEventMessage";
 
-    int CHUNK_SIZE_FHIR_RESOURCES = 100;
+    int FHIR_QUERY_MINIMUM_PAGE_SIZE = 50;
+    int FHIR_QUERY_MAXIMUM_PAGE_SIZE = 1000;
+
+    int FTTP_REQUEST_MINIMUM_RESOURCE_SIZE = 10;
+    int FTTP_REQUEST_MAXIMUM_RESOURCE_SIZE = 100;
 }
