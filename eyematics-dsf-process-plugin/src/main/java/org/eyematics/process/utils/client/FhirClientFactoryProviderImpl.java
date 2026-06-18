@@ -79,6 +79,10 @@ public class FhirClientFactoryProviderImpl implements FhirClientFactoryProvider 
 
     @Override
     public FhirClientFactory create() {
+        if (this.fhirStoreBaseUrl == null) {
+            throw new RuntimeException("FhirStoreBaseUrl is not set.");
+        }
+
         return new FhirClientFactory(this.trustStorePath, this.certificatePath, this.privateKeyPath, this.fhirStorePrivateKeyPassword,
                 this.fhirStoreConnectTimeout, this.fhirStoreSocketTimeout, this.fhirStoreConnectionRequestTimeout, this.fhirStoreBaseUrl,
                 this.fhirStoreUsername, this.fhirStorePassword, this.fhirStoreBearerToken, this.tokenProvider, this.proxyUrl, this.proxyUsername,

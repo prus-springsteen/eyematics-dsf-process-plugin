@@ -21,7 +21,7 @@ public class SelectProvideTargetTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Selecting the target for the acknowledge process");
+        logger.info("-> Selecting the target for the acknowledge process.");
         Target target = SelectTarget.getRequestTarget(this.api, variables, false);
         variables.setTarget(target);
     }

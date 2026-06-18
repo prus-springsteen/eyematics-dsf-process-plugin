@@ -4,6 +4,7 @@ import static org.hl7.fhir.r4.model.Bundle.BundleType.COLLECTION;
 import static org.hl7.fhir.r4.model.DocumentReference.ReferredDocumentStatus.FINAL;
 import static org.hl7.fhir.r4.model.Enumerations.DocumentReferenceStatus.CURRENT;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -59,6 +60,14 @@ public class KeyProviderImpl implements KeyProvider, InitializingBean
     {
         logger.info("Configuring KeyProvider with private-key from '{}' and public-key from '{}'", privateKeyFile,
                 publicKeyFile);
+
+        if (privateKeyFile == null || publicKeyFile == null) {
+            throw new RuntimeException("Both private-key and public-key must be configured.");
+        }
+
+        if (!new File(privateKeyFile).exists() && !new File(publicKeyFile).exists()) {
+            throw new RuntimeException("Both private-key and public-key must exist.");
+        }
 
         PrivateKey privateKey = null;
         RSAPublicKey publicKey = null;

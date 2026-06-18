@@ -1,14 +1,14 @@
 package org.eyematics.process.tools.generator.resourcebuilder;
 
+import org.eyematics.process.tools.generator.shared.ConsentConstant;
 import org.hl7.fhir.r4.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 
 public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, MedicationResource> {
 
-    private String id;
     private String version;
     private String pzn;
     private String atc;
@@ -19,18 +19,20 @@ public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, 
     private int amountOfIngredient;
 
     public MedicationResource() {
-        super(new Medication());
-        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivom-medication"));
-    }
-
-    @Override
-    protected void init() {
-        this.randomize();
+        super();
+        this.version = "";
+        this.pzn = "";
+        this.atc = "";
+        this.manufacturerId = "";
+        this.unitOfMeasure = "";
+        this.numerator = 0.0d;
+        this.denominator = 0.0d;
+        this.amountOfIngredient = 0;
     }
 
     @Override
     public MedicationResource randomize() {
-        this.id = UUID.randomUUID().toString();
+        this.randomizeId();
         this.version = this.getRandomDateTimeString();
         this.pzn = "PZN" + this.getRandomInteger(1000, 9999);
         this.atc = "ATC" + this.getRandomInteger(1000, 9999);
@@ -47,6 +49,7 @@ public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, 
         Medication m = new Medication();
         m.setId(this.id);
         m.getIdentifier().add(new Identifier().setUse(Identifier.IdentifierUse.TEMP).setValue(this.id));
+        m.getIdentifier().add(this.getRandomIdentifier());
         CodeableConcept c = new CodeableConcept();
         c.addCoding(new Coding().setSystem("http://fhir.de/CodeSystem/bfarm/atc").setVersion(this.version).setCode(this.atc).setDisplay("Medication --- " + this.id).setUserSelected(false));
         c.addCoding(new Coding().setSystem("http://fhir.de/CodeSystem/ifa/pzn").setVersion(this.version).setCode(this.pzn).setUserSelected(false));
@@ -62,14 +65,14 @@ public class MedicationResource extends AbstractFHIRResourceBuilder<Medication, 
         m.getAmount().setNumerator(new Quantity(this.numerator).setUnit(this.unitOfMeasure).setSystem("http://unitsofmeasure.org").setCode(this.unitOfMeasure));
         m.getAmount().setDenominator(new Quantity(this.denominator).setSystem("http://unitsofmeasure.org").setCode("1"));
         List<Medication.MedicationIngredientComponent> ingredients = new ArrayList<>();
-        for (int i = 0; i < amountOfIngredient + 1; i++) ingredients.add(this.getMedicationIngredientComponent(i));
+        for (int i = 0; i < this.amountOfIngredient + 1; i++) ingredients.add(this.getMedicationIngredientComponent(i));
         m.setIngredient(ingredients);
         Meta meta = new Meta();
         meta.setSource("https://pharma-idx-data-service");
         meta.getProfile().add(new CanonicalType("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivom-medication"));
+        meta.getProfile().add(new CanonicalType(ConsentConstant.CHARACTERISTIC_TO_DELETE));
         m.setMeta(meta);
-        this.setResource(m);
-        return this.getResource();
+        return m;
     }
 
     private Medication.MedicationIngredientComponent  getMedicationIngredientComponent(int id) {

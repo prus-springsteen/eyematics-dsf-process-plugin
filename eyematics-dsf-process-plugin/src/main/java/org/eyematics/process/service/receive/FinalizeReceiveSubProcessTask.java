@@ -24,7 +24,7 @@ public class FinalizeReceiveSubProcessTask extends FinalizeProcessServiceDelegat
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Finalizing the receipt subprocess");
+        logger.info("-> Finalizing the receipt subprocess.");
         Task currentTask = variables.getLatestTask();
 
         Task errorTask = this.getErrorTask(variables, this.getCorrelationKey(delegateExecution));

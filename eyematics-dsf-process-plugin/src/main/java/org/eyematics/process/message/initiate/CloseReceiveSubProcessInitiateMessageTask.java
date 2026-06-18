@@ -24,10 +24,11 @@ public class CloseReceiveSubProcessInitiateMessageTask extends CloseProcessAbstr
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
                                                                            Variables variables) {
-        logger.info("-> Preparing the output to close a receive process");
+        logger.info("-> Preparing the output to close a receive process.");
         String correlationKey = variables.getTarget().getCorrelationKey();
-        Task subTask = variables
-                .getResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
+        Task subTask =
+                variables.getResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE
+                        + "_" + correlationKey);
         return this.dataSetStatusGenerator.transformOutputToInputComponent(subTask,
                 EyeMaticsGenericStatus.getTypeSystem(),
                 EyeMaticsGenericStatus.getTypeCode());

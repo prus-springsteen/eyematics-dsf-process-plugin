@@ -1,32 +1,37 @@
 package org.eyematics.process.tools.generator.resourcebuilder;
 
 import org.apache.commons.codec.binary.Base64;
+import org.eyematics.process.tools.generator.shared.ConsentConstant;
+import org.hl7.fhir.r4.model.Identifier;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class AbstractFHIRResourceBuilder<R, B> {
 
-    private R resource;
+    protected String id;
 
-    public AbstractFHIRResourceBuilder(R resource) {
-        this.resource = resource;
-        this.init();
-        this.randomize();
+    public AbstractFHIRResourceBuilder() {
+        this.id = "";
     }
 
-    protected void init() {}
-
-    protected void setResource(R resource) {
-        this.resource = resource;
+    public B setId(String id) {
+        this.id = id;
+        return (B) this;
     }
 
-    protected R getResource() {
-        return this.resource;
+    public B randomizeId() {
+        return this.setId(this.getRandomId());
+    }
+
+    protected String getRandomId() {
+        return UUID.randomUUID().toString();
     }
 
     protected String getRandomDateTimeString() {
@@ -38,10 +43,25 @@ public abstract class AbstractFHIRResourceBuilder<R, B> {
 
     protected long getRandomDateTimeLong() {
         long startMillis = LocalDateTime.of(2000, 1, 1, 0, 0)
-                .atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
-        long endMillis =  LocalDateTime.of(2023, 12, 31, 23, 59)
-                .atZone(ZoneId.of("UTC")).toInstant().toEpochMilli();
+                .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        long endMillis =  LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         return ThreadLocalRandom.current().nextLong(startMillis, endMillis);
+    }
+
+    protected Date getRandomDate() {
+        return new Date(this.getRandomDateTimeLong());
+    }
+
+    protected long getRandomLong(long minimum, long maximum) {
+        if (maximum == minimum) return maximum;
+        if (maximum < minimum) return ThreadLocalRandom.current().nextLong(maximum, minimum);
+        return ThreadLocalRandom.current().nextLong(minimum, maximum);
+    }
+
+    protected Date getRandomDate(Date minimum, Date maximum) {
+        if (maximum.compareTo(minimum) == 0) return maximum;
+        if (maximum.before(minimum)) return new Date(ThreadLocalRandom.current().nextLong(maximum.getTime(), minimum.getTime()));
+        return new Date(ThreadLocalRandom.current().nextLong(minimum.getTime(), maximum.getTime()));
     }
 
     protected String getRandomString(String choiceOne, String choiceTwo) {
@@ -49,19 +69,30 @@ public abstract class AbstractFHIRResourceBuilder<R, B> {
     }
 
     protected double getRandomDouble(double minimum, double maximum) {
-        double randomNumber = ThreadLocalRandom.current().nextDouble(minimum, maximum);
+        double randomNumber = 0.0d;
+        if (maximum == minimum) randomNumber = maximum;
+        if (maximum < minimum) randomNumber = ThreadLocalRandom.current().nextDouble(maximum, minimum);
+        if (maximum > minimum) randomNumber = ThreadLocalRandom.current().nextDouble(minimum, maximum);
         return Math.round(randomNumber * 100.0d) / 100.0d;
     }
 
     protected int getRandomInteger(int minimum, int maximum) {
+        if (maximum == minimum) return maximum;
+        if (maximum < minimum) return ThreadLocalRandom.current().nextInt(maximum, minimum);
         return ThreadLocalRandom.current().nextInt(minimum, maximum);
     }
 
     protected String getRandomBloomfilter() {
-        Random random = ThreadLocalRandom.current();
-        byte[] r = new byte[252];
-        random.nextBytes(r);
-        return Base64.encodeBase64String(r);
+        String bloomfilter = "eyematics-bloomfilter-uuid-" + this.getRandomId();
+        return Base64.encodeBase64String(bloomfilter.getBytes());
+    }
+
+    protected Identifier getRandomIdentifier() {
+        if (this.getRandomBoolean()) {
+            return new Identifier().setSystem(ConsentConstant.CHARACTERISTIC_TO_DELETE)
+                    .setValue(String.valueOf(UUID.randomUUID().toString()));
+        }
+        return new Identifier().setValue(ConsentConstant.CHARACTERISTIC_TO_DELETE);
     }
 
     protected boolean getRandomBoolean() {

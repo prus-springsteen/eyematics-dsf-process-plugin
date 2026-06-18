@@ -26,28 +26,44 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Storing the encrypted local data on FHIR server");
+        logger.info("-> Storing the encrypted local data on FHIR server.");
         MediaType mediaType = MediaType.valueOf(MediaType.APPLICATION_OCTET_STREAM);
-        byte[] content = {};
         String targetOrganizationIdentifier = variables.getTarget().getOrganizationIdentifierValue();
 
         try {
-            content = variables.getByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
-        } catch (Exception exception) {
-            this.handleStoreError(exception, variables);
-        }
+            Bundle referenceBundle =
+                    variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE_BUNDLE);
+            if (referenceBundle == null) throw new Exception("Reference Bundle is null");
 
-        try (InputStream in = new ByteArrayInputStream(content)) {
-            IdType created = this.storeBinaryData(in, mediaType, targetOrganizationIdentifier);
-            String idTypeVar = created.toString();
-            variables.setString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE, idTypeVar);
+            referenceBundle.getEntry()
+                    .stream()
+                    .filter(e -> e.getResource().getResourceType().equals(ResourceType.Bundle))
+                    .map(e -> (Bundle) e.getResource())
+                    .forEach(b -> {
+                        String particularId = b.getIdElement().getIdPart();
+                        byte[] bundleEncrypted = this.getByte(variables,
+                                ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, particularId);
+
+                        try (InputStream in = new ByteArrayInputStream(bundleEncrypted)) {
+                            IdType created = this.storeBinaryData(in, mediaType, targetOrganizationIdentifier);
+                            String idTypeVar = created.toString();
+                            b.addEntry().setResource(new Basic().setSubject(new Reference(idTypeVar)));
+
+                        } catch (Exception exception) {
+                            this.handleStoreError(exception, variables);
+                        }
+                    });
+
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE_BUNDLE,
+                    referenceBundle);
+
         } catch (Exception exception) {
             this.handleStoreError(exception, variables);
         }
     }
 
     private IdType storeBinaryData(InputStream in, MediaType mediaType, String targetOrganizationIdentifier) {
-        return api.getFhirWebserviceClientProvider()
+        return this.api.getFhirWebserviceClientProvider()
                 .getLocalWebserviceClient()
                 .withMinimalReturn()
                 .createBinary(in, mediaType, this.getSecurityContext(targetOrganizationIdentifier));
@@ -55,12 +71,12 @@ public class StoreProvideDataTask extends AbstractExtendedProcessServiceDelegate
 
     private void handleStoreError(Exception exception, Variables variables) {
         String errorMessage = exception.getMessage();
-        logger.error("Could not store dataset: {}", errorMessage);
+        logger.error("Could not store dataset: {}.", errorMessage);
         this.handleTaskError(EyeMaticsGenericStatus.DATA_STORE_FAILURE, variables, errorMessage);
     }
 
     private String getSecurityContext(String dicIdentifier) {
-        return api.getOrganizationProvider().getOrganization(dicIdentifier)
+        return this.api.getOrganizationProvider().getOrganization(dicIdentifier)
                 .orElseThrow(() -> new RuntimeException("Could not find organization with id '" + dicIdentifier + "'"))
                 .getIdElement().toVersionless().getValue();
     }

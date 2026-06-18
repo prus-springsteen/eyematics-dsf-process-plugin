@@ -43,8 +43,10 @@ public interface EyeMaticsConstants {
      * @see <a href="https://imi-ms.github.io/eyematics-kds/artifacts.html">EyeMatics KDS Artifacts Documentation</a>
      * @see <a href="https://simplifier.net/guide/mii-ig-modul-consent-2025/MII-IG-Modul-Consent?version=2025.0.4">Kerndatensatz Modul Consent</a>
      */
+    String PATIENT_MII_PROFILE = "https://www.medizininformatik-initiative.de/fhir/core/modul-person/StructureDefinition/Patient|2024.0.0";
+    String EYEMATICS_IVI_MEASURE_REPORT_PROFILE = "https://eyematics.org/fhir/MeasureReport/ivi-patients-summary";
+    String EYEMATICS_ORGANIZATION_PROFILE = "https://eyematics.org/fhir/Organization";
 
-    String IDENTIFIER_CODE_SYSTEM_EYEMATICS_DIC_PSEUDONYM = "https://eyematics.org/sid/dic-pseudonym";
     String IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER = "https://eyematics.org/sid/bloom-filter";
     String IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM = "https://ths-greifswald.de/gpas";
 
@@ -63,6 +65,7 @@ public interface EyeMaticsConstants {
                                                                                                 "RetinalVasculitis",
                                                                                                 "IrisSynechiae",
                                                                                                 "observation-visual-acuity"));
+    String EYEMATICS_CORE_DATASET_DIAGNOSTIC_REPORT_PROFILE = "OphthalmicDiagnosticReport";
     String EYEMATICS_CORE_DATASET_MEDICATION_PROFILE = "mii-eyematics-ivom-medication";
     String EYEMATICS_CORE_DATASET_MEDICATION_ADMINISTRATION_PROFILE = "mii-eyematics-ivom-medicationadministration";
     String EYEMATICS_CORE_DATASET_MEDICATION_REQUEST_PROFILE = "mii-eyematics-ivi-medicationrequest";
@@ -71,7 +74,12 @@ public interface EyeMaticsConstants {
     String MII_IG_MODUL_CONSENT_CATEGORY_LOINC_SYSTEM = "http://loinc.org";
     String MII_IG_MODUL_CONSENT_CATEGORY_LOINC_CODE = "57016-8";
     String MII_IG_MODUL_CONSENT_CATEGORY_MII_SYSTEM = "https://www.medizininformatik-initiative.de/fhir/modul-consent/CodeSystem/mii-cs-consent-consent_category";
-    String MII_IG_MODUL_CONSENT_CATEGORY_MII_CODE = "2.16.840.1.113883.3.1937.777.24.2.184";
-    String MII_IG_MODUL_CONSENT_PROVISION_SYSTEM = "urn:oid:2.16.840.1.113883.3.1937.777.24.5.3";
-    String MII_IG_MODUL_CONSENT_PROVISION_CODE = "2.16.840.1.113883.3.1937.777.24.5.3.8";                               // MDAT wissenschaftlich nutzen EU DSGVO NIVEAU
+    String MII_IG_MODUL_BASE_CODE = "2.16.840.1.113883.3.1937.777.24.";
+    List<String> MII_IG_MODUL_CONSENT_VERSIONS = List.of(MII_IG_MODUL_BASE_CODE + "2.1790" /*  VERSION_1_6d  */,
+                                                         MII_IG_MODUL_BASE_CODE + "2.1791" /*  VERSION_1_6f  */,
+                                                         MII_IG_MODUL_BASE_CODE + "2.2079" /*  VERSION_1_7_2 */);
+    String MII_IG_MODUL_CONSENT_CATEGORY_MII_CODE = MII_IG_MODUL_BASE_CODE + "2.184";
+    String MII_IG_MODUL_CONSENT_PROVISION_SYSTEM = "urn:oid:" + MII_IG_MODUL_BASE_CODE + "5.3";
+    String MII_IG_MODUL_CONSENT_PROVISION_CODE_MDAT = MII_IG_MODUL_BASE_CODE + "5.3.8";                                 // MDAT wissenschaftlich nutzen EU DSGVO NIVEAU
+    String MII_IG_MODUL_CONSENT_PROVISION_CODE_MDAT_RETRO = MII_IG_MODUL_BASE_CODE + "5.3.46";                          // MDAT retrospektiv wissenschaftlich nutzen EU DSGVO NIVEAU
 }

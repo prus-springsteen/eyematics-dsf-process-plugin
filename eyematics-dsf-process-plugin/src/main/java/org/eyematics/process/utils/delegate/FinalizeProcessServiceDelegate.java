@@ -36,7 +36,8 @@ public abstract class FinalizeProcessServiceDelegate extends AbstractServiceDele
     }
 
     protected Task getErrorTask(Variables variables, String correlationKey) {
-        return variables.getResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
+        return variables.getResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE
+                + "_" + correlationKey);
     }
 
     protected String getDataSetStatus(Task task) {

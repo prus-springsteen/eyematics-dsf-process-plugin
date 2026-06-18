@@ -25,7 +25,7 @@ public class FinalizeInitiateSubProcessTask extends FinalizeProcessServiceDelega
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Finalizing the initiate subprocess");
+        logger.info("-> Finalizing the initiate subprocess.");
         Task currentTask = variables.getLatestTask();
 
         String correlationKey = this.getCorrelationKey(delegateExecution);

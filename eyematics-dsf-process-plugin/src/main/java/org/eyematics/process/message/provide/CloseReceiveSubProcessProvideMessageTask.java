@@ -23,7 +23,7 @@ public class CloseReceiveSubProcessProvideMessageTask extends CloseProcessAbstra
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
                                                                            Variables variables) {
-        logger.info("-> Preparing the output to close a receive process");
+        logger.info("-> Preparing the output to close a receive process.");
         Task startTask = variables.getStartTask();
         return this.dataSetStatusGenerator.transformOutputToInputComponent(startTask,
                 EyeMaticsGenericStatus.getTypeSystem(),

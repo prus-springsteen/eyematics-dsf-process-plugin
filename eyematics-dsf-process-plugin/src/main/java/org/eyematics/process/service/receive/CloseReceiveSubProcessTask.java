@@ -30,7 +30,7 @@ public class CloseReceiveSubProcessTask extends AbstractExtendedSubProcessServic
                 ReceiveConstants.BPMN_EXECUTION_VARIABLE_TARGET_RESOURCE);
         String providingOrganization = originTarget.getOrganizationIdentifierValue();
         Task latestTask = variables.getLatestTask();
-        logger.error("-> The data-set from {} is missing for data receiving.", providingOrganization);
+        logger.warn("-> The data-set from {} is missing for data receiving.", providingOrganization);
 
         Coding currentTaskInputCoding = this.getStatusCodeFromInput(variables.getLatestTask());
         String statusCode = currentTaskInputCoding != null ?
@@ -44,9 +44,9 @@ public class CloseReceiveSubProcessTask extends AbstractExtendedSubProcessServic
                         .createDataSetStatusOutput(statusCode,
                                 EyeMaticsGenericStatus.getTypeSystem(),
                                 EyeMaticsGenericStatus.getTypeCode(),
-                                "An error encountered during a request to " + providingOrganization + "."));
-        String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task);
+                                "An error or other reason encountered during a request to "
+                                        + providingOrganization + "."));
+        this.setVariable(delegateExecution, EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE, task);
     }
 
     private Coding getStatusCodeFromInput(Task latestTask) {

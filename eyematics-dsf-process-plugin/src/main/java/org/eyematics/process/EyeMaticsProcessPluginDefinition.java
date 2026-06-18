@@ -18,7 +18,7 @@ import static org.eyematics.process.constant.ReceiveConstants.PROCESS_NAME_FULL_
 public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition {
 
 	public static final String VERSION = "1.2.0.0";
-	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 3, 16);
+	public static final LocalDate RELEASE_DATE = LocalDate.of(2026, 6, 18);
 
 	@Override
 	public String getName() {
@@ -96,8 +96,9 @@ public class EyeMaticsProcessPluginDefinition implements ProcessPluginDefinition
 		return List.of(
                 EyeMaticsConfig.class, CryptoConfig.class,
                 InitiateConfig.class,
-                ReceiveConfig.class, ReceiveFhirClientConfig.class,
-                ProvideAdminApprovalConfig.class, ProvideFhirClientConfig.class, ProvideFTTPClientConfig.class,
-                ProvideMailConfig.class, ProvidePseudonymizeConfig.class, ProvideConfig.class);
+                ReceiveConfig.class, ReceiveFhirClientConfig.class, ProvideAdminApprovalConfig.class,
+                ProvideFhirClientConfig.class, ProvideConsentConfig.class, ProvideFTTPClientConfig.class,
+                ProvideMailConfig.class, ProvidePseudonymizeConfig.class, ProvideDataConfig.class,
+                ProvideBundleConfig.class, ProvideConfig.class);
 	}
 }

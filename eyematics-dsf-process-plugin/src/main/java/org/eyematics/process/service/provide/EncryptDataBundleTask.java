@@ -44,17 +44,28 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Encrypting the local data for provision");
+        logger.info("-> Encrypting the local data for provision.");
         String reqOrg = variables.getStartTask().getRequester().getIdentifier().getValue();
         String recOrg = variables.getStartTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
+
         try {
+            Bundle referenceBundle =
+                    variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE_BUNDLE);
+            if (referenceBundle == null) throw new Exception("Reference Bundle is null");
             PublicKey pubKey = this.readPublicKey(reqOrg);
-            Bundle bundle = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET);
-            byte[] bundleEncrypted = this.encrypt(pubKey, bundle, recOrg, reqOrg);
-            variables.setByteArray(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, bundleEncrypted);
+
+            referenceBundle.getEntry().forEach(e -> {
+                String particularId = e.getResource().getIdElement().getIdPart();
+                Bundle particularBundle = this.getResource(variables,
+                        ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET,
+                        particularId);
+                byte[] bundleEncrypted = this.encrypt(pubKey, particularBundle, recOrg, reqOrg);
+                this.setByte(variables, bundleEncrypted,
+                        ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET, particularId);
+            });
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
-            logger.error("Could not encrypt data: {}", errorMessage);
+            logger.error("Could not encrypt data: {}.", errorMessage);
             this.handleTaskError(EyeMaticsGenericStatus.DATA_ENCRYPT_FAILURE, variables, errorMessage);
         }
     }
@@ -65,7 +76,6 @@ public class EncryptDataBundleTask extends AbstractExtendedProcessServiceDelegat
         if (publicKeyBundleOptional.isEmpty())
             throw new IllegalStateException(
                     "Could not find PublicKey Bundle of organization with identifier'" + url + "'");
-        logger.debug("Downloaded PublicKey Bundle from organization with identifier '{}'", url);
         Bundle publicKeyBundle = publicKeyBundleOptional.get();
         DocumentReference documentReference = this.getDocumentReference(publicKeyBundle);
         Binary binary = this.getBinary(publicKeyBundle);

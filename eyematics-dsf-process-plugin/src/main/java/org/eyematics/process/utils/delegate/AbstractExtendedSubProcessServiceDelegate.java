@@ -56,18 +56,26 @@ public abstract class AbstractExtendedSubProcessServiceDelegate extends Abstract
                         EyeMaticsGenericStatus.getTypeCode(),
                         errorMessage));
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey,
+        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + "_" + correlationKey,
                 task.copy());
         variables.updateTask(task);
     }
 
     protected void setVariable(DelegateExecution delegateExecution, String s, Object o) {
         String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
-        delegateExecution.setVariable(s + correlationKey, o);
+        delegateExecution.setVariable(s + "_" + correlationKey, o);
     }
 
     protected Object getVariable(DelegateExecution delegateExecution, String s) {
         String correlationKey = this.api.getVariables(delegateExecution).getTarget().getCorrelationKey();
-        return delegateExecution.getVariable(s + correlationKey);
+        return delegateExecution.getVariable(s + "_" + correlationKey);
+    }
+
+    protected void setVariable(DelegateExecution delegateExecution, String s, String id, Object o) {
+        this.setVariable(delegateExecution, s + "_" + id, o);
+    }
+
+    protected Object getVariable(DelegateExecution delegateExecution, String s, String id) {
+        return this.getVariable(delegateExecution, s + "_" + id);
     }
 }

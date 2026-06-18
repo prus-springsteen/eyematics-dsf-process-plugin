@@ -11,8 +11,10 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.utils.delegate.AbstractExtendedSubProcessServiceDelegate;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
+import org.hl7.fhir.r4.model.Basic;
 import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.Bundle;
+import org.hl7.fhir.r4.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.nio.charset.StandardCharsets;
@@ -38,19 +40,32 @@ public class DecryptRequestedDataTask extends AbstractExtendedSubProcessServiceD
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Decrypting the provided data");
+        logger.info("-> Decrypting the provided data.");
         try {
-            Binary bundleEncryptedBinary = (Binary) this.getVariable(delegateExecution,
-                            ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET);
             String reqOrg = variables.getLatestTask().getRequester().getIdentifier().getValue();
             String recOrg = variables.getLatestTask().getRestriction().getRecipientFirstRep().getIdentifier().getValue();
-            Bundle bundleDecrypted = this.decryptBundle(this.keyProvider.getPrivateKey(),
-                    bundleEncryptedBinary.getData(),
-                    reqOrg,
-                    recOrg);
-            this.setVariable(delegateExecution,
-                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET,
-                    bundleDecrypted);
+
+            Bundle receivedData = (Bundle) this.getVariable(delegateExecution,
+                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_REFERENCE_BUNDLE);
+            if (receivedData == null) throw new Exception("Received data is null");
+
+            receivedData.getEntry()
+                    .stream()
+                    .filter(e -> e.getResource().getResourceType().equals(ResourceType.Basic))
+                    .map(e -> (Basic) e.getResource())
+                    .forEach(b -> {
+                        String rId = b.getSubject().getReference();
+                        Binary bundleEncryptedBinary = (Binary) this.getVariable(delegateExecution,
+                                ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET, rId);
+                        Bundle bundleDecrypted = this.decryptBundle(this.keyProvider.getPrivateKey(),
+                                bundleEncryptedBinary.getData(),
+                                reqOrg,
+                                recOrg);
+                        this.setVariable(delegateExecution,
+                                ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET, rId,
+                                bundleDecrypted);
+            });
+
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not decrypt downloaded data from DIC: {}", errorMessage);

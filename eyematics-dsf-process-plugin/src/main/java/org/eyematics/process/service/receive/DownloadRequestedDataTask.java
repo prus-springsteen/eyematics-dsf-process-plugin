@@ -13,6 +13,7 @@ import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.UUID;
 
 
 public class DownloadRequestedDataTask extends AbstractExtendedSubProcessServiceDelegate {
@@ -30,22 +31,29 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Downloading the provided data");
+        logger.info("-> Downloading the provided data.");
         try {
             Task latestTask = variables.getLatestTask();
-            Reference reference = api.getTaskHelper()
-                    .getFirstInputParameterValue(latestTask,
-                            ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                            ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE,
-                            Reference.class)
-                    .orElseThrow(() -> this.getHandleTaskError(EyeMaticsGenericStatus.DATA_DOWNLOAD_FAILURE,
-                            variables,
-                            "Could not find Reference-Input for downloading Data"));
+            Bundle receivedData = new Bundle().setType(Bundle.BundleType.COLLECTION);
+            receivedData.setId(UUID.randomUUID().toString());
 
-            Binary referenceBinary = this.downloadData(reference.getReference());
+            this.api.getTaskHelper().getInputParameters(latestTask,
+                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE,
+                    Reference.class)
+                    .filter(p -> p.getValue() instanceof Reference)
+                    .map(p -> (Reference) p.getValue())
+                    .forEach(r -> {
+                        Binary referenceBinary = this.downloadData(r.getReference());
+                        String rId = referenceBinary.getIdElement().getIdPart();
+                        this.setVariable(delegateExecution,
+                                ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET, rId, referenceBinary);
+                        receivedData.addEntry().setResource(new Basic().setSubject(new Reference(rId)));
+                    });
+
             this.setVariable(delegateExecution,
-                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET,
-                    referenceBinary);
+                    ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET_REFERENCE_BUNDLE,
+                    receivedData);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not download data from DIC: {}", errorMessage);
@@ -55,7 +63,7 @@ public class DownloadRequestedDataTask extends AbstractExtendedSubProcessService
 
     private Binary downloadData(String referenceInput) {
         IdType dataReference = new IdType(referenceInput);
-        BasicFhirWebserviceClient client = api.getFhirWebserviceClientProvider()
+        BasicFhirWebserviceClient client = this.api.getFhirWebserviceClientProvider()
                 .getWebserviceClient(dataReference.getBaseUrl()).withRetry(EyeMaticsConstants.DSF_CLIENT_RETRY_6_TIMES,
                         EyeMaticsConstants.DSF_CLIENT_RETRY_INTERVAL_5MIN);
         return dataReference.hasVersionIdPart()

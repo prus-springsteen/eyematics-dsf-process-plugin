@@ -2,7 +2,7 @@ package org.eyematics.process.spring.config.provide;
 
 import dev.dsf.bpe.v1.documentation.ProcessDocumentation;
 import org.eyematics.process.constant.ProvideConstants;
-import org.eyematics.process.utils.client.FTTPClientFactory;
+import org.eyematics.process.utils.fttp.FTTPClientFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import java.nio.file.Files;
@@ -89,8 +89,7 @@ public class ProvideFTTPClientConfig {
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_eyematicsProvideProcess" },
-            description = "",
-            recommendation = ""
+            description = "Number of Bloom filters which should be submitted per request to the fTTP. [min = 10; max = 100]"
     )
     @Value("${org.eyematics.provide.fttp.client.request.resource.size:100}")
     private int fttpClientRequestResourceSize;
@@ -114,11 +113,11 @@ public class ProvideFTTPClientConfig {
     }
 
     public int getFttpClientRequestResourceSize() {
-        if (fttpClientRequestResourceSize <= ProvideConstants.FTTP_REQUEST_MINIMUM_RESOURCE_SIZE) {
-            return ProvideConstants.FTTP_REQUEST_MINIMUM_RESOURCE_SIZE;
+        if (fttpClientRequestResourceSize <= ProvideConstants.MINIMUM_PAGE_FHIR_PER_FTTP_REQUEST) {
+            return ProvideConstants.MINIMUM_PAGE_FHIR_PER_FTTP_REQUEST;
         }
-        if (fttpClientRequestResourceSize >= ProvideConstants.FTTP_REQUEST_MAXIMUM_RESOURCE_SIZE) {
-            return ProvideConstants.FTTP_REQUEST_MAXIMUM_RESOURCE_SIZE;
+        if (fttpClientRequestResourceSize >= ProvideConstants.MAXIMUM_PAGE_FHIR_PER_FTTP_REQUEST) {
+            return ProvideConstants.MAXIMUM_PAGE_FHIR_PER_FTTP_REQUEST;
         }
         return fttpClientRequestResourceSize;
     }

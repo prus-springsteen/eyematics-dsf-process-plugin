@@ -26,7 +26,8 @@ public class InformAdminTask extends AbstractServiceDelegate {
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
         logger.info("-> Informing the admin about the encountered error.");
         String correlationKey = variables.getTarget().getCorrelationKey();
-        Task errorTask = variables.getResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey);
+        Task errorTask = variables.getResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE
+                + "_" + correlationKey);
         if (errorTask != null) {
             Coding output = (Coding) errorTask.getOutput().get(0).getValue();
             MailSender.sendError(this.api.getMailService(),

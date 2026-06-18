@@ -18,8 +18,15 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
 
     private static final Logger logger = LoggerFactory.getLogger(EyeMaticsFhirClientImpl.class);
 
-    public EyeMaticsFhirClientImpl(KeyStore trustStore, KeyStore keyStore, char[] keyStorePassword, int connectTimeout, int socketTimeout, String fhirServerBasicAuthUsername, String fhirServerBasicAuthPassword, String fhirServerBearerToken, TokenProvider fhirServerOAuth2TokenProvider, String fhirServerBase, String proxyUrl, String proxyUsername, String proxyPassword, FhirContext fhirContext, String localIdentifierValue, DataLogger dataLogger) {
-        super(trustStore, keyStore, keyStorePassword, connectTimeout, socketTimeout, fhirServerBasicAuthUsername, fhirServerBasicAuthPassword, fhirServerBearerToken, fhirServerOAuth2TokenProvider, fhirServerBase, proxyUrl, proxyUsername, proxyPassword, fhirContext, localIdentifierValue, dataLogger);
+    public EyeMaticsFhirClientImpl(KeyStore trustStore, KeyStore keyStore, char[] keyStorePassword, int connectTimeout,
+                                   int socketTimeout, String fhirServerBasicAuthUsername,
+                                   String fhirServerBasicAuthPassword, String fhirServerBearerToken,
+                                   TokenProvider fhirServerOAuth2TokenProvider, String fhirServerBase, String proxyUrl,
+                                   String proxyUsername, String proxyPassword, FhirContext fhirContext,
+                                   String localIdentifierValue, DataLogger dataLogger) {
+        super(trustStore, keyStore, keyStorePassword, connectTimeout, socketTimeout, fhirServerBasicAuthUsername,
+                fhirServerBasicAuthPassword, fhirServerBearerToken, fhirServerOAuth2TokenProvider, fhirServerBase,
+                proxyUrl, proxyUsername, proxyPassword, fhirContext, localIdentifierValue, dataLogger);
     }
 
     @Override
@@ -38,7 +45,7 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
         if (searchQuery == null || searchQuery.isEmpty()) {
             return readImplementation(resourceType, mimeType);
         }
-        String url = resourceType + "?" + searchQuery;
+        String url = resourceType + searchQuery;
         return readImplementation(url, mimeType);
     }
 
@@ -66,7 +73,7 @@ public class EyeMaticsFhirClientImpl extends AbstractHttpFhirClient implements E
 
     @Override
     public String create(String resourceType, String fhirResource, String mimeType) throws Exception {
-        return createImplementation(resourceType, fhirResource, mimeType);
+        return this.createImplementation(resourceType, fhirResource, mimeType);
     }
 
     private String createImplementation(String resourceType, String fhirResource, String mimeType) throws Exception {

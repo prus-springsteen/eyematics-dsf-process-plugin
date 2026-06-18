@@ -47,12 +47,11 @@ public class InitiateProvideDataMessageTask extends AbstractTaskMessageSend {
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Could not initiate data provision from DIC ('%s') - {%s}",
+        String message = String.format("Could not initiate data provision from DIC ('%s') - {%s}.",
                 variables.getTarget().getOrganizationIdentifierValue(),
                 exception.getMessage());
 
-        task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+        task.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
                         EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
                         message));
@@ -60,7 +59,7 @@ public class InitiateProvideDataMessageTask extends AbstractTaskMessageSend {
         variables.updateTask(task);
 
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey,
+        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + "_" + correlationKey,
                 task.copy());
 
         logger.warn(message);

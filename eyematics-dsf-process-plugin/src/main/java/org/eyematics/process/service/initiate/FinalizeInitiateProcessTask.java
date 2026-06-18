@@ -35,7 +35,7 @@ public class FinalizeInitiateProcessTask extends FinalizeProcessServiceDelegate 
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Finalizing the initiation process");
+        logger.info("-> Finalizing the initiation process.");
         Task startTask = variables.getStartTask();
 
         List<Target> targetsList = variables.getTargets().getEntries();
@@ -89,6 +89,5 @@ public class FinalizeInitiateProcessTask extends FinalizeProcessServiceDelegate 
                     output.getCode(),
                     taskOutputComponent.getExtension().get(0).getValue().toString());
         }
-
     }
 }

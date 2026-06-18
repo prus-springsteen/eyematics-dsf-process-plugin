@@ -7,13 +7,11 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.eyematics.process.constant.EyeMaticsConstants;
 import org.eyematics.process.constant.EyeMaticsGenericStatus;
 import org.eyematics.process.constant.ProvideConstants;
-import org.eyematics.process.utils.client.FTTPClient;
-import org.eyematics.process.utils.client.FTTPClientFactory;
+import org.eyematics.process.utils.fttp.FTTPClient;
+import org.eyematics.process.utils.fttp.FTTPClientFactory;
 import org.eyematics.process.utils.delegate.AbstractExtendedProcessServiceDelegate;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.hl7.fhir.r4.model.Bundle;
-import org.hl7.fhir.r4.model.Identifier;
-import org.hl7.fhir.r4.model.Patient;
+import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.*;
@@ -42,38 +40,43 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Requesting and processing global pseudonyms for patient data");
+        logger.info("-> Requesting and processing global pseudonyms for patient data.");
         try {
             FTTPClient fttpClient = this.fttpClientFactory.getFTTPClient();
             Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
+
             List<String> bloomfilterList = patients.getEntry()
                     .stream()
+                    .parallel()
+                    .filter(e -> e.getResource().getResourceType().equals(ResourceType.Bundle))
                     .map(this::getBloomfilterFromBundleEntry)
                     .flatMap(Optional::stream)
                     .filter(Objects::nonNull)
                     .toList();
 
-            List<String> bloomFilter = new ArrayList<>(bloomfilterList);
             HashMap<String, String> globalPseudonymMap = new HashMap<>();
-            for (int i = 0; i < bloomFilter.size(); i += this.fttpClientRequestResourceSize) {
-                int end = Math.min(i + this.fttpClientRequestResourceSize, bloomFilter.size());
-                HashSet<String> bloomFilterSet = new HashSet<>(bloomFilter.subList(i, end));
+            for (int i = 0; i < bloomfilterList.size(); i += this.fttpClientRequestResourceSize) {
+                int end = Math.min(i + this.fttpClientRequestResourceSize, bloomfilterList.size());
+                HashSet<String> bloomFilterSet = new HashSet<>(bloomfilterList.subList(i, end));
                 Optional<HashMap<String, String>> globalPseudonyms = fttpClient.getGlobalPseudonym(bloomFilterSet);
                 globalPseudonyms.ifPresent(globalPseudonymMap::putAll);
             }
 
-            List<Bundle.BundleEntryComponent> pseudonymizedPatients = patients.getEntry()
+            List<Bundle.BundleEntryComponent> patientsConsentsPseudonymBundleEntries = patients.getEntry()
                     .stream()
-                    .map(p -> this.setGlobalPseudonymToBundleEntry(p, globalPseudonymMap))
+                    .parallel()
+                    .filter(e -> e.getResource().getResourceType().equals(ResourceType.Bundle))
+                    .map(e -> this.setBloomfilterToBundleEntry(e, globalPseudonymMap))
                     .flatMap(Optional::stream)
                     .filter(Objects::nonNull)
                     .toList();
-            patients.getEntry().clear();
-            patients.getEntry().addAll(pseudonymizedPatients);
-            delegateExecution.setVariable(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
+
+            patients.setEntry(patientsConsentsPseudonymBundleEntries);
+            variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
+
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
-            logger.error("Could not process global pseudonyms from fTTP: {}", errorMessage);
+            logger.error("Could not process global pseudonyms from fTTP: {}.", errorMessage);
             this.handleTaskError(EyeMaticsGenericStatus.PSEUDONYM_PROCESS_FAILURE, variables, errorMessage);
         }
     }
@@ -85,38 +88,41 @@ public class ProcessGlobalPseudonymTask extends AbstractExtendedProcessServiceDe
         return Optional.empty();
     }
 
-    private Optional<String> getBloomfilterFromBundleEntry(Bundle.BundleEntryComponent patient) {
-        Patient p = this.transformToPatient(patient).orElse(null);
+    private Optional<String> getBloomfilterFromBundleEntry(Bundle.BundleEntryComponent patientBundleEntry) {
+        Bundle patientBundle = (Bundle) patientBundleEntry.getResource();
+        Patient p = this.transformToPatient(patientBundle.getEntry().get(0)).orElse(null);
         if (p != null && p.hasIdentifier()) {
             String bloomfilter = p.getIdentifier()
                     .stream()
-                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
+                    .filter(pi -> pi.getSystem() != null
+                            && pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
                     .map(Identifier::getValue)
-                    .toList()
-                    .get(0);
+                    .findFirst()
+                    .orElse(null);
             return Optional.ofNullable(bloomfilter);
         }
         return Optional.empty();
     }
 
-    private Optional<Bundle.BundleEntryComponent> setGlobalPseudonymToBundleEntry(Bundle.BundleEntryComponent patient,
-                                                                        HashMap<String, String> globalPseudonymMap) {
-        Patient p = this.transformToPatient(patient).orElse(null);
+    private Optional<Bundle.BundleEntryComponent> setBloomfilterToBundleEntry(Bundle.BundleEntryComponent patientBundleEntry,
+                                                                              HashMap<String, String> bloomfilterMap) {
+        Bundle patientBundle = (Bundle) patientBundleEntry.getResource();
+        Patient p = this.transformToPatient(patientBundle.getEntry().get(0)).orElse(null);
         if (p != null && p.hasIdentifier()) {
             String bloomfilter = p.getIdentifier()
                     .stream()
-                    .filter(pi -> pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
+                    .parallel()
+                    .filter(pi -> pi.getSystem() != null
+                            && pi.getSystem().equals(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER))
                     .map(Identifier::getValue)
-                    .filter(Objects::nonNull)
-                    .toList()
-                    .get(0);
-            if (bloomfilter == null) return Optional.empty();
-            String globalPseudonym = globalPseudonymMap.get(bloomfilter);
-            if (globalPseudonym == null) return Optional.empty();
-            p.getIdentifier().add(new Identifier()
-                    .setSystem(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM)
-                    .setValue(globalPseudonym));
-            return Optional.of(patient);
+                    .findFirst()
+                    .orElse(null);
+            if (bloomfilter != null) {
+                String gpas = bloomfilterMap.get(bloomfilter);
+                p.getIdentifier().add(new Identifier().setValue(gpas)
+                        .setSystem(EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_GLOBAL_PSEUDONYM));
+                return Optional.of(patientBundleEntry);
+            }
         }
         return Optional.empty();
     }

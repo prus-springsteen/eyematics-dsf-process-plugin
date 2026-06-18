@@ -47,7 +47,7 @@ public class InitiateReceiveProcessMessageTask extends AbstractTaskMessageSend {
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
                                                                            Variables variables) {
-        logger.info("-> Initiating receive process with participating organization(s)");
+        logger.info("-> Initiating receive process with participating organization(s).");
         Targets targets = variables.getTargets();
         List<Task.ParameterComponent> targetInputs = targets.getEntries()
                 .stream()
@@ -57,12 +57,11 @@ public class InitiateReceiveProcessMessageTask extends AbstractTaskMessageSend {
     }
 
     private Task.ParameterComponent transformToTargetInput(Target target) {
-        Task.ParameterComponent input = api.getTaskHelper().createInput(new StringType(target.getCorrelationKey()),
+        Task.ParameterComponent input = this.api.getTaskHelper().createInput(new StringType(target.getCorrelationKey()),
                 ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE,
                 ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_INITIATE_PROCESS_CORRELATION_KEY);
         input.addExtension().setUrl(ReceiveConstants.EXTENSION_RECEIVE_PROCESS_INITIATE_URL_DIC_IDENTIFIER)
-                .setValue(new Reference()
-                        .setIdentifier(NamingSystems.OrganizationIdentifier
+                .setValue(new Reference().setIdentifier(NamingSystems.OrganizationIdentifier
                                 .withValue(target.getOrganizationIdentifierValue()))
                         .setType(ResourceType.Organization.name()));
         return input;
@@ -81,12 +80,11 @@ public class InitiateReceiveProcessMessageTask extends AbstractTaskMessageSend {
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Failed to initiate data sharing with DIC ('%s') in Task with ID '%s': %s",
+        String message = String.format("Failed to initiate data sharing with DIC ('%s') in Task with ID '%s': %s.",
                                        variables.getTarget().getOrganizationIdentifierValue(),
                                        task.getId(),
                                        exception.getMessage());
-        task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+        task.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
                         EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
                         message));

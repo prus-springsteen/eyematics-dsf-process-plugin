@@ -42,10 +42,6 @@ public class EyeMaticsAdminApprovalTask extends DefaultUserTaskListener {
         String message = "please approve the data transfer to the requesting organisation (see below). \n" +
                 "For this, please answer the questionnaire provided at the following link: \n\n"
                 + url;
-        MailSender.sendInfo(this.api.getMailService(),
-                variables.getStartTask(),
-                "-",
-                subject,
-                message);
+        MailSender.sendInfo(this.api.getMailService(), variables.getStartTask(), "-", subject, message);
     }
 }

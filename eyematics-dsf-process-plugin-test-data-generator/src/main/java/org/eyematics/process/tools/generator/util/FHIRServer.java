@@ -3,12 +3,12 @@ package org.eyematics.process.tools.generator.util;
 public class FHIRServer {
     private String dic;
     private String localPort;
-    private String commonPort;
+    private String demonstratorPort;
 
-    public FHIRServer(String dic, String localPort, String commonPort) {
+    public FHIRServer(String dic, String localPort, String demonstratorPort) {
         this.dic = dic;
         this.localPort = localPort;
-        this.commonPort = commonPort;
+        this.demonstratorPort = demonstratorPort;
     }
 
     public String getDic() {
@@ -19,8 +19,8 @@ public class FHIRServer {
         return this.localPort;
     }
 
-    public String getCommonPort() {
-        return this.commonPort;
+    public String getDemonstratorPort() {
+        return this.demonstratorPort;
     }
 
     public void setDic(String dic) {
@@ -31,8 +31,8 @@ public class FHIRServer {
         this.localPort = localPort;
     }
 
-    public void setCommonPort(String commonPort) {
-        this.commonPort = commonPort;
+    public void setDemonstratorPort(String demonstratorPort) {
+        this.demonstratorPort = demonstratorPort;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class FHIRServer {
         return "FHIRServer{" +
                 "dic='" + dic + '\'' +
                 ", localPort='" + localPort + '\'' +
-                ", commonPort='" + commonPort + '\'' +
+                ", demonstratorPort='" + demonstratorPort + '\'' +
                 '}';
     }
 }

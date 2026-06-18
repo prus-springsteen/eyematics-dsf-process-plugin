@@ -1,4 +1,4 @@
-package org.eyematics.process.utils.client;
+package org.eyematics.process.utils.fttp;
 
 import java.util.HashMap;
 import java.util.HashSet;

@@ -36,7 +36,7 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
                                                                            Variables variables) {
-        logger.info("-> Initiating providing process(es) in accordance with participating organization(s)");
+        logger.info("-> Initiating providing process(es) in accordance with participating organization(s).");
         return Stream.empty();
     }
 
@@ -57,14 +57,13 @@ public class RequestDataMessageTask extends AbstractTaskMessageSend {
                 variables.getTarget().getOrganizationIdentifierValue(),
                 exception.getMessage());
 
-        task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+        task.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
                         EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
                         message));
 
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey,
+        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + "_" + correlationKey,
                 task);
 
         logger.warn(message);

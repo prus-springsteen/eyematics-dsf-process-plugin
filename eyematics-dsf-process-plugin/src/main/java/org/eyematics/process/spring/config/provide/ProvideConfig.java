@@ -7,7 +7,6 @@ import org.eyematics.process.message.provide.ProvideDataMessageTask;
 import org.eyematics.process.service.provide.*;
 import org.eyematics.process.spring.config.receive.CryptoConfig;
 import org.eyematics.process.utils.generator.DataSetStatusGenerator;
-import org.eyematics.process.utils.pseudonymize.EyeMaticsMdatPseudonymizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +30,9 @@ public class ProvideConfig {
     private ProvideFhirClientConfig provideFhirClientConfig;
 
     @Autowired
+    private ProvideConsentConfig provideConsentConfig;
+
+    @Autowired
     private ProvideFTTPClientConfig provideFTTPClientConfig;
 
     @Autowired
@@ -41,6 +43,12 @@ public class ProvideConfig {
 
     @Autowired
     private ProvidePseudonymizeConfig providePseudonymizeConfig;
+
+    @Autowired
+    private ProvideDataConfig provideDataConfig;
+
+    @Autowired
+    private ProvideBundleConfig provideBundleConfig;
 
 
     @Bean
@@ -90,11 +98,12 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CheckBroadConsentTask checkBroadConsentTask() {
-        return new CheckBroadConsentTask(api,
+    public ReadConsentDataTask readConsentDataTask() {
+        return new ReadConsentDataTask(api,
                 dataSetStatusGenerator,
                 provideFhirClientConfig.getFhirClientFactory(),
-                provideFhirClientConfig.getFhirStoreResourcePageSize());
+                provideFhirClientConfig.getFhirStoreResourcePageSize(),
+                provideConsentConfig.getConsentResourceValidator());
     }
 
     @Bean
@@ -108,8 +117,8 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public ReadMedicinalDataTask readMedicinalDataTask() {
-        return new ReadMedicinalDataTask(api,
+    public ReadMedicalDataTask readMedicalDataTask() {
+        return new ReadMedicalDataTask(api,
                 dataSetStatusGenerator,
                 provideFhirClientConfig.getFhirClientFactory(),
                 provideFhirClientConfig.getFhirStoreResourcePageSize());
@@ -117,10 +126,25 @@ public class ProvideConfig {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public CreateDataBundleTask createDataBundleTask() {
-        return new CreateDataBundleTask(api,
+    public CheckConsentMedicalDataTask checkConsentMedicalDataTask() {
+        return new CheckConsentMedicalDataTask(api, dataSetStatusGenerator);
+    }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public PseudonymizeDataTask pseudonymizeDataTask() {
+        return new PseudonymizeDataTask(api,
                 dataSetStatusGenerator,
-                providePseudonymizeConfig.getFhirResourcePseudonymizer());
+                providePseudonymizeConfig.getFhirResourcePseudonymizer(),
+                provideDataConfig.getWaitingDurationPatientsPerBundle());
+    }
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public CreateDataBundlesTask createDataBundlesTask() {
+        return new CreateDataBundlesTask(api,
+                dataSetStatusGenerator,
+                provideBundleConfig.getMaximumPatientsPerBundle());
     }
 
     @Bean

@@ -22,10 +22,10 @@ public class SelectInitiateTargetTask extends AbstractServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Selecting the target for the initiate provide process");
+        logger.info("-> Selecting the target for the initiate provide process.");
         String correlationKey = variables.getTarget().getCorrelationKey();
-        delegateExecution.setVariable(ReceiveConstants.BPMN_EXECUTION_VARIABLE_TARGET_RESOURCE + correlationKey,
-                variables.getTarget());
+        delegateExecution.setVariable(ReceiveConstants.BPMN_EXECUTION_VARIABLE_TARGET_RESOURCE
+                        + "_" + correlationKey, variables.getTarget());
         Target target = SelectTarget.getRequestTarget(this.api, variables, correlationKey, true);
         variables.setTarget(target);
     }

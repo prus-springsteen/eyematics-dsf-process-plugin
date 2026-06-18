@@ -30,13 +30,12 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
                                                                            Variables variables) {
-        logger.info("-> Preparing the output as part of acknowledgment");
+        logger.info("-> Preparing the output as part of acknowledgment.");
         Task task = variables.getLatestTask();
 
         if (task.getOutput().isEmpty()) {
-            task.addOutput(
-                    this.dataSetStatusGenerator
-                            .createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
+            task.addOutput(this.dataSetStatusGenerator
+                    .createDataSetStatusOutput(EyeMaticsGenericStatus.DATA_RECEIVE_SUCCESS.getStatusCode(),
                                     EyeMaticsGenericStatus.getTypeSystem(),
                                     EyeMaticsGenericStatus.getTypeCode()));
             variables.updateTask(task);
@@ -61,14 +60,14 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Could not acknowledge or send receipt for data-set with id '%s' to DIC ('%s') referenced in Task with id '%s' - {%s}",
+        String message = String.format("Could not acknowledge or send receipt for data-set" +
+                        " with id '%s' to DIC ('%s') referenced in Task with id '%s' - {%s}.",
                                        variables.getString(ReceiveConstants.BPMN_RECEIVE_EXECUTION_VARIABLE_DATA_SET),
                                        variables.getTarget().getOrganizationIdentifierValue(),
                                        task.getId(),
                                        exception.getMessage());
 
-        task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+        task.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
                         EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
                         message));
@@ -76,7 +75,7 @@ public class AcknowledgeReceivedMessageTask extends AbstractTaskMessageSend {
         variables.updateTask(task);
 
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey,
+        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + "_" + correlationKey,
                 task.copy());
 
         logger.warn(message);

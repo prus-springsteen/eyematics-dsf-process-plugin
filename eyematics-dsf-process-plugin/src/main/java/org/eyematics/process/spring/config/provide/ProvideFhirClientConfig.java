@@ -245,8 +245,7 @@ public class ProvideFhirClientConfig {
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_eyematicsProvideProcess" },
-            description = "",
-            recommendation = ""
+            description = "Number of FHIR resources which should be provided per FHIR server request. [min = 50; max = 1000]"
     )
     @Value("${org.eyematics.provide.fhir.server.resource.page.size:100}")
     private int fhirStoreResourcePageSize;
@@ -261,11 +260,11 @@ public class ProvideFhirClientConfig {
 	}
 
     public int getFhirStoreResourcePageSize() {
-    	if (fhirStoreResourcePageSize <= ProvideConstants.FHIR_QUERY_MINIMUM_PAGE_SIZE) {
-            return ProvideConstants.FHIR_QUERY_MINIMUM_PAGE_SIZE;
+    	if (fhirStoreResourcePageSize <= ProvideConstants.MINIMUM_PAGE_FHIR_PER_QUERY_SIZE) {
+            return ProvideConstants.MINIMUM_PAGE_FHIR_PER_QUERY_SIZE;
         }
-        if (fhirStoreResourcePageSize >= ProvideConstants.FHIR_QUERY_MAXIMUM_PAGE_SIZE) {
-            return ProvideConstants.FHIR_QUERY_MAXIMUM_PAGE_SIZE;
+        if (fhirStoreResourcePageSize >= ProvideConstants.MAXIMUM_PAGE_FHIR_PER_QUERY_SIZE) {
+            return ProvideConstants.MAXIMUM_PAGE_FHIR_PER_QUERY_SIZE;
         }
         return fhirStoreResourcePageSize;
     }

@@ -38,6 +38,7 @@ public class HandleMissingInitiationTask extends AbstractServiceDelegate {
                                 EyeMaticsGenericStatus.getTypeCode(),
                                 "Could not receive Data from " + providingOrganization + "."));
         String correlationKey = variables.getTarget().getCorrelationKey();
-        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE + correlationKey, task);
+        variables.setResource(EyeMaticsConstants.BPMN_EXECUTION_VARIABLE_ERROR_RESOURCE
+                + "_" + correlationKey, task);
     }
 }

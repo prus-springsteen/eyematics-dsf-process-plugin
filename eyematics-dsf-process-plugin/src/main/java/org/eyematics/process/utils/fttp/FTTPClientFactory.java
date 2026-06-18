@@ -1,4 +1,4 @@
-package org.eyematics.process.utils.client;
+package org.eyematics.process.utils.fttp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +48,7 @@ public class FTTPClientFactory {
     public FTTPClient getFTTPClient() {
         Optional<SSLContext> sslContext = this.getSSLContext(this.fttpClientCertificate, this.fttpClientCertificatePassword);
         if (!this.isConfigured() || sslContext.isEmpty()) {
-            logger.warn("FTTP client not configured. Creating simulated client.");
+            logger.warn("fTTP client not configured. Creating simulated client.");
             return new FTTPClientSimulatedImpl();
         }
         return new FTTPClientImpl(this.fttpServerBase, sslContext.get(), this.fttpBasicAuthUsername,

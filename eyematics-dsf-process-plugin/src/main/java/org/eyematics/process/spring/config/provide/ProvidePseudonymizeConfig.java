@@ -10,8 +10,7 @@ public class ProvidePseudonymizeConfig {
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_eyematicsProvideProcess"},
-            description = "",
-            example = ""
+            description = "The salt for hashing (pseudonymization) of the FHIR resource identifier"
     )
     @Value("${org.eyematics.provide.fhir.resource.pseudonymize.salt:EyeMatics")
     private String fhirResourcePseudonymizeSalt;

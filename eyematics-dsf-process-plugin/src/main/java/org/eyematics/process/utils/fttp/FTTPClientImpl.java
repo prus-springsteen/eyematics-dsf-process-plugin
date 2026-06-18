@@ -1,4 +1,4 @@
-package org.eyematics.process.utils.client;
+package org.eyematics.process.utils.fttp;
 
 import ca.uhn.fhir.context.FhirContext;
 import org.eyematics.process.constant.EyeMaticsConstants;

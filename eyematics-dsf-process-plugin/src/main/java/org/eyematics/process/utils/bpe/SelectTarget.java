@@ -22,7 +22,10 @@ public class SelectTarget {
         return SelectTarget.getRequestTarget(api, variables, correlationKey, isStartTask);
     }
 
-    public static Target getRequestTarget(ProcessPluginApi api, Variables variables, String correlationKey, boolean isStartTask) {
+    public static Target getRequestTarget(ProcessPluginApi api,
+                                          Variables variables,
+                                          String correlationKey,
+                                          boolean isStartTask) {
         Task task = isStartTask ? variables.getStartTask() : variables.getLatestTask();
         Identifier organizationIdentifier = task.getRequester().getIdentifier();
         Endpoint endpoint = api.getOrganizationProvider()

@@ -110,7 +110,7 @@ services:
       --spi-truststore-file-hostname-verification-policy=STRICT
 
   dic-a-fhir-local-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8070/health" ]
@@ -134,7 +134,7 @@ services:
       - dic-a-bpe
 
   dic-a-fhir-demonstrator-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8071/health" ]
@@ -168,8 +168,8 @@ services:
         source: ./dic-a/repository/fhir_server_init.sh
         target: /tmp/fhir_server_init.sh
       - type: bind
-        source: ./dic-a/repository/eyematics_cds.json
-        target: /tmp/eyematics_cds.json
+        source: ./dic-a/repository/eyematics_test_data.tar.gz
+        target: /tmp/eyematics_test_data.tar.gz
     networks:
       - dic-a-bpe-frontend
       - dic-a-bpe-backend
@@ -179,7 +179,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-a-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.7.1
+    image: ghcr.io/datasharingframework/fhir:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5000:5000"
@@ -249,7 +249,7 @@ services:
       - proxy
       - keycloak
   dic-a-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.7.1
+    image: ghcr.io/datasharingframework/bpe:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5003:5003"
@@ -326,7 +326,7 @@ services:
       - keycloak
 
   dic-b-fhir-local-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8072/health" ]
@@ -350,7 +350,7 @@ services:
       - dic-b-bpe
 
   dic-b-fhir-demonstrator-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8073/health" ]
@@ -384,8 +384,8 @@ services:
         source: ./dic-b/repository/fhir_server_init.sh
         target: /tmp/fhir_server_init.sh
       - type: bind
-        source: ./dic-b/repository/eyematics_cds.json
-        target: /tmp/eyematics_cds.json
+        source: ./dic-b/repository/eyematics_test_data.tar.gz
+        target: /tmp/eyematics_test_data.tar.gz
     networks:
       - dic-a-bpe-frontend
       - dic-a-bpe-backend
@@ -395,7 +395,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-b-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.7.1
+    image: ghcr.io/datasharingframework/fhir:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5002:5002"
@@ -467,7 +467,7 @@ services:
       - proxy
       - keycloak
   dic-b-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.7.1
+    image: ghcr.io/datasharingframework/bpe:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5005:5005"
@@ -544,7 +544,7 @@ services:
       - keycloak
 
   dic-c-fhir-local-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8074/health" ]
@@ -568,7 +568,7 @@ services:
       - dic-c-bpe
 
   dic-c-fhir-demonstrator-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8075/health" ]
@@ -602,8 +602,8 @@ services:
         source: ./dic-c/repository/fhir_server_init.sh
         target: /tmp/fhir_server_init.sh
       - type: bind
-        source: ./dic-c/repository/eyematics_cds.json
-        target: /tmp/eyematics_cds.json
+        source: ./dic-c/repository/eyematics_test_data.tar.gz
+        target: /tmp/eyematics_test_data.tar.gz
     networks:
       - dic-a-bpe-frontend
       - dic-a-bpe-backend
@@ -613,7 +613,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-c-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.7.1
+    image: ghcr.io/datasharingframework/fhir:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5001:5001"
@@ -684,7 +684,7 @@ services:
       - keycloak
 
   dic-c-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.7.1
+    image: ghcr.io/datasharingframework/bpe:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5004:5004"
@@ -761,7 +761,7 @@ services:
       - keycloak
 
   dic-d-fhir-local-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8076/health" ]
@@ -785,7 +785,7 @@ services:
       - dic-d-bpe
 
   dic-d-fhir-demonstrator-data-repository:
-    image: samply/blaze:1.0.4
+    image: "samply/blaze:1.7.0@sha256:f2e87759605587eaf9cbbf86e229938019a732bb908d4e59f107a2744e73825f"
     restart: on-failure
     healthcheck:
       test: [ "CMD", "curl", "http://localhost:8077/health" ]
@@ -819,8 +819,8 @@ services:
         source: ./dic-d/repository/fhir_server_init.sh
         target: /tmp/fhir_server_init.sh
       - type: bind
-        source: ./dic-d/repository/eyematics_cds.json
-        target: /tmp/eyematics_cds.json
+        source: ./dic-d/repository/eyematics_test_data.tar.gz
+        target: /tmp/eyematics_test_data.tar.gz
     networks:
       - dic-a-bpe-frontend
       - dic-a-bpe-backend
@@ -830,7 +830,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-d-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.7.1
+    image: ghcr.io/datasharingframework/fhir:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5006:5006"
@@ -902,7 +902,7 @@ services:
       - keycloak
 
   dic-d-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.7.1
+    image: ghcr.io/datasharingframework/bpe:1.9.0
     restart: "no"
     ports:
       - "127.0.0.1:5009:5009"

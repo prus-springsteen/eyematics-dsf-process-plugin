@@ -12,8 +12,8 @@ public class ProvideMailConfig {
 
     @ProcessDocumentation(
             processNames = {"eyematicsorg_eyematicsProvideProcess"},
-            description = "Mail service recipient addresses for retrieval of Bloomfilter; comma separated list",
-            example = "recipient@localhost"
+            description = "Mail service recipient addresses for retrieval of global pseudonyms; comma separated list",
+            example = "recipient@localhost.org"
     )
     @Value("${org.eyematics.provide.mail.toAddresses:#{null}}")
     private String provideInformationEmailAddresses;

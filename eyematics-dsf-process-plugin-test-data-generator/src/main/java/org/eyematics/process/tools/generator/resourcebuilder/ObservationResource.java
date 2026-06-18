@@ -1,14 +1,15 @@
 package org.eyematics.process.tools.generator.resourcebuilder;
 
-
+import org.eyematics.process.tools.generator.shared.ConsentConstant;
 import org.hl7.fhir.r4.model.*;
 
-import java.util.UUID;
+import java.util.Date;
 
 
 public class ObservationResource extends AbstractFHIRResourceBuilder<Observation, ObservationResource> {
 
-    private String dateTimeStr;
+    private Date effectiveDate;
+    private String subject;
     private double vas;
     private String position;
     private String display;
@@ -20,18 +21,24 @@ public class ObservationResource extends AbstractFHIRResourceBuilder<Observation
     private String pinhole;
 
     public ObservationResource() {
-        super(new Observation());
-        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/observation-visual-acuity"));
-    }
-
-    @Override
-    protected void init() {
-        this.randomize();
+        super();
+        this.effectiveDate = new Date();
+        this.subject = "";
+        this.vas = 0.0d;
+        this.position = "";
+        this.display = "";
+        this.sphere = 0.0d;
+        this.cylinder = 0.0d;
+        this.distance = "";
+        this.optotypes = "";
+        this.dilatedPupil = "";
+        this.pinhole = "";
     }
 
     @Override
     public ObservationResource randomize() {
-        this.dateTimeStr = this.getRandomDateTimeString();
+        this.randomizeId();
+        this.randomizeEffectiveDate();
         this.vas = this.getRandomDouble(0.1d, 1.6d);
         this.position = this.getRandomString("left", "right");
         this.display = this.getRandomDisplay();
@@ -46,35 +53,48 @@ public class ObservationResource extends AbstractFHIRResourceBuilder<Observation
 
     @Override
     public Observation build() {
-        this.getResource().setId(UUID.randomUUID().toString());
-        this.getResource().setStatus(Observation.ObservationStatus.FINAL);
-        this.getResource().addCategory().addCoding().setSystem("http://terminology.hl7.org/CodeSystem/observation-category").setCode("exam");
-        this.getResource().setCode(new CodeableConcept(new Coding("http://snomed.info/sct", "260246004", "Visual Acuity finding")));
-        this.getResource().setEffective(new DateTimeType(this.dateTimeStr));
-        this.getResource().setValue(new Quantity(this.vas).setSystem("https://imi-ms.github.io/eyematics-kds/CodeSystem-vs-units.html#vs-units-VAS").setCode("Decimal"));
-        this.getResource().setBodySite(new CodeableConcept(new Coding("http://snomed.info/sct", "1290041000", "Entire " + this.position + " eye proper (body structure)")));
+        Observation o = new Observation();
+        o.setId(this.id);
+        o.setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/observation-visual-acuity"));
+        o.getMeta().getProfile().add(new CanonicalType(ConsentConstant.CHARACTERISTIC_TO_DELETE));
+        o.getMeta().setLastUpdated(this.effectiveDate);
+        o.setEffective(new DateTimeType(this.effectiveDate));
+        o.setSubject(new Reference(this.subject));
+        o.getIdentifier().add(this.getRandomIdentifier());
+        o.setStatus(Observation.ObservationStatus.FINAL);
+        o.addCategory().addCoding().setSystem("http://terminology.hl7.org/CodeSystem/observation-category").setCode("exam");
+        o.setCode(new CodeableConcept(new Coding("http://snomed.info/sct", "260246004", "Visual Acuity finding")));
+        o.setValue(new Quantity(this.vas).setSystem("https://imi-ms.github.io/eyematics-kds/CodeSystem-vs-units.html#vs-units-VAS").setCode("Decimal"));
+        o.setBodySite(new CodeableConcept(new Coding("http://snomed.info/sct", "1290041000", "Entire " + this.position + " eye proper (body structure)")));
         Extension subExtension = new Extension("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/LensDuringVATestSpecification");
         subExtension.addExtension("type", new CodeableConcept(new Coding("http://snomed.info/sct", "50121007", this.display)));
         subExtension.addExtension("sphere", new DecimalType(this.sphere));
         subExtension.addExtension("cylinder", new DecimalType(this.cylinder));
-        this.getResource().addComponent().addExtension(subExtension);
-        this.getResource().addComponent().setCode(new CodeableConcept(new Coding("http://loinc.org", "29074-2", this.position + " Eye position")));
-        this.getResource().addComponent().setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "50121007", this.display)));
-        this.getResource().addComponent().setCode(new CodeableConcept(new Coding("http://snomed.info/sct", "252124009", "Test distance")));
-        this.getResource().addComponent().setValue(new CodeableConcept(new Coding("http://loinc.org", "50121007", this.distance)));
-        this.getResource().addComponent().setCode(new CodeableConcept(new Coding("https://eyematics.org/fhir/eyematics-kds/ValueSet/va-optotypes", "VS_VA_Optotypes", "Visual Acuity Optotypes (Experimental)")));
-        this.getResource().addComponent().setValue(new CodeableConcept(new Coding("http://loinc.org", "LA25497-1", this.optotypes)));
-        this.getResource().addComponent().setCode(new CodeableConcept(new Coding( "http://snomed.info/sct", "37125009", "Dilated pupil (finding)")));
-        this.getResource().addComponent().setValue(new CodeableConcept(new Coding("http://loinc.org", "LA25497-1", this.dilatedPupil + " (qualifier value)")));
-        this.getResource().addComponent().setCode(new CodeableConcept(new Coding( "http://snomed.info/sct", "257492003", "Pinhole (physical object)")));
-        this.getResource().addComponent().setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "373062004", this.pinhole)));
-        return this.getResource().copy();
+        o.addComponent().addExtension(subExtension);
+        o.addComponent().setCode(new CodeableConcept(new Coding("http://loinc.org", "29074-2", this.position + " Eye position")));
+        o.addComponent().setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "50121007", this.display)));
+        o.addComponent().setCode(new CodeableConcept(new Coding("http://snomed.info/sct", "252124009", "Test distance")));
+        o.addComponent().setValue(new CodeableConcept(new Coding("http://loinc.org", "50121007", this.distance)));
+        o.addComponent().setCode(new CodeableConcept(new Coding("https://eyematics.org/fhir/eyematics-kds/ValueSet/va-optotypes", "VS_VA_Optotypes", "Visual Acuity Optotypes (Experimental)")));
+        o.addComponent().setValue(new CodeableConcept(new Coding("http://loinc.org", "LA25497-1", this.optotypes)));
+        o.addComponent().setCode(new CodeableConcept(new Coding( "http://snomed.info/sct", "37125009", "Dilated pupil (finding)")));
+        o.addComponent().setValue(new CodeableConcept(new Coding("http://loinc.org", "LA25497-1", this.dilatedPupil + " (qualifier value)")));
+        o.addComponent().setCode(new CodeableConcept(new Coding( "http://snomed.info/sct", "257492003", "Pinhole (physical object)")));
+        o.addComponent().setValue(new CodeableConcept(new Coding("http://snomed.info/sct", "373062004", this.pinhole)));
+        return o;
+    }
+
+    public ObservationResource setSubject(String subject) {
+        this.subject = "Patient/" + subject;
+        return this;
+    }
+
+    public ObservationResource randomizeSubject() {
+        return this.setSubject(this.getRandomId());
     }
 
     public ObservationResource setSubject(Patient patient) {
-        String refStr = "Patient/" + patient.getId();
-        this.getResource().setSubject(new Reference(refStr));
-        return this;
+        return this.setSubject(patient.getId());
     }
 
     private String getRandomDisplay() {
@@ -121,5 +141,14 @@ public class ObservationResource extends AbstractFHIRResourceBuilder<Observation
             case 15 -> "Teller acuity cards";
             default -> "Treatment chart";
         };
+    }
+
+    public ObservationResource setEffectiveDate(Date date) {
+        this.effectiveDate = date;
+        return this;
+    }
+
+    public ObservationResource randomizeEffectiveDate() {
+        return this.setEffectiveDate(this.getRandomDate());
     }
 }

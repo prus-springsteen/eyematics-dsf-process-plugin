@@ -42,7 +42,7 @@ public class ReadPatientDataTask extends AbstractExtendedProcessServiceDelegate 
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Reading patient data from local FHIR repository is initiated");
+        logger.info("-> Reading patient data from local FHIR repository is initiated.");
         try {
             EyeMaticsFhirClient fhirClient = this.fhirClientFactory.getEyeMaticsFhirClient();
             MailSender.sendInfo(this.api.getMailService(),
@@ -51,7 +51,7 @@ public class ReadPatientDataTask extends AbstractExtendedProcessServiceDelegate 
                     "Data requested",
                     "there is a new patient data request which is processed.");
 
-            String patientQuery = String.format("?identifier=%s|&count=%s",
+            String patientQuery = String.format("?identifier=%s|&_count=%s",
                     EyeMaticsConstants.IDENTIFIER_CODE_SYSTEM_EYEMATICS_BLOOM_FILTER,
                     this.fhirStoreResourcePageSize);
             Bundle patients = EyeMaticsDataBundleRetriever.getEyeMaticsDataBundle(fhirClient,
@@ -61,7 +61,7 @@ public class ReadPatientDataTask extends AbstractExtendedProcessServiceDelegate 
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patients);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
-            logger.error("Could not read Patient data from FHIR repository: {}", errorMessage);
+            logger.error("Could not read Patient data from FHIR repository: {}.", errorMessage);
             this.handleTaskError(EyeMaticsGenericStatus.PATIENT_READ_FAILURE, variables, errorMessage);
         }
     }

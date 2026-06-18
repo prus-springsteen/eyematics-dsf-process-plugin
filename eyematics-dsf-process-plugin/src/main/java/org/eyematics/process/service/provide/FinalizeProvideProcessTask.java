@@ -39,7 +39,7 @@ public class FinalizeProvideProcessTask extends FinalizeProcessServiceDelegate {
 
     @Override
     protected void doExecute(DelegateExecution delegateExecution, Variables variables) throws BpmnError, Exception {
-        logger.info("-> Finalizing the provision process");
+        logger.info("-> Finalizing the provision process.");
         Task startTask = variables.getStartTask();
         Task currentTask = variables.getLatestTask();
 
@@ -60,7 +60,7 @@ public class FinalizeProvideProcessTask extends FinalizeProcessServiceDelegate {
         if (!Task.TaskStatus.FAILED.equals(startTask.getStatus()) ||
                 (Task.TaskStatus.FAILED.equals(startTask.getStatus()) &&
                         EyeMaticsGenericStatus.DATA_ACKNOWLEDGE_MISSING.getStatusCode().equals(this.getDataSetStatus(startTask)))) {
-            logger.info("-> Mailing the shared pseudonyms");
+            logger.info("-> Mailing the shared pseudonyms.");
             Bundle globalPseudonymBundle = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_GLOBAL_PSEUDONYMS);
             this.sendGlobalPseudonymMail(globalPseudonymBundle, variables.getStartTask());
         }

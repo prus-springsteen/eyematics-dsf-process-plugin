@@ -1,4 +1,4 @@
-package org.eyematics.process.utils.client;
+package org.eyematics.process.utils.fttp;
 
 import org.apache.commons.codec.binary.Hex;
 import org.eyematics.process.constant.EyeMaticsConstants;
@@ -60,6 +60,6 @@ public class FTTPClientSimulatedImpl implements FTTPClient {
     }
 
     private void logMessage() {
-        logger.warn("Returning simulated DIC pseudonym(s) as fTTP connection  is not configured.");
+        logger.warn("Returning simulated DIC pseudonym(s) as fTTP connection is not configured.");
     }
 }

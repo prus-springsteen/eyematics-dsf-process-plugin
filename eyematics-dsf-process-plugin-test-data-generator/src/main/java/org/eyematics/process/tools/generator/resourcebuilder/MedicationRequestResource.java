@@ -1,34 +1,34 @@
 package org.eyematics.process.tools.generator.resourcebuilder;
 
+import org.eyematics.process.tools.generator.shared.ConsentConstant;
 import org.hl7.fhir.r4.model.*;
 
 import java.util.Date;
-import java.util.UUID;
 
 
 public class MedicationRequestResource extends AbstractFHIRResourceBuilder<MedicationRequest, MedicationRequestResource>{
 
-    private long dateMillis;
+    private Date authoredOn;
     private int versionId;
+    private String subject;
+    private String medication;
     private MedicationRequest.MedicationRequestStatus medicationRequestStatus;
     private MedicationRequest.MedicationRequestIntent medicationRequestIntent;
 
     public MedicationRequestResource() {
-        super(new MedicationRequest());
-        this.getResource().setMeta(new Meta().addProfile("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivi-medicationrequest"));
-    }
-
-    @Override
-    protected void init() {
-        this.dateMillis = new Date().getTime();
+        super();
+        this.authoredOn = new Date();
         this.versionId = 1;
+        this.subject = "";
+        this.medication = "";
         this.medicationRequestStatus = MedicationRequest.MedicationRequestStatus.ACTIVE;
         this.medicationRequestIntent = MedicationRequest.MedicationRequestIntent.ORDER;
     }
 
     @Override
     public MedicationRequestResource randomize() {
-        this.dateMillis = this.getRandomDateTimeLong();
+        this.randomizeId();
+        this.randomizeAuthoredOn();
         this.versionId = this.getRandomInteger(1, 999);
         this.medicationRequestStatus = this.getRandomMedicationRequestStatus();
         this.medicationRequestIntent = this.getRandomMedicationRequestIntent();
@@ -50,29 +50,50 @@ public class MedicationRequestResource extends AbstractFHIRResourceBuilder<Medic
 
     @Override
     public MedicationRequest build() {
-        this.getResource().setId(UUID.randomUUID().toString());
-        this.getResource().getExtension().clear();
-        this.getResource().addExtension(this.getRandomExtension());
-        this.getResource().getMeta().setLastUpdated(new Date(this.dateMillis));
-        this.getResource().getMeta().setVersionId(Integer.toString(this.versionId));
-        this.getResource().getMeta().getProfile().clear();
-        this.getResource().getMeta().getProfile().add(new CanonicalType("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivi-medicationrequest"));
-        this.getResource().setStatus(this.medicationRequestStatus);
-        this.getResource().setIntent(this.medicationRequestIntent);
-        this.getResource().getDosageInstruction().add(new Dosage());
-        return this.getResource().copy();
+        MedicationRequest mr = new MedicationRequest();
+        mr.setId(this.id);
+        mr.getExtension().clear();
+        mr.addExtension(this.getRandomExtension());
+        mr.getMeta().setLastUpdated(this.authoredOn);
+        mr.getMeta().setVersionId(Integer.toString(this.versionId));
+        mr.getMeta().getProfile().clear();
+        mr.getMeta().getProfile().add(new CanonicalType("https://eyematics.org/fhir/eyematics-kds/StructureDefinition/mii-eyematics-ivi-medicationrequest"));
+        mr.getMeta().getProfile().add(new CanonicalType(ConsentConstant.CHARACTERISTIC_TO_DELETE));
+        mr.getMeta().setLastUpdated(this.authoredOn);
+        mr.setAuthoredOn(this.authoredOn);
+        mr.getIdentifier().add(this.getRandomIdentifier());
+        mr.setStatus(this.medicationRequestStatus);
+        mr.setIntent(this.medicationRequestIntent);
+        mr.getDosageInstruction().add(new Dosage());
+        mr.setSubject(new Reference(this.subject));
+        mr.setMedication(new Reference(this.medication));
+        return mr;
+    }
+
+    public MedicationRequestResource setSubject(String subject) {
+        this.subject = "Patient/" + subject;
+        return this;
+    }
+
+    public MedicationRequestResource randomizeSubject() {
+        return this.setSubject(this.getRandomId());
     }
 
     public MedicationRequestResource setSubject(Patient patient) {
-        String refStr = "Patient/" + patient.getId();
-        this.getResource().setSubject(new Reference(refStr));
+        return this.setSubject(patient.getId());
+    }
+
+    public MedicationRequestResource setMedication(String medication) {
+        this.medication = "Medication/" + medication;
         return this;
     }
 
+    public MedicationRequestResource randomizeMedication() {
+        return this.setMedication(this.getRandomId());
+    }
+
     public MedicationRequestResource setMedication(Medication medication) {
-        String refStr = "Medication/" + medication.getId();
-        this.getResource().setMedication(new Reference(refStr));
-        return this;
+        return this.setMedication(medication.getId());
     }
 
     private MedicationRequest.MedicationRequestStatus getRandomMedicationRequestStatus() {
@@ -81,5 +102,14 @@ public class MedicationRequestResource extends AbstractFHIRResourceBuilder<Medic
 
     private MedicationRequest.MedicationRequestIntent getRandomMedicationRequestIntent() {
         return MedicationRequest.MedicationRequestIntent.values()[this.getRandomInteger(0, MedicationRequest.MedicationRequestIntent.values().length - 1)];
+    }
+
+    public MedicationRequestResource setAuthoredOn(Date date) {
+        this.authoredOn = date;
+        return this;
+    }
+
+    public MedicationRequestResource randomizeAuthoredOn() {
+        return this.setAuthoredOn(this.getRandomDate());
     }
 }

@@ -32,8 +32,8 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                 .setValue(EyeMaticsConstants.NAMINGSYSTEM_DSF_ORGANIZATION_IDENTIFIER_EYEMATICS);
         Coding memberOrganizationRole = new Coding().setSystem(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE)
                 .setCode(EyeMaticsConstants.CODESYSTEM_DSF_ORGANIZATION_ROLE_VALUE_DIC);
-        FhirWebserviceClient client = api.getFhirWebserviceClientProvider().getLocalWebserviceClient();
-        List<Target> targets = api.getOrganizationProvider().getOrganizations(parentIdentifier, memberOrganizationRole)
+        FhirWebserviceClient client = this.api.getFhirWebserviceClientProvider().getLocalWebserviceClient();
+        List<Target> targets = this.api.getOrganizationProvider().getOrganizations(parentIdentifier, memberOrganizationRole)
                 .stream()
                 .filter(Organization::hasEndpoint)
                 .filter(Organization::hasIdentifier)
@@ -46,7 +46,8 @@ public class SelectRequestTargetsTask extends AbstractServiceDelegate {
                                                   endpoint.getIdentifierFirstRep().getValue(),
                                                   endpoint.getAddress(),
                                                   UUID.randomUUID().toString());
-                }).toList();
+                })
+                .toList();
         variables.setTargets(variables.createTargets(targets));
     }
 }

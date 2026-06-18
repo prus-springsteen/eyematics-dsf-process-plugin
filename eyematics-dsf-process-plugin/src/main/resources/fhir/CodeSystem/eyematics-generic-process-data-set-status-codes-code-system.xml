@@ -144,9 +144,14 @@
         <definition value="An error occurred during decryption of dataset." />
     </concept>
     <concept>
-        <code value="data-insert-failure" />
-        <display value="Data Insert Failure" />
-        <definition value="An error occurred during insertion of dataset." />
+        <code value="partial-insert-failure" />
+        <display value="Partial Insert Failure" />
+        <definition value="An error occurred during insertion of parts of the provided dataset." />
+    </concept>
+    <concept>
+        <code value="complete-insert-failure" />
+        <display value="Complete Insert Failure" />
+        <definition value="An error occurred during insertion of the provided dataset." />
     </concept>
     <concept>
         <code value="data-receive-success" />

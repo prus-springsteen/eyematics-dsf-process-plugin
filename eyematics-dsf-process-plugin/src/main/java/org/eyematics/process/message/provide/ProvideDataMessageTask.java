@@ -38,12 +38,20 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
     @Override
     protected Stream<Task.ParameterComponent> getAdditionalInputParameters(DelegateExecution execution,
                                                                            Variables variables) {
-        logger.info("-> Preparing to send the URL of provided data");
-        return Stream.of(api.getTaskHelper()
-                .createInput(new Reference().setReference(variables
-                                .getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE)),
-                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
-                                    ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE));
+        logger.info("-> Preparing to send the URL of provided data.");
+        Bundle referenceBundle =
+                variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE_BUNDLE);
+        return referenceBundle.getEntry()
+                .stream()
+                .filter(e -> e.getResource().getResourceType().equals(ResourceType.Bundle))
+                .map(e -> (Bundle) e.getResource())
+                .filter(b -> b.getEntry().size() == 1)
+                .filter(b -> b.getEntry().get(0).getResource().getResourceType().equals(ResourceType.Basic))
+                .map(b -> (Basic) b.getEntry().get(0).getResource())
+                .map(p -> this.api.getTaskHelper()
+                        .createInput(new Reference().setReference(p.getSubject().getReference()),
+                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS,
+                                ReceiveConstants.CODE_SYSTEM_RECEIVE_PROCESS_DATA_SET_REFERENCE));
     }
 
     @Override
@@ -59,14 +67,12 @@ public class ProvideDataMessageTask extends AbstractTaskMessageSend {
         }
 
         task.setStatus(Task.TaskStatus.FAILED);
-        String message = String.format("Could not send data-set with id '%s' to DIC ('%s') referenced in Task with id '%s' - {%s}",
-                                       variables.getString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DATA_SET_REFERENCE),
+        String message = String.format("Could not send data-set to DIC ('%s') referenced in Task with id '%s' - {%s}.",
                                        variables.getTarget().getOrganizationIdentifierValue(),
                                        task.getId(),
                                        exception.getMessage());
 
-        task.addOutput(
-                this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
+        task.addOutput(this.dataSetStatusGenerator.createDataSetStatusOutput(status.getStatusCode(),
                         EyeMaticsConstants.CODESYSTEM_GENERIC_DATA_SET_STATUS,
                         EyeMaticsConstants.CODESYSTEM_DATA_TRANSFER_VALUE_DATA_SET_STATUS,
                         message));

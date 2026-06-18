@@ -19,15 +19,18 @@ You can test the processes by following the [README](eyematics-dsf-process-plugi
 the `eyematics-dsf-process-plugin-test-setup` directory.
 
 ## Acknowledgements
-The EyeMatics DSF process plugin is developed based on the DSF Community. Here the periodical technical support by Simon ([@schwzr](https://github.com/schwzr)) and the organizational support by Maximilian ([@MadMax93](https://github.com/MadMax93)) need to be highlighted. 
+The EyeMatics DSF process plugin is not only developed separately, but also by support from the DSF-Community. 
+Here the periodical technical support by Simon ([@schwzr](https://github.com/schwzr)) and the organizational support by Maximilian ([@MadMax93](https://github.com/MadMax93)) need to be highlighted as a good starting point for the development of the plugin. 
 
-Furthermore, existing processes and code is obtained from following repositories:
-- [MII Process Data Transfer](https://github.com/medizininformatik-initiative/mii-process-data-transfer) — Partially the data transferring processes as starting point for the EyeMatics process. Many thanks to [@wetret](https://github.com/wetret) and [@hhund](https://github.com/hhund) for the work.
-- [MII Process Data Sharing](https://github.com/medizininformatik-initiative/mii-process-data-sharing) — Especially error handling and sub-processes are inspired from this repository. Many thanks to [@wetret](https://github.com/wetret), [@hhund](https://github.com/hhund) and [@nhaldorn](https://github.com/nhaldorn) for the work.
-- [Feasibility Processes](https://github.com/medizininformatik-initiative/mii-process-feasibility) — The development environment, as also the project specific enhancement of it needs to be mentioned. Many thanks to [@EmteZogaf](https://github.com/EmteZogaf) and [@alexanderkiel](https://github.com/alexanderkiel) for the work.
+Furthermore, existing processes and code is obtained from the following repositories:
+- [MII Process Data Transfer](https://github.com/medizininformatik-initiative/mii-process-data-transfer) — Partially the data transferring processes as a starting point for the EyeMatics process. Many thanks to [@hhund](https://github.com/hhund) and [@wetret](https://github.com/wetret) for the work.
+- [MII Process Data Sharing](https://github.com/medizininformatik-initiative/mii-process-data-sharing) — Especially error handling and subprocesses are inspired from this repository. Many thanks to [@hhund](https://github.com/hhund) and [@nhaldorn](https://github.com/nhaldorn) for the work.
+- [Feasibility Processes](https://github.com/medizininformatik-initiative/mii-process-feasibility) — The development environment, as also the project-specific enhancement of it needs to be mentioned. Many thanks to [@EmteZogaf](https://github.com/EmteZogaf) and [@alexanderkiel](https://github.com/alexanderkiel) for the work.
 - [NUM Process Dashboard Report](https://github.com/medizininformatik-initiative/dsf-plugin-numdashboard) - The questionnaire implementation is based on this repository. Many thanks to [@Tim-Steinbach-UKB](https://github.com/Tim-Steinbach-UKB), [@quastkj](https://github.com/quastkj) and [@kleinertp](https://github.com/kleinertp) for the work.
 - [RDP Processes](https://github.com/num-codex/codex-processes-ap1) — The fTTP client could be found in this repository and is taken - with modifications. Many thanks to [@wetret](https://github.com/wetret), [@hhund](https://github.com/hhund) and [@schwzr](https://github.com/schwzr) for the work.
 - [MII Processes Common](https://github.com/medizininformatik-initiative/mii-processes-common) — FHIR® clients, cryptography, constants and the DataSetStatusGenerator are also used from this repository with little modifications. Many thanks to [@wetret](https://github.com/wetret) and [@hhund](https://github.com/hhund) for the work.
+- [DSF Process Ping Pong](https://github.com/datasharingframework/dsf-process-ping-pong) — Dynamical setup of timer duration is based on this repository. Many thanks to [@wetret](https://github.com/wetret), [@hhund](https://github.com/hhund) and [@jaboehri](https://github.com/jaboehri) for the work. 
+  
 
 ## License
 All code is published under the [Apache-2.0 License](LICENSE).

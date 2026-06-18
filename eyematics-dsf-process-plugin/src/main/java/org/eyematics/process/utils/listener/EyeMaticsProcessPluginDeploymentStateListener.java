@@ -29,7 +29,7 @@ public class EyeMaticsProcessPluginDeploymentStateListener implements ProcessPlu
     @Override
     public void onProcessesDeployed(List<String> activeProcesses) {
         if (activeProcesses.contains(InitiateConstants.PROCESS_NAME_FULL_EXECUTE_INITIATE_EYEMATICS_PROCESS)) {
-            keyProvider.createPublicKeyIfNotExists();
+            this.keyProvider.createPublicKeyIfNotExists();
         }
     }
 }

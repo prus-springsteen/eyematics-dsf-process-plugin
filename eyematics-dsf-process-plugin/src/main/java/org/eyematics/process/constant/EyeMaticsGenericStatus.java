@@ -18,8 +18,10 @@ public enum EyeMaticsGenericStatus {
     DATA_PROVIDE_DENIED,
     DATA_READ_FAILURE,
     PATIENT_READ_FAILURE,
-    CONSENT_CHECK_FAILURE,
+    CONSENT_READ_FAILURE,
     PSEUDONYM_PROCESS_FAILURE,
+    CONSENT_CHECK_FAILURE,
+    PSEUDONYMIZE_DATA_FAILURE,
     DATA_BUNDLE_FAILURE,
     DATA_ENCRYPT_FAILURE,
     DATA_STORE_FAILURE,
@@ -29,7 +31,8 @@ public enum EyeMaticsGenericStatus {
     DATA_DELETE_FAILURE,
     DATA_DOWNLOAD_FAILURE,
     DATA_DECRYPT_FAILURE,
-    DATA_INSERT_FAILURE,
+    PARTIAL_INSERT_FAILURE,
+    COMPLETE_INSERT_FAILURE,
     DATA_RECEIVE_SUCCESS,
     DATA_ACKNOWLEDGE_FAILURE,
     DATA_ACKNOWLEDGE_FORBIDDEN,
@@ -57,6 +60,7 @@ public enum EyeMaticsGenericStatus {
             case DATA_REQUEST_FAILURE, DATA_REQUEST_FORBIDDEN -> "dataRequestFailure";
             case RECEIVE_CLOSE_FAILURE, RECEIVE_CLOSE_FORBIDDEN -> "receiveCloseFailure";
             case DATA_PROVIDE_FAILURE, DATA_PROVIDE_FORBIDDEN -> "dataProvideFailure";
+            case PARTIAL_INSERT_FAILURE, COMPLETE_INSERT_FAILURE -> "dataInsertFailure";
             case DATA_ACKNOWLEDGE_FAILURE, DATA_ACKNOWLEDGE_FORBIDDEN -> "dataAcknowledgeFailure";
             default -> CaseUtils.toCamelCase(this.name(), false, '_');
         };
