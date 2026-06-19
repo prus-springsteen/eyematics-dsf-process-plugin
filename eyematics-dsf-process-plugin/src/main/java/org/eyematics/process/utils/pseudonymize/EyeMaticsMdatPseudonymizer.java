@@ -1,12 +1,14 @@
 package org.eyematics.process.utils.pseudonymize;
 
 import org.apache.commons.codec.binary.Hex;
+import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.Resource;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
+
 
 public class EyeMaticsMdatPseudonymizer {
 
@@ -15,6 +17,11 @@ public class EyeMaticsMdatPseudonymizer {
 
     public EyeMaticsMdatPseudonymizer(String salt) {
         this.saltArray = salt.getBytes(StandardCharsets.UTF_8);
+    }
+
+    public Optional<String> pseudonymize(Resource resource, Organization organization) {
+        String id = organization.getIdElement().getIdPart() + "_" + resource.getIdElement().getIdPart();
+        return this.pseudonymize(id);
     }
 
     public Optional<String> pseudonymize(Resource resource) {

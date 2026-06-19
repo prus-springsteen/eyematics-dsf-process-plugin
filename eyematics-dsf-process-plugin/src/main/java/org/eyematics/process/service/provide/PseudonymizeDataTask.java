@@ -40,24 +40,23 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
         try {
             Organization organization = this.getLocalEyeMaticsOrganization();
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_ORGANIZATION_DATA_SET, organization);
-            Reference organizationReference = new Reference(organization);
 
-            this.pseudonymizeAndStoreMeasureReports(variables);
+            this.pseudonymizeAndStoreMeasureReports(variables, organization);
             Map<String, Reference> medicationsPseudonymizedReferenceMap =
-                    this.pseudonymizeAndStoreMedication(variables);
+                    this.pseudonymizeAndStoreMedication(variables, organization);
 
             Map<String, Reference> patientsPseudonymizedReferenceMap =
-                    this.pseudonymizeAndStorePatient(organization, organizationReference, variables);
+                    this.pseudonymizeAndStorePatient(variables, organization);
 
             patientsPseudonymizedReferenceMap.forEach((patientId, patientReference) -> {
                 Map<String, Reference> observationsPseudonymizedReferenceHashMap =
-                        this.pseudonymizeAndStoreObservation(patientId, patientReference, variables);
+                        this.pseudonymizeAndStoreObservation(patientId, patientReference, variables, organization);
                 this.pseudonymizeAndStoreDiagnosticReport(patientId,
-                        patientReference, observationsPseudonymizedReferenceHashMap, variables);
+                        patientReference, observationsPseudonymizedReferenceHashMap, variables, organization);
                 this.pseudonymizeAndStoreMedicationAdministration(patientId,
-                        patientReference, medicationsPseudonymizedReferenceMap, variables);
+                        patientReference, medicationsPseudonymizedReferenceMap, variables, organization);
                 this.pseudonymizeAndStoreMedicationRequest(patientId,
-                        patientReference, medicationsPseudonymizedReferenceMap, variables);
+                        patientReference, medicationsPseudonymizedReferenceMap, variables, organization);
             });
 
             long timerDuration = (long) patientsPseudonymizedReferenceMap.size()
@@ -96,7 +95,7 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
         return eyeMaticsOrganization;
     }
 
-    private void pseudonymizeAndStoreMeasureReports(Variables variables) {
+    private void pseudonymizeAndStoreMeasureReports(Variables variables, Organization organization) {
         Bundle measureReports =
                 variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEASURE_REPORT_DATA_SET);
         if (measureReports != null) {
@@ -108,7 +107,7 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                     .map(e -> (MeasureReport) e.getResource())
                     .filter(MeasureReport::hasIdElement)
                     .filter(m -> this.eyeMaticsMdatPseudonymizer
-                            .pseudonymize(m).orElse(null) != null)
+                            .pseudonymize(m, organization).orElse(null) != null)
                     .map(m -> {
                         String measureReportPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(m)
                                 .orElse(null);
@@ -129,7 +128,7 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
         }
     }
 
-    private Map<String, Reference> pseudonymizeAndStoreMedication(Variables variables) {
+    private Map<String, Reference> pseudonymizeAndStoreMedication(Variables variables, Organization organization) {
         Bundle medications =
                 variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_DATA_SET);
         if (medications == null) return new HashMap<>();
@@ -141,7 +140,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                         .equals(ResourceType.Medication))
                 .map(me -> (Medication) me.getResource())
                 .filter(Medication::hasIdElement)
-                .filter(m -> this.eyeMaticsMdatPseudonymizer.pseudonymize(m).orElse(null) != null)
+                .filter(m -> this.eyeMaticsMdatPseudonymizer.pseudonymize(m, organization)
+                        .orElse(null) != null)
                 .map(m -> {
                     String medicationPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(m).orElse(null);
                     if (medicationPseudonym == null) return null;
@@ -163,9 +163,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
         return medicationsPseudonymizedReferenceMap;
     }
 
-    private Map<String, Reference> pseudonymizeAndStorePatient(Organization organization,
-                                                               Reference organizationReference,
-                                                               Variables variables) {
+    private Map<String, Reference> pseudonymizeAndStorePatient(Variables variables,
+                                                               Organization organization) {
         Bundle patients = variables.getResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET);
         if (patients == null) return new HashMap<>();
         String organizationName = organization.getName();
@@ -195,7 +194,9 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                             p.setMeta(new Meta().addProfile(EyeMaticsConstants.PATIENT_MII_PROFILE));
                             p.getIdentifier().clear();
                             p.getIdentifier().add(gpasIdentifier);
-                            p.setManagingOrganization(organizationReference);
+                            Reference managingOrganizationReference = new Reference("Organization/"
+                                    + organization.getId());
+                            p.setManagingOrganization(managingOrganizationReference);
                             patientsPseudonymized.addEntry().setResource(p);
                             Reference patientReference = new Reference(p).setReference(gpasValue);
                             patientsPseudonymizedReferenceMap.put(patientId, patientReference);
@@ -208,7 +209,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
 
     private Map<String, Reference> pseudonymizeAndStoreObservation(String patientId,
                                                                    Reference patientReference,
-                                                                   Variables variables) {
+                                                                   Variables variables,
+                                                                   Organization organization) {
         Bundle observations = this.getResource(variables,
                 ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET, patientId);
         if (observations == null) return new HashMap<>();
@@ -223,7 +225,7 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                         (Observation) observationConsentedBundleEntry.getResource())
                 .filter(Observation::hasIdElement)
                 .forEach(o -> {
-                    String observationPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(o)
+                    String observationPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(o, organization)
                             .orElse(null);
                     if (observationPseudonym != null) {
                         o.setId(observationPseudonym);
@@ -253,7 +255,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
     private void pseudonymizeAndStoreDiagnosticReport(String patientId,
                                                       Reference patientReference,
                                                       Map<String, Reference> observationsPseudonymizedReferenceMap,
-                                                      Variables variables) {
+                                                      Variables variables,
+                                                      Organization organization) {
         Bundle diagnosticReports = this.getResource(variables,
                 ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DIAGNOSTIC_REPORT_DATA_SET, patientId);
 
@@ -266,7 +269,7 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                     .map(e -> (DiagnosticReport) e.getResource())
                     .filter(DiagnosticReport::hasIdElement)
                     .map(dr -> {
-                        String diagnosticReportPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(dr)
+                        String diagnosticReportPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(dr, organization)
                                 .orElse(null);
                         if (diagnosticReportPseudonym == null) return null;
                         dr.setId(diagnosticReportPseudonym);
@@ -303,7 +306,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
     private void pseudonymizeAndStoreMedicationAdministration(String patientId,
                                                               Reference patientReference,
                                                               Map<String, Reference> medicationsPseudonymizedReferenceMap,
-                                                              Variables variables) {
+                                                              Variables variables,
+                                                              Organization organization) {
         Bundle medicationAdministrations = this.getResource(variables,
                 ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET, patientId);
 
@@ -316,8 +320,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                     .map(e -> (MedicationAdministration) e.getResource())
                     .filter(MedicationAdministration::hasIdElement)
                     .map(ma -> {
-                        String medicationAdministrationPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(ma)
-                                .orElse(null);
+                        String medicationAdministrationPseudonym =
+                                this.eyeMaticsMdatPseudonymizer.pseudonymize(ma, organization).orElse(null);
                         if (medicationAdministrationPseudonym == null) return null;
                         ma.setId(medicationAdministrationPseudonym);
                         ma.getIdentifier().clear();
@@ -346,7 +350,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
     private void pseudonymizeAndStoreMedicationRequest(String patientId,
                                                        Reference patientReference,
                                                        Map<String, Reference> medicationsPseudonymizedReferenceMap,
-                                                       Variables variables) {
+                                                       Variables variables,
+                                                       Organization organization) {
         Bundle medicationRequests = this.getResource(variables,
                 ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, patientId);
 
@@ -359,8 +364,8 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                     .map(e -> (MedicationRequest) e.getResource())
                     .filter(MedicationRequest::hasIdElement)
                     .map(mr -> {
-                        String medicationRequestPseudonym = this.eyeMaticsMdatPseudonymizer.pseudonymize(mr)
-                                .orElse(null);
+                        String medicationRequestPseudonym =
+                                this.eyeMaticsMdatPseudonymizer.pseudonymize(mr, organization).orElse(null);
                         if (medicationRequestPseudonym == null) return null;
                         mr.setId(medicationRequestPseudonym);
                         mr.getIdentifier().clear();
