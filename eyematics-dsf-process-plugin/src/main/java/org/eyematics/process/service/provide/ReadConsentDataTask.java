@@ -106,6 +106,7 @@ public class ReadConsentDataTask extends AbstractExtendedProcessServiceDelegate 
                     return new Bundle.BundleEntryComponent().setResource(patientConsentBundle);
                 }
             } else {
+                logger.warn("Consent data for patient: {} is not valid.", patient.getResource().getIdElement().getIdPart());
                 return null;
             }
         } catch (Exception exception) {

@@ -135,8 +135,7 @@ public class ProvideConfig {
     public PseudonymizeDataTask pseudonymizeDataTask() {
         return new PseudonymizeDataTask(api,
                 dataSetStatusGenerator,
-                providePseudonymizeConfig.getFhirResourcePseudonymizer(),
-                provideDataConfig.getWaitingDurationPatientsPerBundle());
+                providePseudonymizeConfig.getFhirResourcePseudonymizer());
     }
 
     @Bean
@@ -144,7 +143,8 @@ public class ProvideConfig {
     public CreateDataBundlesTask createDataBundlesTask() {
         return new CreateDataBundlesTask(api,
                 dataSetStatusGenerator,
-                provideBundleConfig.getMaximumPatientsPerBundle());
+                provideBundleConfig.getMaximumPatientsPerBundle(),
+                provideDataConfig.getWaitingDurationPatientsPerBundle());
     }
 
     @Bean

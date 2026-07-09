@@ -35,6 +35,7 @@ public class EyeMaticsMdatPseudonymizer {
             byte[] sha256Hash = digest.digest(value.getBytes(StandardCharsets.UTF_8));
             return Optional.of(Hex.encodeHexString(sha256Hash));
         } catch (NoSuchAlgorithmException e) {
+            System.err.println("Error while creating CRR pseudonym");
             return Optional.empty();
         }
     }

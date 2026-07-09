@@ -76,49 +76,40 @@ public class CheckConsentMedicalDataTask extends AbstractExtendedProcessServiceD
                     ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET, patientId);
             Bundle observationsConsented = this.getConsentObservationsBundle(observations, c);
 
+            this.setResource(variables,
+                    ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET,
+                    patientId,
+                    observationsConsented);
+
             Bundle diagnosticReports = this.getResource(variables,
                     ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DIAGNOSTIC_REPORT_DATA_SET, patientId);
             Bundle diagnosticReportsConsented = this.getConsentDiagnosticReportsBundle(diagnosticReports, c);
 
+            this.setResource(variables,
+                    ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DIAGNOSTIC_REPORT_DATA_SET,
+                    patientId,
+                    diagnosticReportsConsented);
+
             Bundle medicationAdministrations = this.getResource(variables,
                     ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET, patientId);
-
             Bundle medicationAdministrationsConsented =
                     this.getConsentedMedicationAdministrationBundle(medicationAdministrations, c);
+
+            this.setResource(variables,
+                    ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET,
+                    patientId,
+                    medicationAdministrationsConsented);
 
             Bundle medicationRequests = this.getResource(variables,
                     ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, patientId);
             Bundle medicationRequestsConsented = this.getConsentedMedicationRequestBundle(medicationRequests, c);
 
-            if (!observationsConsented.getEntry().isEmpty()
-                    && !diagnosticReportsConsented.getEntry().isEmpty()
-                    && !medicationAdministrationsConsented.getEntry().isEmpty()
-                    && !medicationRequestsConsented.getEntry().isEmpty()) {
-                Bundle patientBundle = new Bundle().setType(Bundle.BundleType.BATCH);
-                patientBundle.addEntry().setResource(p);
-                this.setResource(variables, ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET,
-                        patientId, observationsConsented);
-                this.setResource(variables, ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DIAGNOSTIC_REPORT_DATA_SET,
-                        patientId, diagnosticReportsConsented);
-                this.setResource(variables,
-                        ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET, patientId,
-                        medicationAdministrationsConsented);
-                this.setResource(variables,
-                        ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, patientId,
-                        medicationRequestsConsented);
-                return new Bundle.BundleEntryComponent().setResource(p);
-            } else {
-                this.setResource(variables, ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_OBSERVATION_DATA_SET,
-                        patientId, null);
-                this.setResource(variables, ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_DIAGNOSTIC_REPORT_DATA_SET,
-                        patientId, null);
-                this.setResource(variables,
-                        ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_ADMINISTRATION_DATA_SET, patientId,
-                        null);
-                this.setResource(variables,
-                        ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, patientId, null);
-            }
-            return null;
+            this.setResource(variables,
+                    ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_MEDICATION_REQUEST_DATA_SET, patientId,
+                    medicationRequestsConsented);
+
+            return new Bundle.BundleEntryComponent().setResource(p);
+
         } catch (Exception exception) {
             throw new Exception(exception.getMessage());
         }

@@ -12,6 +12,7 @@ import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -23,12 +24,15 @@ public class CreateDataBundlesTask extends AbstractExtendedProcessServiceDelegat
 
     private static final Logger logger = LoggerFactory.getLogger(CreateDataBundlesTask.class);
     private final int maximumPatientPerBundle;
+    private final long acknowledgementTimerDurationPerPatient;
 
     public CreateDataBundlesTask(ProcessPluginApi api,
                                  DataSetStatusGenerator dataSetStatusGenerator,
-                                 int maximumPatientPerBundle) {
+                                 int maximumPatientPerBundle,
+                                 long acknowledgementTimerDurationPerPatient) {
         super(api, dataSetStatusGenerator);
         this.maximumPatientPerBundle = maximumPatientPerBundle;
+        this.acknowledgementTimerDurationPerPatient = acknowledgementTimerDurationPerPatient;
     }
 
     @Override
@@ -138,6 +142,10 @@ public class CreateDataBundlesTask extends AbstractExtendedProcessServiceDelegat
 
             variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_GLOBAL_PSEUDONYMS,
                     globalPseudonymBundle);
+
+            this.setTimerDuration(variables,
+                    particularBundle.get().getEntry().size(),
+                    this.acknowledgementTimerDurationPerPatient);
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
             logger.error("Could not bundle data: {}.", errorMessage);
@@ -192,5 +200,14 @@ public class CreateDataBundlesTask extends AbstractExtendedProcessServiceDelegat
             return bundleEntries;
         }
         return List.of();
+    }
+
+    private void setTimerDuration(Variables variables, int amountPatients, long timerDurationPerPatient) {
+        long timerDuration = (long) amountPatients * 1000 * timerDurationPerPatient;
+        long minTimerDuration = 1000 * 60 * ProvideConstants.MINIMUM_ACKNOWLEDGEMENT_WAITING_DURATION_PER_PATIENT;
+        if (timerDuration < minTimerDuration) timerDuration = minTimerDuration;
+        String timerDurationConversion = Duration.ofMillis(timerDuration).toString();
+        variables.setString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_ACKNOWLEDGEMENT_WAITING_DURATION,
+                timerDurationConversion);
     }
 }

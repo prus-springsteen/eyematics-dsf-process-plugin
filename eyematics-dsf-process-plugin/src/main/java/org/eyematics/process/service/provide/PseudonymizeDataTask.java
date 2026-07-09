@@ -23,15 +23,12 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
 
     private static final Logger logger = LoggerFactory.getLogger(PseudonymizeDataTask.class);
     private final EyeMaticsMdatPseudonymizer eyeMaticsMdatPseudonymizer;
-    private final long acknowledgementTimerDurationPerPatient;
 
     public PseudonymizeDataTask(ProcessPluginApi api,
                                 DataSetStatusGenerator dataSetStatusGenerator,
-                                EyeMaticsMdatPseudonymizer eyeMaticsMdatPseudonymizer,
-                                long acknowledgementTimerDurationPerPatient) {
+                                EyeMaticsMdatPseudonymizer eyeMaticsMdatPseudonymizer) {
         super(api, dataSetStatusGenerator);
         this.eyeMaticsMdatPseudonymizer = eyeMaticsMdatPseudonymizer;
-        this.acknowledgementTimerDurationPerPatient = acknowledgementTimerDurationPerPatient;
     }
 
     @Override
@@ -58,14 +55,6 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                 this.pseudonymizeAndStoreMedicationRequest(patientId,
                         patientReference, medicationsPseudonymizedReferenceMap, variables, organization);
             });
-
-            long timerDuration = (long) patientsPseudonymizedReferenceMap.size()
-                    * 1000 * this.acknowledgementTimerDurationPerPatient;
-            long minTimerDuration = 1000 * 60 * 5;
-            if (timerDuration < minTimerDuration) timerDuration = minTimerDuration;
-            String timerDurationConversion = Duration.ofMillis(timerDuration).toString();
-            variables.setString(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_ACKNOWLEDGEMENT_WAITING_DURATION,
-                    timerDurationConversion);
 
         } catch (Exception exception) {
             String errorMessage = exception.getMessage();
@@ -203,6 +192,7 @@ public class PseudonymizeDataTask extends AbstractExtendedProcessServiceDelegate
                         }
                     }
                 });
+
         variables.setResource(ProvideConstants.BPMN_PROVIDE_EXECUTION_VARIABLE_PATIENT_DATA_SET, patientsPseudonymized);
         return patientsPseudonymizedReferenceMap;
     }
