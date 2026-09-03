@@ -179,7 +179,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-a-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.9.0
+    image: ghcr.io/datasharingframework/fhir:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5000:5000"
@@ -249,7 +249,7 @@ services:
       - proxy
       - keycloak
   dic-a-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.9.0
+    image: ghcr.io/datasharingframework/bpe:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5003:5003"
@@ -284,7 +284,7 @@ services:
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5003
       DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
       DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_a_bpe_user.password
-      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_a_bpe_user_camunda.password
+      DEV_DSF_BPE_DB_USER_ENGINE_PASSWORD_FILE: /run/secrets/db_dic_a_bpe_user_camunda.password
       DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_a_client_certificate.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_a_client_certificate_private_key.pem
@@ -292,8 +292,8 @@ services:
       DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_a_bpe
       DEV_DSF_BPE_DB_USER_GROUP: dic_a_bpe_users
       DEV_DSF_BPE_DB_USER_USERNAME: dic_a_bpe_server_user
-      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_a_camunda_users
-      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_a_camunda_server_user
+      DEV_DSF_BPE_DB_USER_ENGINE_GROUP: dic_a_camunda_users
+      DEV_DSF_BPE_DB_USER_ENGINE_USERNAME: dic_a_camunda_server_user
       DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-a/fhir
       DEV_DSF_BPE_SERVER_BASE_URL: https://dic-a/bpe
       DEV_DSF_BPE_SERVER_UI_THEME: dev
@@ -395,7 +395,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-b-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.9.0
+    image: ghcr.io/datasharingframework/fhir:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5002:5002"
@@ -467,7 +467,7 @@ services:
       - proxy
       - keycloak
   dic-b-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.9.0
+    image: ghcr.io/datasharingframework/bpe:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5005:5005"
@@ -502,7 +502,7 @@ services:
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
       DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
       DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_b_bpe_user.password
-      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_b_bpe_user_camunda.password
+      DEV_DSF_BPE_DB_USER_ENGINE_PASSWORD_FILE: /run/secrets/db_dic_b_bpe_user_camunda.password
       DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_b_client_certificate.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_b_client_certificate_private_key.pem
@@ -510,8 +510,8 @@ services:
       DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_b_bpe
       DEV_DSF_BPE_DB_USER_GROUP: dic_b_bpe_users
       DEV_DSF_BPE_DB_USER_USERNAME: dic_b_bpe_server_user
-      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_b_camunda_users
-      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_b_camunda_server_user
+      DEV_DSF_BPE_DB_USER_ENGINE_GROUP: dic_b_camunda_users
+      DEV_DSF_BPE_DB_USER_ENGINE_USERNAME: dic_b_camunda_server_user
       DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-b/fhir
       DEV_DSF_BPE_SERVER_BASE_URL: https://dic-b/bpe
       DEV_DSF_BPE_SERVER_UI_THEME: dev
@@ -613,7 +613,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-c-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.9.0
+    image: ghcr.io/datasharingframework/fhir:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5001:5001"
@@ -684,7 +684,7 @@ services:
       - keycloak
 
   dic-c-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.9.0
+    image: ghcr.io/datasharingframework/bpe:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5004:5004"
@@ -719,7 +719,7 @@ services:
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5004
       DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
       DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_c_bpe_user.password
-      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_c_bpe_user_camunda.password
+      DEV_DSF_BPE_DB_USER_ENGINE_PASSWORD_FILE: /run/secrets/db_dic_c_bpe_user_camunda.password
       DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_server_trust_certificates.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_c_client_certificate.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_c_client_certificate_private_key.pem
@@ -727,8 +727,8 @@ services:
       DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_c_bpe
       DEV_DSF_BPE_DB_USER_GROUP: dic_c_bpe_users
       DEV_DSF_BPE_DB_USER_USERNAME: dic_c_bpe_server_user
-      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_c_camunda_users
-      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_c_camunda_server_user
+      DEV_DSF_BPE_DB_USER_ENGINE_GROUP: dic_c_camunda_users
+      DEV_DSF_BPE_DB_USER_ENGINE_USERNAME: dic_c_camunda_server_user
       DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-c/fhir
       DEV_DSF_BPE_SERVER_BASE_URL: https://dic-c/bpe
       DEV_DSF_BPE_SERVER_UI_THEME: dev
@@ -830,7 +830,7 @@ services:
       - dic-a-fhir-demonstrator-data-repository
 
   dic-d-fhir:
-    image: ghcr.io/datasharingframework/fhir:1.9.0
+    image: ghcr.io/datasharingframework/fhir:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5006:5006"
@@ -902,7 +902,7 @@ services:
       - keycloak
 
   dic-d-bpe:
-    image: ghcr.io/datasharingframework/bpe:1.9.0
+    image: ghcr.io/datasharingframework/bpe:2.1.1
     restart: "no"
     ports:
       - "127.0.0.1:5009:5009"
@@ -937,7 +937,7 @@ services:
       EXTRA_JVM_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5009
       DEV_DSF_BPE_DB_LIQUIBASE_PASSWORD_FILE: /run/secrets/db_liquibase.password
       DEV_DSF_BPE_DB_USER_PASSWORD_FILE: /run/secrets/db_dic_d_bpe_user.password
-      DEV_DSF_BPE_DB_USER_CAMUNDA_PASSWORD_FILE: /run/secrets/db_dic_d_bpe_user_camunda.password
+      DEV_DSF_BPE_DB_USER_ENGINE_PASSWORD_FILE: /run/secrets/db_dic_d_bpe_user_camunda.password
       DEV_DSF_BPE_FHIR_CLIENT_TRUST_SERVER_CERTIFICATE_CAS: /run/secrets/app_client_trust_certificates.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE: /run/secrets/app_dic_d_client_certificate.pem
       DEV_DSF_BPE_FHIR_CLIENT_CERTIFICATE_PRIVATE_KEY: /run/secrets/app_dic_d_client_certificate_private_key.pem
@@ -945,8 +945,8 @@ services:
       DEV_DSF_BPE_DB_URL: jdbc:postgresql://db/dic_d_bpe
       DEV_DSF_BPE_DB_USER_GROUP: dic_d_bpe_users
       DEV_DSF_BPE_DB_USER_USERNAME: dic_d_bpe_server_user
-      DEV_DSF_BPE_DB_USER_CAMUNDA_GROUP: dic_d_camunda_users
-      DEV_DSF_BPE_DB_USER_CAMUNDA_USERNAME: dic_d_camunda_server_user
+      DEV_DSF_BPE_DB_USER_ENGINE_GROUP: dic_d_camunda_users
+      DEV_DSF_BPE_DB_USER_ENGINE_USERNAME: dic_d_camunda_server_user
       DEV_DSF_BPE_FHIR_SERVER_BASE_URL: https://dic-d/fhir
       DEV_DSF_BPE_SERVER_BASE_URL: https://dic-d/bpe
       DEV_DSF_BPE_SERVER_UI_THEME: dev

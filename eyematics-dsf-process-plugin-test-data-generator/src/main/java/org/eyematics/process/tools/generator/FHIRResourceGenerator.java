@@ -230,7 +230,7 @@ public class FHIRResourceGenerator {
             throw new RuntimeException(e.getMessage());
         }
 
-        Map<String, String> fhirServer = Map.of("dic", dic, "port", port, "resource", resourceFile);
+        Map<String, String> fhirServer = Map.of("dic", dic, "port", port, "resourceFile", resourceFile);
         StringSubstitutor SubStr = new StringSubstitutor(fhirServer);
         try (FileOutputStream os = new FileOutputStream(path.toFile())) {
             String bashScript = SubStr.replace(bashScriptTemplate).replaceAll("\r\n", "\n");;
