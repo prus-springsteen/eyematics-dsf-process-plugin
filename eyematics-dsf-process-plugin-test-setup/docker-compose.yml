@@ -44,7 +44,7 @@ services:
       TZ: Europe/Berlin
 
   db:
-    image: postgres:15
+    image: postgres:18
     restart: "no"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U liquibase_user -d postgres"]
@@ -71,7 +71,7 @@ services:
     volumes:
       - type: volume
         source: db-data
-        target: /var/lib/postgresql/data
+        target: /var/lib/postgresql
       - type: bind
         source: ./db/init-db.sh
         target: /docker-entrypoint-initdb.d/init-db.sh
@@ -309,6 +309,7 @@ services:
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-a-fhir-demonstrator-data-repository:8071/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_a_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_a_public_key.pem
+      ORG_EYEMATICS_PROVIDE_ADMIN_APPROVAL: false
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
         - webbrowser_test_user:
             thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
@@ -527,6 +528,7 @@ services:
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-b-fhir-demonstrator-data-repository:8073/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_b_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_b_public_key.pem
+      ORG_EYEMATICS_PROVIDE_ADMIN_APPROVAL: false
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
         - webbrowser_test_user:
             thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
@@ -744,6 +746,7 @@ services:
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-c-fhir-demonstrator-data-repository:8075/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_c_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_c_public_key.pem
+      ORG_EYEMATICS_PROVIDE_ADMIN_APPROVAL: false
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
         - webbrowser_test_user:
             thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
@@ -962,6 +965,7 @@ services:
       ORG_EYEMATICS_RECEIVE_FHIR_SERVER_BASE_URL: http://dic-d-fhir-demonstrator-data-repository:8077/fhir
       ORG_EYEMATICS_DIC_RECEIVE_PRIVATE_KEY_FILE: /run/secrets/dic_d_private_key.pem
       ORG_EYEMATICS_DIC_RECEIVE_PUBLIC_KEY_FILE: /run/secrets/dic_d_public_key.pem
+      ORG_EYEMATICS_PROVIDE_ADMIN_APPROVAL: false
       DEV_DSF_BPE_SERVER_ROLECONFIG: |
         - webbrowser_test_user:
             thumbprint: ${WEBBROWSER_TEST_USER_THUMBPRINT}
